@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="match_settings.UIControllerMatchSettings">
+  <children>
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
+         <children>
+            <Button id="btBtmm" fx:id="btBtmm" layoutX="54.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btBtmmOnClickHandler" text="&lt;- Back" />
+            <Button id="btStrt" fx:id="btStrt" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btStrtOnClickHandler" text="Start -&gt;" />
+            <Label layoutX="135.0" layoutY="115.0" text="Player1" />
+            <Label layoutX="135.0" layoutY="192.0" text="Player2" />
+            <ChoiceBox id="choicebPlayer1" fx:id="choicebPlayer1" layoutX="189.0" layoutY="111.0" prefHeight="25.0" prefWidth="70.0" />
+            <ChoiceBox id="choicebPlayer2" fx:id="choicebPlayer2" layoutX="189.0" layoutY="188.0" prefHeight="25.0" prefWidth="70.0" />
+            <CheckBox id="checkbAI" fx:id="checkbAI" layoutX="82.0" layoutY="192.0" onMouseClicked="#checkbAIonClickHandler" mnemonicParsing="false" text="AI" />
+         </children>
+    </AnchorPane>
+  </children>
+</VBox>
