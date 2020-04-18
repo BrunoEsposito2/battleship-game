@@ -4,20 +4,52 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="match_settings.UIControllerMatchSettings">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button id="btBtmm" fx:id="btBtmm" layoutX="54.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btBtmmOnClickHandler" text="&lt;- Back" />
-            <Button id="btStrt" fx:id="btStrt" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btStrtOnClickHandler" text="Start -&gt;" />
-            <Label layoutX="135.0" layoutY="115.0" text="Player1" />
-            <Label layoutX="135.0" layoutY="192.0" text="Player2" />
-            <ChoiceBox id="choicebPlayer1" fx:id="choicebPlayer1" layoutX="189.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
-            <ChoiceBox id="choicebPlayer2" fx:id="choicebPlayer2" layoutX="189.0" layoutY="188.0" prefHeight="25.0" prefWidth="140.0" />
-            <CheckBox id="checkbAI" fx:id="checkbAI" layoutX="82.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#checkbAIonClickHandler" text="AI" />
+            <Button id="btBtmm" fx:id="btBtmm" layoutX="54.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btBtmmOnClickHandler" text="&lt;- Back">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Button id="btStrt" fx:id="btStrt" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btStrtOnClickHandler" text="Start -&gt;">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Label layoutX="96.0" layoutY="115.0" text="Player1">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <Label layoutX="96.0" layoutY="192.0" text="Player2">
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font></Label>
+            <ChoiceBox id="choicebPlayer1" fx:id="choicebPlayer1" layoutX="143.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
+            <ChoiceBox id="choicebPlayer2" fx:id="choicebPlayer2" layoutX="143.0" layoutY="188.0" prefHeight="25.0" prefWidth="140.0" />
+            <CheckBox id="checkbAI" fx:id="checkbAI" layoutX="54.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#checkbAIonClickHandler" text="AI" />
+            <Line endX="446.0" layoutX="155.0" layoutY="279.0" startX="-116.0" />
+            <Label layoutX="143.0" layoutY="54.0" text="PLAYERS">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="411.0" layoutY="54.0" text="GAME MODE">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Line endX="446.0" layoutX="155.0" layoutY="45.0" startX="-116.0" />
+            <Line endX="100.0" endY="111.5" layoutX="220.0" layoutY="168.0" startX="100.0" startY="-122.5" />
+            <Line endX="-0.5" endY="159.5" layoutX="39.0" layoutY="119.0" startX="-0.5" startY="-74.5" />
+            <Line endX="-0.5" endY="159.5" layoutX="602.0" layoutY="120.0" startX="-0.5" startY="-74.5" />
+            <ChoiceBox id="choicebGamemode" fx:id="choicebGamemode" layoutX="397.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
+            <TextArea id="textareaGameModeDescription" fx:id="textareaGameModeDescription" editable="false" layoutX="333.0" layoutY="151.0" prefHeight="121.0" prefWidth="255.0" />
          </children>
     </AnchorPane>
   </children>
