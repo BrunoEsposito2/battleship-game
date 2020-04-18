@@ -19,5 +19,11 @@ public class PlayerHuman implements Player {
     public Boolean isHuman() {
         return isHuman;
     }
+
+    @Override
+    public void startTurn() {
+       // shoot at a position
+        
+    }
     
 }
