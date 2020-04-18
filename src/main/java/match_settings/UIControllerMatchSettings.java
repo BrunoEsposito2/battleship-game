@@ -1,9 +1,11 @@
 package match_settings;
 
-import java.util.Iterator;
+import javafx.scene.control.TextArea;
 import java.util.Set;
 import controllers.GameManager;
 import controllers.GameManagerImpl;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -12,6 +14,7 @@ import model.Player;
 import model.PlayerAI;
 import model.ProfileLoader;
 import model.SceneName;
+import model.WinCondition;
 import view.ViewManager;
 
 
@@ -32,17 +35,30 @@ public final class UIControllerMatchSettings {
     @FXML
     private ChoiceBox<String> choicebPlayer2;
     @FXML
+    private ChoiceBox<String> choicebGamemode;
+    @FXML
     private CheckBox checkbAI;
+    @FXML
+    private TextArea textareaGameModeDescription;
     
     public void initialize() {
-        Iterator<Player> it = profiles.iterator();
-        while(it.hasNext()) {
-            String next = it.next().getName();
-            choicebPlayer1.getItems().add(next);
-            choicebPlayer2.getItems().add(next);
+        for(Player p : profiles) {
+            choicebPlayer1.getItems().add(p.getName());
+            choicebPlayer2.getItems().add(p.getName());
+        }
+        for(WinCondition wc : WinCondition.values()) {
+            choicebGamemode.getItems().add(wc.getName());
         }
         choicebPlayer1.getSelectionModel().selectFirst();
         choicebPlayer2.getSelectionModel().selectFirst();
+        choicebGamemode.getSelectionModel().selectFirst();
+        choicebGamemode.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                updateTextareaDescription(WinCondition.getWinConditionFromName(newValue).getDescription());
+            }           
+        });
+        this.updateTextareaDescription(WinCondition.ALL_ENEMY_SHIPS_SUNK.getDescription());
     }
 
     /**
@@ -78,7 +94,7 @@ public final class UIControllerMatchSettings {
                 })
                 .get();
         }
-        final GameManager gm = new GameManagerImpl(p1,p2);
+        final GameManager gm = new GameManagerImpl(p1,p2,WinCondition.getWinConditionFromName(choicebGamemode.getSelectionModel().getSelectedItem()));
         //gm.start();
     }
     
@@ -89,6 +105,10 @@ public final class UIControllerMatchSettings {
     public void checkbAIonClickHandler() {
         System.out.println("checkbox clicked\n ");
         choicebPlayer2.setDisable(!choicebPlayer2.isDisabled());
+    }
+    
+    private void updateTextareaDescription(String text) {
+        this.textareaGameModeDescription.setText(text);
     }
 
 }

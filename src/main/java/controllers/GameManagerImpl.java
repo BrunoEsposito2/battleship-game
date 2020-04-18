@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import model.Player;
+import model.WinCondition;
 
 public class GameManagerImpl implements GameManager {
 
@@ -13,12 +14,14 @@ public class GameManagerImpl implements GameManager {
     private int turnsElapsed;
     private final List<Player> playerList;
     private final Player p1, p2;
+    private final WinCondition wc;
     //private final PlayerTurn playerTurn;
     
-    public GameManagerImpl(Player p1, Player p2) {
+    public GameManagerImpl(Player p1, Player p2, WinCondition wc) {
         //load human player from saved profiles and create ai player
         this.p1 = p1;
         this.p2 = p2;
+        this.wc = wc; 
         playerList = Arrays.asList(p1,p2);
     }
     
