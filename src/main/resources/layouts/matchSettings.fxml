@@ -32,7 +32,9 @@
                </font></Label>
             <ChoiceBox id="choicebPlayer1" fx:id="choicebPlayer1" layoutX="143.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
             <ChoiceBox id="choicebPlayer2" fx:id="choicebPlayer2" layoutX="143.0" layoutY="188.0" prefHeight="25.0" prefWidth="140.0" />
+            <ChoiceBox id="choicebGamemode" fx:id="choicebGamemode" layoutX="397.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
             <CheckBox id="checkbAI" fx:id="checkbAI" layoutX="54.0" layoutY="192.0" mnemonicParsing="false" onMouseClicked="#checkbAIonClickHandler" text="AI" />
+            <TextArea id="textareaGameModeDescription" fx:id="textareaGameModeDescription" editable="false" layoutX="333.0" layoutY="151.0" prefHeight="121.0" prefWidth="255.0" wrapText="true" />
             <Line endX="446.0" layoutX="155.0" layoutY="279.0" startX="-116.0" />
             <Label layoutX="143.0" layoutY="54.0" text="PLAYERS">
                <font>
@@ -48,8 +50,6 @@
             <Line endX="100.0" endY="111.5" layoutX="220.0" layoutY="168.0" startX="100.0" startY="-122.5" />
             <Line endX="-0.5" endY="159.5" layoutX="39.0" layoutY="119.0" startX="-0.5" startY="-74.5" />
             <Line endX="-0.5" endY="159.5" layoutX="602.0" layoutY="120.0" startX="-0.5" startY="-74.5" />
-            <ChoiceBox id="choicebGamemode" fx:id="choicebGamemode" layoutX="397.0" layoutY="111.0" prefHeight="25.0" prefWidth="140.0" />
-            <TextArea id="textareaGameModeDescription" fx:id="textareaGameModeDescription" editable="false" layoutX="333.0" layoutY="151.0" prefHeight="121.0" prefWidth="255.0" wrapText="true" />
          </children>
     </AnchorPane>
   </children>

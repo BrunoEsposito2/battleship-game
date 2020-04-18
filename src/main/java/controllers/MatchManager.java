@@ -1,5 +1,5 @@
 package controllers;
 
-public interface GameManager {
+public interface MatchManager {
     public void start();
 }

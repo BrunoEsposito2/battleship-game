@@ -2,8 +2,8 @@ package match_settings;
 
 import javafx.scene.control.TextArea;
 import java.util.Set;
-import controllers.GameManager;
-import controllers.GameManagerImpl;
+import controllers.MatchManager;
+import controllers.MatchManagerImpl;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -94,7 +94,7 @@ public final class UIControllerMatchSettings {
                 })
                 .get();
         }
-        final GameManager gm = new GameManagerImpl(p1,p2,WinCondition.getWinConditionFromName(choicebGamemode.getSelectionModel().getSelectedItem()));
+        final MatchManager gm = new MatchManagerImpl(p1,p2,WinCondition.getWinConditionFromName(choicebGamemode.getSelectionModel().getSelectedItem()));
         //gm.start();
     }
     

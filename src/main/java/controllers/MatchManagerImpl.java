@@ -6,7 +6,7 @@ import java.util.List;
 import model.Player;
 import model.WinCondition;
 
-public class GameManagerImpl implements GameManager {
+public class MatchManagerImpl implements MatchManager {
 
     // VERY UNFINISHED AND TEMPORARY CLASS !!
     // will handle the gameloop
@@ -17,7 +17,7 @@ public class GameManagerImpl implements GameManager {
     private final WinCondition wc;
     //private final PlayerTurn playerTurn;
     
-    public GameManagerImpl(Player p1, Player p2, WinCondition wc) {
+    public MatchManagerImpl(Player p1, Player p2, WinCondition wc) {
         //load human player from saved profiles and create ai player
         this.p1 = p1;
         this.p2 = p2;
