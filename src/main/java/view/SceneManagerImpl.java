@@ -13,18 +13,18 @@ import model.SceneName;
  * Used as a Singleton by calling the getInstance() method
  *
  */
-public final class ViewManager {
+public final class SceneManagerImpl implements SceneManager {
 
-    private static final ViewManager vm = new ViewManager();
+    private static final SceneManagerImpl vm = new SceneManagerImpl();
     private Stage currentStage;
 
-    private ViewManager() { };
+    private SceneManagerImpl() { };
 
     /**
      * This method returns the usable instance of the singleton.
      * @return the ViewManager instance.
      */
-    public static ViewManager getInstance() {
+    public static SceneManagerImpl getInstance() {
         return vm;
     }
 

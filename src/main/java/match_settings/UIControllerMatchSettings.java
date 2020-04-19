@@ -15,7 +15,7 @@ import model.PlayerAI;
 import model.ProfileLoader;
 import model.SceneName;
 import model.WinCondition;
-import view.ViewManager;
+import view.SceneManagerImpl;
 
 
 /**
@@ -67,7 +67,7 @@ public final class UIControllerMatchSettings {
     @FXML
     public void btBtmmOnClickHandler() {
         System.out.println("\"Back To Main Menu\" button clicked\n ");
-        ViewManager.getInstance().switchScene(SceneName.MAIN);
+        SceneManagerImpl.getInstance().switchScene(SceneName.MAIN);
     }
 
     /**
