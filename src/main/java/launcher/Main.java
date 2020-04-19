@@ -5,7 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.SceneManagerImpl;
+import view.SceneManager;
+import view.SceneManager;
 
 /**
  * This class represent the Main class of the JavaFX-based application.
@@ -23,7 +24,7 @@ public final class Main extends Application {
         stage.setTitle("Battleships");
         stage.setScene(scene);
         stage.show();
-        SceneManagerImpl.getInstance().init(stage);
+        SceneManager.INSTANCE.init(stage);
     }
     
     /**
