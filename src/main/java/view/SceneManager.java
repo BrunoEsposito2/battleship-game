@@ -7,6 +7,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import model.SceneName;
 
+/**
+ * This enum is used to switch Scenes on the active Stage.
+ * It is used as a singleton by calling SceneManager.INSTANCE.methodName()
+ * Before its first use, this enum must be initialized by calling the init() method.
+ * The init method must be called only once.
+ */
 public enum SceneManager {
     
     INSTANCE;
@@ -38,7 +44,7 @@ public enum SceneManager {
             throw new IllegalArgumentException("param \"stage\" is not a valid Stage");
         }
         if (currentStage != null) {
-            throw new IllegalStateException("init method has already been called. Only one call is allowed");
+            throw new IllegalStateException("SceneManager is already initialized");
         }
         currentStage = stage;
     }

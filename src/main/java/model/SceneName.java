@@ -17,6 +17,9 @@ public enum SceneName {
         this.layoutName = layoutName;
     }
     
+    /**
+     * @return The layout's name
+     */
     public String getLayoutName() {
         return layoutName;
     }

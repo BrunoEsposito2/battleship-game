@@ -1,44 +1,48 @@
 package controllers;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import model.Player;
 import model.WinCondition;
 
 public class MatchManagerImpl implements MatchManager {
 
+    //TODO Consider making this class a singleton 
     // VERY UNFINISHED AND TEMPORARY CLASS !!
     // will handle the gameloop
     
+    private boolean isMatchStarted;
     private int turnsElapsed;
-    private final List<Player> playerList;
-    private final Player p1, p2;
-    private final WinCondition wc;
-    //private final PlayerTurn playerTurn;
+    private  List<Player> players;
+    private  WinCondition wc;
     
-    public MatchManagerImpl(Player p1, Player p2, WinCondition wc) {
-        //load human player from saved profiles and create ai player
-        this.p1 = p1;
-        this.p2 = p2;
-        this.wc = wc; 
-        playerList = Arrays.asList(p1,p2);
+    public MatchManagerImpl() {
+        this.isMatchStarted = false;
     }
     
     @Override
-    public void start() {
+    public void start(Set<Player> players, WinCondition wc) {
+        if(isMatchStarted) {
+            throw new IllegalStateException("A match is already in progress");
+        }
+        isMatchStarted = true;
+        this.wc = wc; 
+        this.players = new ArrayList<>(players);
         turnsElapsed = 0;
         gameLoop();
     }
     
     private void gameLoop() {
         while(true) {
-            for(int i=0; i<playerList.size(); i++) {
+            for(int i=0; i<players.size(); i++) {
                 // load grid for player(i)
                 turnsElapsed++;
-                playerList.get(i).startTurn();
-                // if(isMatchOver(winCondition)) break;
+                players.get(i).startTurn();
+                // if(isMatchOver(wc)) break;
             }
         }
+        //isMatchStarted = false;
     }
 }
