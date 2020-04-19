@@ -10,13 +10,11 @@ import model.SceneName;
 public enum SceneManager {
     
     INSTANCE;
-
     private Stage currentStage;
 
     /**
      * This method switches the active Scene to the one passed as nextScene.
      * @param nextScene the Scene to switch to.
-     * 
      */
     public void switchScene(final SceneName nextScene) {
         if (currentStage == null) {
@@ -34,11 +32,13 @@ public enum SceneManager {
     /**
      * This method must be called once before using ViewManager for the first time.
      * @param stage the main stage, containing the active scene.
-     * 
      */
     public void init(final Stage stage) {
-        if (stage == null || currentStage != null) {
-            throw new IllegalStateException();
+        if (stage == null) {
+            throw new IllegalArgumentException("param \"stage\" is not a valid Stage");
+        }
+        if (currentStage != null) {
+            throw new IllegalStateException("init method has already been called. Only one call is allowed");
         }
         currentStage = stage;
     }
