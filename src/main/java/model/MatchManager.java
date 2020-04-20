@@ -1,9 +1,7 @@
-package controller;
+package model;
 
 
 import java.util.Set;
-import model.Player;
-import model.WinCondition;
 
 /**
  * This interface is used to start a new match by calling the start() method.

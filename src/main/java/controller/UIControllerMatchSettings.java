@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import model.MatchManager;
+import model.MatchManagerImpl;
 import model.Player;
 import model.PlayerAI;
 import model.ProfileLoader;
