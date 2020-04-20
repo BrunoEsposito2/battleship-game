@@ -7,9 +7,9 @@
 <VBox alignment="CENTER" prefHeight="400.0" prefWidth="640.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIControllerMainMenu">
 
   <children>
-      <Button id="btNewg" fx:id="btNewg" mnemonicParsing="false" onMouseClicked="#btNewgOnClickHandler" text="New Game" />
-      <Button id="btSett" fx:id="btSett" alignment="CENTER" onMouseClicked="#btSettOnClickHandler" text="Settings" />
-      <Button id="btProf" fx:id="btProf" mnemonicParsing="false" onMouseClicked="#btProfOnClickHandler" text="Profile" />
+      <Button id="btNewGame" fx:id="btNewg" mnemonicParsing="false" onMouseClicked="#btNewGameOnClickHandler" text="New Game" />
+      <Button id="btSettings" fx:id="btSett" alignment="CENTER" onMouseClicked="#btSettingsOnClickHandler" text="Settings" />
+      <Button id="btProfile" fx:id="btProf" mnemonicParsing="false" onMouseClicked="#btProfileOnClickHandler" text="Profile" />
       <Button id="btExit" fx:id="btExit" mnemonicParsing="false" onMouseClicked="#btExitOnClickHandler" text="Exit" />
   </children>
    <opaqueInsets>

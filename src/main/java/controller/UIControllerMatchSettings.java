@@ -67,7 +67,6 @@ public final class UIControllerMatchSettings {
      */
     @FXML
     public void btBackOnClickHandler() {
-        System.out.println("\"Back To Main Menu\" button clicked\n ");
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 
@@ -76,7 +75,6 @@ public final class UIControllerMatchSettings {
      */
     @FXML
     public void btStartOnClickHandler() {
-        System.out.println("\"Start Game\" button clicked\n ");
         Player p1, p2;
         p1 = getSelectedPlayer(choicebPlayer1);
         if (checkbAI.isSelected()) {
@@ -94,7 +92,6 @@ public final class UIControllerMatchSettings {
      */
     @FXML
     public void checkbAIonClickHandler() {
-        System.out.println("checkbox clicked\n ");
         choicebPlayer2.setDisable(!choicebPlayer2.isDisabled());
     }
 
