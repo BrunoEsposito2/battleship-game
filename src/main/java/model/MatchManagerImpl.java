@@ -7,11 +7,10 @@ import java.util.Set;
 public class MatchManagerImpl implements MatchManager {
 
     //TODO Consider making this class a singleton 
-    // VERY UNFINISHED AND TEMPORARY CLASS !!
+    // VERY UNFINISHED CLASS !!
     // will handle the gameloop
     
     private boolean isMatchStarted;
-    private int turnsElapsed;
     private  List<Player> players;
     private  WinCondition wc;
     
@@ -27,7 +26,6 @@ public class MatchManagerImpl implements MatchManager {
         isMatchStarted = true;
         this.wc = wc; 
         this.players = new ArrayList<>(players);
-        turnsElapsed = 0;
         gameLoop();
     }
     
@@ -35,7 +33,6 @@ public class MatchManagerImpl implements MatchManager {
         while(true) {
             for(int i=0; i<players.size(); i++) {
                 // load grid for player(i)
-                turnsElapsed++;
                 players.get(i).startTurn();
                 // if(isMatchOver(wc)) break;
             }

@@ -80,26 +80,14 @@ public final class UIControllerMatchSettings {
     @FXML
     public void btStrtOnClickHandler() {
         System.out.println("\"Start Game\" button clicked\n ");
-        // TODO have this handler call a function to deal with gamemanager rather than doing it itself
         Player p1,p2;
-        p1 = profiles.stream()
-            .filter(x -> x.getName().equals(choicebPlayer1.getSelectionModel().getSelectedItem()))
-            .reduce((a, b) -> {
-                throw new IllegalStateException("Multiple profiles with same name: " + a + ", " + b);
-            })
-            .get();
+        p1 = getSelectedPlayer(choicebPlayer1);
         if(checkbAI.isSelected()) {
             p2 = new PlayerAI("AI");
         } else {
-            p2 = profiles.stream()
-                .filter(x -> x.getName().equals(choicebPlayer2.getSelectionModel().getSelectedItem()))
-                .reduce((a, b) -> {
-                    throw new IllegalStateException("Multiple profiles with same name: " + a + ", " + b);
-                })
-                .get();
+            p2 = getSelectedPlayer(choicebPlayer2);
         }
-        final MatchManager gm = new MatchManagerImpl();
-        gm.start(new HashSet<Player>(Arrays.asList(p1,p2)),WinCondition.getWinConditionFromName(choicebGamemode.getSelectionModel().getSelectedItem()));
+        new MatchManagerImpl().start(new HashSet<Player>(Arrays.asList(p1,p2)),WinCondition.getWinConditionFromName(choicebGamemode.getSelectionModel().getSelectedItem()));
     }
     
     /**
@@ -113,6 +101,15 @@ public final class UIControllerMatchSettings {
     
     private void updateTextareaDescription(String text) {
         this.textareaGameModeDescription.setText(text);
+    }
+    
+    private Player getSelectedPlayer(ChoiceBox<String> cb) {
+        return profiles.stream()
+                .filter(x -> x.getName().equals(cb.getSelectionModel().getSelectedItem()))
+                .reduce((a, b) -> {
+                    throw new IllegalStateException("Multiple profiles with same name: " + a + ", " + b);
+                })
+                .get();
     }
 
 }
