@@ -14,11 +14,11 @@
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button id="btBtmm" fx:id="btBtmm" layoutX="54.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btBtmmOnClickHandler" text="&lt;- Back">
+            <Button id="btBack" fx:id="btBack" layoutX="54.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btBackOnClickHandler" text="&lt;- Back">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
-            <Button id="btStrt" fx:id="btStrt" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btStrtOnClickHandler" text="Start -&gt;">
+            <Button id="btStart" fx:id="btStart" layoutX="533.0" layoutY="327.0" mnemonicParsing="false" onMouseClicked="#btStartOnClickHandler" text="Start -&gt;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font></Button>
