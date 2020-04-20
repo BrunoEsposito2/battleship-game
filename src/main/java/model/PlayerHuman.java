@@ -1,11 +1,19 @@
 package model;
 
-public class PlayerHuman implements Player {
-    
+/**
+ * Implementation of Player interface.
+ * Models a human player.
+ */
+public final class PlayerHuman implements Player {
+
     private final Boolean isHuman;
     private String name;
-    
-    public PlayerHuman(String name) {
+
+    /**
+     * This class' constructor.
+     * @param name - the player's name
+     */
+    public PlayerHuman(final String name) {
         this.name = name;
         isHuman = true;
     }
@@ -14,7 +22,7 @@ public class PlayerHuman implements Player {
     public String getName() {
         return name;
     }
-    
+
     @Override
     public Boolean isHuman() {
         return isHuman;
@@ -23,7 +31,5 @@ public class PlayerHuman implements Player {
     @Override
     public void startTurn() {
        // shoot at a position
-        
     }
-    
 }

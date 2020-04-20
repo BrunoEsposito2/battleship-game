@@ -6,7 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import view.SceneManager;
-import view.SceneManager;
 
 /**
  * This class represent the Main class of the JavaFX-based application.
@@ -26,13 +25,13 @@ public final class Main extends Application {
         stage.show();
         SceneManager.INSTANCE.init(stage);
     }
-    
+
     /**
      * 
      * @param args unused
      */
     public static void main(final String[] args) {
-        launch();  
+        launch();
     }
-    
+
 }

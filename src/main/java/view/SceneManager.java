@@ -9,14 +9,14 @@ import model.SceneName;
 
 /**
  * This enum is used to switch Scenes on the active Stage.
- * It is used as a singleton by calling SceneManager.INSTANCE.methodName()
+ * It is used as a singleton by calling SceneManager.INSTANCE.methodName().
  * Before its first use, this enum must be initialized by calling the init() method.
  * The init method must be called only once.
  */
 // NOTE: IN THIS PROJECT THE INIT() METHOD IS CALLED BY THE LAUNCHER AT STARTUP. NO NEED TO EVER CALL IT AGAIN
 public enum SceneManager {
     
-    INSTANCE;
+    INSTANCE; // The usable instance of this class.
     private Stage currentStage;
 
     /**

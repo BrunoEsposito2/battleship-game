@@ -6,17 +6,17 @@ package model;
 public enum SceneName {
     // New scenes can be added here
     // Scene layoutName should be the fxml layout file's name, excluding the extension (ex. mainMenu.fxml -> mainMenu)
-    MAIN ("mainMenu"),
-    MATCH_SETTINGS ("matchSettings");
+    MAIN("mainMenu"),
+    MATCH_SETTINGS("matchSettings");
     //SETTINGS ("settings");
     //PROFILE ("profile");
-    
+
     private final String layoutName;
-    
-    private SceneName(String layoutName) {
+
+    private SceneName(final String layoutName) {
         this.layoutName = layoutName;
     }
-    
+
     /**
      * @return The layout's name
      */
