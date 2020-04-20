@@ -1,12 +1,11 @@
-package match_settings;
+package controller;
 
 import javafx.scene.control.TextArea;
 
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import controllers.MatchManager;
-import controllers.MatchManagerImpl;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;

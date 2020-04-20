@@ -7,7 +7,7 @@ package model;
  */
 public enum SceneName {
     MAIN ("mainMenu"),
-    GAMEMODE_SELECTION ("matchSettings");
+    MATCH_SETTINGS ("matchSettings");
     //SETTINGS ("settings"),
     //PROFILE ("profile"),
     

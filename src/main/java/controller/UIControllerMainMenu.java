@@ -1,4 +1,4 @@
-package main_menu;
+package controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -26,7 +26,7 @@ public final class UIControllerMainMenu {
     @FXML
     public void btNewgOnClickHandler() {
         System.out.println("NewGame button clicked\n ");
-        SceneManager.INSTANCE.switchScene(SceneName.GAMEMODE_SELECTION);
+        SceneManager.INSTANCE.switchScene(SceneName.MATCH_SETTINGS);
     }
 
     /**
