@@ -45,6 +45,7 @@ public final class UIControllerMatchSettings {
     @FXML
     private TextArea textareaGameModeDescription;
     
+    // this method is called automatically when loading the fxml layout. It sets the initial state of the UI
     public void initialize() {
         for(Player p : profiles) {
             choicebPlayer1.getItems().add(p.getName());
