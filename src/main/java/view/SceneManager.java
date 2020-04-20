@@ -13,6 +13,7 @@ import model.SceneName;
  * Before its first use, this enum must be initialized by calling the init() method.
  * The init method must be called only once.
  */
+// NOTE: IN THIS PROJECT THE INIT() METHOD IS CALLED BY THE LAUNCHER AT STARTUP. NO NEED TO EVER CALL IT AGAIN
 public enum SceneManager {
     
     INSTANCE;
@@ -30,7 +31,7 @@ public enum SceneManager {
             currentStage.setScene(new Scene(FXMLLoader.load(ClassLoader.getSystemResource("layouts/" + nextScene.getLayoutName() + ".fxml"))));
         } catch (IOException e) {
             e.printStackTrace();
-            System.out.println("Error reading layouts. Exiting\n");
+            System.out.println("Critical error reading layouts from disk.\nApp closing. . .\n");
             System.exit(1);
         }
     }
