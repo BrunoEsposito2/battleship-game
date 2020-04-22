@@ -8,19 +8,19 @@
 <VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UIControllerMainMenu">
 
   <children>
-      <Button id="btNewGame" fx:id="btNewg" mnemonicParsing="false" onMouseClicked="#btNewGameOnClickHandler" text="New Game">
+      <Button id="buttonNewGame" fx:id="buttonNewGame" mnemonicParsing="false" onMouseClicked="#buttonNewGame" text="New Game">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btSettings" fx:id="btSett" alignment="CENTER" onMouseClicked="#btSettingsOnClickHandler" text="Settings">
+      <Button id="buttonSettings" fx:id="buttonSettings" alignment="CENTER" onMouseClicked="#buttonSettings" text="Settings">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btProfile" fx:id="btProf" mnemonicParsing="false" onMouseClicked="#btProfileOnClickHandler" text="Profile">
+      <Button id="buttonProfile" fx:id="buttonProfile" mnemonicParsing="false" onMouseClicked="#buttonProfile" text="Profile">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="btExit" fx:id="btExit" mnemonicParsing="false" onMouseClicked="#btExitOnClickHandler" text="Exit">
+      <Button id="buttonExit" fx:id="buttonExit" mnemonicParsing="false" onMouseClicked="#buttonExit" text="Exit">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>

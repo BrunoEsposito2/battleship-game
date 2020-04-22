@@ -38,21 +38,21 @@
                         <Font name="System Bold Italic" size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox id="choicebPlayer1" fx:id="choicebPlayer1" prefWidth="300.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
+                  <ChoiceBox id="choiceboxPlayer1" fx:id="choiceboxPlayer1" prefWidth="300.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
                   <Label text="Player2" GridPane.halignment="RIGHT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="System Bold Italic" size="18.0" />
                      </font>
                   </Label>
-                  <ChoiceBox id="choicebPlayer2" fx:id="choicebPlayer2" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <CheckBox id="checkbAI" fx:id="checkbAI" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkbAIonClickHandler" text="AI" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
+                  <ChoiceBox id="choiceboxPlayer2" fx:id="choiceboxPlayer2" prefWidth="300.0" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                  <CheckBox id="checkboxAI" fx:id="checkboxAI" alignment="CENTER" mnemonicParsing="false" onMouseClicked="#checkboxAI" text="AI" GridPane.columnIndex="2" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="TOP">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </CheckBox>
                </children>
             </GridPane>
-            <Button id="btBack" fx:id="btBack" mnemonicParsing="false" onMouseClicked="#btBackOnClickHandler" text="&lt;- Back">
+            <Button id="buttonBack" fx:id="buttonBack" mnemonicParsing="false" onMouseClicked="#buttonBack" text="&lt;- Back">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -71,14 +71,14 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <ChoiceBox id="choicebGamemode" fx:id="choicebGamemode" prefHeight="25.0" prefWidth="140.0" />
-                  <TextArea id="textareaGameModeDescription" fx:id="textareaGameModeDescription" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="400.0" wrapText="true">
+                  <ChoiceBox id="choiceboxGamemode" fx:id="choiceboxGamemode" prefHeight="25.0" prefWidth="140.0" />
+                  <TextArea id="textareaDescription" fx:id="textareaDescription" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="400.0" wrapText="true">
                      <font>
                         <Font size="18.0" />
                      </font></TextArea>
                </children>
             </VBox>
-            <Button id="btStart" fx:id="btStart" mnemonicParsing="false" onMouseClicked="#btStartOnClickHandler" text="Start -&gt;">
+            <Button id="buttonStart" fx:id="buttonStart" mnemonicParsing="false" onMouseClicked="#buttonStart" text="Start -&gt;">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
