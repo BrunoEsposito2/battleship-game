@@ -44,6 +44,9 @@ public final class UIControllerMatchSettings {
      */
     public void initialize() {
         for (Player p : profiles) {
+            choicebPlayer1.setStyle("-fx-font: 18px \"Serif\";");
+            choicebPlayer2.setStyle("-fx-font: 18px \"Serif\";");
+            choicebGamemode.setStyle("-fx-font: 18px \"Serif\";");
             choicebPlayer1.getItems().add(p.getName());
             choicebPlayer2.getItems().add(p.getName());
         }

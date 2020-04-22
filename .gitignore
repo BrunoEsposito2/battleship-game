@@ -6,4 +6,5 @@ out/
 # Ignored, as Gradle Buildship generates it on import / refresh
 .classpath
 doc/ 
-src/main/resources/layouts/gameModeSelection2.fxml 
+src/main/resources/layouts/matchSettingsOld.fxml 
+src/main/resources/layouts/matchSettingsTest.fxml
