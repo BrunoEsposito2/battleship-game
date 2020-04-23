@@ -1,11 +1,13 @@
 package controller;
 
 import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert.AlertType;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.Set;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
@@ -62,9 +64,12 @@ public final class UIControllerMatchSettings {
     public void buttonStart() {
         Player p1 = getSelectedPlayer(choiceboxPlayer1);
         Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedPlayer(choiceboxPlayer2);
-        MatchManager gm = new MatchManagerImpl(Set.of(p1, p2),selectedWinCondition);
-        // START THE MATCH WITH SELECTED SETTINGS
-        //gm.start();
+        if (this.arePlayersDistinct(p1, p2)) {
+            MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
+            gm.startNewMatch();
+        } else {
+            alertPlayersNotDistinct();
+        }
     }
 
     /**
@@ -102,4 +107,15 @@ public final class UIControllerMatchSettings {
         cb.setStyle("-fx-font: 18px \"Serif\";");
     }
 
+    private boolean arePlayersDistinct(final Player p1, final Player p2) {
+        return !p1.equals(p2);
+    }
+
+    private void alertPlayersNotDistinct() {
+        Alert alert = new Alert(AlertType.ERROR);
+        alert.setHeaderText(null);
+        alert.setTitle("Error!");
+        alert.setContentText("Player1 and Player2 cannot be the same!\nChange your selection.");
+        alert.showAndWait();
+    }
 }
