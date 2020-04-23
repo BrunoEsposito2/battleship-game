@@ -16,7 +16,7 @@ public final class MatchManagerImpl implements MatchManager {
     private final MatchStatus ms = new MatchStatusImpl();
     private final List<Player> players;
     private final WinCondition wc;
-    private boolean isMatchInProgress;
+    private boolean hasMatchStarted;
 
     /**
      * This is the class' constructor.
@@ -24,17 +24,17 @@ public final class MatchManagerImpl implements MatchManager {
      * @param wc - the winCondition which determines when the match will end
      */
     public MatchManagerImpl(final Set<Player> players, final WinCondition wc) {
-        this.isMatchInProgress = false;
+        this.hasMatchStarted = false;
         this.players = new ArrayList<>(players);
         this.wc = wc;
     }
 
     @Override
     public void startNewMatch() {
-        if (isMatchInProgress) {
-            throw new IllegalStateException("A match is already in progress");
+        if (hasMatchStarted) {
+            throw new IllegalStateException("Cannot start more than one match from the same MatchManager instance");
         }
-        isMatchInProgress = true;
+        hasMatchStarted = true;
         postMatchOperations(gameLoop());
     }
 

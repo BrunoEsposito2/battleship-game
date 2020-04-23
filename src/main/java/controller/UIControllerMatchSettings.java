@@ -13,6 +13,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.MatchManager;
 import model.MatchManagerImpl;
+import model.NamedItem;
 import model.Player;
 import model.PlayerAI;
 import model.ProfileLoader;
@@ -27,13 +28,15 @@ import view.SceneManager;
  */
 public final class UIControllerMatchSettings {
 
-    private final Collection<Player> profiles = new ProfileLoader().load();
+    private final Collection<Player> profiles = new ProfileLoader().load(); //TODO update the way profiles are loaded once profile classes are available
     private WinCondition selectedWinCondition = WinCondition.ALL_ENEMY_SHIPS_SUNK;
 
     @FXML
     private Button buttonBack, buttonStart;
     @FXML
-    private ChoiceBox<String> choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode;
+    private ChoiceBox<NamedItem<Player>> choiceboxPlayer1, choiceboxPlayer2;
+    @FXML
+    private ChoiceBox<NamedItem<WinCondition>> choiceboxGameMode;
     @FXML
     private CheckBox checkboxAI;
     @FXML
@@ -62,13 +65,13 @@ public final class UIControllerMatchSettings {
      */
     @FXML
     public void buttonStart() {
-        Player p1 = getSelectedPlayer(choiceboxPlayer1);
-        Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedPlayer(choiceboxPlayer2);
-        if (this.arePlayersDistinct(p1, p2)) {
+        Player p1 = getSelectedItem(choiceboxPlayer1);
+        Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedItem(choiceboxPlayer2);
+        if (!arePlayersDistinct(p1, p2)) {
+            alertPlayersNotDistinct();
+        } else {
             MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
             gm.startNewMatch();
-        } else {
-            alertPlayersNotDistinct();
         }
     }
 
@@ -85,37 +88,33 @@ public final class UIControllerMatchSettings {
      */
     @FXML
     public void choiceboxGameMode() {
-        selectedWinCondition = WinCondition.getWinConditionFromName(choiceboxGameMode.getSelectionModel().getSelectedItem());
+        selectedWinCondition = choiceboxGameMode.getSelectionModel().getSelectedItem().getItem();
         textareaDescription.setText(selectedWinCondition.getDescription());
-    }
-
-    // TEMPORARY
-    private Player getSelectedPlayer(final ChoiceBox<String> cb) {
-        return profiles.stream()
-                .filter(x -> x.getName().equals(cb.getSelectionModel().getSelectedItem()))
-                .reduce((a, b) -> {
-                    throw new IllegalStateException("Multiple profiles with same name: " + a + ", " + b);
-                })
-                .get();
-    }
-
-    private <T, V> void initChoicebox(final ChoiceBox<T> cb, final Collection<V> c, final Function<V, T> f) {
-        for (V elem : c) {
-            cb.getItems().add(f.apply(elem));
-        }
-        cb.getSelectionModel().selectFirst();
-        cb.setStyle("-fx-font: 18px \"Serif\";");
     }
 
     private boolean arePlayersDistinct(final Player p1, final Player p2) {
         return !p1.equals(p2);
     }
 
+    private <T> T getSelectedItem(final ChoiceBox<NamedItem<T>> cb) {
+        return cb.getSelectionModel().getSelectedItem().getItem();
+    }
+
+    private <T> void initChoicebox(final ChoiceBox<NamedItem<T>> cb, final Collection<T> c, final Function<T, String> name) {
+        for (T elem : c) {
+            cb.getItems().add(new NamedItem<T>(name.apply(elem), elem));
+        }
+        cb.getSelectionModel().selectFirst();
+        cb.setStyle("-fx-font: 18px \"Serif\";");
+    }
+
+
     private void alertPlayersNotDistinct() {
         Alert alert = new Alert(AlertType.ERROR);
         alert.setHeaderText(null);
         alert.setTitle("Error!");
-        alert.setContentText("Player1 and Player2 cannot be the same!\nChange your selection.");
+        alert.setContentText("Player1 and Player2 cannot be the same!\nChange your selection and try again.");
         alert.showAndWait();
     }
+
 }
