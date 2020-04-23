@@ -12,7 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.enums.SceneName;
-import model.enums.WinCondition;
+import model.enums.GameMode;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
 import model.player.Player;
@@ -29,14 +29,14 @@ import view.SceneManager;
 public final class MatchSettings {
 
     private final Collection<Player> profiles = new ProfileLoader().load(); //TODO update the way profiles are loaded once profile classes are available
-    private WinCondition selectedWinCondition = WinCondition.ALL_ENEMY_SHIPS_SUNK;
+    private GameMode selectedWinCondition = GameMode.CLASSIC;
 
     @FXML
     private Button buttonBack, buttonStart;
     @FXML
     private ChoiceBox<NamedItem<Player>> choiceboxPlayer1, choiceboxPlayer2;
     @FXML
-    private ChoiceBox<NamedItem<WinCondition>> choiceboxGameMode;
+    private ChoiceBox<NamedItem<GameMode>> choiceboxGameMode;
     @FXML
     private CheckBox checkboxAI;
     @FXML
@@ -48,7 +48,7 @@ public final class MatchSettings {
     public void initialize() {
         initChoicebox(choiceboxPlayer1, profiles, x -> x.getName());
         initChoicebox(choiceboxPlayer2, profiles, x -> x.getName());
-        initChoicebox(choiceboxGameMode, List.of(WinCondition.values()), x -> x.getName());
+        initChoicebox(choiceboxGameMode, List.of(GameMode.values()), x -> x.getName());
         textareaDescription.setText(selectedWinCondition.getDescription());
     }
 

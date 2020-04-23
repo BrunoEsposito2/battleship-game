@@ -7,7 +7,7 @@ import java.util.Set;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import model.enums.SceneName;
-import model.enums.WinCondition;
+import model.enums.GameMode;
 import model.player.Player;
 import view.SceneManager;
 
@@ -18,26 +18,26 @@ public final class MatchManagerImpl implements MatchManager {
 
     private final MatchStatus ms = new MatchStatusImpl();
     private final List<Player> players;
-    private final WinCondition wc;
-    private boolean hasMatchStarted;
+    private final GameMode wc;
+    private boolean hasStartedMatch;
 
     /**
      * This is the class' constructor.
      * @param players - a Set containing the players of the match
-     * @param wc - the winCondition which determines when the match will end
+     * @param wc - the WinCondition which determines when the match will end
      */
-    public MatchManagerImpl(final Set<Player> players, final WinCondition wc) {
-        this.hasMatchStarted = false;
+    public MatchManagerImpl(final Set<Player> players, final GameMode wc) {
+        this.hasStartedMatch = false;
         this.players = new ArrayList<>(players);
         this.wc = wc;
     }
 
     @Override
     public void startNewMatch() {
-        if (hasMatchStarted) {
+        if (hasStartedMatch) {
             throw new IllegalStateException("Cannot start more than one match from the same MatchManager instance");
         }
-        hasMatchStarted = true;
+        hasStartedMatch = true;
         postMatchOperations(gameLoop());
     }
 
