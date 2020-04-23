@@ -1,8 +1,8 @@
 package model.util;
 
 /**
- * This class models an object that has a name property.
- * Used to have a Choicebox hold an item while displaying its name.
+ * This class models an object that has a name(String) property.
+ * Useful to have a Choicebox hold an item while displaying its user-friendly name.
  * @param <T> - The type of the item contained
  */
 public final class NamedItem<T> {

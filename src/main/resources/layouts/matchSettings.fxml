@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<SplitPane dividerPositions="0.5" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.MatchSettings">
+<SplitPane dividerPositions="0.5" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.MatchSettings">
    <items>
       <SplitPane dividerPositions="0.5, 0.5" orientation="VERTICAL" prefHeight="540.0" prefWidth="400.0">
         <items>
@@ -50,6 +50,11 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </CheckBox>
+                  <Label id="labelSamePlayers" fx:id="labelSamePlayers" prefWidth="300.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </GridPane>
             <Button id="buttonBack" fx:id="buttonBack" mnemonicParsing="false" onMouseClicked="#buttonBack" text="&lt;- Back">
@@ -71,7 +76,7 @@
             </Label>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
                <children>
-                  <ChoiceBox id="choiceboxGamemode" fx:id="choiceboxGameMode" prefHeight="25.0" prefWidth="140.0" onAction="#choiceboxGameMode" />
+                  <ChoiceBox id="choiceboxGamemode" fx:id="choiceboxGameMode" onAction="#choiceboxGameMode" prefHeight="25.0" prefWidth="140.0" />
                   <TextArea id="textareaDescription" fx:id="textareaDescription" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="346.0" prefWidth="400.0" wrapText="true">
                      <font>
                         <Font size="18.0" />

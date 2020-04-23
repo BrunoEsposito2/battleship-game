@@ -8,7 +8,7 @@ package model.match;
 public interface MatchManager {
     /**
      * This method is used to start a new match.
-     * An instance of MatchManager can start a single match in its lifetime.
+     * Can be called once per MatchManager instance.
      */
     void startNewMatch();
 }

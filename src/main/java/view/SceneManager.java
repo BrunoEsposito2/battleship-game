@@ -20,8 +20,8 @@ public enum SceneManager {
     private Stage currentStage;
 
     /**
-     * This method switches the active Scene to the one passed as nextScene.
-     * @param nextScene the Scene to switch to.
+     * This method switches the active Scene to the one passed as parameter.
+     * @param nextScene - the Scene to switch to.
      */
     public void switchScene(final SceneName nextScene) {
         if (currentStage == null) {

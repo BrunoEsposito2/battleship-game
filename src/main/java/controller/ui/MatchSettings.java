@@ -6,11 +6,17 @@ import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
 import java.util.Set;
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.ListChangeListener;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import model.enums.SceneName;
 import model.enums.GameMode;
 import model.match.MatchManager;
@@ -41,6 +47,8 @@ public final class MatchSettings {
     private CheckBox checkboxAI;
     @FXML
     private TextArea textareaDescription;
+    @FXML
+    private Label labelSamePlayers;
 
     /**
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI
@@ -50,6 +58,7 @@ public final class MatchSettings {
         initChoicebox(choiceboxPlayer2, profiles, x -> x.getName());
         initChoicebox(choiceboxGameMode, List.of(GameMode.values()), x -> x.getName());
         textareaDescription.setText(selectedWinCondition.getDescription());
+        updateSamePlayersLabel();
     }
 
     /**
@@ -81,6 +90,11 @@ public final class MatchSettings {
     @FXML
     public void checkboxAI() {
         choiceboxPlayer2.setDisable(!choiceboxPlayer2.isDisabled());
+        if (checkboxAI.isSelected()) {
+            labelSamePlayers.setText("");
+        } else {
+            updateSamePlayersLabel();
+        }
     }
 
     /**
@@ -106,8 +120,20 @@ public final class MatchSettings {
         }
         cb.getSelectionModel().selectFirst();
         cb.setStyle("-fx-font: 18px \"Serif\";");
+        cb.getSelectionModel().selectedItemProperty().addListener((x, y, z) -> {
+            updateSamePlayersLabel();
+        }
+        );
+
     }
 
+    private void updateSamePlayersLabel() {
+        if (!arePlayersDistinct(getSelectedItem(choiceboxPlayer1), getSelectedItem(choiceboxPlayer2))) {
+            labelSamePlayers.setText("Warning: players must use distinct profiles");
+        } else {
+            labelSamePlayers.setText("");
+        }
+    }
 
     private void alertPlayersNotDistinct() {
         Alert alert = new Alert(AlertType.ERROR);
