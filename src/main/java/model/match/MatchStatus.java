@@ -1,4 +1,6 @@
-package model;
+package model.match;
+
+import model.enums.WinCondition;
 
 /**
  *  This interface gives information about the status of the match currently in progress.

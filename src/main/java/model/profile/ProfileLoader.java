@@ -1,6 +1,9 @@
-package model;
+package model.profile;
 
 import java.util.Set;
+
+import model.player.Player;
+import model.player.PlayerHuman;
 
 /**
  * Temporary prototype class used to load saved profiles.

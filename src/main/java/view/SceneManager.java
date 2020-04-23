@@ -5,7 +5,7 @@ import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.SceneName;
+import model.enums.SceneName;
 
 /**
  * This enum is used to switch Scenes on the active Stage.

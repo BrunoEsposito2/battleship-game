@@ -1,4 +1,4 @@
-package model;
+package model.match;
 
 /**
  * This interface is used to start a new match by calling the start() method.

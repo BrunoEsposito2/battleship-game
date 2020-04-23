@@ -1,10 +1,10 @@
-package model;
+package model.player;
 
 /**
  * Implementation of Player interface.
- * Models a human player.
+ * Models an AI-controlled player
  */
-public final class PlayerHuman implements Player {
+public final class PlayerAI implements Player {
 
     private final Boolean isHuman;
     private String name;
@@ -13,9 +13,9 @@ public final class PlayerHuman implements Player {
      * This class' constructor.
      * @param name - the player's name
      */
-    public PlayerHuman(final String name) {
+    public PlayerAI(final String name) {
         this.name = name;
-        isHuman = true;
+        isHuman = false;
     }
 
     @Override
@@ -30,6 +30,6 @@ public final class PlayerHuman implements Player {
 
     @Override
     public void startTurn() {
-       // shoot at a position
+        // shoot at a position
     }
 }

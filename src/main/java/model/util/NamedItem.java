@@ -1,4 +1,4 @@
-package model;
+package model.util;
 
 /**
  * This class models an object that has a name property.

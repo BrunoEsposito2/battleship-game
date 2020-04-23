@@ -1,4 +1,4 @@
-package model;
+package model.player;
 
 /**
  * This interface models a player (human or ai indifferently) during a match.

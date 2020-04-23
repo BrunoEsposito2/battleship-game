@@ -1,4 +1,4 @@
-package controller;
+package controller.ui;
 
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Alert.AlertType;
@@ -11,14 +11,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import model.MatchManager;
-import model.MatchManagerImpl;
-import model.NamedItem;
-import model.Player;
-import model.PlayerAI;
-import model.ProfileLoader;
-import model.SceneName;
-import model.WinCondition;
+import model.enums.SceneName;
+import model.enums.WinCondition;
+import model.match.MatchManager;
+import model.match.MatchManagerImpl;
+import model.player.Player;
+import model.player.PlayerAI;
+import model.profile.ProfileLoader;
+import model.util.NamedItem;
 import view.SceneManager;
 
 
@@ -26,7 +26,7 @@ import view.SceneManager;
  *  The Controller related to the matchSettings.fxml GUI.
  *
  */
-public final class UIControllerMatchSettings {
+public final class MatchSettings {
 
     private final Collection<Player> profiles = new ProfileLoader().load(); //TODO update the way profiles are loaded once profile classes are available
     private WinCondition selectedWinCondition = WinCondition.ALL_ENEMY_SHIPS_SUNK;

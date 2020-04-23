@@ -1,4 +1,4 @@
-package model;
+package model.enums;
 
 /**
  * This enum models the viewable Scenes of the app.

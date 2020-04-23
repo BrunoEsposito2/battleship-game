@@ -1,15 +1,15 @@
-package controller;
+package controller.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import model.SceneName;
+import model.enums.SceneName;
 import view.SceneManager;
 
 /**
  * The Controller related to the mainMenu.fxml GUI.
  *
  */
-public final class UIControllerMainMenu {
+public final class MainMenu {
 
     @FXML
     private Button buttonNewGame, buttonSettings, buttonProfile, buttonExit;

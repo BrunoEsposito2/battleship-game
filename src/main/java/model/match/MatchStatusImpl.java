@@ -1,4 +1,6 @@
-package model;
+package model.match;
+
+import model.enums.WinCondition;
 
 /**
  * Implementation of MatchStatus interface.
