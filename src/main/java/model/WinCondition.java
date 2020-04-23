@@ -8,8 +8,8 @@ import java.util.NoSuchElementException;
 public enum WinCondition {
     // New win conditions can be added here
     // NAMES PASSED TO THE CONSTRUCTOR MUST BE DISTINCT!!
-    ALL_ENEMY_SHIPS_SUNK("Classic","Sink all enemy ships to win"),
-    HIGHEST_SCORE_AFTER_N_TURNS("Highest score","Have the highest score at the end of the match");
+    ALL_ENEMY_SHIPS_SUNK("Classic", "Sink all enemy ships to win"),
+    HIGHEST_SCORE_AFTER_N_TURNS("Highest score", "Have the highest score at the end of the match");
 
     private final String description;
     private final String name;
