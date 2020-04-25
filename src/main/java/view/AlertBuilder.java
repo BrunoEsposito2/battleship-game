@@ -9,6 +9,8 @@ import javafx.scene.control.Alert.AlertType;
  */
 public final class AlertBuilder {
 
+    private AlertBuilder() { };
+
     /**
      * This method returns a new alert from passed parameters.
      * @param type - type of the alert

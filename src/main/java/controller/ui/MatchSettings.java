@@ -25,6 +25,7 @@ import model.player.Player;
 import model.player.PlayerAI;
 import model.profile.ProfileLoader;
 import model.util.NamedItem;
+import view.AlertBuilder;
 import view.SceneManager;
 
 
@@ -77,7 +78,7 @@ public final class MatchSettings {
         Player p1 = getSelectedItem(choiceboxPlayer1);
         Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedItem(choiceboxPlayer2);
         if (!arePlayersDistinct(p1, p2)) {
-            alertPlayersNotDistinct();
+            AlertBuilder.buildAndLaunch(AlertType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
         } else {
             MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
             gm.startNewMatch();
@@ -133,14 +134,6 @@ public final class MatchSettings {
         } else {
             labelSamePlayers.setText("");
         }
-    }
-
-    private void alertPlayersNotDistinct() {
-        Alert alert = new Alert(AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setTitle("Error!");
-        alert.setContentText("Player1 and Player2 cannot be the same!\nChange your selection and try again.");
-        alert.showAndWait();
     }
 
 }

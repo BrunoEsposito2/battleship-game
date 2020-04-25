@@ -3,6 +3,7 @@ package model.util;
 /**
  * This class models an object that has a name(String) property.
  * Useful to have a Choicebox hold an item while displaying its user-friendly name.
+ * toString() is set to return the item's name.
  * @param <T> - The type of the item contained
  */
 public final class NamedItem<T> {

@@ -20,7 +20,8 @@ public enum SceneManager {
      * The usable instance of this class.
      */
     INSTANCE;
-    private final Stage currentStage = Main.getStage();;
+
+    private final Stage currentStage = Main.getStage();
 
     /**
      * This method switches the active Scene to the one passed as parameter.
