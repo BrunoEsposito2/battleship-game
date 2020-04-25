@@ -9,6 +9,7 @@ import javafx.scene.control.Alert.AlertType;
 import model.enums.SceneName;
 import model.enums.GameMode;
 import model.player.Player;
+import view.AlertBuilder;
 import view.SceneManager;
 
 /**
@@ -54,11 +55,7 @@ public final class MatchManagerImpl implements MatchManager {
     }
 
     private void postMatchOperations(final Player winner) {
-        Alert alert = new Alert(AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setTitle("Match over!");
-        alert.setContentText("Player " + winner.getName() + " won the match!\nPress ok to go back to menu.");
-        alert.showAndWait();
+        AlertBuilder.buildAndLaunch(AlertType.INFORMATION,"Match over!","Player " + winner.getName() + " won the match!\nPress ok to go back to menu.",null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 }

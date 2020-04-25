@@ -1,10 +1,12 @@
 package view;
 
-import java.io.IOException;
-
+import java.io.File;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import application.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.enums.SceneName;
 
@@ -14,20 +16,28 @@ import model.enums.SceneName;
  */
 public enum SceneManager {
 
-    INSTANCE; // The usable instance of this class.
+    /**
+     * The usable instance of this class.
+     */
+    INSTANCE;
     private final Stage currentStage = Main.getStage();;
 
     /**
      * This method switches the active Scene to the one passed as parameter.
-     * @param nextScene - the Scene to switch to.
+     * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
         try {
-            currentStage.setScene(new Scene(FXMLLoader.load(ClassLoader.getSystemResource("layouts/" + nextScene.getLayoutName() + ".fxml"))));
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Critical error reading layouts from disk.\nApp closing. . .\n");
-            System.exit(1);
+            currentStage.setScene(new Scene(FXMLLoader.load(ClassLoader.getSystemResource("layouts" + File.separator + nextScene.getLayoutName() + ".fxml"))));
+        } catch (Exception e) {
+            AlertBuilder.buildAndLaunch(AlertType.ERROR, "An Exception has occurred",
+                    "Application encountered a critical error while reading files from disk", this.getStringFromStackTrace(e));
         }
+    }
+
+    private String getStringFromStackTrace(final Exception e) {
+        StringWriter sw = new StringWriter();
+        e.printStackTrace(new PrintWriter(sw));
+        return sw.toString();
     }
 }
