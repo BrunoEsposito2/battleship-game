@@ -56,7 +56,7 @@ public final class MatchManagerImpl implements MatchManager {
     private void postMatchOperations(final Player winner) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setHeaderText(null);
-        alert.setTitle("Winner!");
+        alert.setTitle("Match over!");
         alert.setContentText("Player " + winner.getName() + " won the match!\nPress ok to go back to menu.");
         alert.showAndWait();
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
