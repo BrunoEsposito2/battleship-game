@@ -1,5 +1,7 @@
 package model.match;
 
+import model.player.Player;
+
 /**
  * This interface is used to start a new match by calling the start() method.
  * The new match will be managed from start to finish by this interface, using the settings
@@ -9,6 +11,7 @@ public interface MatchManager {
     /**
      * This method is used to start a new match.
      * Can be called once per MatchManager instance.
+     * @return the winner of the match
      */
-    void startNewMatch();
+    Player startNewMatch();
 }

@@ -13,7 +13,7 @@ public enum SceneName {
 
     private final String layoutName;
 
-    private SceneName(final String layoutName) {
+    SceneName(final String layoutName) {
         this.layoutName = layoutName;
     }
 
