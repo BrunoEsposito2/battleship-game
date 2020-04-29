@@ -1,22 +1,30 @@
 package model.player;
 
+import java.util.Optional;
+
+import model.enums.PlayerType;
+
 /**
- * This interface models a player (human or ai indifferently) during a match.
+ * Consists on players registered in the game.
+ * 
  */
 public interface Player {
-    /**
-     * @return the player's name
-     */
-    String getName();
 
     /**
-     * @return true if the player is human
+     * Returns a specific player informations.
+     * 
+     * @param type
+     * @param username
+     * @return player
      */
-    Boolean isHuman();
+    Optional<PlayerPrototype> getPlayerInfo(PlayerType type, String username);
 
     /**
-     * Starts the player's turn.
-     * The turn is managed by this method from start to finish
+     * 
+     * @param type
+     * @param username
+     * @param password
      */
-    void startTurn();
+    void createPlayerProfile(PlayerType type, String username, String password);
+
 }
