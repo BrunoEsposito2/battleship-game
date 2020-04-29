@@ -23,7 +23,7 @@ public enum GameMode {
     private final String name;
     private final String description;
 
-    private GameMode(final String name, final String description) {
+    GameMode(final String name, final String description) {
         this.name = name;
         this.description = description;
     }

@@ -25,7 +25,7 @@ import model.player.Player;
 import model.player.PlayerAI;
 import model.profile.ProfileLoader;
 import model.util.NamedItem;
-import view.AlertBuilder;
+import view.DialogBuilder;
 import view.SceneManager;
 
 
@@ -78,10 +78,9 @@ public final class MatchSettings {
         Player p1 = getSelectedItem(choiceboxPlayer1);
         Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedItem(choiceboxPlayer2);
         if (!arePlayersDistinct(p1, p2)) {
-            AlertBuilder.buildAndLaunch(AlertType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
+            DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
         } else {
-            MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
-            gm.startNewMatch();
+            this.startMatch(p1, p2);
         }
     }
 
@@ -116,11 +115,9 @@ public final class MatchSettings {
     }
 
     private <T> void initChoicebox(final ChoiceBox<NamedItem<T>> cb, final Collection<T> c, final Function<T, String> name) {
-        for (T elem : c) {
-            cb.getItems().add(new NamedItem<T>(name.apply(elem), elem));
-        }
-        cb.getSelectionModel().selectFirst();
+        c.forEach(x -> cb.getItems().add(new NamedItem<T>(name.apply(x), x)));
         cb.setStyle("-fx-font: 18px \"Serif\";");
+        cb.getSelectionModel().selectFirst();
         cb.getSelectionModel().selectedItemProperty().addListener((x, y, z) -> {
             updateSamePlayersLabel();
         }
@@ -134,6 +131,13 @@ public final class MatchSettings {
         } else {
             labelSamePlayers.setText("");
         }
+    }
+
+    private void startMatch(final Player p1, final Player p2) {
+        MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
+        Player winner = gm.startNewMatch();
+        DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.INFORMATION, "Match over!", "Player " + winner.getName() + " won the match!\nPress ok to go back to menu.", null);
+        SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 
 }

@@ -31,7 +31,7 @@ public enum SceneManager {
         try {
             currentStage.setScene(new Scene(FXMLLoader.load(ClassLoader.getSystemResource("layouts" + File.separator + nextScene.getLayoutName() + ".fxml"))));
         } catch (Exception e) {
-            AlertBuilder.buildAndLaunch(AlertType.ERROR, "An Exception has occurred",
+            DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.ERROR, "An Exception has occurred",
                     "Application encountered a critical error while reading files from disk", this.getStringFromStackTrace(e));
         }
     }

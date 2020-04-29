@@ -7,9 +7,23 @@ import javafx.scene.control.Alert.AlertType;
 /**
  *  This class is used to create and launch new alerts.
  */
-public final class AlertBuilder {
+public final class DialogBuilder {
 
-    private AlertBuilder() { };
+    public enum DialogType {
+
+        CONFIRMATION(AlertType.CONFIRMATION),
+        INFORMATION(AlertType.INFORMATION),
+        WARNING(AlertType.WARNING),
+        ERROR(AlertType.ERROR);
+
+        private final AlertType concreteType;
+
+        DialogType(final AlertType concreteType) {
+            this.concreteType = concreteType;
+        }
+    }
+
+    private DialogBuilder() { };
 
     /**
      * This method returns a new alert from passed parameters.
@@ -19,8 +33,8 @@ public final class AlertBuilder {
      * @param description - description of the alert
      * @return the created alert
      */
-    public static Alert build(final AlertType type, final String title, final String header, final String description) {
-        Alert alert = new Alert(type);
+    public static Alert build(final DialogType type, final String title, final String header, final String description) {
+        Alert alert = new Alert(type.concreteType);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setResizable(true);
@@ -42,7 +56,7 @@ public final class AlertBuilder {
      * @param header - header of the alert
      * @param description - description of the alert
      */
-    public static void buildAndLaunch(final AlertType type, final String title, final String header, final String description) {
+    public static void buildAndLaunch(final DialogType type, final String title, final String header, final String description) {
         build(type, title, header, description).showAndWait();
     }
 

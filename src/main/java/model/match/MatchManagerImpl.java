@@ -3,23 +3,17 @@ package model.match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import model.enums.SceneName;
 import model.enums.GameMode;
 import model.player.Player;
-import view.AlertBuilder;
-import view.SceneManager;
 
 /**
  * Implementation of MatchManager interface.
  */
 public final class MatchManagerImpl implements MatchManager {
 
-    private final MatchStatus ms = new MatchStatusImpl();
-    private final List<Player> players;
-    private final GameMode wc;
+    private final MatchStatus matchStatus = new MatchStatusImpl();
+    private final List<Player> playerList;
+    private final GameMode gameMode;
     private boolean hasStartedMatch;
 
     /**
@@ -29,33 +23,35 @@ public final class MatchManagerImpl implements MatchManager {
      */
     public MatchManagerImpl(final Set<Player> players, final GameMode wc) {
         this.hasStartedMatch = false;
-        this.players = new ArrayList<>(players);
-        this.wc = wc;
+        this.playerList = new ArrayList<>(players);
+        this.gameMode = wc;
     }
 
     @Override
-    public void startNewMatch() {
+    public Player startNewMatch() {
         if (hasStartedMatch) {
             throw new IllegalStateException("Cannot start more than one match from the same MatchManager instance");
         }
         hasStartedMatch = true;
-        postMatchOperations(gameLoop());
+        return gameLoop();
     }
 
     private Player gameLoop() {
         while (true) {
-            for (int i = 0; i < players.size(); i++) {
+            for (int i = 0; i < playerList.size(); i++) {
                 //TODO load grid & prepare stuff for player(i)'s turn
-                players.get(i).startTurn();
-                if (ms.isMatchOver(wc)) {
-                    return players.get(i);
+                playerList.get(i).startTurn();
+                if (matchStatus.isMatchOver(gameMode)) {
+                    return playerList.get(i); // returns the winner
                 }
             }
         }
     }
 
+    /*
     private void postMatchOperations(final Player winner) {
-        AlertBuilder.buildAndLaunch(AlertType.INFORMATION,"Match over!","Player " + winner.getName() + " won the match!\nPress ok to go back to menu.",null);
+        DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.INFORMATION, "Match over!", "Player " + winner.getName() + " won the match!\nPress ok to go back to menu.", null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
+    */
 }
