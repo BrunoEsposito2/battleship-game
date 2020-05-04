@@ -50,6 +50,7 @@ public final class MatchSettings {
         initChoicebox(choiceboxPlayer2, profiles);
         initChoicebox(choiceboxGameMode, List.of(GameMode.values()));
         textareaDescription.setText(selectedWinCondition.getDescription());
+        choiceboxGameMode.getSelectionModel().selectFirst();
     }
 
     /**
@@ -106,12 +107,8 @@ public final class MatchSettings {
         cb.setStyle("-fx-font: 18px \"Serif\";");
         if (!cb.equals(choiceboxGameMode)) {
             cb.getSelectionModel().selectedItemProperty().addListener((x, y, z) -> {
-                if (getSelectedItem(cb) != null) {
-                    login(cb, (Player) getSelectedItem(cb));
-                }
+                onPlayerSelected(cb);
             });
-        } else {
-            cb.getSelectionModel().selectFirst();
         }
     }
 
@@ -127,7 +124,13 @@ public final class MatchSettings {
             dialog.buildAndLaunch(DialogType.INFORMATION, "Login", "Login successful!", null);
         } else {
             cb.getSelectionModel().clearSelection();
-            dialog.buildAndLaunch(DialogType.ERROR, "Login", "Wrong account credentials!", null);
+            dialog.buildAndLaunch(DialogType.ERROR, "Login", "Invalid account credentials!", null);
+        }
+    }
+
+    private <T> void onPlayerSelected(final ChoiceBox<T> cb) {
+        if (getSelectedItem(cb) != null) {
+            login(cb, (Player) getSelectedItem(cb));
         }
     }
 
