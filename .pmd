@@ -3,6 +3,6 @@
     <useProjectRuleSet>true</useProjectRuleSet>
     <ruleSetFile>/config/pmd/pmd.xml</ruleSetFile>
     <includeDerivedFiles>false</includeDerivedFiles>
-    <violationsAsErrors>false</violationsAsErrors>
+    <violationsAsErrors>true</violationsAsErrors>
     <fullBuildEnabled>true</fullBuildEnabled>
 </pmd>
