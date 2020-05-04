@@ -1,30 +1,22 @@
 package controller.ui;
 
 import javafx.scene.control.TextArea;
-import javafx.scene.control.Alert.AlertType;
 import java.util.Collection;
 import java.util.List;
-import java.util.function.Function;
 import java.util.Set;
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.ListChangeListener;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
 import model.enums.SceneName;
+import model.enums.DialogType;
 import model.enums.GameMode;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
 import model.player.Player;
 import model.player.PlayerAI;
+import model.profile.AccountLogin;
 import model.profile.ProfileLoader;
-import model.util.NamedItem;
 import view.DialogBuilder;
 import view.SceneManager;
 
@@ -36,30 +28,28 @@ import view.SceneManager;
 public final class MatchSettings {
 
     private final Collection<Player> profiles = new ProfileLoader().load(); //TODO update the way profiles are loaded once profile classes are available
+    private final DialogBuilder dialog = new DialogBuilder();
     private GameMode selectedWinCondition = GameMode.CLASSIC;
 
     @FXML
     private Button buttonBack, buttonStart;
     @FXML
-    private ChoiceBox<NamedItem<Player>> choiceboxPlayer1, choiceboxPlayer2;
+    private ChoiceBox<Player> choiceboxPlayer1, choiceboxPlayer2;
     @FXML
-    private ChoiceBox<NamedItem<GameMode>> choiceboxGameMode;
+    private ChoiceBox<GameMode> choiceboxGameMode;
     @FXML
     private CheckBox checkboxAI;
     @FXML
     private TextArea textareaDescription;
-    @FXML
-    private Label labelSamePlayers;
 
     /**
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI
      */
     public void initialize() {
-        initChoicebox(choiceboxPlayer1, profiles, x -> x.getName());
-        initChoicebox(choiceboxPlayer2, profiles, x -> x.getName());
-        initChoicebox(choiceboxGameMode, List.of(GameMode.values()), x -> x.getName());
+        initChoicebox(choiceboxPlayer1, profiles);
+        initChoicebox(choiceboxPlayer2, profiles);
+        initChoicebox(choiceboxGameMode, List.of(GameMode.values()));
         textareaDescription.setText(selectedWinCondition.getDescription());
-        updateSamePlayersLabel();
     }
 
     /**
@@ -77,8 +67,10 @@ public final class MatchSettings {
     public void buttonStart() {
         Player p1 = getSelectedItem(choiceboxPlayer1);
         Player p2 = checkboxAI.isSelected() ? new PlayerAI("AI") : getSelectedItem(choiceboxPlayer2);
-        if (!arePlayersDistinct(p1, p2)) {
-            DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
+        if (p1 == null || p2 == null) {
+            dialog.buildAndLaunch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
+        } else if (!arePlayersDistinct(p1, p2)) {
+            dialog.buildAndLaunch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
         } else {
             this.startMatch(p1, p2);
         }
@@ -90,11 +82,6 @@ public final class MatchSettings {
     @FXML
     public void checkboxAI() {
         choiceboxPlayer2.setDisable(!choiceboxPlayer2.isDisabled());
-        if (checkboxAI.isSelected()) {
-            labelSamePlayers.setText("");
-        } else {
-            updateSamePlayersLabel();
-        }
     }
 
     /**
@@ -102,7 +89,7 @@ public final class MatchSettings {
      */
     @FXML
     public void choiceboxGameMode() {
-        selectedWinCondition = choiceboxGameMode.getSelectionModel().getSelectedItem().getItem();
+        selectedWinCondition = getSelectedItem(choiceboxGameMode);
         textareaDescription.setText(selectedWinCondition.getDescription());
     }
 
@@ -110,34 +97,38 @@ public final class MatchSettings {
         return !p1.equals(p2);
     }
 
-    private <T> T getSelectedItem(final ChoiceBox<NamedItem<T>> cb) {
-        return cb.getSelectionModel().getSelectedItem().getItem();
+    private <T> T getSelectedItem(final ChoiceBox<T> cb) {
+        return cb.getSelectionModel().getSelectedItem();
     }
 
-    private <T> void initChoicebox(final ChoiceBox<NamedItem<T>> cb, final Collection<T> c, final Function<T, String> name) {
-        c.forEach(x -> cb.getItems().add(new NamedItem<T>(name.apply(x), x)));
+    private <T> void initChoicebox(final ChoiceBox<T> cb, final Collection<T> c) {
+        c.forEach(x -> cb.getItems().add(x));
         cb.setStyle("-fx-font: 18px \"Serif\";");
-        cb.getSelectionModel().selectFirst();
-        cb.getSelectionModel().selectedItemProperty().addListener((x, y, z) -> {
-            updateSamePlayersLabel();
-        }
-        );
-
-    }
-
-    private void updateSamePlayersLabel() {
-        if (!arePlayersDistinct(getSelectedItem(choiceboxPlayer1), getSelectedItem(choiceboxPlayer2))) {
-            labelSamePlayers.setText("Warning: players must use distinct profiles");
+        if (!cb.equals(choiceboxGameMode)) {
+            cb.getSelectionModel().selectedItemProperty().addListener((x, y, z) -> {
+                if (getSelectedItem(cb) != null) {
+                    login(cb, (Player) getSelectedItem(cb));
+                }
+            });
         } else {
-            labelSamePlayers.setText("");
+            cb.getSelectionModel().selectFirst();
         }
     }
 
     private void startMatch(final Player p1, final Player p2) {
         MatchManager gm = new MatchManagerImpl(Set.of(p1, p2), selectedWinCondition);
         Player winner = gm.startNewMatch();
-        DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.INFORMATION, "Match over!", "Player " + winner.getName() + " won the match!\nPress ok to go back to menu.", null);
+        dialog.buildAndLaunch(DialogType.INFORMATION, "Match over!", "Player " + winner.getName() + " won the match!\nPress ok to go back to menu.", null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
+    }
+
+    private <T> void login(final ChoiceBox<T> cb, final Player p) {
+        if (new AccountLogin().login(p)) {
+            dialog.buildAndLaunch(DialogType.INFORMATION, "Login", "Login successful!", null);
+        } else {
+            cb.getSelectionModel().clearSelection();
+            dialog.buildAndLaunch(DialogType.ERROR, "Login", "Wrong account credentials!", null);
+        }
     }
 
 }
