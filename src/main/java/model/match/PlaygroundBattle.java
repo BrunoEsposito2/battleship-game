@@ -14,4 +14,6 @@ public interface PlaygroundBattle {
     boolean removeShip(Pair<Integer, Integer> box);
 
     boolean shot(Pair<Integer, Integer> box);
+
+    boolean areThereAliveShip();
 }
