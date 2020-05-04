@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import application.Main;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
@@ -28,17 +29,7 @@ public enum SceneManager {
      * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
-        try {
-            currentStage.setScene(new Scene(FXMLLoader.load(ClassLoader.getSystemResource("layouts" + File.separator + nextScene.getLayoutName() + ".fxml"))));
-        } catch (Exception e) {
-            DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.ERROR, "An Exception has occurred",
-                    "Application encountered a critical error while reading files from disk", this.getStringFromStackTrace(e));
-        }
+        currentStage.setScene(new Scene((Parent) ResourceLoader.load("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
     }
 
-    private String getStringFromStackTrace(final Exception e) {
-        StringWriter sw = new StringWriter();
-        e.printStackTrace(new PrintWriter(sw));
-        return sw.toString();
-    }
 }
