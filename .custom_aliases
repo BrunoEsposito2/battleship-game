@@ -1,0 +1,21 @@
+alias l="ls -alh"
+alias gs="git status"
+alias ga="git add"
+alias gc="git commit -m"
+alias gd="git diff"
+alias gck="git checkout"
+alias gph="git push"
+alias gpl="git pull"
+alias glg="git log --graph --all"
+alias glo="git log --oneline --all"
+
+gac(){
+	ga "${1}"
+	gc ""${1}" ${2}"
+}
+
+gacp(){
+	ga "${1}"
+	gc ""${1}" ${2}"
+	gph
+}
