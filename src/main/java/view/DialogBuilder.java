@@ -2,28 +2,15 @@ package view;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
+import model.enums.DialogType;
 import javafx.scene.control.Alert.AlertType;
 
 /**
  *  This class is used to create and launch new alerts.
  */
-public final class DialogBuilder {
+public class DialogBuilder {
 
-    public enum DialogType {
-
-        CONFIRMATION(AlertType.CONFIRMATION),
-        INFORMATION(AlertType.INFORMATION),
-        WARNING(AlertType.WARNING),
-        ERROR(AlertType.ERROR);
-
-        private final AlertType concreteType;
-
-        DialogType(final AlertType concreteType) {
-            this.concreteType = concreteType;
-        }
-    }
-
-    private DialogBuilder() { };
+    public DialogBuilder() { };
 
     /**
      * This method returns a new alert from passed parameters.
@@ -33,8 +20,8 @@ public final class DialogBuilder {
      * @param description - description of the alert
      * @return the created alert
      */
-    public static Alert build(final DialogType type, final String title, final String header, final String description) {
-        Alert alert = new Alert(type.concreteType);
+    public Alert build(final DialogType type, final String title, final String header, final String description) {
+        Alert alert = new Alert(type.getConcreteType());
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setResizable(true);
@@ -56,7 +43,7 @@ public final class DialogBuilder {
      * @param header - header of the alert
      * @param description - description of the alert
      */
-    public static void buildAndLaunch(final DialogType type, final String title, final String header, final String description) {
+    public void buildAndLaunch(final DialogType type, final String title, final String header, final String description) {
         build(type, title, header, description).showAndWait();
     }
 
