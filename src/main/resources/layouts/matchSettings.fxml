@@ -50,11 +50,6 @@
                         <Font name="System Bold" size="18.0" />
                      </font>
                   </CheckBox>
-                  <Label id="labelSamePlayers" fx:id="labelSamePlayers" prefWidth="300.0" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
                </children>
             </GridPane>
             <Button id="buttonBack" fx:id="buttonBack" mnemonicParsing="false" onMouseClicked="#buttonBack" text="&lt;- Back">
