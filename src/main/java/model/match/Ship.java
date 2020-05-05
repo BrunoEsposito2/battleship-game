@@ -1,6 +1,6 @@
 package model.match;
 
-import model.ShipType;
+import model.enums.ShipType;
 
 /**
  * Represents a generic ship of the game
