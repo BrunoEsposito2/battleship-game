@@ -1,5 +1,7 @@
 package model.match;
 
+import java.util.List;
+
 import model.util.Pair;
 
 /**
@@ -16,4 +18,6 @@ public interface PlaygroundBattle {
     boolean shot(Pair<Integer, Integer> box);
 
     boolean areThereAliveShip();
+
+    List<List<Boolean>> getPlaygroundBattle();
 }
