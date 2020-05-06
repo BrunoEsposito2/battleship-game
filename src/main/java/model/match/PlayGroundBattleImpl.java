@@ -53,7 +53,7 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         // TODO Auto-generated method stub
         return false;
     }
-    
+
     private void createPlayGround() {
         this.playground = new ArrayList<List<Boolean>>(this.columns);
         for (int i = 0; i < this.columns ; i++) {
@@ -63,4 +63,6 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
             }
         }
     }
+    
+    
 }
