@@ -11,16 +11,16 @@ import model.util.Pair;
 public class PlayGroundBattleImpl implements PlaygroundBattle {
 
     private List<List<Boolean>> playground;
-    private int columns;
     private int lines;
+    private int columns;
 
     /**
      * Constructor of battle's playground with size passed.
      * @param size - number of box for side.
      */
-    public PlayGroundBattleImpl(final int columns, final int lines) {
-        this.columns = columns;
+    public PlayGroundBattleImpl(final int lines, final int columns) {
         this.lines = lines;
+        this.columns = columns;
         this.createPlayGround();
     }
 
@@ -54,15 +54,22 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         return false;
     }
 
+    @Override
+    public ArrayList<List<Boolean>> getPlaygroundBattle() {
+        // TODO Auto-generated method stub
+        return new ArrayList<List<Boolean>>(this.playground);
+    }
+    
     private void createPlayGround() {
-        this.playground = new ArrayList<List<Boolean>>(this.columns);
-        for (int i = 0; i < this.columns ; i++) {
-            this.playground.add(new ArrayList<Boolean>(this.lines));
-            for (int j = 0; j < this.lines; j++) {
-                this.playground.get(j).add(false);
+        this.playground = new ArrayList<List<Boolean>>(this.lines);
+        for (int i = 0; i < this.lines; i++) {
+            this.playground.add(new ArrayList<Boolean>(this.columns));
+            for (int j = 0; j < this.columns; j++) {
+                this.playground.get(i).add(false);
             }
         }
     }
+
     
     
 }
