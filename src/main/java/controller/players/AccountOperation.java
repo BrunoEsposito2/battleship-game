@@ -1,6 +1,5 @@
 package controller.players;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,7 +8,7 @@ public class AccountOperation implements AccountManager {
     private List<Player> users;
     private FileManager system;
 
-    public AccountOperation() throws IOException {
+    public AccountOperation() {
         this.users = new LinkedList<Player>();
         this.system = new FileSystemManager();
     }

@@ -1,12 +1,18 @@
 package controller.players;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class HumanPlayer implements Player {
+public class HumanPlayer implements Player, Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 8116603641426068234L;
 
     private String userName;
     private String password;
