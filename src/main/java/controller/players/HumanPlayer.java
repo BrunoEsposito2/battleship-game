@@ -1,0 +1,53 @@
+package controller.players;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class HumanPlayer implements Player {
+
+    private String userName;
+    private String password;
+    private boolean online;
+    private Map<String, List<Double>> stats;
+
+    public HumanPlayer(final String name, final String password) {
+        this.userName = name;
+        this.password = password;
+        this.online = false;
+        this.stats = new HashMap<>();
+    }
+
+    @Override
+    public final void setStatistics(final Map<String, List<Double>> values) {
+        this.stats = values;
+    }
+
+    @Override
+    public final String getUsername() {
+        return this.userName;
+    }
+
+    @Override
+    public final String getPassword() {
+        return this.password;
+    }
+
+    @Override
+    public final Map<String, List<Double>> getStatistics() {
+        return Collections.unmodifiableMap(this.stats);
+    }
+
+    @Override
+    public final void setLogin(final boolean value) {
+        this.online = value;
+    }
+
+    @Override
+    public final boolean isPlaying() {
+        return this.online;
+    }
+
+}
