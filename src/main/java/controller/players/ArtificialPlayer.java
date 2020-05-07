@@ -1,9 +1,19 @@
 package controller.players;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-public class ArtificialPlayer implements Player {
+public class ArtificialPlayer implements Player, Serializable {
+
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -6800182305987141934L;
+
+    public ArtificialPlayer() {
+        // TODO Auto-generated constructor stub
+    }
 
     @Override
     public void setStatistics(final Map<String, List<Double>> values) {
