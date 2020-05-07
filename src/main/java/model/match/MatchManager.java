@@ -1,6 +1,6 @@
 package model.match;
 
-import model.player.Player;
+import controller.players.Player;
 
 /**
  * This interface is used to start a new match by calling the start() method.

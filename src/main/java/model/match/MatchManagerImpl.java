@@ -3,8 +3,9 @@ package model.match;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import controller.players.Player;
 import model.enums.GameMode;
-import model.player.Player;
+
 
 /**
  * Implementation of MatchManager interface.
@@ -40,7 +41,7 @@ public final class MatchManagerImpl implements MatchManager {
         while (true) {
             for (int i = 0; i < playerList.size(); i++) {
                 //TODO load grid & prepare stuff for player(i)'s turn
-                playerList.get(i).startTurn();
+                //playerList.get(i).startTurn();
                 if (matchStatus.isMatchOver(gameMode)) {
                     return playerList.get(i); // returns the winner
                 }
