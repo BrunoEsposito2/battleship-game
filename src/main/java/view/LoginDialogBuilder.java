@@ -7,17 +7,15 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.util.Pair;
 
 public final class LoginDialogBuilder {
 
-    public Dialog<Pair<String, String>> build() {
+    public Dialog<String> build(final String username) {
 
-        Dialog<Pair<String, String>> dialog = new Dialog<>();
+        Dialog<String> dialog = new Dialog<>();
         dialog.setTitle("Login");
-        dialog.setHeaderText("Insert username and password to log into your account");
+        dialog.setHeaderText("Insert password for the account \"" + username + "\"");
 
         ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
@@ -27,19 +25,16 @@ public final class LoginDialogBuilder {
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(20, 150, 10, 10));
 
-        TextField username = new TextField();
-        username.setPromptText("your username here...");
         PasswordField password = new PasswordField();
         password.setPromptText("your password here...");
 
-        gridPane.add(username, 0, 0);
-        gridPane.add(password, 0, 1);
+        gridPane.add(password, 1, 0);
 
         dialog.getDialogPane().setContent(gridPane);
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
-                return new Pair<>(username.getText(), password.getText());
+                return password.getText();
             }
             return null;
         });
@@ -47,8 +42,8 @@ public final class LoginDialogBuilder {
         return dialog;
     }
 
-    public Optional<Pair<String, String>> buildAndLaunch() {
-        return this.build().showAndWait();
+    public Optional<String> buildAndLaunch(final String username) {
+        return this.build(username).showAndWait();
     }
 
 }
