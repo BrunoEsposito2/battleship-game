@@ -1,17 +1,15 @@
 package controller.ui;
 
 import javafx.scene.control.TextArea;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import controller.players.AccountManager;
 import controller.players.AccountOperation;
-import controller.players.ArtificialPlayer;
 import controller.players.Player;
-import javafx.beans.value.ChangeListener;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -33,7 +31,7 @@ import view.SceneManager;
 public final class MatchSettings {
 
     private final AccountManager accountManager = new AccountOperation();
-    private final Collection<String> usernames = accountManager.getAllUsername();
+    private final Collection<String> usernames = new ArrayList<String>();
     private final LoginDialogBuilder loginDialog = new LoginDialogBuilder();
     private final DialogBuilder dialog = new DialogBuilder();
     private GameMode selectedWinCondition = GameMode.CLASSIC;
@@ -53,6 +51,10 @@ public final class MatchSettings {
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI
      */
     public void initialize() {
+        //TODO remove null check once loader is stable
+        if(accountManager.getAllUsername() != null) {
+            usernames.addAll(accountManager.getAllUsername());
+        }
         initChoiceBox(choiceboxPlayer1, usernames);
         initChoiceBox(choiceboxPlayer2, usernames);
         initChoiceBox(choiceboxGameMode, Arrays.asList(GameMode.values()));
