@@ -16,7 +16,8 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
 
     /**
      * Constructor of battle's playground with size passed.
-     * @param size - number of box for side.
+     * @param lines - number of box for vertical side.
+     * @param columns - number of box for horizontal side.
      */
     public PlayGroundBattleImpl(final int lines, final int columns) {
         this.lines = lines;
