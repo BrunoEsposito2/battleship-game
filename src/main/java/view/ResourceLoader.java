@@ -5,21 +5,25 @@ import java.io.StringWriter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import model.enums.DialogType;
+import view.dialog.DialogBuilder;
+import view.dialog.GenericDialog;
 
-public abstract class ResourceLoader {
+public final class ResourceLoader {
 
-    public static Object load(final String resource) {
+    private final DialogBuilder dialog = new GenericDialog();
+
+    public Object load(final String resource) {
         Node res = null;
         try {
             res = FXMLLoader.load(ClassLoader.getSystemResource(resource));
         } catch (Exception e) {
-            new DialogBuilder().buildAndLaunch(DialogType.ERROR, "An Exception has occurred",
+            dialog.launch(DialogType.ERROR, "An Exception has occurred",
                     "Application encountered a critical error while reading files from disk", getStringFromStackTrace(e));
         }
         return res;
     }
 
-    private static String getStringFromStackTrace(final Exception e) {
+    private String getStringFromStackTrace(final Exception e) {
         StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         return sw.toString();

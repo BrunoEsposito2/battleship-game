@@ -1,13 +1,9 @@
 package view;
 
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 import application.Main;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import model.enums.SceneName;
 
@@ -23,13 +19,14 @@ public enum SceneManager {
     INSTANCE;
 
     private final Stage currentStage = Main.getStage();
+    private final ResourceLoader resource = new ResourceLoader();
 
     /**
      * This method switches the active Scene to the one passed as parameter.
      * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
-        currentStage.setScene(new Scene((Parent) ResourceLoader.load("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
+        currentStage.setScene(new Scene((Parent) resource.load("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
     }
 
 }

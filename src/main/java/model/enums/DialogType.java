@@ -7,7 +7,8 @@ public enum DialogType {
     CONFIRMATION(AlertType.CONFIRMATION),
     INFORMATION(AlertType.INFORMATION),
     WARNING(AlertType.WARNING),
-    ERROR(AlertType.ERROR);
+    ERROR(AlertType.ERROR),
+    LOGIN(AlertType.NONE);
 
     private final AlertType concreteType;
 
