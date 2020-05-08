@@ -19,14 +19,14 @@ public enum SceneManager {
     INSTANCE;
 
     private final Stage currentStage = Main.getStage();
-    private final ResourceLoader resource = new ResourceLoader();
+    private final ResourceLoaderImpl loader = new ResourceLoaderImpl();
 
     /**
      * This method switches the active Scene to the one passed as parameter.
      * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
-        currentStage.setScene(new Scene((Parent) resource.load("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
+        currentStage.setScene(new Scene( loader.loadFXML("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
     }
 
 }
