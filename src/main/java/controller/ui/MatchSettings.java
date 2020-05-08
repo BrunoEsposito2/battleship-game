@@ -17,6 +17,7 @@ import javafx.scene.control.ChoiceBox;
 import model.enums.SceneName;
 import model.enums.DialogType;
 import model.enums.GameMode;
+import model.enums.PlayerType;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
 import view.SceneManager;
@@ -68,18 +69,13 @@ public final class MatchSettings {
      */
     @FXML
     public void buttonStart() {
-        //TODO Need a way to get Player from username
-        /*
-        Player p1 = getSelectedItem(choiceboxPlayer1);
-        Player p2 = checkboxAI.isSelected() ? new ArtificialPlayer() : getSelectedItem(choiceboxPlayer2);
-        if (p1 == null || p2 == null) {
-            dialog.buildAndLaunch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
-        } else if (!arePlayersDistinct(p1, p2)) {
-            dialog.buildAndLaunch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
-        } else {
-            this.startMatch(p1, p2);
+        boolean aiPlayer = checkboxAI.isSelected();
+        String username1 = getSelectedItem(choiceboxPlayer1);
+        String username2 = aiPlayer ? null : getSelectedItem(choiceboxPlayer2);
+        if (arePlayersValid(username1, username2, aiPlayer)) {
+            this.startMatch(username1, username2, aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN);
         }
-        */
+        
     }
 
     /**
@@ -127,11 +123,10 @@ public final class MatchSettings {
         }
     }
 
-    private void startMatch(final Player p1, final Player p2) {
-        //TODO update this as soon as player methods are available...
-        MatchManager gm = new MatchManagerImpl(new HashSet<Player>(Arrays.asList(p1, p2)), selectedWinCondition);
-        Player winner = gm.startNewMatch();
-        dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner.getUsername() + " won the match!\nPress ok to go back to menu.", null);
+    private void startMatch(final String username1, final String username2, PlayerType playerType) {
+        MatchManager gm = new MatchManagerImpl(username1, username2, playerType, selectedWinCondition);
+        String winner = gm.startNewMatch();
+        dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 
@@ -139,8 +134,15 @@ public final class MatchSettings {
         return cb.getSelectionModel().getSelectedItem();
     }
 
-    private boolean arePlayersDistinct(final Player p1, final Player p2) {
-        return !p1.equals(p2);
+    private boolean arePlayersValid(final String username1, final String username2, final boolean aiPlayer) {
+        if (username1 == null || (username2 == null && !aiPlayer)) {
+            dialog.launch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
+        } else if (username1.equals(username2)) {
+            dialog.launch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
+        } else {
+            return true;
+        }
+        return false;
     }
 
 }

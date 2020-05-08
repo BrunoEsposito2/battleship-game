@@ -1,10 +1,9 @@
 package model.match;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
-import controller.players.Player;
 import model.enums.GameMode;
+import model.enums.PlayerType;
 
 
 /**
@@ -13,8 +12,9 @@ import model.enums.GameMode;
 public final class MatchManagerImpl implements MatchManager {
 
     private final MatchStatus matchStatus = new MatchStatusImpl();
-    private final List<Player> playerList;
+    private final List<String> playerList;
     private final GameMode gameMode;
+    private final boolean isPlayer2Human;
     private boolean hasStartedMatch;
 
     /**
@@ -22,14 +22,15 @@ public final class MatchManagerImpl implements MatchManager {
      * @param players - a Set containing the players of the match
      * @param wc - the WinCondition which determines when the match will end
      */
-    public MatchManagerImpl(final Set<Player> players, final GameMode wc) {
+    public MatchManagerImpl(final String username1, final String username2, PlayerType playerType, final GameMode wc) {
         this.hasStartedMatch = false;
-        this.playerList = new ArrayList<>(players);
+        this.playerList = Arrays.asList(username1, username2);
+        this.isPlayer2Human = playerType.equals(PlayerType.HUMAN) ? true : false;
         this.gameMode = wc;
     }
 
     @Override
-    public Player startNewMatch() {
+    public String startNewMatch() {
         if (hasStartedMatch) {
             throw new IllegalStateException("Cannot start more than one match from the same MatchManager instance");
         }
@@ -37,7 +38,7 @@ public final class MatchManagerImpl implements MatchManager {
         return gameLoop();
     }
 
-    private Player gameLoop() {
+    private String gameLoop() {
         while (true) {
             for (int i = 0; i < playerList.size(); i++) {
                 //TODO load grid & prepare stuff for player(i)'s turn
@@ -49,10 +50,4 @@ public final class MatchManagerImpl implements MatchManager {
         }
     }
 
-    /*
-    private void postMatchOperations(final Player winner) {
-        DialogBuilder.buildAndLaunch(DialogBuilder.DialogType.INFORMATION, "Match over!", "Player " + winner.getName() + " won the match!\nPress ok to go back to menu.", null);
-        SceneManager.INSTANCE.switchScene(SceneName.MAIN);
-    }
-    */
 }
