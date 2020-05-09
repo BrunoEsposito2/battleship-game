@@ -30,7 +30,7 @@ public enum Orientation {
     Orientation(final Pair<Integer, Integer> direction) {
         this.direction = direction;
     }
-    
+
     /**
      * Get a list of cells used in the direction of object "Orientation",
      * given the initial cell and the number of cells these will be used. 
