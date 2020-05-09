@@ -9,7 +9,7 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * 
- * Enumeration type to indicate the orientation of a ship inside a playground.
+ * Enumeration type to indicate the orientation of a cells block inside a playground.
  * It could be vertical or horizontal.
  *
  */
