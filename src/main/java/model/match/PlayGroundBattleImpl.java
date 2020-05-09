@@ -63,17 +63,23 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         // TODO Auto-generated method stub
         return new ArrayList<List<Boolean>>(this.playground);
     }
-    
+
     private void createPlayGround() {
-        /*Stream.iterate( -> new ArrayList<List<Boolean>>(this.lines))
-            .limit(this.lines)
-            .peek(i -> i.addAll(
-                    Stream.generate(() -> new ArrayList<Boolean>(this.columns))
-                    .limit(this.columns)
-                    .peek(j -> j.add(false)).collect(toList())));*/
-        
-            
-            
+        /*this.playground = Stream.iterate(new ArrayList<List<Boolean>>(this.lines), i -> new ArrayList<List<Boolean>>(this.lines))
+                                .limit(this.lines)
+                                .collect(toList())
+                                .stream()
+                                .peek(j -> j.addAll(
+                                        Stream.iterate(new ArrayList<Boolean>(this.columns), k -> new ArrayList<Boolean>(this.columns))
+                                        .limit(this.columns)
+                                        .collect(toList())
+                                        .stream()
+                                        .peek(y -> y.add(false))
+                                        .collect(toList())))
+                                .collect(toList());*/
+
+
+
         this.playground = new ArrayList<List<Boolean>>(this.lines);
         for (int i = 0; i < this.lines; i++) {
             this.playground.add(new ArrayList<Boolean>(this.columns));
@@ -83,6 +89,4 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         }
     }
 
-    
-    
 }
