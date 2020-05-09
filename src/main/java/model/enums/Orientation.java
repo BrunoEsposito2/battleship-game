@@ -30,11 +30,18 @@ public enum Orientation {
     Orientation(final Pair<Integer, Integer> direction) {
         this.direction = direction;
     }
-
-    public List<Pair<Integer, Integer>> occupied(final Pair<Integer, Integer> initialBox, final int size) {
-        return Stream.iterate(initialBox, 
+    
+    /**
+     * Get a list of cells used in the direction of object "Orientation",
+     * given the initial cell and the number of cells these will be used. 
+     * @param initialCell - The cell where to start.
+     * @param cellsNumber - Number of cell used along direction.
+     * @return a list of cells used
+     */
+    public List<Pair<Integer, Integer>> cellsUsedList(final Pair<Integer, Integer> initialCell, final int cellsNumber) {
+        return Stream.iterate(initialCell, 
                         i -> new Pair<Integer, Integer>(i.getX() + this.direction.getX(), i.getY() + this.direction.getY()))
-                .limit(size)
+                .limit(cellsNumber)
                 .collect(toList());
     }
 }
