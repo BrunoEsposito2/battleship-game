@@ -6,7 +6,7 @@ import java.util.List;
 public class AccountOperation implements AccountManager {
 
     private List<Player> users;
-    private FileManager system;
+    private final FileManager system;
 
     public AccountOperation() {
         this.users = new LinkedList<Player>();
@@ -62,3 +62,4 @@ public class AccountOperation implements AccountManager {
     }
 
 }
+

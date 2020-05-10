@@ -2,16 +2,15 @@ package controller.players;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 public interface FileManager {
 
-    void savePlayer(String userName, String password);
+    void savePlayer(HumanPlayer player);
 
-    Map<String, String> loadPlayers();
+    Optional<List<Player>> loadPlayers();
 
-    Map<String, List<Double>> loadStats(String userName);
-
-    void removePlayer(String userName);
+    void removePlayer(HumanPlayer player);
 
     void saveStats(Map<String, List<Double>> scores);
 }

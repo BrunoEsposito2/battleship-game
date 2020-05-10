@@ -1,7 +1,6 @@
 package controller.players;
 
 import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 public class ArtificialPlayer implements Player, Serializable {
@@ -16,7 +15,7 @@ public class ArtificialPlayer implements Player, Serializable {
     }
 
     @Override
-    public void setStatistics(final Map<String, List<Double>> values) {
+    public void setStatistics(final Map<String, Double> values) {
         // TODO Auto-generated method stub
 
     }
@@ -34,7 +33,7 @@ public class ArtificialPlayer implements Player, Serializable {
     }
 
     @Override
-    public final Map<String, List<Double>> getStatistics() {
+    public final Map<String, Double> getStatistics() {
         // TODO Auto-generated method stub
         return null;
     }
@@ -49,6 +48,11 @@ public class ArtificialPlayer implements Player, Serializable {
     public final boolean isPlaying() {
         // TODO Auto-generated method stub
         return false;
+    }
+
+    @Override
+    public final String toString() {
+        return "IA username: ";
     }
 
 }
