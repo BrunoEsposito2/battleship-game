@@ -23,9 +23,9 @@ public class TestPlayGroundBattle {
                           x -> x.stream()
                                 .forEach(
                                         y -> assertEquals(y, false)));
-
-        assertEquals(playground.size(), lines);
-        assertEquals(playground.get(first).size(), columns);
+        System.out.println(playground);
+        assertEquals(lines, playground.size());
+        assertEquals(columns, playground.get(first).size());
     }
 
 }
