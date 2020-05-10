@@ -2,8 +2,11 @@ package model.match;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 import model.util.Pair;
+
+import static java.util.stream.Collectors.toList;
 
 /**
  *
@@ -60,8 +63,23 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         // TODO Auto-generated method stub
         return new ArrayList<List<Boolean>>(this.playground);
     }
-    
+
     private void createPlayGround() {
+        /*this.playground = Stream.iterate(new ArrayList<List<Boolean>>(this.lines), i -> new ArrayList<List<Boolean>>(this.lines))
+                                .limit(this.lines)
+                                .collect(toList())
+                                .stream()
+                                .peek(j -> j.addAll(
+                                        Stream.iterate(new ArrayList<Boolean>(this.columns), k -> new ArrayList<Boolean>(this.columns))
+                                        .limit(this.columns)
+                                        .collect(toList())
+                                        .stream()
+                                        .peek(y -> y.add(false))
+                                        .collect(toList())))
+                                .collect(toList());*/
+
+
+
         this.playground = new ArrayList<List<Boolean>>(this.lines);
         for (int i = 0; i < this.lines; i++) {
             this.playground.add(new ArrayList<Boolean>(this.columns));
@@ -71,6 +89,4 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
         }
     }
 
-    
-    
 }

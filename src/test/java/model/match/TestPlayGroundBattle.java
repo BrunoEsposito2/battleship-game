@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.List;
+
 public class TestPlayGroundBattle {
 
     @Test
@@ -14,7 +16,7 @@ public class TestPlayGroundBattle {
 
         PlaygroundBattle playgroundBattle = new PlayGroundBattleImpl(lines, columns);
 
-        var playground = playgroundBattle.getPlaygroundBattle();
+        List<List<Boolean>> playground = playgroundBattle.getPlaygroundBattle();
 
         playground.stream()
                   .forEach(

@@ -1,4 +1,4 @@
-package view;
+package view.dialog;
 
 import java.util.Optional;
 
@@ -7,30 +7,23 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.GridPane;
 
-public final class LoginDialogBuilder {
+final class LoginDialog {
 
-    public Dialog<String> build(final String username) {
+    private Dialog<String> build(final String title, final String header) {
 
         Dialog<String> dialog = new Dialog<>();
-        dialog.setTitle("Login");
-        dialog.setHeaderText("Insert password for the account \"" + username + "\"");
+        dialog.setTitle(title);
+        dialog.setHeaderText(header);
 
         ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        GridPane gridPane = new GridPane();
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setPadding(new Insets(20, 150, 10, 10));
-
         PasswordField password = new PasswordField();
         password.setPromptText("your password here...");
 
-        gridPane.add(password, 1, 0);
-
-        dialog.getDialogPane().setContent(gridPane);
+        dialog.getDialogPane().setContent(password);
+        dialog.getDialogPane().setPadding(new Insets(30, 30, 30, 30));
 
         dialog.setResultConverter(dialogButton -> {
             if (dialogButton == loginButtonType) {
@@ -42,8 +35,8 @@ public final class LoginDialogBuilder {
         return dialog;
     }
 
-    public Optional<String> buildAndLaunch(final String username) {
-        return this.build(username).showAndWait();
+    protected Optional<String> launch(final String title, final String header) {
+        return this.build(title, header).showAndWait();
     }
 
 }

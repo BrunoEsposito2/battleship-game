@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import view.SceneManager;
 
 /**
  * This class represent the Main class of the JavaFX-based application.
