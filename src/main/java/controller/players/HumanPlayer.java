@@ -16,8 +16,8 @@ public class HumanPlayer implements Player, Serializable {
 
     private String userName;
     private String password;
-    private boolean online;
-    private Map<String, List<Double>> stats;
+    private transient boolean online;
+    private Map<String, Double> stats;
 
     public HumanPlayer(final String name, final String password) {
         this.userName = name;
@@ -27,7 +27,7 @@ public class HumanPlayer implements Player, Serializable {
     }
 
     @Override
-    public final void setStatistics(final Map<String, List<Double>> values) {
+    public final void setStatistics(final Map<String, Double> values) {
         this.stats = values;
     }
 
@@ -42,7 +42,7 @@ public class HumanPlayer implements Player, Serializable {
     }
 
     @Override
-    public final Map<String, List<Double>> getStatistics() {
+    public final Map<String, Double> getStatistics() {
         return Collections.unmodifiableMap(this.stats);
     }
 
@@ -54,6 +54,11 @@ public class HumanPlayer implements Player, Serializable {
     @Override
     public final boolean isPlaying() {
         return this.online;
+    }
+
+    @Override
+    public final String toString() {
+        return "Username: " + this.userName;
     }
 
 }
