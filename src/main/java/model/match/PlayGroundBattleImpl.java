@@ -65,21 +65,6 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
     }
 
     private void createPlayGround() {
-        /*this.playground = Stream.iterate(new ArrayList<List<Boolean>>(this.lines), i -> new ArrayList<List<Boolean>>(this.lines))
-                                .limit(this.lines)
-                                .collect(toList())
-                                .stream()
-                                .peek(j -> j.addAll(
-                                        Stream.iterate(new ArrayList<Boolean>(this.columns), k -> new ArrayList<Boolean>(this.columns))
-                                        .limit(this.columns)
-                                        .collect(toList())
-                                        .stream()
-                                        .peek(y -> y.add(false))
-                                        .collect(toList())))
-                                .collect(toList());*/
-
-
-
         this.playground = new ArrayList<List<Boolean>>(this.lines);
         for (int i = 0; i < this.lines; i++) {
             this.playground.add(new ArrayList<Boolean>(this.columns));
