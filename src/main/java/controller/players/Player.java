@@ -2,7 +2,7 @@ package controller.players;
 
 import java.util.Map;
 
-public interface Player {
+public  interface Player {
 
     void setStatistics(Map<String, Double> values);
 
