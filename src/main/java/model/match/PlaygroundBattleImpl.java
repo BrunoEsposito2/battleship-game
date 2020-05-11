@@ -3,7 +3,7 @@ package model.match;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.Map;
 
 import model.enums.Orientation;
 import model.util.Pair;
@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     private List<List<Boolean>> playground;
-    private HashMap<Ship, List<Pair<Integer, Integer>>> shipList = new HashMap<Ship, List<Pair<Integer, Integer>>>();
+    private Map<Ship, List<Pair<Integer, Integer>>> shipList = new HashMap<Ship, List<Pair<Integer, Integer>>>();
 
     private int lines;
     private int columns;
@@ -39,8 +39,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
          * If list is empty there aren't overlap.
          */
         if (this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
-            return Objects.nonNull(this.shipList.put(ship, cellsNecessary));
-
+            this.shipList.put(ship, cellsNecessary);
+            return true;
         }
         return false;
     }
