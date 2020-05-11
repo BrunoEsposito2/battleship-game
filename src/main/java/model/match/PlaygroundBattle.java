@@ -2,6 +2,7 @@ package model.match;
 
 import java.util.List;
 
+import model.enums.Orientation;
 import model.util.Pair;
 
 /**
@@ -9,9 +10,9 @@ import model.util.Pair;
  */
 public interface PlaygroundBattle {
 
-    boolean positionShip(ShipAngelo ship, Pair<Integer, Integer> box);
+    boolean positionShip(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
-    boolean isPositionable(ShipAngelo ship, Pair<Integer, Integer> box);
+    List<Pair<Integer, Integer>> cellsAlreadyUsed(List<Pair<Integer, Integer>> cellsNecessary);
 
     boolean removeShip(Pair<Integer, Integer> box);
 
