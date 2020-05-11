@@ -49,7 +49,12 @@ public final class InstallManager {
         final File usersDir = new File(DIR_PATH);
 
         if (!usersDir.exists()) {
-            usersDir.mkdir();
+            try {
+                usersDir.mkdir();
+            } catch (Exception e) {
+                System.err.println("Error in directory creation: dir not created");
+                e.printStackTrace();
+            }
         }
     }
 

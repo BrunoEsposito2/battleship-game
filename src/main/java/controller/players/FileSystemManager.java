@@ -86,9 +86,18 @@ public class FileSystemManager implements FileManager {
 
         final File user = new File(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
 
-        if (user.exists() && user.isFile()) {
-            user.delete();
+        try {
+            if (user.exists() && user.isFile()) {
+                try {
+                    user.delete();
+                } catch (Exception e) {
+                    System.err.println("Error in 'delete file': file not deleted");
+                    e.printStackTrace();
+                }
+            }
+        } catch (Exception e) {
+            System.err.println("Error in 'removePlayer': player is not removed");
+            e.printStackTrace();
         }
-
     }
 }
