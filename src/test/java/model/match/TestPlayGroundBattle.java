@@ -14,7 +14,7 @@ public class TestPlayGroundBattle {
         int lines = 8;
         int first = 0;
 
-        PlaygroundBattle playgroundBattle = new PlayGroundBattleImpl(lines, columns);
+        PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(lines, columns);
 
         List<List<Boolean>> playground = playgroundBattle.getPlaygroundBattle();
 
