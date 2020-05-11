@@ -1,9 +1,10 @@
 package model.match;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Stream;
 
+import model.enums.Orientation;
 import model.util.Pair;
 
 import static java.util.stream.Collectors.toList;
@@ -14,6 +15,8 @@ import static java.util.stream.Collectors.toList;
 public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     private List<List<Boolean>> playground;
+    private HashMap<Ship, List<Pair<Integer, Integer>>> shipList = new HashMap<Ship, List<Pair<Integer, Integer>>>();
+
     private int lines;
     private int columns;
 
@@ -29,15 +32,24 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public boolean positionShip(final ShipAngelo ship, final Pair<Integer, Integer> box) {
-        // TODO Auto-generated method stub
+    public boolean positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
+        List<Pair<Integer, Integer>> cellsNecessary = orientation.cellsUsedList(firstCell, ship.getSize());
+        /*
+         * If list is empty there aren't overlap.
+         */
+        if(this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
+            shipList.put(ship, cellsNecessary);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean isPositionable(final ShipAngelo ship, final Pair<Integer, Integer> box) {
-        // TODO Auto-generated method stub
-        return false;
+    public List<Pair<Integer, Integer>> cellsAlreadyUsed(final List<Pair<Integer, Integer>> cellsNecessary) {
+        List<Pair<Integer, Integer>> cellsAlreadyUsed =  cellsNecessary.stream()
+                                              .filter(i -> isCellUsed(i))
+                                              .collect(toList());
+        return cellsAlreadyUsed;
     }
 
     @Override
@@ -64,6 +76,10 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return new ArrayList<List<Boolean>>(this.playground);
     }
 
+    private boolean isCellUsed(final Pair<Integer, Integer> cell) {
+        return this.playground.get(cell.getY()).get(cell.getX());
+    }
+    
     private void createPlayGround() {
         this.playground = new ArrayList<List<Boolean>>(this.lines);
         for (int i = 0; i < this.lines; i++) {
