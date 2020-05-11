@@ -3,6 +3,7 @@ package model.match;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 
 import model.enums.Orientation;
 import model.util.Pair;
@@ -38,15 +39,15 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
          * If list is empty there aren't overlap.
          */
         if (this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
-            shipList.put(ship, cellsNecessary);
-            return true;
+            return Objects.nonNull(this.shipList.put(ship, cellsNecessary));
+
         }
         return false;
     }
 
     @Override
     public List<Pair<Integer, Integer>> cellsAlreadyUsed(final List<Pair<Integer, Integer>> cellsNecessary) {
-        List<Pair<Integer, Integer>> cellsAlreadyUsed =  cellsNecessary.stream()
+        List<Pair<Integer, Integer>> cellsAlreadyUsed = cellsNecessary.stream()
                                               .filter(i -> isCellUsed(i))
                                               .collect(toList());
         return cellsAlreadyUsed;
