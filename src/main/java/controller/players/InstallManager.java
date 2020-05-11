@@ -48,9 +48,9 @@ public final class InstallManager {
 
         final File usersDir = new File(DIR_PATH);
 
-        if (!usersDir.exists()) {           //se non esiste la cartella => la creo
+        if (!usersDir.exists()) {
             usersDir.mkdir();
-        }                                   //altrimenti nulla
+        }
     }
 
 }

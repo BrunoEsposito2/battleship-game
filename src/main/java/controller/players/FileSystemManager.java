@@ -12,7 +12,6 @@ import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 public class FileSystemManager implements FileManager {
@@ -21,7 +20,8 @@ public class FileSystemManager implements FileManager {
         InstallManager.setupApplication();
     }
 
-    private void writePlayerOnFile(final Player player) {
+    private static void writePlayerOnFile(final Player player) {
+
         try (
              OutputStream file = new FileOutputStream(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
              OutputStream bstream = new BufferedOutputStream(file);
@@ -33,7 +33,8 @@ public class FileSystemManager implements FileManager {
          }
     }
 
-    private void loadPlayerFromFile(final List<Player> players, final String usernameFile) {
+    private static void loadPlayerFromFile(final List<Player> players, final String usernameFile) {
+
         try (
              InputStream file = new FileInputStream(InstallManager.FILE_PATH + InstallManager.SEPARATOR + usernameFile);
              InputStream bstream = new BufferedInputStream(file);
@@ -46,7 +47,7 @@ public class FileSystemManager implements FileManager {
     }
 
     @Override
-    public final void savePlayer(final HumanPlayer player) {
+    public final void savePlayer(final Player player) {
 
         final File playerFile = new File(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
 
@@ -57,37 +58,37 @@ public class FileSystemManager implements FileManager {
                 e.printStackTrace();
             }
         }
-
         writePlayerOnFile(player);
-
     }
 
     @Override
     public final Optional<List<Player>> loadPlayers() {
+
         List<Player> players = new LinkedList<>();
 
         final File dir = new File(InstallManager.DIR_PATH);
 
         if (dir.isDirectory()) {
-            String[] names = dir.list();
-            for (String user : names) {
-                loadPlayerFromFile(players, user);
+            Optional<String[]> names = Optional.ofNullable(dir.list());
+            if (names.isPresent()) {
+                for (String user : names.get()) {
+                    loadPlayerFromFile(players, user);
+                }
+            } else {
+                return Optional.of(players);
             }
         }
-
         return Optional.of(players);
     }
 
     @Override
-    public void removePlayer(final HumanPlayer player) {
-        // TODO Auto-generated method stub
+    public final void removePlayer(final Player player) {
+
+        final File user = new File(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
+
+        if (user.exists() && user.isFile()) {
+            user.delete();
+        }
 
     }
-
-    @Override
-    public void saveStats(final Map<String, List<Double>> scores) {
-        // TODO Auto-generated method stub
-
-    }
-
 }
