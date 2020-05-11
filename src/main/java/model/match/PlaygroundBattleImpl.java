@@ -37,7 +37,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         /*
          * If list is empty there aren't overlap.
          */
-        if(this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
+        if (this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
             shipList.put(ship, cellsNecessary);
             return true;
         }
