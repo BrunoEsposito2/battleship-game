@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 /**
  *
  */
-public class PlayGroundBattleImpl implements PlaygroundBattle {
+public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     private List<List<Boolean>> playground;
     private int lines;
@@ -22,7 +22,7 @@ public class PlayGroundBattleImpl implements PlaygroundBattle {
      * @param lines - number of box for vertical side.
      * @param columns - number of box for horizontal side.
      */
-    public PlayGroundBattleImpl(final int lines, final int columns) {
+    public PlaygroundBattleImpl(final int lines, final int columns) {
         this.lines = lines;
         this.columns = columns;
         this.createPlayGround();
