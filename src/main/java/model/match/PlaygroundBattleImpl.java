@@ -88,7 +88,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     @Override
     public ArrayList<List<Boolean>> getPlaygroundBattle() {
-        // TODO Auto-generated method stub
         return new ArrayList<List<Boolean>>(this.playground);
     }
 
