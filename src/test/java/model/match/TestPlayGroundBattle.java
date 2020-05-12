@@ -8,6 +8,7 @@ import model.enums.ShipType;
 import model.util.Pair;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
@@ -44,7 +45,25 @@ public class TestPlayGroundBattle {
 
     @Test
     public void testInsertShip() {
+        List<Pair<Integer, Integer>> cells = 
+                Orientation.HORIZONTAL.cellsUsedList(new Pair<Integer, Integer>(0, 0), CELLS_USED);
+
         assertTrue(PLAYGROUND_BATTLE.positionShip(new Ship(3, ShipType.BATTLESHIP),
+                new Pair<Integer, Integer>(0, 0), Orientation.HORIZONTAL));
+
+        /*
+         * To verify that list of overlapped cells is not empty.
+         */
+        assertFalse((PLAYGROUND_BATTLE.getCellsOverlappedList(cells).isEmpty()));
+        
+        /*
+         * To verify that list of overlapped cells is equal to cells already used.
+         */
+        assertEquals(cells, PLAYGROUND_BATTLE.getCellsOverlappedList(cells));
+        /*
+         * Try to position ship to overlap the previous.
+         */
+        assertFalse(PLAYGROUND_BATTLE.positionShip(new Ship(3, ShipType.BATTLESHIP),
                 new Pair<Integer, Integer>(0, 0), Orientation.HORIZONTAL));
     }
 
