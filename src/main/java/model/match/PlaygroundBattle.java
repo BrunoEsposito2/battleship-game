@@ -16,6 +16,8 @@ public interface PlaygroundBattle {
 
     boolean removeShip(Pair<Integer, Integer> box);
 
+    boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
+
     boolean shot(Pair<Integer, Integer> box);
 
     boolean areThereAliveShip();
