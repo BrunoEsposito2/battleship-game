@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import model.enums.Orientation;
 import model.util.Pair;
@@ -60,14 +61,28 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public boolean shot(final Pair<Integer, Integer> box) {
-        // TODO Auto-generated method stub
+    public boolean shot(final Pair<Integer, Integer> cell) {
+        this.playground.get(cell.getX()).set(cell.getY(), true);
+        for (Entry<Ship, List<Pair<Integer, Integer>>> v : this.shipList.entrySet()) {
+            if (v.getValue().contains(cell)) {
+                return true; 
+            }
+        }
         return false;
     }
 
     @Override
+    public boolean cellAlreadyShotted(final Pair<Integer, Integer> cell) {
+        return this.playground.get(cell.getX()).get(cell.getY());
+    }
+
+    @Override
     public boolean areThereAliveShip() {
-        // TODO Auto-generated method stub
+        for (Entry<Ship, List<Pair<Integer, Integer>>> v : this.shipList.entrySet()) {
+            if (!v.getKey().isDestroyed()) {
+                return true; 
+            }
+        }
         return false;
     }
 
