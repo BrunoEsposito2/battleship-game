@@ -39,15 +39,16 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         /*
          * If list is empty there aren't overlap.
          */
-        if (this.cellsAlreadyUsed(cellsNecessary).isEmpty()) {
+        if (this.getCellsOverlappedList(cellsNecessary).isEmpty()) {
             this.shipList.put(ship, cellsNecessary);
+            cellsNecessary.forEach(i -> this.playground.get(i.getX()).set(i.getY(), true));
             return true;
         }
         return false;
     }
 
     @Override
-    public List<Pair<Integer, Integer>> cellsAlreadyUsed(final List<Pair<Integer, Integer>> cellsNecessary) {
+    public List<Pair<Integer, Integer>> getCellsOverlappedList(final List<Pair<Integer, Integer>> cellsNecessary) {
         List<Pair<Integer, Integer>> cellsAlreadyUsed = cellsNecessary.stream()
                                               .filter(i -> isCellUsed(i))
                                               .collect(toList());
@@ -92,7 +93,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     private boolean isCellUsed(final Pair<Integer, Integer> cell) {
-        return this.playground.get(cell.getY()).get(cell.getX());
+        return this.playground.get(cell.getX()).get(cell.getY());
     }
     
     private void createPlayGround() {
