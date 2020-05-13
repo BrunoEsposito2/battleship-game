@@ -6,14 +6,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import model.enums.DialogType;
 import view.dialog.DialogBuilder;
-import view.dialog.GenericDialog;
+import view.dialog.DialogBuilderimpl;
 
 /**
  * Concrete implementation of ResourceLoader.
  */
 public final class ResourceLoaderImpl implements ResourceLoader {
 
-    private final DialogBuilder dialog = new GenericDialog();
+    private final DialogBuilder dialog = new DialogBuilderimpl();
 
     /**
      * {@inheritDoc}

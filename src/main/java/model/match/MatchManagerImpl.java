@@ -14,7 +14,7 @@ public final class MatchManagerImpl implements MatchManager {
     private final MatchStatus matchStatus = new MatchStatusImpl();
     private final List<String> playerList;
     private final GameMode gameMode;
-    private final boolean isPlayer2Human;
+    private final boolean isOpponentAi;
     private boolean hasStartedMatch;
 
     /**
@@ -25,7 +25,7 @@ public final class MatchManagerImpl implements MatchManager {
     public MatchManagerImpl(final String username1, final String username2, PlayerType playerType, final GameMode wc) {
         this.hasStartedMatch = false;
         this.playerList = Arrays.asList(username1, username2);
-        this.isPlayer2Human = playerType.equals(PlayerType.HUMAN) ? true : false;
+        this.isOpponentAi = playerType.equals(PlayerType.HUMAN) ? true : false;
         this.gameMode = wc;
     }
 

@@ -25,7 +25,11 @@ public enum SceneManager {
      * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
-        currentStage.setScene(new Scene(loader.loadFXML("layouts" + File.separator + nextScene.getLayoutName() + ".fxml")));
+        final String directory = "layouts";
+        final String separator = File.separator;
+        final String fileName = nextScene.getLayoutName();
+        final String fileExtension = ".fxml";
+        currentStage.setScene(new Scene(loader.loadFXML(directory + separator + fileName + fileExtension)));
     }
 
 }

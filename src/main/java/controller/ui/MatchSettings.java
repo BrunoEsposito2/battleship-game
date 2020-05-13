@@ -5,11 +5,9 @@ import javafx.scene.control.TextArea;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Optional;
 import controller.players.AccountManager;
 import controller.players.AccountOperation;
-import controller.players.Player;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -22,7 +20,7 @@ import model.match.MatchManager;
 import model.match.MatchManagerImpl;
 import view.SceneManager;
 import view.dialog.DialogBuilder;
-import view.dialog.GenericDialog;
+import view.dialog.DialogBuilderimpl;
 
 
 /**
@@ -31,7 +29,7 @@ import view.dialog.GenericDialog;
  */
 public final class MatchSettings {
 
-    private final DialogBuilder dialog = new GenericDialog();
+    private final DialogBuilder dialog = new DialogBuilderimpl();
     private final AccountManager accountManager = new AccountOperation();
     private final Collection<String> usernames = new ArrayList<String>();
     private GameMode selectedWinCondition = GameMode.CLASSIC;
@@ -69,13 +67,12 @@ public final class MatchSettings {
      */
     @FXML
     public void buttonStart() {
-        boolean aiPlayer = checkboxAI.isSelected();
-        String username1 = getSelectedItem(choiceboxPlayer1);
-        String username2 = aiPlayer ? null : getSelectedItem(choiceboxPlayer2);
+        final boolean aiPlayer = checkboxAI.isSelected();
+        final Optional<String> username1 = Optional.of(getSelectedItem(choiceboxPlayer1));
+        final Optional<String> username2 = Optional.of(getSelectedItem(choiceboxPlayer2));
         if (arePlayersValid(username1, username2, aiPlayer)) {
-            this.startMatch(username1, username2, aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN);
+            startMatch(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN);
         }
-        
     }
 
     /**
@@ -123,9 +120,9 @@ public final class MatchSettings {
         }
     }
 
-    private void startMatch(final String username1, final String username2, PlayerType playerType) {
-        MatchManager gm = new MatchManagerImpl(username1, username2, playerType, selectedWinCondition);
-        String winner = gm.startNewMatch();
+    private void startMatch(final String username1, final String username2, final PlayerType playerType) {
+        final MatchManager gm = new MatchManagerImpl(username1, username2, playerType, selectedWinCondition);
+        final String winner = gm.startNewMatch();
         dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
@@ -134,8 +131,8 @@ public final class MatchSettings {
         return cb.getSelectionModel().getSelectedItem();
     }
 
-    private boolean arePlayersValid(final String username1, final String username2, final boolean aiPlayer) {
-        if (username1 == null || (username2 == null && !aiPlayer)) {
+    private boolean arePlayersValid(final Optional<String> username1, final Optional<String> username2, final boolean aiPlayer) {
+        if (!username1.isPresent() || (!username2.isPresent() && !aiPlayer)) {
             dialog.launch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
         } else if (username1.equals(username2)) {
             dialog.launch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
