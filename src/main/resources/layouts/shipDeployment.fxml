@@ -13,7 +13,7 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fitHeight="43.0" fitWidth="160.0" layoutX="22.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="43.0" fitWidth="160.0" layoutX="22.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="22.0">
                      <image>
                         <Image url="@../images/ships/Carrier.png" />
                      </image>
@@ -23,17 +23,17 @@
                         <Image url="@../images/ships/Battleship.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="92.0" fitWidth="21.0" layoutX="405.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fitHeight="92.0" fitWidth="21.0" layoutX="399.0" layoutY="-17.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.rightAnchor="82.46875">
                      <image>
                         <Image url="@../images/ships/Cruiser.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="103.0" fitWidth="31.0" layoutX="185.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fitHeight="103.0" fitWidth="31.0" layoutX="185.0" layoutY="22.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.bottomAnchor="-22.0">
                      <image>
                         <Image url="@../images/ships/Submarine.png" />
                      </image>
                   </ImageView>
-                  <ImageView fitHeight="116.0" fitWidth="17.0" layoutX="323.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fitHeight="116.0" fitWidth="17.0" layoutX="329.0" layoutY="38.0" pickOnBounds="true" preserveRatio="true" rotate="90.0" AnchorPane.bottomAnchor="-6.9230804443359375">
                      <image>
                         <Image url="@../images/ships/Destroyer.png" />
                      </image>
