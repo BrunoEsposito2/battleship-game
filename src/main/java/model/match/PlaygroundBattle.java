@@ -12,13 +12,13 @@ public interface PlaygroundBattle {
 
     boolean positionShip(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
-    List<Pair<Integer, Integer>> getCellsOverlappedList(List<Pair<Integer, Integer>> cellsNecessary);
+    List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
     boolean removeShip(Pair<Integer, Integer> box);
 
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
-    boolean shot(Pair<Integer, Integer> box);
+    boolean shot(Pair<Integer, Integer> cell);
 
     boolean areThereAliveShip();
 
