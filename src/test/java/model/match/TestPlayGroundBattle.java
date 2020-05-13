@@ -1,6 +1,5 @@
 package model.match;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -63,7 +62,7 @@ public class TestPlayGroundBattle {
         /*
          * To verify that list of overlapped cells is not empty.
          */
-        assertFalse((PLAYGROUND_BATTLE.getCellsOverlappedList(SHIP_SIZE_THREE, firstShipPosition, Orientation.HORIZONTAL).isEmpty()));
+        assertFalse(PLAYGROUND_BATTLE.getCellsOverlappedList(SHIP_SIZE_THREE, firstShipPosition, Orientation.HORIZONTAL).isEmpty());
 
         /*
          * To verify that list of overlapped cells is equal to cells already used.
@@ -157,7 +156,7 @@ public class TestPlayGroundBattle {
         Orientation.VERTICAL.cellsUsedList(firstShipPosition, SHIP_SIZE_THREE.getSize())
                             .forEach(i -> assertFalse(PLAYGROUND_BATTLE.getPlaygroundBattle()
                                     .get(i.getX()).get(i.getY())));
-        
+
         /*
          * First ship correct.
          */
