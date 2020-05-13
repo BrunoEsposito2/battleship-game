@@ -8,6 +8,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.PasswordField;
 
+// package-private
 final class LoginDialog {
 
     private Dialog<String> build(final String title, final String header) {
@@ -35,8 +36,8 @@ final class LoginDialog {
         return dialog;
     }
 
-    protected Optional<String> launch(final String title, final String header) {
-        return this.build(title, header).showAndWait();
+    Optional<String> launch(final String title, final String header) {
+        return build(title, header).showAndWait();
     }
 
 }

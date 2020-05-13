@@ -6,10 +6,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import model.enums.DialogType;
 
-/**
- *  This class is used to create and launch new alerts.
- */
-final class SimpleDialog {
+//package-private
+final class MessageDialog {
 
     private Alert build(final DialogType type, final String title, final String header, final String description) {
         Alert alert = new Alert(type.getConcreteType());
@@ -27,7 +25,7 @@ final class SimpleDialog {
         return alert;
     }
 
-    protected Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
+    Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
         build(type, title, header, description).showAndWait();
         return Optional.empty();
     }
