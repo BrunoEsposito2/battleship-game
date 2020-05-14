@@ -145,7 +145,8 @@ public class TestPlayGroundBattle {
 
         System.out.println("");
 
-        playgroundBattle.removeShip(firstShipPosition);
+//        playgroundBattle.removeShip(firstShipPosition);
+        playgroundBattle.removeAllShips();
         playgroundBattle.getPlaygroundBattle().forEach(i -> System.out.println(i));
 
         Orientation.VERTICAL.cellsUsedList(firstShipPosition, SHIP_SIZE_THREE.getSize())
