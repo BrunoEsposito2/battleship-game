@@ -1,8 +1,10 @@
 package controller.players;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HumanPlayer implements Player, Serializable {
@@ -58,6 +60,31 @@ public class HumanPlayer implements Player, Serializable {
     @Override
     public final String toString() {
         return "Username: " + this.userName;
+    }
+
+    private static final class HumanStats {
+
+        private static final String TOT = "Totals";
+
+        private static final String WIN = "Wins";
+
+        private static final String LOSS = "Loss";
+
+        private static final String REC = "Record";
+
+        private static final String W_PERC = "Win Rate";
+
+        private static final String L_PERC = "Loss Rate";
+
+        private static final List<String> INFO_STATS = Arrays.asList(TOT, WIN, LOSS, REC, W_PERC, L_PERC);
+
+        private HumanStats() {
+        }
+
+        public static void initHumanStats(final Map<String, Double> stats) {
+            INFO_STATS.stream().forEach(x -> stats.put(x, 0.0));
+        }
+
     }
 
 }
