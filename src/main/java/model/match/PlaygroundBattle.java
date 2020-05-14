@@ -16,6 +16,10 @@ public interface PlaygroundBattle {
 
     boolean removeShip(Pair<Integer, Integer> box);
 
+    void removeAllShips();
+
+    void resetPlayground();
+
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
     boolean shot(Pair<Integer, Integer> cell);
