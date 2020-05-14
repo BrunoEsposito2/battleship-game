@@ -21,6 +21,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     private List<List<Boolean>> playground;
     private final Map<Ship, List<Pair<Integer, Integer>>> shipList;
 
+
     private final int lines;
     private final int columns;
 
@@ -75,7 +76,20 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public boolean shot(final Pair<Integer, Integer> cell) {
+    public void resetPlayground() {
+        this.createPlayGround();
+    }
+
+    @Override
+    public void removeAllShips() {
+        for (Entry<Ship, List<Pair<Integer, Integer>>> list : this.shipList.entrySet()) {
+            this.removeShip(list.getValue().get(0));
+        }
+    }
+
+
+    @Override
+    public boolean shot(final Pair<Integer, Integer> cell) { 
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<Ship, List<Pair<Integer, Integer>>> v : this.shipList.entrySet()) {
             if (v.getValue().contains(cell)) {
