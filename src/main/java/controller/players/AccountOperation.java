@@ -2,32 +2,50 @@ package controller.players;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 
 public class AccountOperation implements AccountManager {
 
-    private List<Player> users;
+    private Optional<List<Player>> users;
     private final FileManager system;
 
     public AccountOperation() {
-        this.users = new LinkedList<Player>();
         this.system = new FileSystemManager();
+        initAllUsers();
+    }
+
+    private void initAllUsers() {
+        if (this.system.loadPlayers().isPresent()) {
+            this.users = this.system.loadPlayers();
+        } else {
+            this.users = Optional.of(new LinkedList<>());
+        }
+    }
+
+    private boolean usernameExists(final String userName) {
+        return (this.users.get().stream().map(x -> x.getUsername())
+                .filter(x -> x.equals(userName))
+                .count() == 0) ? false : true;
     }
 
     @Override
-    public void createAccount(final String userName, final String password) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void initAll() {
-        // TODO Auto-generated method stub
-
+    public final void createAccount(final String userName, final String password) {
+        try {
+            if (!usernameExists(userName)) {
+                Player p = new HumanPlayer(userName, password);
+                this.users.get().add(p);
+                this.system.savePlayer(p);
+            } else {
+                throw new Exception("Account already exists");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public final boolean logInAccount(final String userName, final String password) {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
