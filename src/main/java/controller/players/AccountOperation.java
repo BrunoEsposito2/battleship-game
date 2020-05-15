@@ -23,9 +23,18 @@ public class AccountOperation implements AccountManager {
     }
 
     private boolean usernameExists(final String userName) {
-        return (this.users.get().stream().map(x -> x.getUsername())
+        return (this.users.get().stream()
+                .map(x -> x.getUsername())
                 .filter(x -> x.equals(userName))
-                .count() == 0) ? false : true;
+                .count() == 1) ? true : false;
+    }
+
+    private boolean infoAreValid(final String userName, final String password) {
+        return (usernameExists(userName) 
+                && (this.users.get().stream()
+                        .map(x -> x.getPassword())
+                        .filter(x -> x.equals(password))
+                        .count() == 1)) ? true : false;
     }
 
     @Override
@@ -45,7 +54,20 @@ public class AccountOperation implements AccountManager {
 
     @Override
     public final boolean logInAccount(final String userName, final String password) {
-
+        try {
+            if (infoAreValid(userName, password)) {
+                this.users.get().forEach(x -> {
+                    if (x.getUsername().equals(userName)) {
+                        x.setLogin(true);
+                    }
+                });
+                return true;
+            } else {
+                throw new Exception("Invalid Info: Account doesn't exists");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return false;
     }
 
