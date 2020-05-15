@@ -25,7 +25,7 @@ public class AccountOperation implements AccountManager {
     private boolean usernameExists(final String userName) {
         return (this.users.get().stream()
                 .map(x -> x.getUsername())
-                .filter(x -> x.equals(userName))
+                .filter(x -> x.equalsIgnoreCase(userName))
                 .count() == 1) ? true : false;
     }
 
