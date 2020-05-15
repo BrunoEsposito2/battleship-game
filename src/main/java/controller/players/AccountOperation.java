@@ -57,7 +57,7 @@ public class AccountOperation implements AccountManager {
         try {
             if (infoAreValid(userName, password)) {
                 this.users.get().forEach(x -> {
-                    if (x.getUsername().equals(userName)) {
+                    if (x.getUsername().equalsIgnoreCase(userName)) {
                         x.setLogin(true);
                     }
                 });
@@ -72,9 +72,21 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public void logOutAccount(final String userName) {
-        // TODO Auto-generated method stub
-
+    public final void logOutAccount(final String userName) {
+        try {
+            if (usernameExists(userName)) {
+                this.users.get().forEach(x -> {
+                    if (x.getUsername().equalsIgnoreCase(userName)) {
+                        x.setLogin(false);
+                    }
+                });
+            }
+        } catch (Exception e) {
+            System.err.println("Log out Failed");
+            e.printStackTrace();
+        } finally {
+            this.users.get().forEach(x -> this.system.savePlayer(x));
+        }
     }
 
     @Override
