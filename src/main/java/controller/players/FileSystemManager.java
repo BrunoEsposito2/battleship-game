@@ -64,21 +64,22 @@ public class FileSystemManager implements FileManager {
     @Override
     public final Optional<List<Player>> loadPlayers() {
 
-        List<Player> players = new LinkedList<>();
+        List<Player> players = null;
 
         final File dir = new File(InstallManager.DIR_PATH);
 
         if (dir.isDirectory()) {
             Optional<String[]> names = Optional.ofNullable(dir.list());
             if (names.isPresent()) {
+                players = new LinkedList<>();
                 for (String user : names.get()) {
                     loadPlayerFromFile(players, user);
                 }
             } else {
-                return Optional.of(players);
+                return Optional.ofNullable(players);
             }
         }
-        return Optional.of(players);
+        return Optional.ofNullable(players);
     }
 
     @Override

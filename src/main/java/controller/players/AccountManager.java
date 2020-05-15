@@ -6,8 +6,6 @@ public interface AccountManager {
 
     void createAccount(String userName, String password);
 
-    void initAll();
-
     boolean logInAccount(String userName, String password);
 
     void logOutAccount(String userName);
