@@ -45,13 +45,12 @@ public class AccountOperation implements AccountManager {
             if (!usernameExists(userName)) {
                 Player p = new HumanPlayer(userName, password);
                 this.users.get().add(p);
+                this.system.savePlayer(p);
             } else {
                 throw new Exception("Account already exists");
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            this.users.get().forEach(x -> this.system.savePlayer(x));
         }
     }
 
@@ -117,7 +116,7 @@ public class AccountOperation implements AccountManager {
         try {
             if (infoAreValid(userName, password)) {
                 this.users.get().forEach(x -> {
-                    if (x.getUsername().equals(userName)) {
+                    if (x instanceof HumanPlayer && x.getUsername().equals(userName)) {
                         this.users.get().remove(x);
                         this.system.removePlayer(x);
                     }
@@ -127,8 +126,6 @@ public class AccountOperation implements AccountManager {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            this.users.get().forEach(x -> this.system.savePlayer(x));
         }
     }
 
