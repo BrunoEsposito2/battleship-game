@@ -1,8 +1,10 @@
 package controller.players;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class AccountOperation implements AccountManager {
 
@@ -91,8 +93,9 @@ public class AccountOperation implements AccountManager {
 
     @Override
     public final List<String> getAllUsername() {
-        // TODO Auto-generated method stub
-        return null;
+        return Collections.unmodifiableList(this.users.get().stream()
+                .map(x -> x.getUsername())
+                .collect(Collectors.toList()));
     }
 
     @Override
