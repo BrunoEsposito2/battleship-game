@@ -35,7 +35,8 @@ public final class MainMenu {
      */
     @FXML
     public void buttonProfile() {
-        System.out.println("Profile button clicked\n ");
+        SceneManager.INSTANCE.switchScene(SceneName.PROFILE);
+        //System.out.println("Profile button clicked\n ");
     }
 
     /**

@@ -1,6 +1,7 @@
 package controller.players;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface AccountManager {
 
@@ -10,7 +11,7 @@ public interface AccountManager {
 
     void logOutAccount(String userName);
 
-    List<String> getAllUsername();
+    Optional<List<String>> getAllUsername();
 
     void setWinner(String userName, Double scoreValue);
 

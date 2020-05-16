@@ -93,10 +93,10 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public final List<String> getAllUsername() {
-        return Collections.unmodifiableList(this.users.get().stream()
+    public final Optional<List<String>> getAllUsername() {
+        return Optional.of(Collections.unmodifiableList(this.users.get().stream()
                 .map(x -> x.getUsername())
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())));
     }
 
     @Override
