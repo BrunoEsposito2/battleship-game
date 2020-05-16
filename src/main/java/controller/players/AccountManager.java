@@ -16,6 +16,6 @@ public interface AccountManager {
 
     void setLoser(String userName, Double scoreValue);
 
-    void removeAccount(String userName);
+    void removeAccount(String userName, String password);
 
 }

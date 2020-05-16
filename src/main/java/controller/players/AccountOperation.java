@@ -45,12 +45,13 @@ public class AccountOperation implements AccountManager {
             if (!usernameExists(userName)) {
                 Player p = new HumanPlayer(userName, password);
                 this.users.get().add(p);
-                this.system.savePlayer(p);
             } else {
                 throw new Exception("Account already exists");
             }
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            this.users.get().forEach(x -> this.system.savePlayer(x));
         }
     }
 
@@ -82,9 +83,10 @@ public class AccountOperation implements AccountManager {
                         x.setLogin(false);
                     }
                 });
+            } else {
+                throw new Exception("Log out Failed");
             }
         } catch (Exception e) {
-            System.err.println("Log out Failed");
             e.printStackTrace();
         } finally {
             this.users.get().forEach(x -> this.system.savePlayer(x));
@@ -111,9 +113,23 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public void removeAccount(final String userName) {
-        // TODO Auto-generated method stub
-
+    public final void removeAccount(final String userName, final String password) {
+        try {
+            if (infoAreValid(userName, password)) {
+                this.users.get().forEach(x -> {
+                    if (x.getUsername().equals(userName)) {
+                        this.users.get().remove(x);
+                        this.system.removePlayer(x);
+                    }
+                });
+            } else {
+                throw new Exception("Invalid info: Account already not exists");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            this.users.get().forEach(x -> this.system.savePlayer(x));
+        }
     }
 
 }
