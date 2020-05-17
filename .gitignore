@@ -8,3 +8,4 @@ out/
 doc/ 
 src/main/resources/layouts/matchSettingsOld.fxml 
 src/main/resources/layouts/matchSettingsTest.fxml
+src/main/java/view/prova/
