@@ -37,6 +37,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.createPlayGround();
     }
 
+    
     @Override
     public boolean positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
         final List<Pair<Integer, Integer>> cellsNecessary = orientation.cellsUsedList(firstCell, ship.getSize());
