@@ -21,7 +21,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     private List<List<Boolean>> playground;
     private final Map<Ship, List<Pair<Integer, Integer>>> shipList;
 
-
     private final int lines;
     private final int columns;
 
