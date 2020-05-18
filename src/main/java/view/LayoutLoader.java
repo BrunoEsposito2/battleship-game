@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 /**
  * This interface provides methods to load resources from disk.
  */
-public interface ResourceLoader {
+public interface LayoutLoader {
 
     /**
      * This method is used to load FXML resources (layouts).

@@ -50,8 +50,8 @@ public final class MatchSettings {
      */
     public void initialize() {
         //TODO remove null check once loader is stable
-        if (accountManager.getAllUsername() != null) {
-            usernames.addAll(accountManager.getAllUsername());
+        if (accountManager.getAllUsername().isPresent()) {
+            usernames.addAll(accountManager.getAllUsername().get());
         }
         //TODO remove test usernames
         usernames.add("temptest1");
