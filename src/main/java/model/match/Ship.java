@@ -13,11 +13,11 @@ public class Ship implements GameObject {
     private boolean destroyed;
     private ShipType shipType;
 
-    public Ship(int size, ShipType shiptype) {
-        this.size = size;
+    public Ship(ShipType shipType) {
+        this.shipType = shipType;
+        this.size = shipType.getSize();
         this.damage = 0;
         this.destroyed = false;
-        this.shipType = shiptype;
     }
 
     @Override
