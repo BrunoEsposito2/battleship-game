@@ -10,7 +10,7 @@ import model.util.Pair;
  */
 public interface PlaygroundBattle {
 
-    boolean positionShip(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
+    void positionShip(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation) throws CellsFilledException;
 
     List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
@@ -22,7 +22,7 @@ public interface PlaygroundBattle {
 
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
-    boolean shot(Pair<Integer, Integer> cell);
+    boolean shot(Pair<Integer, Integer> cell) throws CellAlreadyShottedException;
 
     boolean areThereAliveShip();
 
