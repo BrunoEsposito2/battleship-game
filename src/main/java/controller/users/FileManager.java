@@ -1,14 +1,16 @@
-package controller.players;
+package controller.users;
 
 import java.util.List;
 import java.util.Optional;
 
+import model.players.Player;
+
 public interface FileManager {
 
-    void savePlayer(Player player);
+    void saveUser(Player player);
 
-    Optional<List<Player>> loadPlayers();
+    Optional<List<Player>> loadUsers();
 
-    void removePlayer(Player player);
+    void removeUser(Player player);
 
 }

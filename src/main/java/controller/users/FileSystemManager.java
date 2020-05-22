@@ -1,4 +1,4 @@
-package controller.players;
+package controller.users;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -14,13 +14,15 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
+import model.players.Player;
+
 public class FileSystemManager implements FileManager {
 
     public FileSystemManager() {
         InstallManager.setupApplication();
     }
 
-    private static void writePlayerOnFile(final Player player) {
+    private static void writeUserOnFile(final Player player) {
 
         try (
              OutputStream file = new FileOutputStream(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
@@ -33,7 +35,7 @@ public class FileSystemManager implements FileManager {
          }
     }
 
-    private static void loadPlayerFromFile(final List<Player> players, final String usernameFile) {
+    private static void loadUserFromFile(final List<Player> players, final String usernameFile) {
 
         try (
              InputStream file = new FileInputStream(InstallManager.FILE_PATH + InstallManager.SEPARATOR + usernameFile);
@@ -47,7 +49,7 @@ public class FileSystemManager implements FileManager {
     }
 
     @Override
-    public final void savePlayer(final Player player) {
+    public final void saveUser(final Player player) {
 
         final File playerFile = new File(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
 
@@ -58,11 +60,11 @@ public class FileSystemManager implements FileManager {
                 e.printStackTrace();
             }
         }
-        writePlayerOnFile(player);
+        writeUserOnFile(player);
     }
 
     @Override
-    public final Optional<List<Player>> loadPlayers() {
+    public final Optional<List<Player>> loadUsers() {
 
         List<Player> players = null;
 
@@ -73,7 +75,7 @@ public class FileSystemManager implements FileManager {
             if (names.isPresent()) {
                 players = new LinkedList<>();
                 for (String user : names.get()) {
-                    loadPlayerFromFile(players, user);
+                    loadUserFromFile(players, user);
                 }
             } else {
                 return Optional.ofNullable(players);
@@ -83,7 +85,7 @@ public class FileSystemManager implements FileManager {
     }
 
     @Override
-    public final void removePlayer(final Player player) {
+    public final void removeUser(final Player player) {
 
         final File user = new File(InstallManager.FILE_PATH + InstallManager.SEPARATOR + player.getUsername() + ".bin");
 

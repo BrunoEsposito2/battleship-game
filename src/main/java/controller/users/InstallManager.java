@@ -1,4 +1,4 @@
-package controller.players;
+package controller.users;
 
 import java.io.File;
 

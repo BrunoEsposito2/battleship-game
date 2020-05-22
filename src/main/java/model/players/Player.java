@@ -1,4 +1,4 @@
-package controller.players;
+package model.players;
 
 import java.util.Map;
 
