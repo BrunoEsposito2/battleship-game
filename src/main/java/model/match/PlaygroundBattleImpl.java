@@ -19,7 +19,7 @@ import static java.util.stream.Collectors.toList;
 public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     private List<List<Boolean>> playground;
-    private final Map<Ship, List<Pair<Integer, Integer>>> shipList;
+    private final Map<List<Pair<Integer, Integer>>, Ship> shipList;
 
     private final int lines;
     private final int columns;
@@ -36,19 +36,19 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.createPlayGround();
     }
 
-    
+
     @Override
-    public boolean positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
+    public void positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) throws CellsFilledException {
         final List<Pair<Integer, Integer>> cellsNecessary = orientation.cellsUsedList(firstCell, ship.getSize());
-        /*
-         * If list is empty there aren't overlap.
-         */
-        if (this.getCellsOverlappedList(ship, firstCell, orientation).isEmpty()) {
-            this.shipList.put(ship, cellsNecessary);
-            cellsNecessary.forEach(i -> this.playground.get(i.getX()).set(i.getY(), true));
-            return true;
+        final List<Pair<Integer, Integer>> cellsOverlapped = this.getCellsOverlappedList(ship, firstCell, orientation);
+
+        if (!cellsOverlapped.isEmpty()) {
+            throw new CellsFilledException(cellsOverlapped);
         }
-        return false;
+
+        this.shipList.put(cellsNecessary, ship);
+        cellsNecessary.forEach(i -> this.playground.get(i.getX()).set(i.getY(), true));
+
     }
 
     @Override
@@ -60,12 +60,12 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     @Override
     public boolean removeShip(final Pair<Integer, Integer> cell) {
-        final Set<Entry<Ship, List<Pair<Integer, Integer>>>> setOfShipEntries = this.shipList.entrySet();
-        final Iterator<Entry<Ship, List<Pair<Integer, Integer>>>> iterator = setOfShipEntries.iterator();
+        final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
+        final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
 
         while (iterator.hasNext()) {
-            final Entry<Ship, List<Pair<Integer, Integer>>> ship = iterator.next();
-            final List<Pair<Integer, Integer>> shipCells = ship.getValue();
+            final Entry<List<Pair<Integer, Integer>>, Ship> ship = iterator.next();
+            final List<Pair<Integer, Integer>> shipCells = ship.getKey();
 
             if (shipCells.contains(cell)) {
                 shipCells.forEach(i -> this.playground.get(i.getX()).set(i.getY(), false));
@@ -82,17 +82,22 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     @Override
     public void removeAllShips() {
-        for (Entry<Ship, List<Pair<Integer, Integer>>> list : this.shipList.entrySet()) {
-            this.removeShip(list.getValue().get(0));
+        for (Entry<List<Pair<Integer, Integer>>, Ship> list : this.shipList.entrySet()) {
+            this.removeShip(list.getKey().get(0));
         }
     }
 
 
     @Override
-    public boolean shot(final Pair<Integer, Integer> cell) { 
+    public boolean shot(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+        
+        if (this.isCellUsed(cell)) {
+            throw new CellAlreadyShottedException(cell);
+        }
+        
         this.playground.get(cell.getX()).set(cell.getY(), true);
-        for (final Entry<Ship, List<Pair<Integer, Integer>>> v : this.shipList.entrySet()) {
-            if (v.getValue().contains(cell)) {
+        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
+            if (v.getKey().contains(cell)) {
                 return true; 
             }
         }
@@ -106,8 +111,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     @Override
     public boolean areThereAliveShip() {
-        for (final Entry<Ship, List<Pair<Integer, Integer>>> v : this.shipList.entrySet()) {
-            if (!v.getKey().isDestroyed()) {
+        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
+            if (!v.getValue().isDestroyed()) {
                 return true; 
             }
         }
