@@ -6,24 +6,23 @@ package model.enums;
  */
 public enum ShipType {
 
-    // fileName should be the png file, without the extension (Carrier -> Carrier.png)
-    CARRIER("Carrier"),
-    BATTLESHIP("Battleship"),
-    CRUISER("Cruiser"),
-    SUBMARINE("Submarine"),
-    DESTROYER("Destroyer");
+    CARRIER(5),
+    BATTLESHIP(4),
+    CRUISER(3),
+    SUBMARINE(3),
+    DESTROYER(2);
 
-    private final String fileName;
+    private final int size;
 
-    ShipType(final String fileName) {
-        this.fileName = fileName;
+    ShipType(final int size) {
+        this.size = size;
     }
 
     /**
      * @return The file's name
      */
-    public String getFileName() {
-        return this.fileName;
+    public int getSize() {
+        return this.size;
     }
 
 }

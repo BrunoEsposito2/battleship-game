@@ -9,7 +9,7 @@ public enum SceneName {
     MAIN("mainMenu"),
     MATCH_SETTINGS("matchSettings"),
     //SETTINGS ("settings");
-    PROFILE ("profile");
+    PROFILE("profile");
 
     private final String layoutName;
 

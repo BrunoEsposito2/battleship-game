@@ -11,7 +11,7 @@ import view.dialog.DialogBuilderimpl;
 /**
  * Concrete implementation of ResourceLoader.
  */
-public final class ResourceLoaderImpl implements ResourceLoader {
+public final class LayoutLoaderImpl implements LayoutLoader {
 
     private final DialogBuilder dialog = new DialogBuilderimpl();
 

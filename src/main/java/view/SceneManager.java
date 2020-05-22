@@ -18,7 +18,7 @@ public enum SceneManager {
     INSTANCE;
 
     private final Stage currentStage = Main.getStage();
-    private final ResourceLoaderImpl loader = new ResourceLoaderImpl();
+    private final LayoutLoaderImpl loader = new LayoutLoaderImpl();
 
     /**
      * This method switches the active Scene to the one passed as parameter.

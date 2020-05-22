@@ -21,7 +21,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     private List<List<Boolean>> playground;
     private final Map<Ship, List<Pair<Integer, Integer>>> shipList;
 
-
     private final int lines;
     private final int columns;
 
@@ -37,6 +36,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.createPlayGround();
     }
 
+    
     @Override
     public boolean positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
         final List<Pair<Integer, Integer>> cellsNecessary = orientation.cellsUsedList(firstCell, ship.getSize());

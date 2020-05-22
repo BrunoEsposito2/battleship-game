@@ -20,10 +20,10 @@ public class TestPlayGroundBattle {
     private static final int FIRST = 0;
     private static final int CELLS_USED = 3;
 
-    private static final Ship SHIP_SIZE_ONE = new Ship(1, ShipType.BATTLESHIP);
-    private static final Ship SHIP_SIZE_TWO = new Ship(2, ShipType.CRUISER);
-    private static final Ship SHIP_SIZE_THREE = new Ship(3, ShipType.DESTROYER);
-    private static final Ship SHIP_SIZE_FOUR = new Ship(4, ShipType.SUBMARINE);
+    private static final Ship SHIP_SIZE_ONE = new Ship(ShipType.BATTLESHIP);
+    private static final Ship SHIP_SIZE_TWO = new Ship(ShipType.CRUISER);
+    private static final Ship SHIP_SIZE_THREE = new Ship(ShipType.DESTROYER);
+    private static final Ship SHIP_SIZE_FOUR = new Ship(ShipType.SUBMARINE);
 
 
     @Test
