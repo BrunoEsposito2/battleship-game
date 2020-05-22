@@ -18,9 +18,9 @@ public class TestPlayGroundBattle {
     private static final int COLUMNS = 10;
     private static final int LINES = 8;
     private static final int FIRST = 0;
-    private static final int CELLS_USED = 3;
+    private static final int CELLS_USED = 2;
 
-    private static final Ship SHIP_SIZE_ONE = new Ship(ShipType.BATTLESHIP);
+    //private static final Ship SHIP_SIZE_ONE = new Ship(ShipType.BATTLESHIP);
     private static final Ship SHIP_SIZE_TWO = new Ship(ShipType.CRUISER);
     private static final Ship SHIP_SIZE_THREE = new Ship(ShipType.DESTROYER);
     private static final Ship SHIP_SIZE_FOUR = new Ship(ShipType.SUBMARINE);
@@ -117,20 +117,20 @@ public class TestPlayGroundBattle {
         /*
          * Fifth ship incorrect.
          */
-        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
-                fifthShipPositionIncorrect1, Orientation.VERTICAL));
+//      assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
+//              fifthShipPositionIncorrect1, Orientation.VERTICAL));
 
-        assertEquals(Arrays.asList(fifthShipPositionIncorrect1),
-                playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect1, Orientation.VERTICAL));
+//      assertEquals(Arrays.asList(fifthShipPositionIncorrect1),
+//              playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect1, Orientation.VERTICAL));
 
         /*
          * Fifth ship incorrect
          */
-        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
-                fifthShipPositionIncorrect2, Orientation.VERTICAL));
+//        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
+//              fifthShipPositionIncorrect2, Orientation.VERTICAL));
 
-        assertEquals(Arrays.asList(fifthShipPositionIncorrect2),
-                playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect2, Orientation.VERTICAL));
+//        assertEquals(Arrays.asList(fifthShipPositionIncorrect2),
+//                playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect2, Orientation.VERTICAL));
 
 
     }
