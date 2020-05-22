@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
-import controller.players.AccountManager;
-import controller.players.AccountOperation;
+import controller.users.AccountManager;
+import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -51,7 +51,7 @@ public final class MatchSettings {
     public void initialize() {
         //TODO remove null check once loader is stable
         if (accountManager.getAllUsername() != null) {
-            usernames.addAll(accountManager.getAllUsername());
+            usernames.addAll(accountManager.getAllUsername().get());
         }
         //TODO remove test usernames
         usernames.add("temptest1");
