@@ -26,7 +26,10 @@ public final class LayoutLoaderImpl implements LayoutLoader {
             dialog.launch(DialogType.ERROR, "An Exception has occurred",
                     "Application encountered a critical error while reading files from disk", getStringFromStackTrace(e));
         }
-        return res;
+        if (res == null) {
+            throw new IllegalStateException("Failed to laod resource");
+        }
+        return res; 
     }
 
     private String getStringFromStackTrace(final Exception e) {
