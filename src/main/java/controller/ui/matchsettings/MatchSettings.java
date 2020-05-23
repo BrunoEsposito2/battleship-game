@@ -1,9 +1,7 @@
 package controller.ui.matchsettings;
 
 import javafx.scene.control.TextArea;
-
 import java.util.Optional;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -14,9 +12,9 @@ import model.enums.GameMode;
 import model.enums.PlayerType;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
-import view.SceneManager;
 import view.dialog.DialogBuilder;
 import view.dialog.DialogBuilderimpl;
+import view.scene.SceneManager;
 
 
 /**

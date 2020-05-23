@@ -1,4 +1,4 @@
-package view;
+package view.scene;
 
 import java.io.File;
 import application.Main;
@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import model.enums.SceneName;
 
 /**
- * This enum is used to switch Scenes on the active Stage.
+ * This enum models a class used to switch Scenes on the active Stage.
  * It is used as a singleton by calling SceneManager.INSTANCE.methodName().
  */
 public enum SceneManager {
@@ -18,7 +18,7 @@ public enum SceneManager {
     INSTANCE;
 
     private final Stage currentStage = Main.getStage();
-    private final LayoutLoaderImpl loader = new LayoutLoaderImpl();
+    private final LayoutLoader layoutLoader = new LayoutLoader();
 
     /**
      * This method switches the active Scene to the one passed as parameter.
@@ -29,7 +29,7 @@ public enum SceneManager {
         final String separator = File.separator;
         final String fileName = nextScene.getLayoutName();
         final String fileExtension = ".fxml";
-        currentStage.setScene(new Scene(loader.loadFXML(directory + separator + fileName + fileExtension)));
+        currentStage.setScene(new Scene(layoutLoader.loadFXML(directory + separator + fileName + fileExtension)));
     }
 
 }

@@ -3,7 +3,7 @@ package controller.ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import model.enums.SceneName;
-import view.SceneManager;
+import view.scene.SceneManager;
 
 /**
  * The Controller related to the mainMenu.fxml GUI.

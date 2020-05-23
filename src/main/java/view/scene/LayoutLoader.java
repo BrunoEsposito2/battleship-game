@@ -1,4 +1,4 @@
-package view;
+package view.scene;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -8,17 +8,12 @@ import model.enums.DialogType;
 import view.dialog.DialogBuilder;
 import view.dialog.DialogBuilderimpl;
 
-/**
- * Concrete implementation of ResourceLoader.
- */
-public final class LayoutLoaderImpl implements LayoutLoader {
+//package private
+final class LayoutLoader {
 
     private final DialogBuilder dialog = new DialogBuilderimpl();
 
-    /**
-     * {@inheritDoc}
-     */
-    public Parent loadFXML(final String resourcePath) {
+    Parent loadFXML(final String resourcePath) {
         Parent res = null;
         try {
             res = FXMLLoader.load(ClassLoader.getSystemResource(resourcePath));
