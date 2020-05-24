@@ -29,7 +29,6 @@ public final class MatchSettings {
     private final DialogBuilder dialog = new DialogBuilderimpl();
     private final Login login = new Login(dialog, accountManager);
     private final Initializer initializer = new Initializer(this, login, accountManager, dialog);
-    private GameMode selectedGameMode = GameMode.CLASSIC;
 
     @FXML
     private Button buttonBack, buttonStart;
@@ -73,9 +72,14 @@ public final class MatchSettings {
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 
-    //package private
-    void updateGameModeText(final String text) {
+    // package-private
+    void setGameModeDescription(final String text) {
         textareaDescription.setText(text);
+    }
+
+    // package-private
+    <T> T getSelectedItem(final ChoiceBox<T> cb) {
+        return cb.getSelectionModel().getSelectedItem();
     }
 
     private void startMatch() {
@@ -83,24 +87,10 @@ public final class MatchSettings {
         final Optional<String> username1 = Optional.of(getSelectedItem(choiceboxPlayer1));
         final Optional<String> username2 = Optional.of(getSelectedItem(choiceboxPlayer2));
         if (login.arePlayersValid(username1, username2, aiPlayer)) {
-            final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, selectedGameMode);
+            final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
             final String winner = gm.startNewMatch();
             dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
             SceneManager.INSTANCE.switchScene(SceneName.MAIN);
         }
     }
-
-    // GETTERS & SETTERS (package-private)
-    void setSelectedGameMode(final GameMode gm) {
-        selectedGameMode = gm;
-    }
-
-    GameMode getSelectedGameMode() {
-        return selectedGameMode;
-    }
-
-    <T> T getSelectedItem(final ChoiceBox<T> cb) {
-        return cb.getSelectionModel().getSelectedItem();
-    }
-
 }

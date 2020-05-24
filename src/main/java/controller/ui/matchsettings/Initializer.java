@@ -21,45 +21,47 @@ final class Initializer {
     //TODO switch to proper init
     //private final Collection<String> usernames = Arrays.asList("voglio andare", "al mare");
 
-    Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager, final DialogBuilder dialog) {
+    private enum ChoiceBoxType {
+        PLAYER, GAMEMODE;
+    }
+
+    protected Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager, final DialogBuilder dialog) {
         this.dialog = dialog;
         this.ms = ms;
         this.login = login;
         usernames = accountManager.getAllUsername().orElse(noProfilesAvailable());
     }
 
+  //package private
     void initChoiceBoxes(final ChoiceBox<String> p1, final ChoiceBox<String> p2, final ChoiceBox<GameMode> gm) {
-        initChoiceBox(p1, usernames, getChoiceBoxPlayerListener(p1));
-        initChoiceBox(p2, usernames, getChoiceBoxPlayerListener(p2));
-        initChoiceBox(gm, Arrays.asList(GameMode.values()), getChoiceBoxGameModeListener(gm));
+        initChoiceBox(p1, usernames, getChoiceBoxListener(p1, ChoiceBoxType.PLAYER));
+        initChoiceBox(p2, usernames, getChoiceBoxListener(p2, ChoiceBoxType.PLAYER));
+        initChoiceBox(gm, Arrays.asList(GameMode.values()), getChoiceBoxListener(gm, ChoiceBoxType.GAMEMODE));
         gm.getSelectionModel().selectFirst();
-        ms.updateGameModeText(ms.getSelectedGameMode().getDescription());
+        ms.setGameModeDescription(ms.getSelectedItem(gm).getDescription());
     }
 
-    private <T> ChoiceBox<T> initChoiceBox(final ChoiceBox<T> cb, final Collection<T> c, final ChangeListener<T> cl) {
+    private <T> void initChoiceBox(final ChoiceBox<T> cb, final Collection<T> c, final ChangeListener<T> cl) {
         c.forEach(x -> cb.getItems().add(x));
         cb.setStyle("-fx-font: 18px \"Serif\";");
         cb.getSelectionModel().selectedItemProperty().addListener(cl);
-        return cb;
     }
 
-    private <T> ChangeListener<T> getChoiceBoxPlayerListener(final ChoiceBox<T> cb) {
-        return (x, y, z) -> {
-            if (ms.getSelectedItem(cb) != null && !login.checkCredentials((String) ms.getSelectedItem(cb))) {
-                cb.getSelectionModel().clearSelection();
-            }
-        };
-    }
-
-    private <T> ChangeListener<T> getChoiceBoxGameModeListener(final ChoiceBox<GameMode> cb) {
-        return (x, y, z) -> {
-            ms.setSelectedGameMode(ms.getSelectedItem(cb));
-            ms.updateGameModeText(ms.getSelectedGameMode().getDescription());
-        };
+    private <T> ChangeListener<T> getChoiceBoxListener(final ChoiceBox<T> cb, final ChoiceBoxType type) {
+        return type.equals(ChoiceBoxType.PLAYER)
+                ? (x, y, z) -> {
+                    if (ms.getSelectedItem(cb) != null && !login.checkCredentials((String) ms.getSelectedItem(cb))) {
+                        cb.getSelectionModel().clearSelection();
+                    }
+                }
+                : (x, y, z) -> {
+                    ms.setGameModeDescription(((GameMode) ms.getSelectedItem(cb)).getDescription());
+                };
     }
 
     private List<String> noProfilesAvailable() {
-        dialog.launch(DialogType.WARNING, "Warning: No Profiles Available", "You must register at least a profile to start a match.\nGo back to the main menu, then click Profile to do so", null);
+        dialog.launch(DialogType.WARNING, "Warning: No Profiles Available", "You must register at least a profile to start a match.\n"
+                + "Go back to the main menu, then click Profile to manage your profiles.", null);
         return Collections.emptyList();
     }
 

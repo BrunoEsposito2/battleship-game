@@ -11,11 +11,12 @@ final class Login {
     private final AccountManager accountManager;
     private final DialogBuilder dialog;
 
-    Login(final DialogBuilder dialog, final AccountManager accountManager) {
+    protected Login(final DialogBuilder dialog, final AccountManager accountManager) {
         this.dialog = dialog;
         this.accountManager = accountManager;
     }
 
+  //package private
     boolean arePlayersValid(final Optional<String> username1, final Optional<String> username2, final boolean aiPlayer) {
         if (!username1.isPresent() || !username2.isPresent() && !aiPlayer) {
             dialog.launch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
@@ -27,10 +28,10 @@ final class Login {
         return false;
     }
 
+  //package private
     boolean checkCredentials(final String username) {
         final Optional<String> password = dialog.launch(DialogType.LOGIN, "Login", "Insert password for user \"" + username + "\"", null);
-        final boolean isLoginValid = (password.isPresent()) ?  accountManager.logInAccount(username, password.get()) : false;
-        if (isLoginValid) {
+        if (password.isPresent() && accountManager.logInAccount(username, password.get())) {
             dialog.launch(DialogType.INFORMATION, "Login", "Login successful!", null);
             return true;
         } else {
