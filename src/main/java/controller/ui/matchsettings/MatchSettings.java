@@ -2,6 +2,8 @@ package controller.ui.matchsettings;
 
 import javafx.scene.control.TextArea;
 import java.util.Optional;
+import controller.users.AccountManager;
+import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -23,9 +25,10 @@ import view.scene.SceneManager;
  */
 public final class MatchSettings {
 
+    private final AccountManager accountManager = new AccountOperation();
     private final DialogBuilder dialog = new DialogBuilderimpl();
-    private final Login login = new Login(dialog);
-    private final Initializer initializer = new Initializer(this, login);
+    private final Login login = new Login(dialog, accountManager);
+    private final Initializer initializer = new Initializer(this, login, accountManager, dialog);
     private GameMode selectedGameMode = GameMode.CLASSIC;
 
     @FXML
@@ -43,7 +46,7 @@ public final class MatchSettings {
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI
      */
     public void initialize() {
-        initializer.initChoiceBoxes();
+        initializer.initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
     }
 
     /**
@@ -80,24 +83,16 @@ public final class MatchSettings {
         final Optional<String> username1 = Optional.of(getSelectedItem(choiceboxPlayer1));
         final Optional<String> username2 = Optional.of(getSelectedItem(choiceboxPlayer2));
         if (login.arePlayersValid(username1, username2, aiPlayer)) {
-            final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), (aiPlayer) ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, selectedGameMode);
+            final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, selectedGameMode);
             final String winner = gm.startNewMatch();
             dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
             SceneManager.INSTANCE.switchScene(SceneName.MAIN);
         }
     }
 
-    // GETTERS & SETTERS (package private)
-    ChoiceBox<String> getChoiceBoxPlayer1() {
-        return choiceboxPlayer1;
-    }
-
-    ChoiceBox<String> getChoiceBoxPlayer2() {
-        return choiceboxPlayer2;
-    }
-
-    ChoiceBox<GameMode> getChoiceBoxGameMode() {
-        return choiceboxGameMode;
+    // GETTERS & SETTERS (package-private)
+    void setSelectedGameMode(final GameMode gm) {
+        selectedGameMode = gm;
     }
 
     GameMode getSelectedGameMode() {
@@ -106,10 +101,6 @@ public final class MatchSettings {
 
     <T> T getSelectedItem(final ChoiceBox<T> cb) {
         return cb.getSelectionModel().getSelectedItem();
-    }
-
-    void setSelectedGameMode(final GameMode gm) {
-        selectedGameMode = gm;
     }
 
 }

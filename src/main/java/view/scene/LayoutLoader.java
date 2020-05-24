@@ -28,7 +28,7 @@ final class LayoutLoader {
     }
 
     private String getStringFromStackTrace(final Exception e) {
-        StringWriter sw = new StringWriter();
+        final StringWriter sw = new StringWriter();
         e.printStackTrace(new PrintWriter(sw));
         return sw.toString();
     }

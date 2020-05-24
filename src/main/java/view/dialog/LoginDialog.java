@@ -13,14 +13,14 @@ final class LoginDialog {
 
     private Dialog<String> build(final String title, final String header) {
 
-        Dialog<String> dialog = new Dialog<>();
+        final Dialog<String> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(header);
 
-        ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        final ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        PasswordField password = new PasswordField();
+        final PasswordField password = new PasswordField();
         password.setPromptText("your password here...");
 
         dialog.getDialogPane().setContent(password);
