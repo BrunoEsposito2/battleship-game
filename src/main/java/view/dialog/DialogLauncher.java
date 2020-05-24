@@ -2,12 +2,10 @@ package view.dialog;
 
 import java.util.Optional;
 
-import model.enums.DialogType;
-
 /**
  * This interface provides a launch method to create and launch different types of dialogs.
  */
-public interface DialogBuilder {
+public interface DialogLauncher {
 
     /**
      * This method creates and launches a dialog using the passed parameters.
@@ -21,6 +19,8 @@ public interface DialogBuilder {
      * @param description - dialog's description
      * @return the result of the dialog's operations, if any.
      */
-     Optional<String> launch(DialogType type, String title, String header, String description);
+     static Optional<String> launch(DialogType type, String title, String header, String description) {
+         return type.getConcreteClass().launch(type, title, header, description);
+     }
 
 }

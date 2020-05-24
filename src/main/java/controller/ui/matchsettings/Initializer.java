@@ -7,14 +7,13 @@ import java.util.List;
 import controller.users.AccountManager;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ChoiceBox;
-import model.enums.DialogType;
 import model.enums.GameMode;
-import view.dialog.DialogBuilder;
+import view.dialog.DialogLauncher;
+import view.dialog.DialogType;
 
 //package private
 final class Initializer {
 
-    private final DialogBuilder dialog;
     private final MatchSettings ms;
     private final Login login;
     private final Collection<String> usernames;
@@ -25,8 +24,7 @@ final class Initializer {
         PLAYER, GAMEMODE;
     }
 
-    protected Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager, final DialogBuilder dialog) {
-        this.dialog = dialog;
+    protected Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager) {
         this.ms = ms;
         this.login = login;
         usernames = accountManager.getAllUsername().orElse(noProfilesAvailable());
@@ -60,7 +58,7 @@ final class Initializer {
     }
 
     private List<String> noProfilesAvailable() {
-        dialog.launch(DialogType.WARNING, "Warning: No Profiles Available", "You must register at least a profile to start a match.\n"
+        DialogLauncher.launch(DialogType.WARNING, "Warning: No Profiles Available", "You must register at least a profile to start a match.\n"
                 + "Go back to the main menu, then click Profile to manage your profiles.", null);
         return Collections.emptyList();
     }

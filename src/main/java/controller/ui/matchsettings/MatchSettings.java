@@ -8,15 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import model.enums.SceneName;
-import model.enums.DialogType;
 import model.enums.GameMode;
 import model.enums.PlayerType;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
-import view.dialog.DialogBuilder;
-import view.dialog.DialogBuilderimpl;
+import view.dialog.DialogLauncher;
+import view.dialog.DialogType;
 import view.scene.SceneManager;
+import view.scene.SceneName;
 
 
 /**
@@ -26,9 +25,8 @@ import view.scene.SceneManager;
 public final class MatchSettings {
 
     private final AccountManager accountManager = new AccountOperation();
-    private final DialogBuilder dialog = new DialogBuilderimpl();
-    private final Login login = new Login(dialog, accountManager);
-    private final Initializer initializer = new Initializer(this, login, accountManager, dialog);
+    private final Login login = new Login(accountManager);
+    private final Initializer initializer = new Initializer(this, login, accountManager);
 
     @FXML
     private Button buttonBack, buttonStart;
@@ -89,7 +87,7 @@ public final class MatchSettings {
         if (login.arePlayersValid(username1, username2, aiPlayer)) {
             final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
             final String winner = gm.startNewMatch();
-            dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
             SceneManager.INSTANCE.switchScene(SceneName.MAIN);
         }
     }

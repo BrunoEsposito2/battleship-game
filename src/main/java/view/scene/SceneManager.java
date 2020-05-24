@@ -4,7 +4,6 @@ import java.io.File;
 import application.Main;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import model.enums.SceneName;
 
 /**
  * This enum models a class used to switch Scenes on the active Stage.
