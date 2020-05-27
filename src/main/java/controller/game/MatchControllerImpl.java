@@ -1,9 +1,11 @@
 package controller.game;
 
+import model.enums.Player;
 import model.match.CellAlreadyShottedException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
 import model.util.Pair;
+import view.match.BattleView;
 
 public class MatchControllerImpl implements MatchController {
 
@@ -13,6 +15,8 @@ public class MatchControllerImpl implements MatchController {
     private static final int LINE = 8;
     private static final int COLUMN = 8;
     
+    private final BattleView battleView;
+    private Player currentPlayer;
     private PlaygroundBattle playgroundPlayerOne;
     private PlaygroundBattle playgroundPlayerTwo;
 
@@ -37,14 +41,19 @@ public class MatchControllerImpl implements MatchController {
             changePlayer();
         } catch (CellAlreadyShottedException e) {
             /*
-             * If cell is already shotted advise view.
+             * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
+             * dell'eccezione?
              */
+            this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
         }
     }
     
     private void checkWin() {
+        /*
+         * The current playground is of the opponent. 
+         */
         if (this.currentPlayerPlaygroundBattle.areThereAliveShip()) {
-            //Call function to display winner
+            this.battleView.showWinDialog(this.currentPlayer);
         }
     }
 
