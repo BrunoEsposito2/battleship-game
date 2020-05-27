@@ -14,6 +14,9 @@ public class BattleViewImpl implements BattleView {
         // TODO Auto-generated constructor stub
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public void showCellAlreadyShottedAlert(final Pair<Integer, Integer> cell) {
         final String description = "Cell [line, column]: [" + cell.getX() + "," + cell.getY() + "] is already shotted.\n"
                                     + "Select another cell, please."; 
