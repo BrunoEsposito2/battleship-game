@@ -2,6 +2,7 @@ package model.match;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -108,7 +109,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 //    }
     
     
-    public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException{
+    public Optional<List<Pair<Integer, Integer>>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException{
         
         if (this.isCellUsed(cell)) {
             throw new CellAlreadyShottedException(cell);
@@ -117,7 +118,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
-                return Optional.of(v);
+                v.getValue().hit();
+                return Optional.of(v.getKey());
             }
         }
         return Optional.empty();
@@ -135,7 +137,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     
     
     @Override
-    public boolean isShipSunk(final Pair<Integer, Integer> cell) throws IOException {
+    public boolean isShipSunk(final List<Pair<Integer, Integer>> cells) throws IOException {
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
                 return v.getValue().hit();
