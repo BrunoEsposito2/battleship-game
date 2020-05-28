@@ -1,6 +1,9 @@
 package view.match;
 
+import java.util.List;
+
 import model.enums.Player;
+import model.enums.ShipType;
 import model.util.Pair;
 
 public interface BattleView {
@@ -10,4 +13,6 @@ public interface BattleView {
     void showWinDialog(Player winnerPlayer);
 
     void drawHit(Pair<Integer, Integer> pair);
+
+    void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells);
 }
