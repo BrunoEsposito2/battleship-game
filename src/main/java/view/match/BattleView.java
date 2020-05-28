@@ -8,4 +8,6 @@ public interface BattleView {
     void showCellAlreadyShottedAlert(Pair<Integer, Integer> cell);
 
     void showWinDialog(Player winnerPlayer);
+
+    void drawHit(Pair<Integer, Integer> pair);
 }
