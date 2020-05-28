@@ -32,5 +32,13 @@ public class BattleViewImpl implements BattleView {
     public void showWinDialog(final Player winnerPlayer) {
         // Dialog or new scene?
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void drawHit(final Pair<Integer, Integer> pair) {
+        // Draw cell hitted with ex. flames
+    }
     
 }
