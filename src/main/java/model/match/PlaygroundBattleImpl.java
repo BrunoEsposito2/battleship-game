@@ -137,14 +137,14 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     
     
     @Override
-    public boolean isShipSunk(final List<Pair<Integer, Integer>> cells) throws IOException {
-        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
-            if (v.getKey().contains(cell)) {
-                return v.getValue().hit();
-            }
-        }
+    public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
+//        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
+//            if (v.getKey().contains(cell)) {
+//                return v.getValue().hit();
+//            }
+//        }
+        return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
         
-        throw new IOException();
     }
 
     @Override
