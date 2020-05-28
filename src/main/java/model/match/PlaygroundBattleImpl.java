@@ -94,11 +94,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
 //    @Override
 //    public boolean isShipPresent(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
-//        
 //        if (this.isCellUsed(cell)) {
 //            throw new CellAlreadyShottedException(cell);
 //        }
-//        
 //        this.playground.get(cell.getX()).set(cell.getY(), true);
 //        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
 //            if (v.getKey().contains(cell)) {
@@ -107,14 +105,14 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 //        }
 //        return false;
 //    }
-    
-    
-    public Optional<List<Pair<Integer, Integer>>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException{
-        
+
+    @Override
+    public Optional<List<Pair<Integer, Integer>>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+
         if (this.isCellUsed(cell)) {
             throw new CellAlreadyShottedException(cell);
         }
-        
+
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
@@ -124,27 +122,11 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         }
         return Optional.empty();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
     @Override
     public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
-//        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
-//            if (v.getKey().contains(cell)) {
-//                return v.getValue().hit();
-//            }
-//        }
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
-        
     }
 
     @Override
