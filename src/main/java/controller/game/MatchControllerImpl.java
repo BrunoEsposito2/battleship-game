@@ -1,9 +1,14 @@
 package controller.game;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.Map.Entry;
+
 import model.enums.Player;
 import model.match.CellAlreadyShottedException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
+import model.match.Ship;
 import model.util.Pair;
 import view.match.BattleView;
 
@@ -31,16 +36,22 @@ public class MatchControllerImpl implements MatchController {
     @Override
     public void shot(final int line, final int col) {
         try {
-            
-            if (this.currentPlaygroundBattle.isShipPresent(new Pair<>(line, col))) {
-                //I've to check if ship is sunk.
-                
-                this.battleView.drawHit(new Pair<>(line, col));
-                this.checkWin();
+
+            Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
+
+            if (v.isPresent()) {
+
+
+                if (this.currentPlaygroundBattle.isShipSunk(v.get().getKey()).get()) {
+                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
+                    this.checkWin();
+                } else {
+                    this.battleView.drawHit(new Pair<>(line, col));
+                }
             } else {
-                
+                // Cell empty, draw no-damaged cell.
             }
-            
+
             changePlayer();
         } catch (CellAlreadyShottedException e) {
             /*
@@ -50,7 +61,7 @@ public class MatchControllerImpl implements MatchController {
             this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
         }
     }
-    
+
     /**
      * {@inheritDoc}
      */
