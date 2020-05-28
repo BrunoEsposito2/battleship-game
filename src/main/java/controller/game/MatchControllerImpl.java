@@ -39,9 +39,9 @@ public class MatchControllerImpl implements MatchController {
 
             Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
 
+            // If optional is present a ship is hitted.
             if (v.isPresent()) {
-
-
+                //If ship is sunk, player could be winner.
                 if (this.currentPlaygroundBattle.isShipSunk(v.get().getKey()).get()) {
                     this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
                     this.checkWin();
@@ -49,10 +49,9 @@ public class MatchControllerImpl implements MatchController {
                     this.battleView.drawHit(new Pair<>(line, col));
                 }
             } else {
-                // Cell empty, draw no-damaged cell.
+                this.battleView.drawMissed(new Pair<>(line, col));
             }
-
-            changePlayer();
+            this.changePlayer();
         } catch (CellAlreadyShottedException e) {
             /*
              * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
