@@ -13,6 +13,8 @@ import model.util.Pair;
 
 import static java.util.stream.Collectors.toList;
 
+import java.io.IOException;
+
 /**
  *
  */
@@ -89,7 +91,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
 
     @Override
-    public boolean shot(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+    public boolean isShipPresent(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
         
         if (this.isCellUsed(cell)) {
             throw new CellAlreadyShottedException(cell);
@@ -102,6 +104,17 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
             }
         }
         return false;
+    }
+    
+    @Override
+    public boolean isShipSunk(final Pair<Integer, Integer> cell) throws IOException {
+        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
+            if (v.getKey().contains(cell)) {
+                return v.getValue().hit();
+            }
+        }
+        
+        throw new IOException();
     }
 
     @Override
