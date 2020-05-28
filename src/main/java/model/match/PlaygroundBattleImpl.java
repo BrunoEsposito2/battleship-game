@@ -128,7 +128,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
     }
-    
 //    public Ship getShip(Pair<Integer, Integer> cell) {
 //        for(var v : this.shipList.entrySet()) {
 //            if (v.getKey().contains(cell)) {
