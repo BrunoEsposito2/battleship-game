@@ -1,5 +1,6 @@
 package model.match;
 
+import java.io.IOException;
 import java.util.List;
 
 import model.enums.Orientation;
@@ -22,7 +23,9 @@ public interface PlaygroundBattle {
 
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
-    boolean shot(Pair<Integer, Integer> cell) throws CellAlreadyShottedException;
+    boolean isShipPresent(Pair<Integer, Integer> cell) throws CellAlreadyShottedException;
+
+    boolean isShipSunk(Pair<Integer, Integer> cell) throws IOException;
 
     boolean areThereAliveShip();
 
