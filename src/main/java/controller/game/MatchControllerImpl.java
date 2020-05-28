@@ -20,22 +20,25 @@ public class MatchControllerImpl implements MatchController {
     private PlaygroundBattle playgroundPlayerOne;
     private PlaygroundBattle playgroundPlayerTwo;
 
-    private PlaygroundBattle currentPlayerPlaygroundBattle;
+    private PlaygroundBattle currentPlaygroundBattle;
     
     public MatchControllerImpl() {
         this.playgroundPlayerOne = new PlaygroundBattleImpl(MatchControllerImpl.LINE, MatchControllerImpl.COLUMN);
         this.playgroundPlayerTwo = new PlaygroundBattleImpl(MatchControllerImpl.LINE, MatchControllerImpl.COLUMN);
-        this.currentPlayerPlaygroundBattle = this.playgroundPlayerOne;
+        this.currentPlaygroundBattle = this.playgroundPlayerOne;
     }
 
     @Override
     public void shot(final int line, final int col) {
         try {
             
-            if (this.currentPlayerPlaygroundBattle.shot(new Pair<Integer, Integer>(line, col))) {
+            if (this.currentPlaygroundBattle.isShipPresent(new Pair<>(line, col))) {
+                //I've to check if ship is sunk.
+                
+                this.battleView.drawHit(new Pair<>(line, col));
                 this.checkWin();
             } else {
-                //Advise view to draw no-hitted cell
+                
             }
             
             changePlayer();
@@ -48,24 +51,38 @@ public class MatchControllerImpl implements MatchController {
         }
     }
     
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void startGame() {
+        this.currentPlayer = Player.PLAYER_ONE;
+        this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+    }
+
     private void checkWin() {
         /*
          * The current playground is of the opponent. 
          */
-        if (this.currentPlayerPlaygroundBattle.areThereAliveShip()) {
+        if (this.currentPlaygroundBattle.areThereAliveShip()) {
             this.battleView.showWinDialog(this.currentPlayer);
         }
     }
 
     private void changePlayer() {
-        this.currentPlayerPlaygroundBattle = next();
+        this.currentPlaygroundBattle = getNext();
     }
 
-    private PlaygroundBattle next() {
-        if (this.currentPlayerPlaygroundBattle == this.playgroundPlayerOne) {
-            return this.playgroundPlayerTwo;
-        } else {
+    /**
+     * Method to get playground to use in next turn.
+     * 
+     * @return playgroundBattle - the playground for next turn. 
+     */
+    private PlaygroundBattle getNext() {
+        if (this.currentPlayer == Player.PLAYER_ONE) {
             return this.playgroundPlayerOne;
+        } else {
+            return this.playgroundPlayerTwo;
         }
     }
 }
