@@ -107,7 +107,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 //    }
 
     @Override
-    public Optional<List<Pair<Integer, Integer>>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+    public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
 
         if (this.isCellUsed(cell)) {
             throw new CellAlreadyShottedException(cell);
@@ -117,7 +117,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
                 v.getValue().hit();
-                return Optional.of(v.getKey());
+                return Optional.of(v);
             }
         }
         return Optional.empty();
@@ -128,6 +128,15 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
     }
+    
+//    public Ship getShip(Pair<Integer, Integer> cell) {
+//        for(var v : this.shipList.entrySet()) {
+//            if (v.getKey().contains(cell)) {
+//                return v.getValue();
+//            }
+//        }
+//        throw new IOException()
+//    }
 
     @Override
     public boolean cellAlreadyShotted(final Pair<Integer, Integer> cell) {
