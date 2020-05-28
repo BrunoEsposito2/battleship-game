@@ -15,4 +15,6 @@ public interface BattleView {
     void drawHit(Pair<Integer, Integer> pair);
 
     void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells);
+
+    void drawMissed(Pair<Integer, Integer> pair);
 }
