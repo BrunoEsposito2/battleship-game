@@ -14,11 +14,11 @@ import model.players.HumanPlayer;
 public class AccountOperation implements AccountManager {
 
     private final FileManager system;
-    private PlayerManager plMng;
+    private final PlayerManager modelMng;
 
     public AccountOperation() {
         this.system = new FileSystemManager();
-        this.plMng = new PlayerOperation(initAllUsers());
+        this.modelMng = new PlayerOperation(initAllUsers());
     }
 
     private Optional<List<Player>> initAllUsers() {
@@ -32,7 +32,7 @@ public class AccountOperation implements AccountManager {
     @Override
     public final void createAccount(final String userName, final String password) {
         try {
-            Optional<Player> p = this.plMng.addPlayer(userName, password);
+            Optional<Player> p = this.modelMng.addPlayer(userName, password);
             if (p.isPresent()) {
                 this.system.saveUser(p.get());
             } else {
@@ -46,7 +46,7 @@ public class AccountOperation implements AccountManager {
     @Override
     public final boolean logInAccount(final String userName, final String password) {
         try {
-            if (this.plMng.setLogIn(userName, password)) {
+            if (this.modelMng.setLogIn(userName, password)) {
                 return true;
             } else {
                 throw new Exception("Invalid Info: Account doesn't exists");
@@ -60,19 +60,20 @@ public class AccountOperation implements AccountManager {
     @Override
     public final void logOutAccount(final String userName) {
         try {
-            if (!this.plMng.setLogOut(userName)) {
+            if (!this.modelMng.setLogOut(userName)) {
                 throw new Exception("Log out Failed");
             } 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            this.plMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
+            this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
         }
     }
 
     @Override
     public final Optional<List<String>> getAllUsername() {
-        return Optional.of(Collections.unmodifiableList(this.plMng.getPlayers().get().stream()
+        return Optional.of(Collections.unmodifiableList(this.modelMng.getPlayers().get()
+                .stream()
                 .map(x -> x.getUsername())
                 .collect(Collectors.toList())));
     }
@@ -92,7 +93,7 @@ public class AccountOperation implements AccountManager {
     @Override
     public final void removeAccount(final String userName, final String password) {
         try {
-            if (this.plMng.removePlayer(userName, password)) {
+            if (this.modelMng.removePlayer(userName, password)) {
                 this.system.removeUser(new HumanPlayer(userName, password));
             } else {
                 throw new Exception("Invalid info: Account already not exists");

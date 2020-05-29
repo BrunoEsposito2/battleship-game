@@ -2,6 +2,8 @@ package application;
 
 import java.io.File;
 
+import controller.Controller;
+import controller.ControllerImpl;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,6 +23,7 @@ public final class Main extends Application {
     public void start(final Stage stage) throws Exception {
         final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts" + File.separator + "mainMenu.fxml"));
         final Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
+        final Controller controller = new ControllerImpl();
         // Stage configuration
         stage.setTitle("Battleships");
         stage.setScene(scene);

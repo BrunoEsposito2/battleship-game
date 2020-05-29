@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public class PlayerOperation implements PlayerManager {
 
-    private Optional<List<Player>> players;
+    private final Optional<List<Player>> players;
 
     public PlayerOperation(final Optional<List<Player>> initUsers) {
         this.players = initUsers;
