@@ -10,4 +10,9 @@ public interface MatchController {
      */
     void shot(int line, int col);
 
+    /**
+     * Method for start the game after ship placement.
+     */
+    void startGame();
+
 }

@@ -8,19 +8,19 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.PasswordField;
 
-// package-private
-final class LoginDialog {
+//package-private
+final class LoginDialog extends AbstractDialog {
 
-    private Dialog<String> build(final String title, final String header) {
+    private Dialog<String> build(final DialogType type, final String title, final String header, final String description) {
 
-        Dialog<String> dialog = new Dialog<>();
+        final Dialog<String> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(header);
 
-        ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
+        final ButtonType loginButtonType = new ButtonType("OK", ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL);
 
-        PasswordField password = new PasswordField();
+        final PasswordField password = new PasswordField();
         password.setPromptText("your password here...");
 
         dialog.getDialogPane().setContent(password);
@@ -36,8 +36,8 @@ final class LoginDialog {
         return dialog;
     }
 
-    Optional<String> launch(final String title, final String header) {
-        return build(title, header).showAndWait();
+    protected Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
+        return build(type, title, header, description).showAndWait();
     }
 
 }

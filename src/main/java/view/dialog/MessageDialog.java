@@ -4,19 +4,18 @@ import java.util.Optional;
 
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
-import model.enums.DialogType;
 
 //package-private
-final class MessageDialog {
+final class MessageDialog extends AbstractDialog {
 
     private Alert build(final DialogType type, final String title, final String header, final String description) {
-        Alert alert = new Alert(type.getConcreteType());
+        final Alert alert = new Alert(type.getAlertType());
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setResizable(true);
 
         if (description != null) {
-            TextArea area = new TextArea(description);
+            final TextArea area = new TextArea(description);
             area.setWrapText(true);
             area.setEditable(false);
             alert.getDialogPane().setContent(area);
@@ -25,7 +24,7 @@ final class MessageDialog {
         return alert;
     }
 
-    Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
+    protected Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
         build(type, title, header, description).showAndWait();
         return Optional.empty();
     }

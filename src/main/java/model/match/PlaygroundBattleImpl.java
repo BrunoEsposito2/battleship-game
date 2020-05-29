@@ -2,16 +2,20 @@ package model.match;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.Set;
 
 import model.enums.Orientation;
 import model.util.Pair;
 
 import static java.util.stream.Collectors.toList;
+
+import java.io.IOException;
 
 /**
  *
@@ -88,21 +92,50 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
 
+//    @Override
+//    public boolean isShipPresent(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+//        if (this.isCellUsed(cell)) {
+//            throw new CellAlreadyShottedException(cell);
+//        }
+//        this.playground.get(cell.getX()).set(cell.getY(), true);
+//        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
+//            if (v.getKey().contains(cell)) {
+//                return true; 
+//            }
+//        }
+//        return false;
+//    }
+
     @Override
-    public boolean shot(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
-        
+    public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+
         if (this.isCellUsed(cell)) {
             throw new CellAlreadyShottedException(cell);
         }
-        
+
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
-                return true; 
+                v.getValue().hit();
+                return Optional.of(v);
             }
         }
-        return false;
+        return Optional.empty();
     }
+
+
+    @Override
+    public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
+        return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
+    }
+//    public Ship getShip(Pair<Integer, Integer> cell) {
+//        for(var v : this.shipList.entrySet()) {
+//            if (v.getKey().contains(cell)) {
+//                return v.getValue();
+//            }
+//        }
+//        throw new IOException()
+//    }
 
     @Override
     public boolean cellAlreadyShotted(final Pair<Integer, Integer> cell) {
