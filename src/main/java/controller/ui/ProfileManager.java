@@ -4,15 +4,14 @@ import controller.users.ManagerInstance;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import view.SceneManager;
-import view.dialog.DialogBuilder;
-import view.dialog.DialogBuilderimpl;
-import model.enums.DialogType;
-import model.enums.SceneName;
+import view.scene.SceneManager;
+import view.dialog.DialogLauncher;
+import view.dialog.DialogType;
+import view.scene.SceneName;
 
 public class ProfileManager {
 
-    private final DialogBuilder dialog;
+    //private final MessageDialog dialog;
 
     @FXML
     private Button signInButton, cancelAccountButton, profileBackButton;
@@ -21,7 +20,7 @@ public class ProfileManager {
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
     public ProfileManager() {
-        this.dialog = new DialogBuilderimpl();
+        //this.dialog = new DialogBuilderimpl();
     }
 
     @FXML
@@ -34,12 +33,12 @@ public class ProfileManager {
         if (!signInUsername.getText().equals("") && !signInPassword.getText().equals("")) {
             ManagerInstance.getInstance().get().createAccount(String.valueOf(signInUsername.getText()).trim(), 
                     String.valueOf(signInPassword.getText()).trim());
-            this.dialog.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
-        } else if (signInUsername.getText().equals("") || signInPassword.getText().equals("")) {
-            this.dialog.launch(DialogType.WARNING, "Account Creation", "Please, insert a valid username and password!",
-                    "Username and/or password may be absent.");
+            DialogLauncher.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
+        } else if (signInUsername.getText().equals("") && signInPassword.getText().equals("")) {
+            DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert username and password!", null);
         } else {
-            this.dialog.launch(DialogType.INFORMATION, "Account Creation", "Please, insert username and password", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "Account Creation", "Please, insert a valid username and password", 
+                    "Username and/or password may be absent.");
         }
         signInUsername.clear();
         signInPassword.clear();
@@ -50,11 +49,11 @@ public class ProfileManager {
         if (!removeUsername.getText().equals("") && !removePassword.getText().equals("")) {
             ManagerInstance.getInstance().get().removeAccount(String.valueOf(removeUsername.getText()).trim(), 
                     String.valueOf(removePassword.getText()).trim());
-            this.dialog.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
-        } else if (removeUsername.getText().equals("") || removePassword.getText().equals("")) {
-            this.dialog.launch(DialogType.WARNING, "Account Creation", "Please, an existing username and/or a valid password", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
+        } else if (removeUsername.getText().equals("") && removePassword.getText().equals("")) {
+            DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert existing username and password", null);
         } else {
-            this.dialog.launch(DialogType.INFORMATION, "Account Creation", "Please, insert existing username and password", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "Account Creation", "Please, insert an existing username and/or a valid password", null);
         }
         removeUsername.clear();
         removePassword.clear();

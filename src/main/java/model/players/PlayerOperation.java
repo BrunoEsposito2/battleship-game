@@ -22,6 +22,7 @@ public class PlayerOperation implements PlayerManager {
     private boolean infoAreValid(final String userName, final String password) {
         return (usernameExists(userName)
                 && (this.players.get().stream()
+                        .filter(x -> x.getUsername().equalsIgnoreCase(userName))
                         .map(x -> x.getPassword())
                         .filter(x -> x.equals(password))
                         .count() == 1)) ? true : false;
