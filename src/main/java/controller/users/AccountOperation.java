@@ -30,16 +30,16 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public final void createAccount(final String userName, final String password) {
+    public final void createAccount(final String userName, final String password) throws Exception {
         try {
             Optional<Player> p = this.modelMng.addPlayer(userName, password);
             if (p.isPresent()) {
                 this.system.saveUser(p.get());
             } else {
-                throw new Exception("Account already exists");
+                throw new Exception();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Account already exists");
         }
     }
 
@@ -91,15 +91,15 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public final void removeAccount(final String userName, final String password) {
+    public final void removeAccount(final String userName, final String password) throws Exception {
         try {
             if (this.modelMng.removePlayer(userName, password)) {
                 this.system.removeUser(new HumanPlayer(userName, password));
             } else {
-                throw new Exception("Invalid info: Account already not exists");
+                throw new Exception();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new Exception("Invalid info: Account already not exists");
         }
     }
 

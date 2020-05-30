@@ -5,7 +5,7 @@ import java.util.Optional;
 
 public interface AccountManager {
 
-    void createAccount(String userName, String password);
+    void createAccount(String userName, String password) throws Exception;
 
     boolean logInAccount(String userName, String password);
 
@@ -17,6 +17,6 @@ public interface AccountManager {
 
     void setLoser(String userName, Double scoreValue);
 
-    void removeAccount(String userName, String password);
+    void removeAccount(String userName, String password) throws Exception;
 
 }

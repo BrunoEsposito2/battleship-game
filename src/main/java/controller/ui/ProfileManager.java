@@ -31,9 +31,13 @@ public class ProfileManager {
     @FXML
     public final void accountSignIn() {
         if (!signInUsername.getText().equals("") && !signInPassword.getText().equals("")) {
-            ManagerInstance.getInstance().get().createAccount(String.valueOf(signInUsername.getText()).trim(), 
-                    String.valueOf(signInPassword.getText()).trim());
-            DialogLauncher.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
+            try {
+                ManagerInstance.getInstance().get().createAccount(String.valueOf(signInUsername.getText()).trim(), 
+                        String.valueOf(signInPassword.getText()).trim());
+                DialogLauncher.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
+            } catch (Exception e) {
+                DialogLauncher.launch(DialogType.INFORMATION, "Account Create Exception", e.getMessage(), null);
+            }
         } else if (signInUsername.getText().equals("") && signInPassword.getText().equals("")) {
             DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert username and password!", null);
         } else {
@@ -47,9 +51,13 @@ public class ProfileManager {
     @FXML
     public final void accountRemove() {
         if (!removeUsername.getText().equals("") && !removePassword.getText().equals("")) {
-            ManagerInstance.getInstance().get().removeAccount(String.valueOf(removeUsername.getText()).trim(), 
-                    String.valueOf(removePassword.getText()).trim());
-            DialogLauncher.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
+            try {
+                ManagerInstance.getInstance().get().removeAccount(String.valueOf(removeUsername.getText()).trim(), 
+                        String.valueOf(removePassword.getText()).trim());
+                DialogLauncher.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
+            } catch (Exception e) {
+                DialogLauncher.launch(DialogType.INFORMATION, "Account Remove Exception", e.getMessage(), null);
+            }
         } else if (removeUsername.getText().equals("") && removePassword.getText().equals("")) {
             DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert existing username and password", null);
         } else {
