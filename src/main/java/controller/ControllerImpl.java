@@ -1,14 +1,14 @@
 package controller;
 
-import controller.ui.ProfileManager;
+import controller.ui.ProfileController;
 import controller.users.ManagerInstance;
 
 public class ControllerImpl implements Controller {
 
-    private final ProfileManager profileMng;
+    private final ProfileController profileCtrl;
 
     public ControllerImpl() {
         ManagerInstance.getInstance();
-        this.profileMng = new ProfileManager();
+        this.profileCtrl = new ProfileController();
     }
 }

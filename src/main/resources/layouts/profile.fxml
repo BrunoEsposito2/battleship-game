@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane id="profilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.ProfileManager">
+<Pane id="profilePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.ProfileController">
    <children>
       <Separator layoutX="-7.0" layoutY="-3.0" orientation="VERTICAL" prefHeight="608.0" prefWidth="810.0" style="-fx-background-color: #d3d3d3;" />
       <Button id="signInButton" fx:id="signInButton" blendMode="MULTIPLY" layoutX="118.0" layoutY="448.0" mnemonicParsing="false" onMousePressed="#accountSignIn" prefHeight="48.0" prefWidth="163.0" text="CREATE ACCOUNT" textAlignment="CENTER">

@@ -9,7 +9,7 @@ import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
-public class ProfileManager {
+public class ProfileController {
 
     //private final MessageDialog dialog;
 
@@ -19,7 +19,7 @@ public class ProfileManager {
     @FXML
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
-    public ProfileManager() {
+    public ProfileController() {
         //this.dialog = new DialogBuilderimpl();
     }
 
