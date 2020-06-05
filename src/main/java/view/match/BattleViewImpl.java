@@ -14,7 +14,8 @@ public class BattleViewImpl implements BattleView {
     private final MatchController controller;
     
 
-    public BattleViewImpl() {
+    public BattleViewImpl(final MatchController controller) {
+        this.controller = controller;
         // TODO Auto-generated constructor stub
     }
 
@@ -39,15 +40,12 @@ public class BattleViewImpl implements BattleView {
     }
 
     @Override
-    public void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells) {
+    public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells) {
         // TODO Auto-generated method stub
-        
     }
 
     @Override
-    public void drawMissed(Pair<Integer, Integer> pair) {
+    public void drawMissed(final Pair<Integer, Integer> pair) {
         // TODO Auto-generated method stub
-        
     }
-    
 }
