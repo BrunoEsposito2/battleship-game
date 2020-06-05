@@ -19,25 +19,28 @@ public class MatchControllerImpl implements MatchController {
      */
     private static final int LINE = 8;
     private static final int COLUMN = 8;
-    
-    private final BattleView battleView;
+
+    private BattleView battleView;
     private Player currentPlayer;
-    private PlaygroundBattle playgroundPlayerOne;
-    private PlaygroundBattle playgroundPlayerTwo;
+    private final PlaygroundBattle playgroundPlayerOne;
+    private final PlaygroundBattle playgroundPlayerTwo;
 
     private PlaygroundBattle currentPlaygroundBattle;
-    
+
     public MatchControllerImpl() {
         this.playgroundPlayerOne = new PlaygroundBattleImpl(MatchControllerImpl.LINE, MatchControllerImpl.COLUMN);
         this.playgroundPlayerTwo = new PlaygroundBattleImpl(MatchControllerImpl.LINE, MatchControllerImpl.COLUMN);
         this.currentPlaygroundBattle = this.playgroundPlayerOne;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void shot(final int line, final int col) {
         try {
 
-            Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
+            final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
 
             // If optional is present a ship is hitted.
             if (v.isPresent()) {
@@ -68,6 +71,14 @@ public class MatchControllerImpl implements MatchController {
     public void startGame() {
         this.currentPlayer = Player.PLAYER_ONE;
         this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setView(final BattleView battleView) {
+        this.battleView = battleView;
     }
 
     private void checkWin() {
