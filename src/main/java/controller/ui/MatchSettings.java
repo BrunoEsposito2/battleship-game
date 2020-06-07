@@ -1,7 +1,6 @@
 package controller.ui;
 
 import javafx.scene.control.TextArea;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,15 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import model.enums.SceneName;
-import model.enums.DialogType;
 import model.enums.GameMode;
 import model.enums.PlayerType;
 import model.match.MatchManager;
 import model.match.MatchManagerImpl;
-import view.SceneManager;
-import view.dialog.DialogBuilder;
-import view.dialog.DialogBuilderimpl;
+import view.dialog.DialogLauncher;
+import view.dialog.DialogType;
+import view.scene.SceneManager;
+import view.scene.SceneName;
 
 
 /**
@@ -29,7 +27,6 @@ import view.dialog.DialogBuilderimpl;
  */
 public final class MatchSettings {
 
-    private final DialogBuilder dialog = new DialogBuilderimpl();
     private final AccountManager accountManager = new AccountOperation();
     private final Collection<String> usernames = new ArrayList<String>();
     private GameMode selectedWinCondition = GameMode.CLASSIC;
@@ -112,20 +109,20 @@ public final class MatchSettings {
     }
 
     private <T> void checkCredentials(final ChoiceBox<T> cb, final String username) {
-        final Optional<String> password = dialog.launch(DialogType.LOGIN, "Login", "Insert password for user \"" + username + "\"", null);
+        final Optional<String> password = DialogLauncher.launch(DialogType.LOGIN, "Login", "Insert password for user \"" + username + "\"", null);
         final boolean isLoginValid = ((password.isPresent()) ?  accountManager.logInAccount(username, password.get()) : false);
         if (isLoginValid) {
-            dialog.launch(DialogType.INFORMATION, "Login", "Login successful!", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "Login", "Login successful!", null);
         } else {
             cb.getSelectionModel().clearSelection();
-            dialog.launch(DialogType.ERROR, "Login", "Invalid account credentials!", null);
+            DialogLauncher.launch(DialogType.ERROR, "Login", "Invalid account credentials!", null);
         }
     }
 
     private void startMatch(final String username1, final String username2, final PlayerType playerType) {
         final MatchManager gm = new MatchManagerImpl(username1, username2, playerType, selectedWinCondition);
         final String winner = gm.startNewMatch();
-        dialog.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
+        DialogLauncher.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
         SceneManager.INSTANCE.switchScene(SceneName.MAIN);
     }
 
@@ -135,9 +132,9 @@ public final class MatchSettings {
 
     private boolean arePlayersValid(final Optional<String> username1, final Optional<String> username2, final boolean aiPlayer) {
         if (!username1.isPresent() || (!username2.isPresent() && !aiPlayer)) {
-            dialog.launch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
+            DialogLauncher.launch(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
         } else if (username1.equals(username2)) {
-            dialog.launch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
+            DialogLauncher.launch(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
         } else {
             return true;
         }
