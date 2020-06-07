@@ -44,6 +44,9 @@ public final class MatchSettings {
      */
     public void initialize() {
         initializer.initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
+        if (choiceboxPlayer1.getItems().isEmpty()) {
+            login.noProfilesAvailable();
+        }
     }
 
     /**
@@ -82,13 +85,14 @@ public final class MatchSettings {
 
     private void startMatch() {
         final boolean aiPlayer = checkboxAI.isSelected();
-        final Optional<String> username1 = Optional.of(getSelectedItem(choiceboxPlayer1));
-        final Optional<String> username2 = Optional.of(getSelectedItem(choiceboxPlayer2));
-        if (login.arePlayersValid(username1, username2, aiPlayer)) {
-            final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
-            final String winner = gm.startNewMatch();
-            DialogLauncher.launch(DialogType.INFORMATION, "Match over!", "Player " + winner + " won the match!\nPress ok to go back to menu.", null);
-            SceneManager.INSTANCE.switchScene(SceneName.MAIN);
+        final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
+        final Optional<String> username2 = Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
+        if (login.isPlayerSelectionValid(username1, username2, aiPlayer)) {
+            //final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
+            //final String winner = gm.startNewMatch();
+            //TODO remove this debug dialog
+            DialogLauncher.launch(DialogType.INFORMATION, "[TEMP] Match Started", "[TEMP] Match is successfully started", null);
+            //SceneManager.INSTANCE.switchScene(SceneName.MAIN);
         }
     }
 }
