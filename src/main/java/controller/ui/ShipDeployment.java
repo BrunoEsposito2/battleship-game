@@ -8,7 +8,9 @@ import model.enums.ShipType;
 import model.util.Pair;
 import model.match.Ship;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -61,6 +63,16 @@ public class ShipDeployment {
         }
         
         dropImage(board);
+    }
+    
+    @FXML
+    private void onMouseClicked(final MouseEvent e) {
+        Node clickedNode = e.getPickResult().getIntersectedNode();
+        Integer colIndex = GridPane.getColumnIndex(clickedNode);
+        Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        int x = colIndex == null ? 0 : colIndex;
+        int y = rowIndex == null ? 0 : rowIndex;
+        System.out.printf("Mouse clicked cell [%d, %d]%n", x, y);
     }
 
 }
