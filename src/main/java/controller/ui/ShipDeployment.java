@@ -1,18 +1,66 @@
 package controller.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import model.enums.ShipType;
+import model.util.Pair;
+import model.match.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class ShipDeployment {
     
+  //Offset which is put every time a ship is dropped on the grid
+    private static final int CARRIER_OFFSET = -40;
+    private static final int BATTLESHIP_OFFSET = 32;
+    private static final int CRUISER_OFFSET = 12;
+    private static final int SUBMARINE_OFFSET = 5;
+    private static final int DESTROYER_OFFSET = -10;
+    
+    private int coordX;
+    private int coordY;
+    private int size;
+    private int offset;
+    private ImageView draggingShip;
+    private Map<ImageView, Pair<Ship, Integer>> ships = new HashMap<>();
+    
     @FXML
-    private ImageView carrier, battleship, cruiser,
-                      submarine, destroyer;
+    private GridPane board;
+
+    @FXML
+    private ImageView carrier, battleship, cruiser, submarine, destroyer;
 
     /**
      * This method is called automatically when loading the fxml layout
      */
-    public void initialize() {
+    @FXML
+    private void initialize() {
+        ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), CARRIER_OFFSET));
+        ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), BATTLESHIP_OFFSET));
+        ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER), CRUISER_OFFSET));
+        ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE), SUBMARINE_OFFSET));
+        ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER), DESTROYER_OFFSET));
+        
+        board.setStyle("-fx-background-color: black;");
+        
+        // inizializzo le celle della griglia
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                Pane pane = new Pane();
+                pane.setStyle("-fx-background-color: white;");
+                board.add(pane, i, j);
+            }
+        }
+        
+        for (Entry<ImageView, Pair<Ship, Integer>> entry : ships.entrySet()) {
+            dragImage(entry.getKey());
+        }
+        
+        dropImage(board);
     }
 
 }
