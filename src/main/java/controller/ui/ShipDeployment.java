@@ -1,8 +1,10 @@
 package controller.ui;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import model.enums.ShipType;
 import model.util.Pair;
@@ -78,6 +80,11 @@ public class ShipDeployment {
         System.out.printf("Mouse clicked cell [%d, %d]%n", x, y);
     }
     
+    /**
+     * Set the source for the drag and drop function
+     * 
+     * @param ship, the ship currently dragged
+     */
     private void dragImage(ImageView ship) {
         ship.setOnDragDetected(e -> {
             Dragboard db = ship.startDragAndDrop(TransferMode.MOVE);
@@ -92,6 +99,11 @@ public class ShipDeployment {
         });
     }
     
+    /**
+     * Set the target for the drag and drop function
+     * 
+     * @param gridPane, where the ship is dropped
+     */
     private void dropImage(GridPane gridPane) {
         gridPane.setOnDragOver(e -> {
             
@@ -130,6 +142,26 @@ public class ShipDeployment {
             e.consume();
         });
 
+    }
+    
+    private void extractSize() {
+        List<Ship> resultUserList = ships.entrySet().stream()
+                .filter(x -> x.getKey().equals(draggingShip))
+                .map(x -> x.getValue().getX())
+                .collect(Collectors.toList());
+        if (resultUserList.size() != 1) {
+            throw new IllegalStateException();
+        }
+        
+        size = resultUserList.get(0).getSize();
+    }
+    
+    private void extractOffset() {
+        for (Entry<ImageView, Pair<Ship, Integer>> entry : ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                offset = entry.getValue().getY();
+            }
+        }
     }
 
 }
