@@ -91,5 +91,45 @@ public class ShipDeployment {
             e.consume();
         });
     }
+    
+    private void dropImage(GridPane gridPane) {
+        gridPane.setOnDragOver(e -> {
+            
+            Dragboard db = e.getDragboard();
+            System.out.println("onDragOver");
+            
+            if (db.hasImage()) {
+                e.acceptTransferModes(TransferMode.MOVE);
+            }
+            
+            /*Node clickedNode = e.getPickResult().getIntersectedNode();
+            Integer colIndex = GridPane.getColumnIndex(clickedNode);
+            Integer rowIndex = GridPane.getRowIndex(clickedNode);
+            coordX = colIndex == null ? 0 : colIndex;
+            coordY = rowIndex == null ? 0 : rowIndex;
+            System.out.printf("Dragging on cell [%d, %d]%n", coordX, coordY);*/
+            
+            e.consume();
+        });
+        
+        gridPane.setOnDragDropped(e -> {
+            
+            Dragboard db = e.getDragboard();
+            System.out.println("onDragDropped");
+            
+            if (db.hasImage() && (coordX < 8)) {
+                this.extractSize();
+                this.extractOffset();
+                
+                ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
+                board.add(draggingShip, coordX + 1, coordY, size, 1);
+                draggingShip.setTranslateX(offset);
+                e.setDropCompleted(true);
+            }
+            
+            e.consume();
+        });
+
+    }
 
 }
