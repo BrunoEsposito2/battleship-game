@@ -10,7 +10,10 @@ import model.match.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
@@ -73,6 +76,20 @@ public class ShipDeployment {
         int x = colIndex == null ? 0 : colIndex;
         int y = rowIndex == null ? 0 : rowIndex;
         System.out.printf("Mouse clicked cell [%d, %d]%n", x, y);
+    }
+    
+    private void dragImage(ImageView ship) {
+        ship.setOnDragDetected(e -> {
+            Dragboard db = ship.startDragAndDrop(TransferMode.MOVE);
+
+            ClipboardContent cc = new ClipboardContent();
+            cc.putImage(ship.getImage());
+
+            db.setContent(cc);
+            draggingShip = ship;
+            
+            e.consume();
+        });
     }
 
 }
