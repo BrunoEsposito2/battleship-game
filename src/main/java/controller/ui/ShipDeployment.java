@@ -113,7 +113,7 @@ public class ShipDeployment {
             }
             
             this.extractCoordinates(e);
-            System.out.printf("Dragging on cell [%d, %d]%n", this.coordX, this.coordY);
+            System.out.printf("Dragging on cell [%d, %d]%n", this.coordX, this.coordY); 
             
             e.consume();
         });
