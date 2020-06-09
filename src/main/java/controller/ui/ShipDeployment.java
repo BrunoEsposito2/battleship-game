@@ -13,6 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
@@ -46,12 +47,7 @@ public class ShipDeployment {
      */
     @FXML
     private void initialize() {
-        ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), CARRIER_OFFSET));
-        ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), BATTLESHIP_OFFSET));
-        ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER), CRUISER_OFFSET));
-        ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE), SUBMARINE_OFFSET));
-        ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER), DESTROYER_OFFSET));
-        
+        this.createShips();
         board.setStyle("-fx-background-color: black;");
         
         //initialize the grid's cells
@@ -114,6 +110,9 @@ public class ShipDeployment {
                 e.acceptTransferModes(TransferMode.MOVE);
             }
             
+            this.extractCoordinates(e);
+            System.out.printf("Dragging on cell [%d, %d]%n", coordX, coordY);
+            
             e.consume();
         });
         
@@ -122,10 +121,10 @@ public class ShipDeployment {
             Dragboard db = e.getDragboard();
             System.out.println("onDragDropped");
             
+            this.extractSize();
+            this.extractOffset();
+            
             if (db.hasImage() && (coordX < 8)) {
-                this.extractSize();
-                this.extractOffset();
-                
                 ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                 board.add(draggingShip, coordX + 1, coordY, size, 1);
                 draggingShip.setTranslateX(offset);
@@ -135,6 +134,17 @@ public class ShipDeployment {
             e.consume();
         });
 
+    }
+    
+    /**
+     * Populates the map of ships
+     */
+    private void createShips() {
+        this.ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), CARRIER_OFFSET));
+        this.ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), BATTLESHIP_OFFSET));
+        this.ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER), CRUISER_OFFSET));
+        this.ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE), SUBMARINE_OFFSET));
+        this.ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER), DESTROYER_OFFSET));
     }
 
     /**
@@ -161,6 +171,19 @@ public class ShipDeployment {
                 offset = entry.getValue().getY();
             }
         }
+    }
+    
+    /**
+     * Utility method to extract coordinates where the ship is dropping
+     * 
+     * @param e, DragEvent
+     */
+    private void extractCoordinates(DragEvent e) {
+        Node clickedNode = e.getPickResult().getIntersectedNode();
+        Integer colIndex = GridPane.getColumnIndex(clickedNode);
+        Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        this.coordX = colIndex == null ? 0 : colIndex;
+        this.coordY = rowIndex == null ? 0 : rowIndex;
     }
 
 }
