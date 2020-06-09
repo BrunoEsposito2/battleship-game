@@ -55,10 +55,10 @@
                   </ImageView>
                   <ImageView fx:id="cruiser" fitHeight="138.0" fitWidth="23.0" layoutX="502.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@..images/ships/Cruiser.png" />
+                        <Image url="@../images/ships/Cruiser.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="carrier" fitHeight="35.0" fitWidth="218.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true">
+                  <ImageView fx:id="carrier" fitHeight="35.0" fitWidth="218.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" translateY="-2.0">
                      <image>
                         <Image url="@../images/ships/Carrier.png" />
                      </image>
