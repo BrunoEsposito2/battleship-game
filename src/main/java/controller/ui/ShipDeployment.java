@@ -29,7 +29,7 @@ public class ShipDeployment {
     private static final int SUBMARINE_OFFSET = 5;
     private static final int DESTROYER_OFFSET = -10;
     
-    private final int GRIDSIZE = 10;
+    private static final int GRIDSIZE = 10;
 
     private int coordX;
     private int coordY;
@@ -61,7 +61,7 @@ public class ShipDeployment {
             }
         }
         
-        for (Entry<ImageView, Pair<Ship, Integer>> entry : ships.entrySet()) {
+        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
             dragImage(entry.getKey());
         }
         
@@ -113,7 +113,7 @@ public class ShipDeployment {
             }
             
             this.extractCoordinates(e);
-            System.out.printf("Dragging on cell [%d, %d]%n", coordX, coordY);
+            System.out.printf("Dragging on cell [%d, %d]%n", this.coordX, this.coordY);
             
             e.consume();
         });
@@ -126,10 +126,10 @@ public class ShipDeployment {
             this.extractSize();
             this.extractOffset();
             
-            if (db.hasImage() && (coordX < GRIDSIZE - this.size + 1)) {
+            if (db.hasImage() && (this.coordX < GRIDSIZE - this.size + 1)) {
                 ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                board.add(draggingShip, coordX + 1, coordY, size, 1);
-                draggingShip.setTranslateX(offset);
+                board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                draggingShip.setTranslateX(this.offset);
                 e.setDropCompleted(true);
             }
             
