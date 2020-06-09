@@ -9,14 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.enums.GameMode;
-import model.enums.PlayerType;
-import model.match.MatchManager;
-import model.match.MatchManagerImpl;
 import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 import view.scene.SceneManager;
 import view.scene.SceneName;
-
 
 /**
  *  The Controller related to the matchSettings.fxml GUI.
@@ -91,7 +87,10 @@ public final class MatchSettings {
             //final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
             //final String winner = gm.startNewMatch();
             //TODO remove this debug dialog
-            DialogLauncher.launch(DialogType.INFORMATION, "[TEMP] Match Started", "[TEMP] Match is successfully started", null);
+            DialogLauncher.launch(DialogType.INFORMATION, "[DEBUG] Match Started", "[DEBUG] Match is successfully started with these settings:",
+                      "player1: " + username1.get() + "\n"
+                    + "player2: " + (aiPlayer ? "AI" : username2.get()) + "\n"
+                    + "gamemode: " + getSelectedItem(choiceboxGameMode));
             //SceneManager.INSTANCE.switchScene(SceneName.MAIN);
         }
     }
