@@ -21,20 +21,20 @@ import javafx.scene.layout.Pane;
 
 public class ShipDeployment {
     
-  //Offset which is put every time a ship is dropped on the grid
+    //Offset which is put every time a ship is dropped on the grid
     private static final int CARRIER_OFFSET = -40;
     private static final int BATTLESHIP_OFFSET = 32;
     private static final int CRUISER_OFFSET = 12;
     private static final int SUBMARINE_OFFSET = 5;
     private static final int DESTROYER_OFFSET = -10;
-    
+
     private int coordX;
     private int coordY;
     private int size;
     private int offset;
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Integer>> ships = new HashMap<>();
-    
+
     @FXML
     private GridPane board;
 
@@ -54,7 +54,7 @@ public class ShipDeployment {
         
         board.setStyle("-fx-background-color: black;");
         
-        // inizializzo le celle della griglia
+        //initialize the grid's cells
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 Pane pane = new Pane();
@@ -69,7 +69,7 @@ public class ShipDeployment {
         
         dropImage(board);
     }
-    
+
     @FXML
     private void onMouseClicked(final MouseEvent e) {
         Node clickedNode = e.getPickResult().getIntersectedNode();
@@ -79,7 +79,7 @@ public class ShipDeployment {
         int y = rowIndex == null ? 0 : rowIndex;
         System.out.printf("Mouse clicked cell [%d, %d]%n", x, y);
     }
-    
+
     /**
      * Set the source for the drag and drop function
      * 
@@ -98,7 +98,7 @@ public class ShipDeployment {
             e.consume();
         });
     }
-    
+
     /**
      * Set the target for the drag and drop function
      * 
@@ -113,13 +113,6 @@ public class ShipDeployment {
             if (db.hasImage()) {
                 e.acceptTransferModes(TransferMode.MOVE);
             }
-            
-            /*Node clickedNode = e.getPickResult().getIntersectedNode();
-            Integer colIndex = GridPane.getColumnIndex(clickedNode);
-            Integer rowIndex = GridPane.getRowIndex(clickedNode);
-            coordX = colIndex == null ? 0 : colIndex;
-            coordY = rowIndex == null ? 0 : rowIndex;
-            System.out.printf("Dragging on cell [%d, %d]%n", coordX, coordY);*/
             
             e.consume();
         });
@@ -143,7 +136,10 @@ public class ShipDeployment {
         });
 
     }
-    
+
+    /**
+     * Utility method to extract the size from the selected ship
+     */
     private void extractSize() {
         List<Ship> resultUserList = ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
@@ -155,7 +151,10 @@ public class ShipDeployment {
         
         size = resultUserList.get(0).getSize();
     }
-    
+
+    /**
+     * Utility method to extract the offset from the selected ship
+     */
     private void extractOffset() {
         for (Entry<ImageView, Pair<Ship, Integer>> entry : ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
