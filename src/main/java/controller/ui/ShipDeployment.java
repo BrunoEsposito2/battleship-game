@@ -68,16 +68,6 @@ public class ShipDeployment {
         dropImage(board);
     }
 
-    @FXML
-    private void onMouseClicked(final MouseEvent e) {
-        Node clickedNode = e.getPickResult().getIntersectedNode();
-        Integer colIndex = GridPane.getColumnIndex(clickedNode);
-        Integer rowIndex = GridPane.getRowIndex(clickedNode);
-        int x = colIndex == null ? 0 : colIndex;
-        int y = rowIndex == null ? 0 : rowIndex;
-        System.out.printf("Mouse clicked cell [%d, %d]%n", x, y);
-    }
-
     /**
      * Set the source for the drag and drop function
      * 
@@ -153,7 +143,7 @@ public class ShipDeployment {
      * Utility method to extract the size from the selected ship
      */
     private void extractSize() {
-        List<Ship> resultUserList = ships.entrySet().stream()
+        List<Ship> resultUserList = this.ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
                 .map(x -> x.getValue().getX())
                 .collect(Collectors.toList());
@@ -161,16 +151,16 @@ public class ShipDeployment {
             throw new IllegalStateException();
         }
         
-        size = resultUserList.get(0).getSize();
+        this.size = resultUserList.get(0).getSize();
     }
 
     /**
      * Utility method to extract the offset from the selected ship
      */
     private void extractOffset() {
-        for (Entry<ImageView, Pair<Ship, Integer>> entry : ships.entrySet()) {
+        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
-                offset = entry.getValue().getY();
+                this.offset = entry.getValue().getY();
             }
         }
     }
