@@ -190,5 +190,25 @@ public class ShipDeployment {
             }
         }
     }
+    
+    /**
+     * This method applies a rotation of 90° at the selected ship
+     */
+    private void applyRotation() {
+        this.extractOrientation();
+        
+        double rot = draggingShip.getRotate();
+        if (this.orientation.equals(Orientation.HORIZONTAL)) {
+            board.getChildren().remove(draggingShip);
+            draggingShip.setRotate(rot - 90);
+            this.ships.get(draggingShip).getX().setOrientation(Orientation.VERTICAL);
+            board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+        } else if (this.orientation.equals(Orientation.VERTICAL)) {
+            board.getChildren().remove(draggingShip);
+            draggingShip.setRotate(rot + 90);
+            this.ships.get(draggingShip).getX().setOrientation(Orientation.HORIZONTAL);
+            board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+        }
+    }
 
 }
