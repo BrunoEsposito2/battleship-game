@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import model.enums.Orientation;
 import model.enums.ShipType;
 import model.util.Pair;
 import model.match.Ship;
@@ -35,6 +36,7 @@ public class ShipDeployment {
     private int coordY;
     private int size;
     private int offset;
+    private Orientation orientation;
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Integer>> ships = new HashMap<>();
 
@@ -176,6 +178,17 @@ public class ShipDeployment {
         Integer rowIndex = GridPane.getRowIndex(clickedNode);
         this.coordX = colIndex == null ? 0 : colIndex;
         this.coordY = rowIndex == null ? 0 : rowIndex;
+    }
+    
+    /**
+     * Utility method to extract the orientation of the selected ship
+     */
+    private void extractOrientation() {
+        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                this.orientation = entry.getValue().getX().getOrientation();
+            }
+        }
     }
 
 }
