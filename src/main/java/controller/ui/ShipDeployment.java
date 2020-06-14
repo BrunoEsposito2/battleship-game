@@ -87,6 +87,13 @@ public class ShipDeployment {
             
             e.consume();
         });
+        
+        ship.setOnMouseClicked(e -> {
+            if (e.getClickCount() == 2) {
+                System.out.println("Double clicked");
+                this.applyRotation();
+            }
+        });
     }
 
     /**
@@ -118,10 +125,21 @@ public class ShipDeployment {
             this.extractSize();
             this.extractOffset();
             
-            if (db.hasImage() && (this.coordX < GRIDSIZE - this.size + 1)) {
-                ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
-                draggingShip.setTranslateX(this.offset);
+            if (db.hasImage()) {
+                
+                this.extractOrientation();
+                
+                if (this.orientation.equals(Orientation.HORIZONTAL)
+                    && (this.coordX < GRIDSIZE - this.size + 1)) {
+                    ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
+                    board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                    draggingShip.setTranslateX(this.offset);
+                } else if (this.orientation.equals(Orientation.VERTICAL)
+                           && (this.coordY < GRIDSIZE - this.size + 1)) {
+                    ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
+                    board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                }
+                
                 e.setDropCompleted(true);
             }
             
