@@ -4,11 +4,11 @@ import java.util.Map;
 
 public interface Player {
 
-    void setStatistics(Map<String, Double> values);
-
     String getUsername();
 
     String getPassword();
+
+    void updateStats(String desc, Double updatedValue);
 
     Map<String, Double> getStatistics();
 
