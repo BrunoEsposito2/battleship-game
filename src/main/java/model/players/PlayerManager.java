@@ -13,5 +13,9 @@ public interface PlayerManager {
 
     boolean setLogOut(String userName);
 
+    boolean updateWinStats(String userName, Double score);
+
+    boolean updateLosStats(String userName, Double score);
+
     Optional<List<Player>> getPlayers();
 }

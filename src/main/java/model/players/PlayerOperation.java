@@ -4,12 +4,18 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import model.stats.LoserStatsCalculator;
+import model.stats.Statistics;
+import model.stats.WinnerStatsCalculator;
+
 public class PlayerOperation implements PlayerManager {
 
     private final Optional<List<Player>> players;
+    private Statistics stats;
 
     public PlayerOperation(final Optional<List<Player>> initUsers) {
         this.players = initUsers;
+        this.stats = null;
     }
 
     private boolean usernameExists(final String userName) {
@@ -80,6 +86,38 @@ public class PlayerOperation implements PlayerManager {
     @Override
     public final Optional<List<Player>> getPlayers() {
         return Optional.of(Collections.unmodifiableList(this.players.get()));
+    }
+
+    @Override
+    public final boolean updateWinStats(final String userName, final Double score) {
+        if (usernameExists(userName)) {
+            this.players.get().forEach(x -> {
+                if (x instanceof HumanPlayer && x.getUsername().equalsIgnoreCase(userName)) {
+                    this.stats = new WinnerStatsCalculator((HumanPlayer) x, score);
+                } else if (x instanceof ArtificialPlayer && x.getUsername().equalsIgnoreCase(userName)) {
+                    this.stats = new WinnerStatsCalculator((ArtificialPlayer) x, score);
+                }
+            });
+            this.stats.basicStats();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public final boolean updateLosStats(final String userName, final Double score) {
+        if (usernameExists(userName)) {
+            this.players.get().forEach(x -> {
+                if (x instanceof HumanPlayer && x.getUsername().equalsIgnoreCase(userName)) {
+                    this.stats = new LoserStatsCalculator((HumanPlayer) x, score);
+                } else if (x instanceof ArtificialPlayer && x.getUsername().equalsIgnoreCase(userName)) {
+                    this.stats = new LoserStatsCalculator((ArtificialPlayer) x, score);
+                }
+            });
+            this.stats.basicStats();
+            return true;
+        }
+        return false;
     }
 
 }

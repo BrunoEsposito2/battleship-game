@@ -13,9 +13,9 @@ public interface AccountManager {
 
     Optional<List<String>> getAllUsername();
 
-    void setWinner(String userName, Double scoreValue);
+    void setWinner(String userName, Double scoreValue) throws Exception;
 
-    void setLoser(String userName, Double scoreValue);
+    void setLoser(String userName, Double scoreValue) throws Exception;
 
     void removeAccount(String userName, String password) throws Exception;
 
