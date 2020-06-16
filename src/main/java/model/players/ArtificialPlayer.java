@@ -15,12 +15,6 @@ public class ArtificialPlayer implements Player, Serializable {
     }
 
     @Override
-    public void setStatistics(final Map<String, Double> values) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
     public final String getUsername() {
         // TODO Auto-generated method stub
         return null;
@@ -53,6 +47,11 @@ public class ArtificialPlayer implements Player, Serializable {
     @Override
     public final String toString() {
         return "IA username: ";
+    }
+
+    @Override
+    public void updateStats(final String desc, final Double updatedValue) {
+        // TODO Auto-generated method stub
     }
 
 }

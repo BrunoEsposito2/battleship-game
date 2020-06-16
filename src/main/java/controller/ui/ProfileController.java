@@ -11,8 +11,6 @@ import view.scene.SceneName;
 
 public class ProfileController {
 
-    //private final MessageDialog dialog;
-
     @FXML
     private Button signInButton, cancelAccountButton, profileBackButton;
 
@@ -20,7 +18,6 @@ public class ProfileController {
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
     public ProfileController() {
-        //this.dialog = new DialogBuilderimpl();
     }
 
     @FXML

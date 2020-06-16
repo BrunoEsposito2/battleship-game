@@ -3,13 +3,10 @@ package controller.ui.matchsettings;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 import controller.users.AccountManager;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ChoiceBox;
 import model.enums.GameMode;
-import view.dialog.DialogLauncher;
-import view.dialog.DialogType;
 
 //package private
 final class Initializer {
@@ -17,8 +14,6 @@ final class Initializer {
     private final MatchSettings ms;
     private final Login login;
     private final Collection<String> usernames;
-    //TODO switch to proper init
-    //private final Collection<String> usernames = Arrays.asList("voglio andare", "al mare");
 
     private enum ChoiceBoxType {
         PLAYER, GAMEMODE;
@@ -27,7 +22,7 @@ final class Initializer {
     protected Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager) {
         this.ms = ms;
         this.login = login;
-        usernames = accountManager.getAllUsername().orElse(noProfilesAvailable());
+        usernames = accountManager.getAllUsername().orElse(Collections.emptyList());
     }
 
   //package private
@@ -48,19 +43,13 @@ final class Initializer {
     private <T> ChangeListener<T> getChoiceBoxListener(final ChoiceBox<T> cb, final ChoiceBoxType type) {
         return type.equals(ChoiceBoxType.PLAYER)
                 ? (x, y, z) -> {
-                    if (ms.getSelectedItem(cb) != null && !login.checkCredentials((String) ms.getSelectedItem(cb))) {
+                    if (ms.getSelectedItem(cb) != null && !login.areCredentialsValid((String) ms.getSelectedItem(cb))) {
                         cb.getSelectionModel().clearSelection();
                     }
                 }
                 : (x, y, z) -> {
                     ms.setGameModeDescription(((GameMode) ms.getSelectedItem(cb)).getDescription());
                 };
-    }
-
-    private List<String> noProfilesAvailable() {
-        DialogLauncher.launch(DialogType.WARNING, "Warning: No Profiles Available", "You must register at least a profile to start a match.\n"
-                + "Go back to the main menu, then click Profile to manage your profiles.", null);
-        return Collections.emptyList();
     }
 
 }

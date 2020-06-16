@@ -79,15 +79,29 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public void setWinner(final String userName, final Double scoreValue) {
-        // TODO Auto-generated method stub
-
+    public final void setWinner(final String userName, final Double scoreValue) throws Exception {
+        try {
+            if (!this.modelMng.updateWinStats(userName, scoreValue)) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new Exception("Invalid Winner Infos");
+        } finally {
+            this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
+        }
     }
 
     @Override
-    public void setLoser(final String userName, final Double scoreValue) {
-        // TODO Auto-generated method stub
-
+    public final void setLoser(final String userName, final Double scoreValue) throws Exception {
+        try {
+            if (!this.modelMng.updateLosStats(userName, scoreValue)) {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            throw new Exception("Invalid Loser Infos");
+        } finally {
+            this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
+        }
     }
 
     @Override
