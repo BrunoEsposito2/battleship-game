@@ -10,10 +10,8 @@ import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 
 public class BattleViewImpl implements BattleView {
-    
-    private final MatchController controller;
-    
 
+    private final MatchController controller;
     public BattleViewImpl(final MatchController controller) {
         this.controller = controller;
         // TODO Auto-generated constructor stub
