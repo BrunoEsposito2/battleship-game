@@ -15,7 +15,6 @@ import model.util.Pair;
 
 import static java.util.stream.Collectors.toList;
 
-import java.io.IOException;
 
 /**
  *
@@ -42,9 +41,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
 
     @Override
-    public void positionShip(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) throws CellsFilledException {
-        final List<Pair<Integer, Integer>> cellsNecessary = orientation.cellsUsedList(firstCell, ship.getSize());
-        final List<Pair<Integer, Integer>> cellsOverlapped = this.getCellsOverlappedList(ship, firstCell, orientation);
+    public void positionShip(final Ship ship, final Pair<Integer, Integer> firstCell) throws CellsFilledException {
+        final List<Pair<Integer, Integer>> cellsNecessary = ship.getOrientation().cellsUsedList(firstCell, ship.getSize());
+        final List<Pair<Integer, Integer>> cellsOverlapped = this.getCellsOverlappedList(ship, firstCell, ship.getOrientation());
 
         if (!cellsOverlapped.isEmpty()) {
             throw new CellsFilledException(cellsOverlapped);
