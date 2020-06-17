@@ -9,6 +9,8 @@ import model.util.Pair;
 import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 
+import static java.util.stream.Collectors.joining;;
+
 public class BattleViewImpl implements BattleView {
 
     private final MatchController controller;
@@ -25,6 +27,14 @@ public class BattleViewImpl implements BattleView {
         final String description = "Cell [line, column]: [" + cell.getX() + "," + cell.getY() + "] is already shotted.\n"
                                     + "Select another cell, please."; 
         DialogLauncher.launch(DialogType.WARNING, "Choiche not valid", "Cell choiced is already shotted!", description);
+    }
+
+    @Override
+    public void showCellAlreadyUsedAlert(final List<Pair<Integer, Integer>> cell) {
+        String description = "Cell [line, column]: ";
+        description += cell.stream().map(e -> "[" + e.getX() + "," + e.getY() + "]").collect(joining(","));
+        description += " already used." + "\n" + "Select a different place, please.";
+        DialogLauncher.launch(DialogType.WARNING, "Choiche not valid", "Position choiced is already used!", description);
     }
 
     @Override
