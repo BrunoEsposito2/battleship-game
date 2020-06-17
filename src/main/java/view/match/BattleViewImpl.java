@@ -3,6 +3,8 @@ package view.match;
 import java.util.List;
 
 import controller.game.MatchController;
+import javafx.fxml.FXML;
+import javafx.scene.layout.GridPane;
 import model.enums.Player;
 import model.enums.ShipType;
 import model.util.Pair;
@@ -13,6 +15,9 @@ import static java.util.stream.Collectors.joining;;
 
 public class BattleViewImpl implements BattleView {
 
+    @FXML
+    private GridPane playerOneGrid, playerTwoGrid;
+    
     private final MatchController controller;
     public BattleViewImpl(final MatchController controller) {
         this.controller = controller;
