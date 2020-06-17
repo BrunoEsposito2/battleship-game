@@ -8,6 +8,8 @@ import model.util.Pair;
 
 public interface BattleView {
 
+    void showCellAlreadyUsedAlert(List<Pair<Integer, Integer>> cell);
+
     void showCellAlreadyShottedAlert(Pair<Integer, Integer> cell);
 
     void showWinDialog(Player winnerPlayer);
