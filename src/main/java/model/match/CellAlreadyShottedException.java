@@ -1,7 +1,6 @@
 package model.match;
 
-import java.util.List;
-
+import java.util.Arrays;
 import model.util.Pair;
 
 public class CellAlreadyShottedException extends CellsAlreadyUsedException {
@@ -12,7 +11,7 @@ public class CellAlreadyShottedException extends CellsAlreadyUsedException {
     private static final long serialVersionUID = 6085552272590623167L;
 
     public CellAlreadyShottedException(final Pair<Integer, Integer> cellUsed) {
-        super(List.of(cellUsed));
+        super(Arrays.asList(cellUsed));
     }
 
     /**
