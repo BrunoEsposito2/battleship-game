@@ -156,6 +156,11 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
+    public Map<List<Pair<Integer, Integer>>, Ship> getShips(){
+        return new HashMap<List<Pair<Integer, Integer>>, Ship>(this.shipList);
+    }
+
+    @Override
     public boolean isCellUsed(final Pair<Integer, Integer> cell) {
         return this.playground.get(cell.getX()).get(cell.getY());
     }
