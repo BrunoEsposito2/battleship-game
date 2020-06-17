@@ -1,6 +1,5 @@
 package model.match;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map.Entry;
 import java.util.Optional;
@@ -27,7 +26,7 @@ public interface PlaygroundBattle {
 
     Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShottedException;
 
-    Optional<Boolean> isShipSunk(List<Pair<Integer, Integer>> cells);
+    Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
     boolean areThereAliveShip();
 

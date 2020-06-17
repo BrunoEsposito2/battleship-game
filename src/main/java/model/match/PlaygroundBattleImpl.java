@@ -123,7 +123,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
 
     @Override
-    public Optional<Boolean> isShipSunk(final List<Pair<Integer, Integer>> cells) {
+    public Optional<Boolean> shipSunk(final List<Pair<Integer, Integer>> cells) {
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
     }
 //    public Ship getShip(Pair<Integer, Integer> cell) {

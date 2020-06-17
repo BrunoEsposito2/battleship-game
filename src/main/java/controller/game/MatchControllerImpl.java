@@ -67,7 +67,7 @@ public class MatchControllerImpl implements MatchController {
             // If optional is present a ship is hitted.
             if (v.isPresent()) {
                 //If ship is sunk, player could be winner.
-                if (this.currentPlaygroundBattle.isShipSunk(v.get().getKey()).get()) {
+                if (this.currentPlaygroundBattle.shipSunk(v.get().getKey()).get()) {
                     this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
                     this.checkWin();
                 } else {
