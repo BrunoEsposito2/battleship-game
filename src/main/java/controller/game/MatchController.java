@@ -1,8 +1,18 @@
 package controller.game;
 
+import model.enums.ShipType;
+import model.util.Pair;
 import view.match.BattleView;
 
 public interface MatchController {
+
+    /**
+     * Method to position a new Ship inside battle playground.
+     * 
+     * @param shipType  - ShipType of ship to position
+     * @param firstCell - Upper and further to left cell used by ship.
+     */
+    void positionShip(ShipType shipType, Pair<Integer, Integer> firstCell);
 
     /**
      * Method for shot to enemy playground.
@@ -23,5 +33,10 @@ public interface MatchController {
      * @param battleView - Game view
      */
     void setView(BattleView battleView);
+
+    /**
+     * Pass to nextTurn player.
+     */
+    void changePlayer();
 
 }
