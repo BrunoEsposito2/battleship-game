@@ -1,6 +1,7 @@
 package model.match;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
 
@@ -33,4 +34,6 @@ public interface PlaygroundBattle {
     boolean isCellUsed(Pair<Integer, Integer> cell);
 
     List<List<Boolean>> getPlaygroundBattle();
+
+    Map<List<Pair<Integer, Integer>>, Ship> getShips();
 }
