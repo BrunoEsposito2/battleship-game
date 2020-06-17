@@ -13,6 +13,13 @@ public interface MatchController {
      * @param firstCell - Upper and further to left cell used by ship.
      */
     void positionShip(ShipType shipType, Pair<Integer, Integer> firstCell);
+    
+    /**
+     * Method to remove ship that occupied one of cells passed.
+     * 
+     * @param cell - One of cell occupied by the ship to remove.
+     */
+    void removeShip(Pair<Integer, Integer> cell);
 
     /**
      * Method for shot to enemy playground.
