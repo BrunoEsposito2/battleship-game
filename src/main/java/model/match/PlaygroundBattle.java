@@ -31,5 +31,7 @@ public interface PlaygroundBattle {
 
     boolean areThereAliveShip();
 
+    boolean isCellUsed(Pair<Integer, Integer> cell);
+
     List<List<Boolean>> getPlaygroundBattle();
 }
