@@ -1,8 +1,6 @@
 package model.stats;
 
 import model.enums.StatsInfo;
-import model.players.ArtificialPlayer;
-import model.players.HumanPlayer;
 import model.players.Player;
 
 public class WinnerStatsCalculator implements Statistics {
@@ -12,12 +10,7 @@ public class WinnerStatsCalculator implements Statistics {
     private Player winner;
     private double matchScore;
 
-    public WinnerStatsCalculator(final HumanPlayer winner, final double score) {
-        this.winner = winner;
-        this.matchScore = score;
-    }
-
-    public WinnerStatsCalculator(final ArtificialPlayer winner, final double score) {
+    public WinnerStatsCalculator(final Player winner, final double score) {
         this.winner = winner;
         this.matchScore = score;
     }
