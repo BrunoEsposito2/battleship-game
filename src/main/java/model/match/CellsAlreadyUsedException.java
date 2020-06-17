@@ -1,6 +1,8 @@
 package model.match;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.util.Pair;
@@ -21,7 +23,7 @@ public class CellsAlreadyUsedException extends IOException {
     }
 
 
-    protected List<Pair<Integer, Integer>> getCellsUsed() {
-        return cellsUsed;
+    public List<Pair<Integer, Integer>> getCellsUsed() {
+        return new ArrayList<>(this.cellsUsed);
     }
 }
