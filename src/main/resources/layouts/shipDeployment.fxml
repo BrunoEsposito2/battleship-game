@@ -152,27 +152,27 @@
                <children>
                   <ImageView fx:id="battleship" fitHeight="180.0" fitWidth="30.0" layoutX="330.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@Battleship.png" />
+                        <Image url="@../images/ships/Battleship.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="cruiser" fitHeight="138.0" fitWidth="23.0" layoutX="502.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@Cruiser.png" />
+                        <Image url="@../images/ships/Cruiser.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="carrier" fitHeight="35.0" fitWidth="218.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" translateY="-2.0">
                      <image>
-                        <Image url="@Carrier.png" />
+                        <Image url="@../images/ships/Carrier.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="submarine" fitHeight="130.0" fitWidth="35.0" layoutX="216.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
-                        <Image url="@Submarine.png" />
+                        <Image url="@../images/ships/Submarine.png" />
                      </image>
                   </ImageView>
                   <ImageView fx:id="destroyer" fitHeight="86.0" fitWidth="22.0" layoutX="379.0" layoutY="41.0" pickOnBounds="true" rotate="90.0">
                      <image>
-                        <Image url="@Destroyer.png" />
+                        <Image url="@../images/ships/Destroyer.png" />
                      </image>
                   </ImageView>
                </children></AnchorPane>
