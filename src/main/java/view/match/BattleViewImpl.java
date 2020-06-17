@@ -19,6 +19,7 @@ public class BattleViewImpl implements BattleView {
         // TODO Auto-generated constructor stub
     }
 
+    
     /**
      * {@inheritDoc}
      */
