@@ -35,6 +35,9 @@ public class MatchControllerImpl implements MatchController {
         this.currentPlaygroundBattle = this.playgroundPlayerOne;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void positionShip(final ShipType shipType, final Pair<Integer, Integer> firstCell) {
         try {
@@ -42,6 +45,14 @@ public class MatchControllerImpl implements MatchController {
         } catch (CellsFilledException e) {
             this.battleView.showCellAlreadyUsedAlert(e.getCellsUsed());
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void removeShip(final Pair<Integer, Integer> cell) {
+        this.currentPlaygroundBattle.removeShip(cell);
     }
 
     /**
