@@ -5,7 +5,9 @@ import java.util.Optional;
 import java.util.Map.Entry;
 
 import model.enums.Player;
+import model.enums.ShipType;
 import model.match.CellAlreadyShottedException;
+import model.match.CellsFilledException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
 import model.match.Ship;
@@ -33,6 +35,15 @@ public class MatchControllerImpl implements MatchController {
         this.currentPlaygroundBattle = this.playgroundPlayerOne;
     }
 
+    @Override
+    public void positionShip(final ShipType shipType, final Pair<Integer, Integer> firstCell) {
+        try {
+            this.currentPlaygroundBattle.positionShip(new Ship(shipType), firstCell);
+        } catch (CellsFilledException e) {
+            this.battleView.showCellAlreadyUsedAlert(e.getCellsUsed());
+        }
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -54,7 +65,6 @@ public class MatchControllerImpl implements MatchController {
             } else {
                 this.battleView.drawMissed(new Pair<>(line, col));
             }
-            this.changePlayer();
         } catch (CellAlreadyShottedException e) {
             /*
              * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
@@ -90,7 +100,11 @@ public class MatchControllerImpl implements MatchController {
         }
     }
 
-    private void changePlayer() {
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void changePlayer() {
         this.currentPlaygroundBattle = getNext();
     }
 
