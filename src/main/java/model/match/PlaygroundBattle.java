@@ -13,7 +13,7 @@ import model.util.Pair;
  */
 public interface PlaygroundBattle {
 
-    void positionShip(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation) throws CellsFilledException;
+    void positionShip(Ship ship, Pair<Integer, Integer> firstCell) throws CellsFilledException;
 
     List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
