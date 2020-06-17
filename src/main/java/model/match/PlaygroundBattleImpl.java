@@ -15,7 +15,6 @@ import model.util.Pair;
 
 import static java.util.stream.Collectors.toList;
 
-
 /**
  *
  */
@@ -156,7 +155,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return new ArrayList<List<Boolean>>(this.playground);
     }
 
-    private boolean isCellUsed(final Pair<Integer, Integer> cell) {
+    @Override
+    public boolean isCellUsed(final Pair<Integer, Integer> cell) {
         return this.playground.get(cell.getX()).get(cell.getY());
     }
 
