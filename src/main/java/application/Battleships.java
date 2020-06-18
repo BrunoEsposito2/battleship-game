@@ -1,31 +1,23 @@
 package application;
 
+
 import controller.Controller;
 import controller.ControllerImpl;
 import controller.users.InstallManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import model.Model;
-import model.ModelImpl;
-import view.View;
-import view.ViewImpl;
 
 /**
  * This class represent the Main class of the JavaFX-based application.
  */
-public final class Main extends Application {
+public final class Battleships extends Application {
 
-    private static Stage stage; 
+    private static Controller controller;
 
     @Override
     public void start(final Stage stage) throws Exception {
         InstallManager.setupApplication();
-        final View view = new ViewImpl(stage);
-        final Model model = new ModelImpl();
-        final Controller controller = new ControllerImpl(model, view);
-        // Stage configuration
-        Main.stage = stage;
-        view.launch(controller);
+        controller = new ControllerImpl(stage);
     }
 
     /**
@@ -37,10 +29,10 @@ public final class Main extends Application {
     }
 
     /**
-     * @return the application's active stage
+     * @return the application's controller from an mvc standpoint.
      */
-    public static Stage getStage() {
-        return stage;
+    public static Controller getController() {
+        return controller; 
     }
 
 }

@@ -10,6 +10,6 @@ public final class Launcher {
      * @param args unused
      */
     public static void main(final String[] args) {
-        Main.main(args);
+        Battleships.main(args);
    }
 }
