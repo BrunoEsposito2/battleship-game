@@ -18,6 +18,7 @@ public class BattleViewImpl implements BattleView {
     @FXML
     private GridPane playerOneGrid, playerTwoGrid;
     
+    
     private final MatchController controller;
     public BattleViewImpl(final MatchController controller) {
         this.controller = controller;
