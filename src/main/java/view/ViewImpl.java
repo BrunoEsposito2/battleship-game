@@ -1,39 +1,40 @@
 package view;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.Optional;
 
-import controller.Controller;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
+import view.dialog.DialogType;
+import view.scene.SceneLoader;
+import view.scene.SceneName;
 
-public class ViewImpl implements View {
+/**
+ * Concrete implementation of tha application's view.
+ */
+public final class ViewImpl implements View {
 
-    private static final int SCENE_WIDTH = 800;
-    private static final int SCENE_HEIGHT = 600;
-
-    private Controller control;
     private final Stage stage;
+    private final SceneLoader sceneLoader;
 
+    /**
+     * the constructor of this class.
+     * @param stage - the application's stage.
+     */
     public ViewImpl(final Stage stage) {
         this.stage = stage;
+        sceneLoader = new SceneLoader();
+        loadScene(SceneName.MAIN);
+        stage.setTitle("Battleships");
+        stage.show();
     }
 
     @Override
-    public final void launch(final Controller controller) throws IOException {
-        this.control = controller;
-        final Parent root = FXMLLoader.load(ClassLoader.getSystemResource("layouts" + File.separator + "mainMenu.fxml"));
-        final Scene scene = new Scene(root, SCENE_WIDTH, SCENE_HEIGHT);
-        stage.setTitle("Battleships");
-        stage.setScene(scene);
-        stage.show();
-        this.setObservers();
+    public void loadScene(final SceneName name) {
+        sceneLoader.switchScene(stage, name);
     }
 
-    private void setObservers() {
-        this.control.setAccountObserver();
+    @Override
+    public Optional<String> launchDialog(final DialogType type, final String title, final String header, final String description) {
+        return type.getConcreteClass().launch(type, title, header, description);
     }
 
 }
