@@ -2,6 +2,7 @@ package application;
 
 import controller.Controller;
 import controller.ControllerImpl;
+import controller.users.InstallManager;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.Model;
@@ -18,6 +19,7 @@ public final class Main extends Application {
 
     @Override
     public void start(final Stage stage) throws Exception {
+        InstallManager.setupApplication();
         final View view = new ViewImpl(stage);
         final Model model = new ModelImpl();
         final Controller controller = new ControllerImpl(model, view);

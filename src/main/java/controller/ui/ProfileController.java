@@ -1,5 +1,6 @@
 package controller.ui;
 
+import controller.users.AccountManager;
 import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class ProfileController {
     @FXML
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
-    private final AccountOperation accountMng;
+    private final AccountManager accountMng;
 
     public ProfileController() {
         this.accountMng = new AccountOperation();
@@ -49,7 +50,7 @@ public class ProfileController {
     }
 
     @FXML
-    public final void accountRemove() {
+    public final void accountDelete() {
         if (!removeUsername.getText().equals("") && !removePassword.getText().equals("")) {
             try {
                 this.accountMng.removeAccount(String.valueOf(removeUsername.getText()).trim(), 

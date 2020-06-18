@@ -19,7 +19,6 @@ import model.players.Player;
 public class FileSystemManager implements FileManager {
 
     public FileSystemManager() {
-        InstallManager.setupApplication();
     }
 
     private static void writeUserOnFile(final Player player) {

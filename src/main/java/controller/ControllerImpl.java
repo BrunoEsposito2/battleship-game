@@ -14,8 +14,6 @@ public class ControllerImpl implements Controller {
     public ControllerImpl(final Model model, final View view) {
         this.model = model;
         this.view = view;
-        //this.accountMng = new AccountOperation();
-        //ManagerInstance.getInstance();
     }
 
     public final void setAccountObserver() {

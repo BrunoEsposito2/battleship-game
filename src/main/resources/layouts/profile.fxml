@@ -15,7 +15,7 @@
             <Font size="15.0" />
          </font>
       </Button>
-      <Button id="cancelAccountButton" fx:id="cancelAccountButton" blendMode="MULTIPLY" layoutX="517.0" layoutY="448.0" mnemonicParsing="false" onMousePressed="#accountRemove" prefHeight="48.0" prefWidth="163.0" text="DELETE ACCOUNT" textAlignment="CENTER">
+      <Button id="cancelAccountButton" fx:id="cancelAccountButton" blendMode="MULTIPLY" layoutX="517.0" layoutY="448.0" mnemonicParsing="false" onMousePressed="#accountDelete" prefHeight="48.0" prefWidth="163.0" text="DELETE ACCOUNT" textAlignment="CENTER">
          <font>
             <Font size="15.0" />
          </font>
