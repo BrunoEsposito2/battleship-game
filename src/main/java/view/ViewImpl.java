@@ -29,6 +29,11 @@ public class ViewImpl implements View {
         stage.setTitle("Battleships");
         stage.setScene(scene);
         stage.show();
+        this.setObservers();
+    }
+
+    private void setObservers() {
+        this.control.setAccountObserver();
     }
 
 }

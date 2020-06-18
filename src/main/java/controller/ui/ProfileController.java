@@ -1,6 +1,6 @@
 package controller.ui;
 
-import controller.users.ManagerInstance;
+import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,7 +17,10 @@ public class ProfileController {
     @FXML
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
+    private final AccountOperation accountMng;
+
     public ProfileController() {
+        this.accountMng = new AccountOperation();
     }
 
     @FXML
@@ -29,7 +32,7 @@ public class ProfileController {
     public final void accountSignIn() {
         if (!signInUsername.getText().equals("") && !signInPassword.getText().equals("")) {
             try {
-                ManagerInstance.getInstance().get().createAccount(String.valueOf(signInUsername.getText()).trim(), 
+                this.accountMng.createAccount(String.valueOf(signInUsername.getText()).trim(), 
                         String.valueOf(signInPassword.getText()).trim());
                 DialogLauncher.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
             } catch (Exception e) {
@@ -49,7 +52,7 @@ public class ProfileController {
     public final void accountRemove() {
         if (!removeUsername.getText().equals("") && !removePassword.getText().equals("")) {
             try {
-                ManagerInstance.getInstance().get().removeAccount(String.valueOf(removeUsername.getText()).trim(), 
+                this.accountMng.removeAccount(String.valueOf(removeUsername.getText()).trim(), 
                         String.valueOf(removePassword.getText()).trim());
                 DialogLauncher.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
             } catch (Exception e) {
