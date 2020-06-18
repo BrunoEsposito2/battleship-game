@@ -41,8 +41,7 @@ public enum DialogType {
         return concreteType;
     }
 
- // package-private
-    AbstractDialog getConcreteClass() {
+    public AbstractDialog getConcreteClass() {
         return concreteClass;
     }
 }

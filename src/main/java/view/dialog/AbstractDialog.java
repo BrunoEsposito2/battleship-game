@@ -3,8 +3,8 @@ package view.dialog;
 import java.util.Optional;
 
 //package-private
-abstract class AbstractDialog {
+public abstract class AbstractDialog {
 
-    protected abstract Optional<String> launch(DialogType type, String title, String header, String description);
+    public abstract Optional<String> launch(DialogType type, String title, String header, String description);
 
 }

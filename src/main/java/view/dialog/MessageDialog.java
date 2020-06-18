@@ -24,7 +24,7 @@ final class MessageDialog extends AbstractDialog {
         return alert;
     }
 
-    protected Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
+    public Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
         build(type, title, header, description).showAndWait();
         return Optional.empty();
     }

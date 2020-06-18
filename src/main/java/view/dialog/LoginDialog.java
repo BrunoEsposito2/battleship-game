@@ -36,7 +36,7 @@ final class LoginDialog extends AbstractDialog {
         return dialog;
     }
 
-    protected Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
+    public Optional<String> launch(final DialogType type, final String title, final String header, final String description) {
         return build(type, title, header, description).showAndWait();
     }
 
