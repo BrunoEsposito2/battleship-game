@@ -1,8 +1,8 @@
 package controller.ui;
 
+import application.Battleships;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import view.scene.SceneManager;
 import view.scene.SceneName;
 
 /**
@@ -19,7 +19,7 @@ public final class MainMenu {
      */
     @FXML
     public void buttonNewGame() {
-        SceneManager.INSTANCE.switchScene(SceneName.MATCH_SETTINGS);
+        Battleships.getController().changeScene(SceneName.MATCH_SETTINGS);
     }
 
     /**
@@ -35,7 +35,7 @@ public final class MainMenu {
      */
     @FXML
     public void buttonProfile() {
-        SceneManager.INSTANCE.switchScene(SceneName.PROFILE);
+        Battleships.getController().changeScene(SceneName.PROFILE);
     }
 
     /**

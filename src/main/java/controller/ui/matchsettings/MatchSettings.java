@@ -2,6 +2,8 @@ package controller.ui.matchsettings;
 
 import javafx.scene.control.TextArea;
 import java.util.Optional;
+import application.Battleships;
+import controller.Controller;
 import controller.users.AccountManager;
 import controller.users.AccountOperation;
 import javafx.fxml.FXML;
@@ -9,9 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.enums.GameMode;
-import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
-import view.scene.SceneManager;
 import view.scene.SceneName;
 
 /**
@@ -23,6 +23,7 @@ public final class MatchSettings {
     private final AccountManager accountManager = new AccountOperation();
     private final Login login = new Login(accountManager);
     private final Initializer initializer = new Initializer(this, login, accountManager);
+    private final Controller controller = Battleships.getController();
 
     @FXML
     private Button buttonBack, buttonStart;
@@ -66,7 +67,7 @@ public final class MatchSettings {
      */
     @FXML
     public void buttonBack() {
-        SceneManager.INSTANCE.switchScene(SceneName.MAIN);
+        controller.changeScene(SceneName.MAIN);
     }
 
     // package-private
@@ -85,13 +86,12 @@ public final class MatchSettings {
         final Optional<String> username2 = Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
         if (login.isPlayerSelectionValid(username1, username2, aiPlayer)) {
             //final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
-            //final String winner = gm.startNewMatch();
             //TODO remove this debug dialog
-            DialogLauncher.launch(DialogType.INFORMATION, "[DEBUG] Match Started", "[DEBUG] Match is successfully started with these settings:",
+            controller.launchDialog(DialogType.INFORMATION, "[DEBUG] Match Started", "[DEBUG] Match is successfully started with these settings:",
                       "player1: " + username1.get() + "\n"
                     + "player2: " + (aiPlayer ? "AI" : username2.get()) + "\n"
                     + "gamemode: " + getSelectedItem(choiceboxGameMode));
-            //SceneManager.INSTANCE.switchScene(SceneName.MAIN);
+            controller.changeScene(SceneName.MAIN);
         }
     }
 }

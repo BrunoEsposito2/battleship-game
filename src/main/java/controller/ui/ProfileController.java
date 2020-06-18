@@ -1,12 +1,11 @@
 package controller.ui;
 
-import controller.users.AccountManager;
+import application.Battleships;
+import controller.Controller;
 import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import view.scene.SceneManager;
-import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -18,15 +17,17 @@ public class ProfileController {
     @FXML
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
-    private final AccountManager accountMng;
+    private final AccountOperation accountMng;
+    private final Controller controller;
 
     public ProfileController() {
         this.accountMng = new AccountOperation();
+        this.controller = Battleships.getController();
     }
 
     @FXML
     public final void turnBack() {
-        SceneManager.INSTANCE.switchScene(SceneName.MAIN);
+        Battleships.getController().changeScene(SceneName.MAIN);
     }
 
     @FXML
@@ -35,14 +36,14 @@ public class ProfileController {
             try {
                 this.accountMng.createAccount(String.valueOf(signInUsername.getText()).trim(), 
                         String.valueOf(signInPassword.getText()).trim());
-                DialogLauncher.launch(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
+                controller.launchDialog(DialogType.INFORMATION, "Account Created", "Your account has been created.", null);
             } catch (Exception e) {
-                DialogLauncher.launch(DialogType.INFORMATION, "Account Create Exception", e.getMessage(), null);
+                controller.launchDialog(DialogType.INFORMATION, "Account Create Exception", e.getMessage(), null);
             }
         } else if (signInUsername.getText().equals("") && signInPassword.getText().equals("")) {
-            DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert username and password!", null);
+            controller.launchDialog(DialogType.WARNING, "Account Creation", "Please, insert username and password!", null);
         } else {
-            DialogLauncher.launch(DialogType.INFORMATION, "Account Creation", "Please, insert a valid username and password", 
+            controller.launchDialog(DialogType.INFORMATION, "Account Creation", "Please, insert a valid username and password", 
                     "Username and/or password may be absent.");
         }
         signInUsername.clear();
@@ -55,14 +56,14 @@ public class ProfileController {
             try {
                 this.accountMng.removeAccount(String.valueOf(removeUsername.getText()).trim(), 
                         String.valueOf(removePassword.getText()).trim());
-                DialogLauncher.launch(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
+                controller.launchDialog(DialogType.INFORMATION, "Account Removed", "Your account has been deleted.", null);
             } catch (Exception e) {
-                DialogLauncher.launch(DialogType.INFORMATION, "Account Remove Exception", e.getMessage(), null);
+                controller.launchDialog(DialogType.INFORMATION, "Account Remove Exception", e.getMessage(), null);
             }
         } else if (removeUsername.getText().equals("") && removePassword.getText().equals("")) {
-            DialogLauncher.launch(DialogType.WARNING, "Account Creation", "Please, insert existing username and password", null);
+            controller.launchDialog(DialogType.WARNING, "Account Creation", "Please, insert existing username and password", null);
         } else {
-            DialogLauncher.launch(DialogType.INFORMATION, "Account Creation", "Please, insert an existing username and/or a valid password", null);
+            controller.launchDialog(DialogType.INFORMATION, "Account Creation", "Please, insert an existing username and/or a valid password", null);
         }
         removeUsername.clear();
         removePassword.clear();

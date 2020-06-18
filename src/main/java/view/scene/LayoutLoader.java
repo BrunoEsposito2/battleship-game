@@ -2,9 +2,9 @@ package view.scene;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import application.Battleships;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 
 //package private
@@ -15,7 +15,7 @@ final class LayoutLoader {
         try {
             res = FXMLLoader.load(ClassLoader.getSystemResource(resourcePath));
         } catch (Exception e) {
-            DialogLauncher.launch(DialogType.ERROR, "An Exception has occurred",
+            Battleships.getController().launchDialog(DialogType.ERROR, "An Exception has occurred",
                     "Application encountered a critical error while reading files from disk", getStringFromStackTrace(e));
         }
         if (res == null) {
