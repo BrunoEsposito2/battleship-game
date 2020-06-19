@@ -6,6 +6,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import model.match.PlaygroundBattle;
+import model.match.PlaygroundBattleImpl;
 import model.enums.Orientation;
 import model.enums.ShipType;
 import model.util.Pair;
@@ -39,6 +41,7 @@ public class ShipDeployment {
     private Orientation orientation;
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Integer>> ships = new HashMap<>();
+    private PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(GRIDSIZE, GRIDSIZE);
 
     @FXML
     private GridPane board;
@@ -172,6 +175,35 @@ public class ShipDeployment {
         }
         
         this.size = resultUserList.get(0).getSize();
+    }
+    
+    /**
+     * Utility method to extract the current ship
+     * 
+     * @return Ship
+     */
+    private Ship extractShip() {
+        List<Ship> resultUserList = this.ships.entrySet().stream()
+                .filter(x -> x.getKey().equals(draggingShip))
+                .map(x -> x.getValue().getX())
+                .collect(Collectors.toList());
+        if (resultUserList.size() != 1) {
+            throw new IllegalStateException();
+        }
+        
+        Ship ship = resultUserList.get(0);
+        return ship;
+    }
+    
+    /**
+     * Method to check if a particular ship has been dropped in the grid
+     * 
+     * @param ship
+     * @return true if the ship is present
+     */
+    private boolean checkShip(Ship ship) {
+        Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
+        return map.containsValue(ship);
     }
 
     /**
