@@ -2,7 +2,8 @@ package controller;
 
 import java.util.Optional;
 
-import controller.ui.ProfileController;
+import controller.users.AccountManager;
+import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
@@ -19,18 +20,16 @@ public final class ControllerImpl implements Controller {
     private final Model model;
     private final View view;
 
-    private ProfileController profileCtrl;
+    private final AccountManager manager;
 
     public ControllerImpl(final Stage stage) {
         view = new ViewImpl(stage);
         model = new ModelImpl();
-        setAccountObserver();
-        //this.accountMng = new AccountOperation();
-        //ManagerInstance.getInstance();
+        manager = new AccountOperation(model);
     }
 
-    private void setAccountObserver() {
-        this.profileCtrl = new ProfileController();
+    public AccountManager getAccountManager() {
+        return this.manager;
     }
 
     @Override

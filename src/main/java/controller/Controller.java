@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Optional;
 
+import controller.users.AccountManager;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -26,5 +27,11 @@ public interface Controller {
      * @return the result of the dialog's operations, if any.
      */
     Optional<String> launchDialog(DialogType type, String title, String header, String description);
+
+    /**
+     * 
+     * @return the controller's account manager object.
+     */
+    AccountManager getAccountManager();
 
 }

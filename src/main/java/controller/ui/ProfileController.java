@@ -2,7 +2,7 @@ package controller.ui;
 
 import application.Battleships;
 import controller.Controller;
-import controller.users.AccountOperation;
+import controller.users.AccountManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -17,11 +17,11 @@ public class ProfileController {
     @FXML
     private TextField signInUsername, signInPassword, removeUsername, removePassword;
 
-    private final AccountOperation accountMng;
+    private final AccountManager accountMng;
     private final Controller controller;
 
     public ProfileController() {
-        this.accountMng = new AccountOperation();
+        this.accountMng = Battleships.getController().getAccountManager();
         this.controller = Battleships.getController();
     }
 

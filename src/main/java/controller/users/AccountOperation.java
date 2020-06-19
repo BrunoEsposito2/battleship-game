@@ -7,8 +7,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import model.players.PlayerManager;
-import model.players.PlayerOperation;
 import model.players.Player;
+import model.Model;
 import model.players.HumanPlayer;
 
 public class AccountOperation implements AccountManager {
@@ -16,9 +16,9 @@ public class AccountOperation implements AccountManager {
     private final FileManager system;
     private final PlayerManager modelMng;
 
-    public AccountOperation() {
+    public AccountOperation(final Model model) {
         this.system = new FileSystemManager();
-        this.modelMng = new PlayerOperation(initAllUsers());
+        this.modelMng = model.setPlayerManager(initAllUsers());
     }
 
     private Optional<List<Player>> initAllUsers() {

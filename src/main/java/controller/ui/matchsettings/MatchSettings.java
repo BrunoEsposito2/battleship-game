@@ -20,7 +20,7 @@ import view.scene.SceneName;
  */
 public final class MatchSettings {
 
-    private final AccountManager accountManager = new AccountOperation();
+    private final AccountManager accountManager = Battleships.getController().getAccountManager(); //new AccountOperation();
     private final Login login = new Login(accountManager);
     private final Initializer initializer = new Initializer(this, login, accountManager);
     private final Controller controller = Battleships.getController();

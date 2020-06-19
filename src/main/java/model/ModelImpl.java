@@ -1,9 +1,18 @@
 package model;
 
-public class ModelImpl implements Model {
+import java.util.List;
+import java.util.Optional;
 
-    public ModelImpl() {
+import model.players.Player;
+import model.players.PlayerManager;
+import model.players.PlayerOperation;
 
+public final class ModelImpl implements Model {
+
+    @Override
+    public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
+        final PlayerManager manager = new PlayerOperation(players);
+        return manager;
     }
 
 }
