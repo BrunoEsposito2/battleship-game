@@ -33,7 +33,7 @@ public class ShipDeployment {
     private static final int SUBMARINE_HORIZ_OFFSET = 5;
     private static final int DESTROYER_HORIZ_OFFSET = -10;
     
-  //Offset which is put every time a ship is dropped on the grid in VERTICAL
+    //Offset which is put every time a ship is dropped on the grid in VERTICAL
     private static final int CARRIER_VERT_OFFSET = -88;
     private static final int BATTLESHIP_VERT_OFFSET = 9;
     private static final int CRUISER_VERT_OFFSET = 10;
