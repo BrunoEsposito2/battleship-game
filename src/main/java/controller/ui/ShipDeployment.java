@@ -76,7 +76,7 @@ public class ShipDeployment {
             }
         }
         
-        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
             dragImage(entry.getKey());
         }
         
@@ -181,11 +181,16 @@ public class ShipDeployment {
      * Populates the map of ships
      */
     private void createShips() {
-        this.ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), CARRIER_OFFSET));
-        this.ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), BATTLESHIP_OFFSET));
-        this.ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER), CRUISER_OFFSET));
-        this.ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE), SUBMARINE_OFFSET));
-        this.ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER), DESTROYER_OFFSET));
+        this.ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), 
+                       new Pair<>(CARRIER_HORIZ_OFFSET, CARRIER_VERT_OFFSET)));
+        this.ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), 
+                       new Pair<>(BATTLESHIP_HORIZ_OFFSET, BATTLESHIP_VERT_OFFSET)));
+        this.ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER),
+                       new Pair<>(CRUISER_HORIZ_OFFSET, CRUISER_VERT_OFFSET)));
+        this.ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE),
+                       new Pair<>(SUBMARINE_HORIZ_OFFSET, SUBMARINE_VERT_OFFSET)));
+        this.ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER),
+                       new Pair<>(DESTROYER_HORIZ_OFFSET, DESTROYER_VERT_OFFSET)));
     }
 
     /**
