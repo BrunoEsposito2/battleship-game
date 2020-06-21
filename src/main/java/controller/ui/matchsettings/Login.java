@@ -18,10 +18,10 @@ final class Login {
     }
 
   //package private
-    boolean isPlayerSelectionValid(final Optional<String> username1, final Optional<String> username2, final boolean aiPlayer) {
-        if (!username1.isPresent() || (!username2.isPresent() && !aiPlayer)) {
+    boolean isPlayerSelectionValid(final Optional<String> username1, final Optional<String> username2, final boolean isPlayer2Ai) {
+        if (!username1.isPresent() || (!username2.isPresent() && !isPlayer2Ai)) {
             controller.launchDialog(DialogType.ERROR, "Error!", "Some players have no profile selected!\nChange your selection and try again.", null);
-        } else if (username1.equals(username2) && !aiPlayer) {
+        } else if (username1.equals(username2) && !isPlayer2Ai) {
             controller.launchDialog(DialogType.ERROR, "Error!", "Player1 and Player2 cannot be the same!\nChange your selection and try again.", null);
         } else {
             return true;

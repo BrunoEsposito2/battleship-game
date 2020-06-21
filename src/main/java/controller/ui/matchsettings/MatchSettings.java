@@ -3,27 +3,23 @@ package controller.ui.matchsettings;
 import javafx.scene.control.TextArea;
 import java.util.Optional;
 import application.Battleships;
-import controller.Controller;
 import controller.users.AccountManager;
-import controller.users.AccountOperation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.enums.GameMode;
-import view.dialog.DialogType;
+import model.enums.PlayerType;
+import model.match.MatchInitializer;
 import view.scene.SceneName;
 
 /**
  *  The Controller related to the matchSettings.fxml GUI.
- *
  */
 public final class MatchSettings {
 
     private final AccountManager accountManager = Battleships.getController().getAccountManager(); //new AccountOperation();
     private final Login login = new Login(accountManager);
-    private final Initializer initializer = new Initializer(this, login, accountManager);
-    private final Controller controller = Battleships.getController();
 
     @FXML
     private Button buttonBack, buttonStart;
@@ -37,10 +33,10 @@ public final class MatchSettings {
     private TextArea textareaDescription;
 
     /**
-     * this method is called automatically when loading the fxml layout. It sets the initial state of the UI
+     * this method is called automatically when loading the fxml layout. It sets the initial state of the UI.
      */
     public void initialize() {
-        initializer.initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
+        new Initializer(this, login, accountManager).initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
         if (choiceboxPlayer1.getItems().isEmpty()) {
             login.noProfilesAvailable();
         }
@@ -51,7 +47,12 @@ public final class MatchSettings {
      */
     @FXML
     public void buttonStart() {
-        startMatch();
+        final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
+        final Optional<String> username2 = Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
+        if (login.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
+            new MatchInitializer(username1.get(), username2, checkboxAI.isSelected() 
+                    ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
+        }
     }
 
     /**
@@ -67,7 +68,7 @@ public final class MatchSettings {
      */
     @FXML
     public void buttonBack() {
-        controller.changeScene(SceneName.MAIN);
+        Battleships.getController().changeScene(SceneName.MAIN);
     }
 
     // package-private
@@ -80,18 +81,4 @@ public final class MatchSettings {
         return cb.getSelectionModel().getSelectedItem();
     }
 
-    private void startMatch() {
-        final boolean aiPlayer = checkboxAI.isSelected();
-        final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
-        final Optional<String> username2 = Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
-        if (login.isPlayerSelectionValid(username1, username2, aiPlayer)) {
-            //final MatchManager gm = new MatchManagerImpl(username1.get(), username2.get(), aiPlayer ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
-            //TODO remove this debug dialog
-            controller.launchDialog(DialogType.INFORMATION, "[DEBUG] Match Started", "[DEBUG] Match is successfully started with these settings:",
-                      "player1: " + username1.get() + "\n"
-                    + "player2: " + (aiPlayer ? "AI" : username2.get()) + "\n"
-                    + "gamemode: " + getSelectedItem(choiceboxGameMode));
-            controller.changeScene(SceneName.MAIN);
-        }
-    }
 }
