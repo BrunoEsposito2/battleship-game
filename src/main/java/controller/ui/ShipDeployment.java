@@ -276,11 +276,37 @@ public class ShipDeployment {
      * Utility method to extract the orientation of the selected ship
      */
     private void extractOrientation() {
-        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 this.orientation = entry.getValue().getX().getOrientation();
             }
         }
+    }
+    
+    /**
+     * 
+     * @return true if vertical rotation is possible (with no collisions)
+     */
+    private boolean checkVertRotation() {
+        for (int i = 1; i < this.size; i++) {
+            if (playgroundBattle.isCellUsed(new Pair<>(this.coordY + i, this.coordX))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    /**
+     * 
+     * @return true if vertical rotation is possible (with no collisions)
+     */
+    private boolean checkHorizRotation() {
+        for (int i = 1; i < this.size; i++) {
+            if (playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX + i))) {
+                return false;
+            }
+        }
+        return true;
     }
     
     /**
