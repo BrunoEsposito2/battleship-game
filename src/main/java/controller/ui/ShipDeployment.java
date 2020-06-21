@@ -238,6 +238,28 @@ public class ShipDeployment {
     }
     
     /**
+     * Utility method to extract the horizontal offset from the selected ship
+     */
+    private void extractHorizontalOffset() {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                this.horizOffset = entry.getValue().getY().getX();
+            }
+        }
+    }
+    
+    /**
+     * Utility method to extract the vertical offset from the selected ship
+     */
+    private void extractVerticalOffset() {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                this.vertOffset = entry.getValue().getY().getY();
+            }
+        }
+    }
+    
+    /**
      * Utility method to extract coordinates where the ship is dropping
      * 
      * @param e, DragEvent
