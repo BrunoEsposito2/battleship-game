@@ -25,22 +25,32 @@ import javafx.scene.layout.Pane;
 
 public class ShipDeployment {
     
-    //Offset which is put every time a ship is dropped on the grid
-    private static final int CARRIER_OFFSET = -40;
-    private static final int BATTLESHIP_OFFSET = 32;
-    private static final int CRUISER_OFFSET = 12;
-    private static final int SUBMARINE_OFFSET = 5;
-    private static final int DESTROYER_OFFSET = -10;
+    //Offset which is put every time a ship is dropped on the grid in HORIZONTAL
+    private static final int CARRIER_HORIZ_OFFSET = -40;
+    private static final int BATTLESHIP_HORIZ_OFFSET = 32;
+    private static final int CRUISER_HORIZ_OFFSET = 12;
+    private static final int SUBMARINE_HORIZ_OFFSET = 5;
+    private static final int DESTROYER_HORIZ_OFFSET = -10;
+    
+  //Offset which is put every time a ship is dropped on the grid in VERTICAL
+    private static final int CARRIER_VERT_OFFSET = -88;
+    private static final int BATTLESHIP_VERT_OFFSET = 9;
+    private static final int CRUISER_VERT_OFFSET = 10;
+    private static final int SUBMARINE_VERT_OFFSET = 6;
+    private static final int DESTROYER_VERT_OFFSET = 10;
     
     private static final int GRIDSIZE = 10;
 
     private int coordX;
     private int coordY;
+    private int mouseCoordX;
+    private int mouseCoordY;
     private int size;
-    private int offset;
+    private int horizOffset;
+    private int vertOffset;
     private Orientation orientation;
     private ImageView draggingShip;
-    private Map<ImageView, Pair<Ship, Integer>> ships = new HashMap<>();
+    private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships = new HashMap<>();
     private PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(GRIDSIZE, GRIDSIZE);
 
     @FXML
@@ -109,6 +119,7 @@ public class ShipDeployment {
         ship.setOnMouseClicked(e -> {
             if (e.getClickCount() == 2) {
                 System.out.println("Double clicked");
+                this.onMouseClicked(e);
                 this.applyRotation();
             }
         });
