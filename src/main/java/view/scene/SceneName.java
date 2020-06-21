@@ -6,10 +6,31 @@ package view.scene;
 public enum SceneName {
     // New scenes can be added here
     // Scene layoutName should be the fxml layout file's name, excluding the extension (ex. mainMenu.fxml -> mainMenu)
+
+    /**
+     * Main menu.
+     */
     MAIN("mainMenu"),
+
+    /**
+     * Choose settings before starting a new match.
+     */
     MATCH_SETTINGS("matchSettings"),
-    //SETTINGS ("settings");
-    PROFILE("profile");
+
+    /**
+     * Create or delete player profiles.
+     */
+    PROFILE("profile"),
+
+    /**
+     * Create or delete player profiles.
+     */
+    SHIP_DEPLOYMENT("shipDeployment"),
+
+    /**
+     * Create or delete player profiles.
+     */
+    MATCH_BATTLE("matchBattle");
 
     private final String layoutName;
 
