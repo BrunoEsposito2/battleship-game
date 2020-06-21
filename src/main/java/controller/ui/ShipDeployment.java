@@ -153,24 +153,59 @@ public class ShipDeployment {
             System.out.println("onDragDropped");
             
             this.extractSize();
-            this.extractOffset();
+            this.extractHorizontalOffset();
+            this.extractVerticalOffset();
             
             if (db.hasImage()) {
                 
                 this.extractOrientation();
                 
+                //*** Horizontal dropping ***
                 if (this.orientation.equals(Orientation.HORIZONTAL)
-                    && (this.coordX < GRIDSIZE - this.size + 1)) {
+                    && (this.coordX < GRIDSIZE - this.size + 1)
+                    && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
+
+                    if (this.checkShip(this.extractShip())) {
+                        playgroundBattle.removeShip(this.extractShip());
+                        System.out.println("REMOVE FATTA");
+                    }
+                    
+                    try {
+                    playgroundBattle.positionShip(this.extractShip(), 
+                                                  new Pair<>(this.coordY, this.coordX), orientation);
                     ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                     board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
-                    draggingShip.setTranslateX(this.offset);
+                    draggingShip.setTranslateX(this.horizOffset);
+                    } catch(CellsFilledException exception) {
+                        System.out.println("NON VA BENE");
+                    }
+                    
+                    e.setDropCompleted(true);
+                    
+                //*** Vertical dropping ***    
                 } else if (this.orientation.equals(Orientation.VERTICAL)
-                           && (this.coordY < GRIDSIZE - this.size + 1)) {
-                    ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                    board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                           && (this.coordY < GRIDSIZE - this.size + 1)
+                           && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
+
+                    if (this.checkShip(this.extractShip())) {
+                        playgroundBattle.removeShip(this.extractShip());
+                        System.out.println("REMOVE FATTA");
+                    }
+                    
+                    try {
+                        playgroundBattle.positionShip(this.extractShip(), 
+                                                      new Pair<>(this.coordY, this.coordX), orientation);
+                        ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
+                        board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                        draggingShip.setTranslateX(this.vertOffset);
+                    } catch (CellsFilledException exception) {
+                        System.out.println("NON VA BENE");
+                    }
+
+                    e.setDropCompleted(true);
                 }
                 
-                e.setDropCompleted(true);
+                
             }
             
             e.consume();
