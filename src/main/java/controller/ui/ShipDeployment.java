@@ -72,6 +72,21 @@ public class ShipDeployment {
         
         dropImage(board);
     }
+    
+    /**
+     * Method to extract the coordinates clicked by the mouse
+     * 
+     * @param e, MouseEvent
+     */
+    @FXML
+    private void onMouseClicked(final MouseEvent e) {
+        Node clickedNode = e.getPickResult().getIntersectedNode();
+        Integer colIndex = GridPane.getColumnIndex(clickedNode);
+        Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        this.mouseCoordY = colIndex == null ? 0 : colIndex;
+        this.mouseCoordX = rowIndex == null ? 0 : rowIndex;
+        System.out.printf("Mouse clicked cell [%d, %d]%n", this.mouseCoordX, this.mouseCoordY);
+    }
 
     /**
      * Set the source for the drag and drop function
