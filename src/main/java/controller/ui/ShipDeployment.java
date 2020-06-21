@@ -236,17 +236,6 @@ public class ShipDeployment {
         Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
         return map.containsValue(ship);
     }
-
-    /**
-     * Utility method to extract the offset from the selected ship
-     */
-    private void extractOffset() {
-        for (Entry<ImageView, Pair<Ship, Integer>> entry : this.ships.entrySet()) {
-            if (entry.getKey().equals(draggingShip)) {
-                this.offset = entry.getValue().getY();
-            }
-        }
-    }
     
     /**
      * Utility method to extract coordinates where the ship is dropping
