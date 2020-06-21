@@ -12,11 +12,7 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
-      <Button id="buttonSettings" fx:id="buttonSettings" alignment="CENTER" onMouseClicked="#buttonSettings" text="Settings">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font></Button>
-      <Button id="buttonProfile" fx:id="buttonProfile" mnemonicParsing="false" onMouseClicked="#buttonProfile" text="Profile">
+      <Button id="buttonProfile" fx:id="buttonProfile" mnemonicParsing="false" onMouseClicked="#buttonProfile" text="Profiles">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
