@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import application.CellsFilledException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
 import model.enums.Orientation;
@@ -316,16 +317,47 @@ public class ShipDeployment {
         this.extractOrientation();
         
         double rot = draggingShip.getRotate();
-        if (this.orientation.equals(Orientation.HORIZONTAL)) {
+        
+        //*** Vertical rotation ***
+        if (this.orientation.equals(Orientation.HORIZONTAL)
+            && (this.coordY < GRIDSIZE - this.size + 1)
+            && this.checkVertRotation()) {
+            
             board.getChildren().remove(draggingShip);
+            playgroundBattle.removeShip(this.extractShip());
             draggingShip.setRotate(rot - 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.VERTICAL);
-            board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
-        } else if (this.orientation.equals(Orientation.VERTICAL)) {
+            
+            try {
+                playgroundBattle.positionShip(this.extractShip(), 
+                                              new Pair<>(this.coordY, this.coordX), 
+                                              this.ships.get(draggingShip).getX().getOrientation());
+                board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                draggingShip.setTranslateX(this.vertOffset);
+            } catch (CellsFilledException exception) {
+                System.out.println("NON VA BENE");
+            }
+            
+        //*** Horizontal rotation ***    
+        } else if (this.orientation.equals(Orientation.VERTICAL)
+                   && (this.coordX < GRIDSIZE - this.size + 1)
+                   && this.checkHorizRotation()) {
+            
             board.getChildren().remove(draggingShip);
+            playgroundBattle.removeShip(this.extractShip());
             draggingShip.setRotate(rot + 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.HORIZONTAL);
-            board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+            
+            try {
+                playgroundBattle.positionShip(this.extractShip(), 
+                                              new Pair<>(this.coordY, this.coordX),
+                                              this.ships.get(draggingShip).getX().getOrientation());
+                board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                draggingShip.setTranslateX(this.horizOffset);
+            } catch (CellsFilledException exception) {
+                System.out.println("NON VA BENE");
+            }
+            
         }
     }
 
