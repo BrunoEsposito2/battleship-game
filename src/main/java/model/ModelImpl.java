@@ -5,9 +5,9 @@ import java.util.Optional;
 
 import model.enums.GameMode;
 import model.enums.PlayerNumber;
-import model.players.CurrentPlayer;
+import model.match.players.CurrentPlayer;
+import model.match.players.PlayerInfo;
 import model.players.Player;
-import model.players.PlayerInfo;
 import model.players.PlayerManager;
 import model.players.PlayerOperation;
 

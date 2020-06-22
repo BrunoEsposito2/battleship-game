@@ -5,7 +5,7 @@ import java.util.Optional;
 import controller.users.AccountManager;
 import model.enums.GameMode;
 import model.enums.PlayerNumber;
-import model.players.PlayerInfo;
+import model.match.players.PlayerInfo;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 

@@ -15,7 +15,7 @@ public interface View {
      * @param name - the scene's name
      */
     void loadScene(SceneName name);
-    
+
     /**
      * Launch a dialog using the passed parameters.
      * Parameters you don't care about can be passed as null.

@@ -9,7 +9,7 @@ import model.Model;
 import model.ModelImpl;
 import model.enums.GameMode;
 import model.enums.PlayerNumber;
-import model.players.PlayerInfo;
+import model.match.players.PlayerInfo;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;

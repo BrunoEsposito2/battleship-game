@@ -5,8 +5,8 @@ import java.util.Optional;
 
 import model.enums.GameMode;
 import model.enums.PlayerNumber;
+import model.match.players.PlayerInfo;
 import model.players.Player;
-import model.players.PlayerInfo;
 import model.players.PlayerManager;
 
 /**

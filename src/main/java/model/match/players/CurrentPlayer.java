@@ -1,4 +1,4 @@
-package model.players;
+package model.match.players;
 
 import java.util.Optional;
 

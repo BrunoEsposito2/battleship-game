@@ -3,6 +3,7 @@ package controller.ui.matchsettings;
 import javafx.scene.control.TextArea;
 import java.util.Optional;
 import application.Battleships;
+import controller.match.MatchInitializer;
 import controller.users.AccountManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,7 +11,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import model.enums.GameMode;
 import model.enums.PlayerType;
-import model.match.MatchInitializer;
 import view.scene.SceneName;
 
 /**

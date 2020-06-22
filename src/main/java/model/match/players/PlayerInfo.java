@@ -1,4 +1,4 @@
-package model.players;
+package model.match.players;
 
 import model.enums.PlayerNumber;
 import model.enums.PlayerType;
