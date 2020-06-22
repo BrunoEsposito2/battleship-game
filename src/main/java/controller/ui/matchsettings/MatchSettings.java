@@ -48,7 +48,7 @@ public final class MatchSettings {
     @FXML
     public void buttonStart() {
         final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
-        final Optional<String> username2 = Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
+        final Optional<String> username2 = checkboxAI.isSelected() ? Optional.empty() : Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
         if (login.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
             new MatchInitializer(username1.get(), username2, checkboxAI.isSelected()
                     ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode)).startNewMatch();
