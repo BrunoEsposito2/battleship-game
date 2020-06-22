@@ -8,14 +8,14 @@ import model.stats.LoserStatsCalculator;
 import model.stats.Statistics;
 import model.stats.WinnerStatsCalculator;
 
-public class PlayerOperation implements PlayerManager {
+public final class PlayerOperation implements PlayerManager {
 
     private final Optional<List<Player>> players;
-    private Statistics stats;
+    private Optional<Statistics> stats;
 
     public PlayerOperation(final Optional<List<Player>> initUsers) {
         this.players = initUsers;
-        this.stats = null;
+        this.stats = Optional.empty();
     }
 
     private boolean usernameExists(final String userName) {
@@ -35,7 +35,7 @@ public class PlayerOperation implements PlayerManager {
     }
 
     @Override
-    public final Optional<Player> addPlayer(final String userName, final String password) {
+    public Optional<Player> addPlayer(final String userName, final String password) {
         if (!usernameExists(userName)) {
             Player p = new HumanPlayer(userName, password);
             this.players.get().add(p);
@@ -45,7 +45,7 @@ public class PlayerOperation implements PlayerManager {
     }
 
     @Override
-    public final boolean removePlayer(final String userName, final String password) {
+    public boolean removePlayer(final String userName, final String password) {
         if (infoAreValid(userName, password)) {
             this.players.get().forEach(x -> {
                 if (x instanceof HumanPlayer && x.getUsername().equals(userName)) {
@@ -58,7 +58,7 @@ public class PlayerOperation implements PlayerManager {
     }
 
     @Override
-    public final boolean setLogIn(final String userName, final String password) {
+    public boolean setLogIn(final String userName, final String password) {
         if (infoAreValid(userName, password)) {
             this.players.get().forEach(x -> {
                 if (x.getUsername().equalsIgnoreCase(userName)) {
@@ -71,7 +71,7 @@ public class PlayerOperation implements PlayerManager {
     }
 
     @Override
-    public final boolean setLogOut(final String userName) {
+    public boolean setLogOut(final String userName) {
         if (usernameExists(userName)) {
             this.players.get().forEach(x -> {
                 if (x.getUsername().equalsIgnoreCase(userName)) {
@@ -84,37 +84,37 @@ public class PlayerOperation implements PlayerManager {
     }
 
     @Override
-    public final Optional<List<Player>> getPlayers() {
+    public Optional<List<Player>> getPlayers() {
         return Optional.of(Collections.unmodifiableList(this.players.get()));
     }
 
     @Override
-    public final boolean updateWinStats(final String userName, final Double score) {
+    public boolean updateWinStats(final String userName, final Double score) {
         if (usernameExists(userName)) {
             this.players.get().forEach(x -> {
                 if (x instanceof HumanPlayer && x.getUsername().equalsIgnoreCase(userName)) {
-                    this.stats = new WinnerStatsCalculator((HumanPlayer) x, score);
+                    this.stats = Optional.of(new WinnerStatsCalculator((HumanPlayer) x, score));
                 } else if (x instanceof ArtificialPlayer && x.getUsername().equalsIgnoreCase(userName)) {
-                    this.stats = new WinnerStatsCalculator((ArtificialPlayer) x, score);
+                    this.stats = Optional.of(new WinnerStatsCalculator((ArtificialPlayer) x, score));
                 }
             });
-            this.stats.basicStats();
+            this.stats.get().basicStats();
             return true;
         }
         return false;
     }
 
     @Override
-    public final boolean updateLosStats(final String userName, final Double score) {
+    public boolean updateLosStats(final String userName, final Double score) {
         if (usernameExists(userName)) {
             this.players.get().forEach(x -> {
                 if (x instanceof HumanPlayer && x.getUsername().equalsIgnoreCase(userName)) {
-                    this.stats = new LoserStatsCalculator((HumanPlayer) x, score);
+                    this.stats = Optional.of(new LoserStatsCalculator((HumanPlayer) x, score));
                 } else if (x instanceof ArtificialPlayer && x.getUsername().equalsIgnoreCase(userName)) {
-                    this.stats = new LoserStatsCalculator((ArtificialPlayer) x, score);
+                    this.stats = Optional.of(new LoserStatsCalculator((ArtificialPlayer) x, score));
                 }
             });
-            this.stats.basicStats();
+            this.stats.get().basicStats();
             return true;
         }
         return false;

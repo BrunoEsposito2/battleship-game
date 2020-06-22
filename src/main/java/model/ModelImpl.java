@@ -11,8 +11,7 @@ public final class ModelImpl implements Model {
 
     @Override
     public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
-        final PlayerManager manager = new PlayerOperation(players);
-        return manager;
+        return new PlayerOperation(players);
     }
 
 }
