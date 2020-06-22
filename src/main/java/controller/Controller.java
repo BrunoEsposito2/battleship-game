@@ -34,4 +34,14 @@ public interface Controller {
      */
     AccountManager getAccountManager();
 
+    /**
+     * @return the current player
+     */
+    Optional<model.enums.Player> getCurrentPlayer();
+
+    /**
+     * @param player - the new current player
+     */
+    void setCurrentPlayer(model.enums.Player player);
+
 }

@@ -2,7 +2,6 @@ package model;
 
 import java.util.List;
 import java.util.Optional;
-
 import model.players.Player;
 import model.players.PlayerManager;
 
@@ -18,5 +17,15 @@ public interface Model {
      * @return the model's player manager object.
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
+
+    /**
+     * @return the current player
+     */
+    Optional<model.enums.Player> getCurrentPlayer();
+
+    /**
+     * @param player - the new current player
+     */
+    void setCurrentPlayer(model.enums.Player player);
 
 }

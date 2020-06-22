@@ -22,6 +22,10 @@ public final class ControllerImpl implements Controller {
 
     private final AccountManager manager;
 
+    /**
+     * Constructor of this class.
+     * @param stage - the app's stage
+     */
     public ControllerImpl(final Stage stage) {
         view = new ViewImpl(stage);
         model = new ModelImpl();
@@ -40,6 +44,22 @@ public final class ControllerImpl implements Controller {
     @Override
     public Optional<String> launchDialog(final DialogType type, final String title, final String header, final String description) {
         return view.launchDialog(type, title, header, description);
+    }
+
+    /**
+     * @return the current player
+     */
+    @Override
+    public Optional<model.enums.Player> getCurrentPlayer() {
+        return model.getCurrentPlayer();
+    }
+
+    /**
+     * @param player - the new current player
+     */
+    @Override
+    public void setCurrentPlayer(final model.enums.Player player) {
+        model.setCurrentPlayer(player);
     }
 
 }
