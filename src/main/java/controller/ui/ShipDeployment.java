@@ -83,7 +83,7 @@ public class ShipDeployment {
         
         dropImage(board);
     }
-    
+
     /**
      * Method to extract the coordinates clicked by the mouse
      * 
@@ -212,7 +212,7 @@ public class ShipDeployment {
         });
 
     }
-    
+
     /**
      * Populates the map of ships
      */
@@ -243,7 +243,7 @@ public class ShipDeployment {
         
         this.size = resultUserList.get(0).getSize();
     }
-    
+
     /**
      * Method to extract the current ship
      * 
@@ -261,7 +261,7 @@ public class ShipDeployment {
         Ship ship = resultUserList.get(0);
         return ship;
     }
-    
+
     /**
      * Method to check if a particular ship has been dropped in the grid
      * 
@@ -272,7 +272,7 @@ public class ShipDeployment {
         Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
         return map.containsValue(ship);
     }
-    
+
     /**
      * Method to extract the horizontal offset from the selected ship
      */
@@ -283,7 +283,7 @@ public class ShipDeployment {
             }
         }
     }
-    
+
     /**
      * Method to extract the vertical offset from the selected ship
      */
@@ -294,7 +294,7 @@ public class ShipDeployment {
             }
         }
     }
-    
+
     /**
      * Method to extract the coordinates where the ship is dropping
      * 
@@ -307,7 +307,7 @@ public class ShipDeployment {
         this.coordX = colIndex == null ? 0 : colIndex;
         this.coordY = rowIndex == null ? 0 : rowIndex;
     }
-    
+
     /**
      * Method to extract the orientation of the selected ship
      */
@@ -318,7 +318,7 @@ public class ShipDeployment {
             }
         }
     }
-    
+
     /**
      * 
      * @return true if vertical rotation is possible (with no collisions)
@@ -331,7 +331,7 @@ public class ShipDeployment {
         }
         return true;
     }
-    
+
     /**
      * 
      * @return true if horizontal rotation is possible (with no collisions)
@@ -344,7 +344,7 @@ public class ShipDeployment {
         }
         return true;
     }
-    
+
     /**
      * This method applies a rotation of 90° at the selected ship
      */
