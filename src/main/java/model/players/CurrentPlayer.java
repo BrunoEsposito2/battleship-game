@@ -7,20 +7,20 @@ import java.util.Optional;
  */
 public class CurrentPlayer {
 
-    private Optional<model.enums.Player> current = Optional.empty();
+    private Optional<model.enums.PlayerNumber> current = Optional.empty();
 
     /**
      * @return the current player
      */
-    public Optional<model.enums.Player> getCurrentPlayer() {
+    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
         return current;
     }
 
     /**
-     * @param player - the new current player
+     * @param playerNumber - the new current player
      */
-    public void setCurrentPlayer(final model.enums.Player player) {
-        current = Optional.ofNullable(player);
+    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+        current = Optional.ofNullable(playerNumber);
     }
 
 }
