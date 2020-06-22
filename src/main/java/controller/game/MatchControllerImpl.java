@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Map.Entry;
 
-import model.enums.Player;
+import model.enums.PlayerNumber;
 import model.enums.ShipType;
 import model.match.CellAlreadyShottedException;
 import model.match.CellsFilledException;
@@ -23,7 +23,7 @@ public class MatchControllerImpl implements MatchController {
     private static final int COLUMN = 8;
 
     private BattleView battleView;
-    private Player currentPlayer;
+    private PlayerNumber currentPlayer;
     private final PlaygroundBattle playgroundPlayerOne;
     private final PlaygroundBattle playgroundPlayerTwo;
 
@@ -90,7 +90,7 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void startGame() {
-        this.currentPlayer = Player.PLAYER_ONE;
+        this.currentPlayer = PlayerNumber.PLAYER_ONE;
         this.currentPlaygroundBattle = this.playgroundPlayerTwo;
     }
 
@@ -125,7 +125,7 @@ public class MatchControllerImpl implements MatchController {
      * @return playgroundBattle - the playground for next turn. 
      */
     private PlaygroundBattle getNext() {
-        if (this.currentPlayer == Player.PLAYER_ONE) {
+        if (this.currentPlayer == PlayerNumber.PLAYER_ONE) {
             return this.playgroundPlayerOne;
         } else {
             return this.playgroundPlayerTwo;

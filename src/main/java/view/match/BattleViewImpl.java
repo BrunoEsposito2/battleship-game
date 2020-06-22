@@ -6,7 +6,7 @@ import application.Battleships;
 import controller.game.MatchController;
 import javafx.fxml.FXML;
 import javafx.scene.layout.GridPane;
-import model.enums.Player;
+import model.enums.PlayerNumber;
 import model.enums.ShipType;
 import model.util.Pair;
 import view.dialog.DialogType;
@@ -45,7 +45,7 @@ public class BattleViewImpl implements BattleView {
     }
 
     @Override
-    public void showWinDialog(final Player winnerPlayer) {
+    public void showWinDialog(final PlayerNumber winnerPlayer) {
         // Dialog or new scene?
     }
 
