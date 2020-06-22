@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
 import model.enums.GameMode;
+import model.enums.PlayerNumber;
+import model.players.PlayerInfo;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;
@@ -47,20 +49,14 @@ public final class ControllerImpl implements Controller {
         return view.launchDialog(type, title, header, description);
     }
 
-    /**
-     * @return the current player
-     */
     @Override
-    public Optional<model.enums.Player> getCurrentPlayer() {
+    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
         return model.getCurrentPlayer();
     }
 
-    /**
-     * @param player - the new current player
-     */
     @Override
-    public void setCurrentPlayer(final model.enums.Player player) {
-        model.setCurrentPlayer(player);
+    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+        model.setCurrentPlayer(playerNumber);
     }
 
     @Override
@@ -69,8 +65,18 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public void setGameMode(GameMode gameMode) {
+    public void setGameMode(final GameMode gameMode) {
         model.setGameMode(gameMode);
+    }
+
+    @Override
+    public Optional<PlayerInfo> getPlayerInfo(final PlayerNumber number) {
+        return model.getPlayerInfo(number);
+    }
+
+    @Override
+    public void setPlayerInfo(final PlayerNumber number, final PlayerInfo info) {
+        model.setPlayerInfo(number, info);
     }
 
 }

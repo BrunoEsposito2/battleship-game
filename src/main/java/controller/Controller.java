@@ -4,6 +4,8 @@ import java.util.Optional;
 
 import controller.users.AccountManager;
 import model.enums.GameMode;
+import model.enums.PlayerNumber;
+import model.players.PlayerInfo;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -38,12 +40,12 @@ public interface Controller {
     /**
      * @return the current player
      */
-    Optional<model.enums.Player> getCurrentPlayer();
+    Optional<model.enums.PlayerNumber> getCurrentPlayer();
 
     /**
-     * @param player - the new current player
+     * @param playerNumber - the new current player
      */
-    void setCurrentPlayer(model.enums.Player player);
+    void setCurrentPlayer(model.enums.PlayerNumber playerNumber);
 
     /**
      * @return the current gameMode
@@ -54,5 +56,18 @@ public interface Controller {
      * @param gameMode - the new current gameMode
      */
     void setGameMode(GameMode gameMode);
+    
+    /**
+     * 
+     * @param number - player's number
+     * @return the player's info, if any
+     */
+    Optional<PlayerInfo> getPlayerInfo(PlayerNumber number);
+
+    /**
+     * @param number - player's number
+     * @param info - player's info
+     */
+    void setPlayerInfo(PlayerNumber number, PlayerInfo info);
 
 }
