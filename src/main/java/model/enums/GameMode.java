@@ -10,7 +10,7 @@ public enum GameMode {
      */
     CLASSIC("Classic", "Sink all enemy ships to win.") {
         @Override
-        public boolean isWinConditionAchieved(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
+        public boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
             return opponentRemainingShips < 1;
         }
     },
@@ -20,7 +20,7 @@ public enum GameMode {
      */
     HIGH_SCORE("High-score", "Have the highest score at the end of the match.") {
         @Override
-        public boolean isWinConditionAchieved(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
+        public boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
             return playerHits > opponentHits;
         }
     };
@@ -40,7 +40,7 @@ public enum GameMode {
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    public abstract boolean isWinConditionAchieved(int playerHits, int opponentHits, int opponentRemainingShips);
+    public abstract boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
 
     /**
      * @return the GameMode's name.

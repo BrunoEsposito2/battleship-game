@@ -7,6 +7,7 @@ import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
+import model.enums.GameMode;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;
@@ -60,6 +61,16 @@ public final class ControllerImpl implements Controller {
     @Override
     public void setCurrentPlayer(final model.enums.Player player) {
         model.setCurrentPlayer(player);
+    }
+
+    @Override
+    public Optional<GameMode> getGameMode() {
+        return model.getGameMode();
+    }
+
+    @Override
+    public void setGameMode(GameMode gameMode) {
+        model.setGameMode(gameMode);
     }
 
 }

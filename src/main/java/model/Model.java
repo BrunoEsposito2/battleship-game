@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 import java.util.Optional;
+
+import model.enums.GameMode;
 import model.players.Player;
 import model.players.PlayerManager;
 
@@ -27,5 +29,15 @@ public interface Model {
      * @param player - the new current player
      */
     void setCurrentPlayer(model.enums.Player player);
+    
+    /**
+     * @return the current gameMode
+     */
+    Optional<GameMode> getGameMode();
+
+    /**
+     * @param gameMode - the new current gameMode
+     */
+    void setGameMode(GameMode gameMode);
 
 }

@@ -3,6 +3,7 @@ package model;
 import java.util.List;
 import java.util.Optional;
 
+import model.enums.GameMode;
 import model.players.CurrentPlayer;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -14,6 +15,7 @@ import model.players.PlayerOperation;
 public final class ModelImpl implements Model {
 
     private final CurrentPlayer currentPlayer = new CurrentPlayer();
+    private Optional<GameMode> gameMode = Optional.empty();
 
     @Override
     public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
@@ -34,6 +36,16 @@ public final class ModelImpl implements Model {
     @Override
     public void setCurrentPlayer(final model.enums.Player player) {
         currentPlayer.setCurrentPlayer(player);
+    }
+
+    @Override
+    public Optional<GameMode> getGameMode() {
+        return gameMode;
+    }
+
+    @Override
+    public void setGameMode(final GameMode gameMode) {
+        this.gameMode = Optional.ofNullable(gameMode);
     }
 
 }

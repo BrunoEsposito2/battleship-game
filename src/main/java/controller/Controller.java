@@ -3,6 +3,7 @@ package controller;
 import java.util.Optional;
 
 import controller.users.AccountManager;
+import model.enums.GameMode;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -43,5 +44,15 @@ public interface Controller {
      * @param player - the new current player
      */
     void setCurrentPlayer(model.enums.Player player);
+
+    /**
+     * @return the current gameMode
+     */
+    Optional<GameMode> getGameMode();
+
+    /**
+     * @param gameMode - the new current gameMode
+     */
+    void setGameMode(GameMode gameMode);
 
 }
