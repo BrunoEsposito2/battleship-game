@@ -26,14 +26,14 @@ import javafx.scene.layout.Pane;
 
 public class ShipDeployment {
     
-    //Offset which is put every time a ship is dropped on the grid in HORIZONTAL
+    //Offset which is put every time a ship is dropped on the grid in HORIZONTAL way
     private static final int CARRIER_HORIZ_OFFSET = -40;
     private static final int BATTLESHIP_HORIZ_OFFSET = 32;
     private static final int CRUISER_HORIZ_OFFSET = 12;
     private static final int SUBMARINE_HORIZ_OFFSET = 5;
     private static final int DESTROYER_HORIZ_OFFSET = -10;
     
-    //Offset which is put every time a ship is dropped on the grid in VERTICAL
+    //Offset which is put every time a ship is dropped on the grid in VERTICAL way
     private static final int CARRIER_VERT_OFFSET = -88;
     private static final int BATTLESHIP_VERT_OFFSET = 9;
     private static final int CRUISER_VERT_OFFSET = 10;
@@ -230,7 +230,7 @@ public class ShipDeployment {
     }
 
     /**
-     * Utility method to extract the size from the selected ship
+     * Method to extract the size from the selected ship
      */
     private void extractSize() {
         List<Ship> resultUserList = this.ships.entrySet().stream()
@@ -245,7 +245,7 @@ public class ShipDeployment {
     }
     
     /**
-     * Utility method to extract the current ship
+     * Method to extract the current ship
      * 
      * @return Ship
      */
@@ -274,7 +274,7 @@ public class ShipDeployment {
     }
     
     /**
-     * Utility method to extract the horizontal offset from the selected ship
+     * Method to extract the horizontal offset from the selected ship
      */
     private void extractHorizontalOffset() {
         for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
@@ -285,7 +285,7 @@ public class ShipDeployment {
     }
     
     /**
-     * Utility method to extract the vertical offset from the selected ship
+     * Method to extract the vertical offset from the selected ship
      */
     private void extractVerticalOffset() {
         for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
@@ -296,7 +296,7 @@ public class ShipDeployment {
     }
     
     /**
-     * Utility method to extract coordinates where the ship is dropping
+     * Method to extract the coordinates where the ship is dropping
      * 
      * @param e, DragEvent
      */
@@ -309,7 +309,7 @@ public class ShipDeployment {
     }
     
     /**
-     * Utility method to extract the orientation of the selected ship
+     * Method to extract the orientation of the selected ship
      */
     private void extractOrientation() {
         for (Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
@@ -334,7 +334,7 @@ public class ShipDeployment {
     
     /**
      * 
-     * @return true if vertical rotation is possible (with no collisions)
+     * @return true if horizontal rotation is possible (with no collisions)
      */
     private boolean checkHorizRotation() {
         for (int i = 1; i < this.size; i++) {
