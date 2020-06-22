@@ -33,9 +33,13 @@ public interface Model {
     void setCurrentPlayer(model.enums.PlayerNumber playerNumber);
 
     /**
-     * @return the current gameMode
+     * this method checks whether the player has won the match according to selected win conditions.
+     * @param playerHits - how many times the player has hit the opponent's ships.
+     * @param opponentHits - how many times the opponent has hit the player's ships.
+     * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
+     * @return true - if the player has won the match.
      */
-    Optional<GameMode> getGameMode();
+    Boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
 
     /**
      * @param gameMode - the new current gameMode

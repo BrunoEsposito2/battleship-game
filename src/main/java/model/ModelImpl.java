@@ -43,11 +43,6 @@ public final class ModelImpl implements Model {
     }
 
     @Override
-    public Optional<GameMode> getGameMode() {
-        return gameMode;
-    }
-
-    @Override
     public void setGameMode(final GameMode gameMode) {
         this.gameMode = Optional.ofNullable(gameMode);
     }
@@ -64,6 +59,11 @@ public final class ModelImpl implements Model {
         } else {
             player2 = Optional.ofNullable(info);
         }
+    }
+
+    @Override
+    public Boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
+        return gameMode.isPresent() ? gameMode.get().isMatchOver(playerHits, opponentHits, opponentRemainingShips) : false;
     }
 
 }

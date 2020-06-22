@@ -60,8 +60,8 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public Optional<GameMode> getGameMode() {
-        return model.getGameMode();
+    public Boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
+        return model.isMatchOver(playerHits, opponentHits, opponentRemainingShips);
     }
 
     @Override
