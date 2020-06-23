@@ -163,7 +163,7 @@ public final class ShipDeployment {
             Dragboard db = e.getDragboard();
             System.out.println("onDragDropped");
             
-            this.extractSize();
+            this.size = manageDeployment.extractSize(draggingShip);
             this.extractHorizontalOffset();
             this.extractVerticalOffset();
             
@@ -176,13 +176,14 @@ public final class ShipDeployment {
                     && (this.coordX < GRIDSIZE - this.size + 1)
                     && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
-                    if (this.checkShip(this.extractShip())) {
-                        playgroundBattle.removeShip(this.extractShip());
+                    //check whether this ship is already present
+                    if (this.checkShip(manageDeployment.extractShip(draggingShip))) {
+                        playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
                     
                     try {
-                    playgroundBattle.positionShip(this.extractShip(), 
+                    playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                                   new Pair<>(this.coordY, this.coordX));
                     ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                     board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
@@ -198,13 +199,14 @@ public final class ShipDeployment {
                            && (this.coordY < GRIDSIZE - this.size + 1)
                            && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
-                    if (this.checkShip(this.extractShip())) {
-                        playgroundBattle.removeShip(this.extractShip());
+                  //check whether this ship is already present
+                    if (this.checkShip(manageDeployment.extractShip(draggingShip))) {
+                        playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
                     
                     try {
-                        playgroundBattle.positionShip(this.extractShip(), 
+                        playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                                       new Pair<>(this.coordY, this.coordX));
                         ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                         board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
@@ -222,39 +224,6 @@ public final class ShipDeployment {
             e.consume();
         });
 
-    }
-
-    /**
-     * Method to extract the size from the selected ship
-     */
-    private void extractSize() {
-        List<Ship> resultUserList = this.ships.entrySet().stream()
-                .filter(x -> x.getKey().equals(draggingShip))
-                .map(x -> x.getValue().getX())
-                .collect(Collectors.toList());
-        if (resultUserList.size() != 1) {
-            throw new IllegalStateException();
-        }
-        
-        this.size = resultUserList.get(0).getSize();
-    }
-
-    /**
-     * Method to extract the current ship
-     * 
-     * @return Ship
-     */
-    private Ship extractShip() {
-        List<Ship> resultUserList = this.ships.entrySet().stream()
-                .filter(x -> x.getKey().equals(draggingShip))
-                .map(x -> x.getValue().getX())
-                .collect(Collectors.toList());
-        if (resultUserList.size() != 1) {
-            throw new IllegalStateException();
-        }
-        
-        Ship ship = resultUserList.get(0);
-        return ship;
     }
 
     /**
@@ -354,12 +323,12 @@ public final class ShipDeployment {
             && this.checkVertRotation()) {
             
             board.getChildren().remove(draggingShip);
-            playgroundBattle.removeShip(this.extractShip());
+            playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
             draggingShip.setRotate(rot - 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.VERTICAL);
             
             try {
-                playgroundBattle.positionShip(this.extractShip(), 
+                playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                               new Pair<>(this.coordY, this.coordX));
                 board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
                 draggingShip.setTranslateX(this.vertOffset);
@@ -373,12 +342,12 @@ public final class ShipDeployment {
                    && this.checkHorizRotation()) {
             
             board.getChildren().remove(draggingShip);
-            playgroundBattle.removeShip(this.extractShip());
+            playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
             draggingShip.setRotate(rot + 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.HORIZONTAL);
             
             try {
-                playgroundBattle.positionShip(this.extractShip(), 
+                playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                               new Pair<>(this.coordY, this.coordX));
                 board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
                 draggingShip.setTranslateX(this.horizOffset);
