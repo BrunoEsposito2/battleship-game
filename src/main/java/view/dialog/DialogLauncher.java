@@ -3,9 +3,9 @@ package view.dialog;
 import java.util.Optional;
 
 /**
- * This class offers an abstraction for other dialog classes.
+ * This interface offers a static method to launch dialogs.
  */
-public abstract class AbstractDialog implements DialogLauncher {
+public interface DialogLauncher {
 
     /**
      * Launch a dialog using the passed parameters.
@@ -16,6 +16,7 @@ public abstract class AbstractDialog implements DialogLauncher {
      * @param description - dialog's description
      * @return the result of the dialog's operations, if any.
      */
-    protected abstract Optional<String> launch(DialogType type, String title, String header, String description);
-
+    static Optional<String> launchDialog(final DialogType type, final String title, final String header, final String description) {
+        return type.getConcreteClass().launch(type, title, header, description);
+    }
 }
