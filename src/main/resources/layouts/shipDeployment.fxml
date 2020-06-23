@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
@@ -11,13 +12,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="650.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.ShipDeployment">
+<AnchorPane prefHeight="650.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.ShipDeployment">
    <children>
       <SplitPane dividerPositions="0.815" layoutX="-26.0" layoutY="-18.0" orientation="VERTICAL" prefHeight="618.0" prefWidth="626.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="492.0" prefWidth="620.0">
                <children>
-                  <GridPane fx:id="board" gridLinesVisible="true" hgap="2.0" layoutX="63.0" layoutY="39.0" onMouseClicked="#onMouseClicked" prefHeight="422.0" prefWidth="472.0" vgap="2.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="39.0">
+                  <GridPane fx:id="board" gridLinesVisible="true" hgap="2.0" layoutX="63.0" layoutY="39.0" onMouseClicked="#onMouseClicked" prefHeight="472.0" prefWidth="471.0" vgap="2.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="39.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" />
@@ -146,31 +147,41 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Button fx:id="buttonStart" layoutX="558.0" layoutY="185.0" mnemonicParsing="false" onMouseClicked="#buttonStart" text="Start Game">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="buttonBack" layoutX="586.0" layoutY="328.0" mnemonicParsing="false" onMouseClicked="#buttonBack" text="Back">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                <children>
-                  <ImageView fx:id="battleship" fitHeight="180.0" fitWidth="30.0" layoutX="330.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="battleship" fitHeight="180.0" fitWidth="30.0" layoutX="377.0" layoutY="-60.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../images/ships/Battleship.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="cruiser" fitHeight="138.0" fitWidth="23.0" layoutX="502.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="cruiser" fitHeight="138.0" fitWidth="23.0" layoutX="580.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../images/ships/Cruiser.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="carrier" fitHeight="35.0" fitWidth="218.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" translateY="-2.0">
+                  <ImageView fx:id="carrier" fitHeight="35.0" fitWidth="218.0" layoutX="29.0" layoutY="15.0" pickOnBounds="true" translateY="-2.0">
                      <image>
                         <Image url="@../images/ships/Carrier.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="submarine" fitHeight="130.0" fitWidth="35.0" layoutX="216.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+                  <ImageView fx:id="submarine" fitHeight="130.0" fitWidth="35.0" layoutX="259.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                      <image>
                         <Image url="@../images/ships/Submarine.png" />
                      </image>
                   </ImageView>
-                  <ImageView fx:id="destroyer" fitHeight="86.0" fitWidth="22.0" layoutX="379.0" layoutY="41.0" pickOnBounds="true" rotate="90.0">
+                  <ImageView fx:id="destroyer" fitHeight="86.0" fitWidth="22.0" layoutX="493.0" layoutY="38.0" pickOnBounds="true" rotate="90.0">
                      <image>
                         <Image url="@../images/ships/Destroyer.png" />
                      </image>
