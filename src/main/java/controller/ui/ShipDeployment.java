@@ -177,7 +177,7 @@ public final class ShipDeployment {
                     && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
                     //check whether this ship is already present
-                    if (this.checkShip(manageDeployment.extractShip(draggingShip))) {
+                    if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
                         playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
@@ -200,7 +200,7 @@ public final class ShipDeployment {
                            && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
                   //check whether this ship is already present
-                    if (this.checkShip(manageDeployment.extractShip(draggingShip))) {
+                    if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
                         playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
@@ -224,17 +224,6 @@ public final class ShipDeployment {
             e.consume();
         });
 
-    }
-
-    /**
-     * Method to check if a particular ship has been dropped in the grid
-     * 
-     * @param ship
-     * @return true if the ship is present
-     */
-    private boolean checkShip(Ship ship) {
-        Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
-        return map.containsValue(ship);
     }
 
     /**
