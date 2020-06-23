@@ -72,6 +72,7 @@ final class ManageDeployment {
     }
     
     /**
+     * Method to extract the current ship
      * 
      * @param draggingShip - the ImageView of the selected ship
      * @return Ship object of the selected ship
@@ -87,6 +88,17 @@ final class ManageDeployment {
         
         Ship ship = resultUserList.get(0);
         return ship;
+    }
+    
+    /**
+     * Method to check if a particular ship has been dropped in the grid
+     * 
+     * @param ship - the current ship
+     * @return true if the ship is present
+     */
+    boolean checkShip(Ship ship) {
+        Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
+        return map.containsValue(ship);
     }
 
 }
