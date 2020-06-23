@@ -27,21 +27,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public class ShipDeployment {
-    
-    //Offset which is put every time a ship is dropped on the grid in HORIZONTAL way
-    private static final int CARRIER_HORIZ_OFFSET = -40;
-    private static final int BATTLESHIP_HORIZ_OFFSET = 32;
-    private static final int CRUISER_HORIZ_OFFSET = 12;
-    private static final int SUBMARINE_HORIZ_OFFSET = 5;
-    private static final int DESTROYER_HORIZ_OFFSET = -10;
-    
-    //Offset which is put every time a ship is dropped on the grid in VERTICAL way
-    private static final int CARRIER_VERT_OFFSET = -88;
-    private static final int BATTLESHIP_VERT_OFFSET = 9;
-    private static final int CRUISER_VERT_OFFSET = 10;
-    private static final int SUBMARINE_VERT_OFFSET = 6;
-    private static final int DESTROYER_VERT_OFFSET = 10;
+public final class ShipDeployment {
     
     private static final int GRIDSIZE = 10;
 
@@ -54,8 +40,10 @@ public class ShipDeployment {
     private int vertOffset;
     private Orientation orientation;
     private ImageView draggingShip;
-    private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships = new HashMap<>();
+    private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
+    
     private PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(GRIDSIZE, GRIDSIZE);
+    private ManageDeployment manageDeployment;
 
     @FXML
     private GridPane board;
@@ -71,7 +59,9 @@ public class ShipDeployment {
      */
     @FXML
     private void initialize() {
-        this.createShips();
+        manageDeployment = new ManageDeployment();
+        this.ships = manageDeployment.createShips(carrier, battleship, cruiser, submarine, destroyer);
+        
         board.setStyle("-fx-background-color: black;");
         
         //initialize the grid's cells
@@ -233,22 +223,6 @@ public class ShipDeployment {
             e.consume();
         });
 
-    }
-
-    /**
-     * Populates the map of ships
-     */
-    private void createShips() {
-        this.ships.put(carrier, new Pair<>(new Ship(ShipType.CARRIER), 
-                       new Pair<>(CARRIER_HORIZ_OFFSET, CARRIER_VERT_OFFSET)));
-        this.ships.put(battleship, new Pair<>(new Ship(ShipType.BATTLESHIP), 
-                       new Pair<>(BATTLESHIP_HORIZ_OFFSET, BATTLESHIP_VERT_OFFSET)));
-        this.ships.put(cruiser, new Pair<>(new Ship(ShipType.CRUISER),
-                       new Pair<>(CRUISER_HORIZ_OFFSET, CRUISER_VERT_OFFSET)));
-        this.ships.put(submarine, new Pair<>(new Ship(ShipType.SUBMARINE),
-                       new Pair<>(SUBMARINE_HORIZ_OFFSET, SUBMARINE_VERT_OFFSET)));
-        this.ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER),
-                       new Pair<>(DESTROYER_HORIZ_OFFSET, DESTROYER_VERT_OFFSET)));
     }
 
     /**
