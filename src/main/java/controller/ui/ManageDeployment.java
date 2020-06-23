@@ -1,7 +1,9 @@
 package controller.ui;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import model.util.Pair;
 import model.match.PlaygroundBattle;
@@ -49,6 +51,42 @@ final class ManageDeployment {
                        new Pair<>(DESTROYER_HORIZ_OFFSET, DESTROYER_VERT_OFFSET)));
         
         return this.ships;
+    }
+    
+    /**
+     * Method to extract the size from the selected ship
+     * 
+     * @param draggingShip - the ImageView of the ship currently selected
+     * @return ship's size
+     */
+    int extractSize(ImageView draggingShip) {
+        List<Ship> resultUserList = this.ships.entrySet().stream()
+                .filter(x -> x.getKey().equals(draggingShip))
+                .map(x -> x.getValue().getX())
+                .collect(Collectors.toList());
+        if (resultUserList.size() != 1) {
+            throw new IllegalStateException();
+        }
+        
+        return resultUserList.get(0).getSize();
+    }
+    
+    /**
+     * 
+     * @param draggingShip - the ImageView of the selected ship
+     * @return Ship object of the selected ship
+     */
+    Ship extractShip(ImageView draggingShip) {
+        List<Ship> resultUserList = this.ships.entrySet().stream()
+                .filter(x -> x.getKey().equals(draggingShip))
+                .map(x -> x.getValue().getX())
+                .collect(Collectors.toList());
+        if (resultUserList.size() != 1) {
+            throw new IllegalStateException();
+        }
+        
+        Ship ship = resultUserList.get(0);
+        return ship;
     }
 
 }
