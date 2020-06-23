@@ -19,4 +19,7 @@ public interface Model {
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
+
+    void startBasicAI();
+
 }
