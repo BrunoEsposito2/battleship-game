@@ -3,7 +3,7 @@ package controller.ui.matchsettings;
 import javafx.scene.control.TextArea;
 import java.util.Optional;
 import application.Battleships;
-import controller.match.MatchInitializer;
+import controller.match.MatchInitializerImpl;
 import controller.users.AccountManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,8 +50,8 @@ public final class MatchSettings {
         final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
         final Optional<String> username2 = checkboxAI.isSelected() ? Optional.empty() : Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
         if (login.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
-            new MatchInitializer(username1.get(), username2, checkboxAI.isSelected()
-                    ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode)).startNewMatch();
+            new MatchInitializerImpl().startNewMatch(username1.get(), username2, checkboxAI.isSelected()
+                    ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
         }
     }
 

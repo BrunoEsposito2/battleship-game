@@ -23,6 +23,9 @@ public final class ModelImpl implements Model {
 
     private final ArtificialPlayer playerAI;
 
+    /**
+     * concrete implementation of Model interface. 
+     */
     public ModelImpl() {
         this.playerAI = new ArtificialPlayer(BASIC_AI_NAME, BASIC_AI_PASS);
     }
@@ -40,12 +43,12 @@ public final class ModelImpl implements Model {
     public void startBasicAI() {
         this.playerAI.setArtificialIntelligence(new BasicArtificialIntelligence(new BasicIntelligenceComputation()));
     }
-    
+
     /**
      * @return the current player
      */
     @Override
-    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
+    public Optional<PlayerNumber> getCurrentPlayer() {
         return currentPlayer.getCurrentPlayer();
     }
 
@@ -53,7 +56,7 @@ public final class ModelImpl implements Model {
      * @param playerNumber - the new current player
      */
     @Override
-    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+    public void setCurrentPlayer(final PlayerNumber playerNumber) {
         currentPlayer.setCurrentPlayer(playerNumber);
     }
 
