@@ -2,8 +2,8 @@ package controller.match;
 
 import java.util.Optional;
 
-import model.enums.GameMode;
 import model.enums.PlayerType;
+import model.gamemode.GameMode;
 
 /**
  * This interface offers methods to start a new match.
