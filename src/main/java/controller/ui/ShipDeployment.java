@@ -42,8 +42,8 @@ public final class ShipDeployment {
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
     
-    private PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(GRIDSIZE, GRIDSIZE);
-    private ManageDeployment manageDeployment;
+    private final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(GRIDSIZE, GRIDSIZE);
+    private final ManageDeployment manageDeployment = new ManageDeployment(playgroundBattle);
 
     @FXML
     private GridPane board;
@@ -58,8 +58,7 @@ public final class ShipDeployment {
      * This method is called automatically when loading the fxml layout
      */
     @FXML
-    private void initialize() {
-        manageDeployment = new ManageDeployment();
+    public void initialize() {
         this.ships = manageDeployment.createShips(carrier, battleship, cruiser, submarine, destroyer);
         
         board.setStyle("-fx-background-color: black;");
