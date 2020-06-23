@@ -22,10 +22,7 @@ public interface Model {
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
-<<<<<<< HEAD
-
     void startBasicAI();
-=======
     /**
      * @return the current player
      */
@@ -62,6 +59,5 @@ public interface Model {
      * @param info - player's info
      */
     void setPlayerInfo(PlayerNumber number, PlayerInfo info);
->>>>>>> 5d3ade73d23c2b4d07dabbab4b781952af1fa203
 
 }

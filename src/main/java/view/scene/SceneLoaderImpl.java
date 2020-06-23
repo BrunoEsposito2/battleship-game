@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  */
 public final class SceneLoaderImpl implements SceneLoader {
 
-    private final LayoutLoader layoutLoader = new LayoutLoader();
+    private final LayoutLoader layoutLoader = new LayoutLoaderFXML();
 
     /**
      * This method switches the active Scene to the one passed as parameter.
@@ -21,7 +21,7 @@ public final class SceneLoaderImpl implements SceneLoader {
         final String separator = File.separator;
         final String fileName = nextScene.getLayoutName();
         final String fileExtension = ".fxml";
-        stage.setScene(new Scene(layoutLoader.loadFXML(directory + separator + fileName + fileExtension)));
+        stage.setScene(new Scene(layoutLoader.load(directory + separator + fileName + fileExtension)));
     }
 
 }
