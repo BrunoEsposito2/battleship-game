@@ -10,6 +10,7 @@ import model.gamemode.GameMode;
 import model.gamemode.WinCondition;
 import model.gamemode.WinConditionImpl;
 import model.match.players.CurrentPlayer;
+import model.match.players.CurrentPlayerImpl;
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -25,7 +26,7 @@ public final class ModelImpl implements Model {
 
     private final ArtificialPlayer playerAI;
     private final WinCondition winCondition = new WinConditionImpl();
-    private final CurrentPlayer currentPlayer = new CurrentPlayer();
+    private final CurrentPlayer currentPlayer = new CurrentPlayerImpl();
     private Optional<PlayerInfo> player1 = Optional.empty(); 
     private Optional<PlayerInfo> player2 = Optional.empty(); 
 
