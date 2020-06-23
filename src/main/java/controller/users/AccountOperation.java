@@ -30,41 +30,36 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public final void createAccount(final String userName, final String password) throws Exception {
+    public final void createAccount(final String userName, final String password) {
         try {
             Optional<Player> p = this.modelMng.addPlayer(userName, password);
             if (p.isPresent()) {
                 this.system.saveUser(p.get());
             } else {
-                throw new Exception();
+                throw new IllegalAccountArgumentException();
             }
-        } catch (Exception e) {
-            throw new Exception("Account already exists");
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Account already exists");
         }
     }
 
     @Override
     public final boolean logInAccount(final String userName, final String password) {
         try {
-            if (this.modelMng.setLogIn(userName, password)) {
-                return true;
-            } else {
-                throw new Exception("Invalid Info: Account doesn't exists");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return this.modelMng.setLogIn(userName, password);
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Invalid Info: Account doesn't exists");
         }
-        return false;
     }
 
     @Override
     public final void logOutAccount(final String userName) {
         try {
             if (!this.modelMng.setLogOut(userName)) {
-                throw new Exception("Log out Failed");
-            } 
-        } catch (Exception e) {
-            e.printStackTrace();
+                throw new IllegalAccountArgumentException();
+            }
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Log out Failed");
         } finally {
             this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
         }
@@ -79,41 +74,41 @@ public class AccountOperation implements AccountManager {
     }
 
     @Override
-    public final void setWinner(final String userName, final Double scoreValue) throws Exception {
+    public final void setWinner(final String userName, final Double scoreValue) {
         try {
             if (!this.modelMng.updateWinStats(userName, scoreValue)) {
-                throw new Exception();
+                throw new IllegalAccountArgumentException();
             }
-        } catch (Exception e) {
-            throw new Exception("Invalid Winner Infos");
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Invalid Winner Infos");
         } finally {
             this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
         }
     }
 
     @Override
-    public final void setLoser(final String userName, final Double scoreValue) throws Exception {
+    public final void setLoser(final String userName, final Double scoreValue) {
         try {
             if (!this.modelMng.updateLosStats(userName, scoreValue)) {
-                throw new Exception();
+                throw new IllegalAccountArgumentException();
             }
-        } catch (Exception e) {
-            throw new Exception("Invalid Loser Infos");
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Invalid Loser Infos");
         } finally {
             this.modelMng.getPlayers().get().forEach(x -> this.system.saveUser(x));
         }
     }
 
     @Override
-    public final void removeAccount(final String userName, final String password) throws Exception {
+    public final void removeAccount(final String userName, final String password) {
         try {
             if (this.modelMng.removePlayer(userName, password)) {
                 this.system.removeUser(new HumanPlayer(userName, password));
             } else {
-                throw new Exception();
+                throw new IllegalAccountArgumentException();
             }
-        } catch (Exception e) {
-            throw new Exception("Invalid info: Account already not exists");
+        } catch (IllegalAccountArgumentException e) {
+            throw new IllegalAccountArgumentException("Invalid info: Account already not exists");
         }
     }
 
