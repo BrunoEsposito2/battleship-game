@@ -2,7 +2,7 @@ package view.match;
 
 import java.util.List;
 
-import model.enums.Player;
+import model.enums.PlayerNumber;
 import model.enums.ShipType;
 import model.util.Pair;
 
@@ -12,7 +12,7 @@ public interface BattleView {
 
     void showCellAlreadyShottedAlert(Pair<Integer, Integer> cell);
 
-    void showWinDialog(Player winnerPlayer);
+    void showWinDialog(PlayerNumber winnerPlayer);
 
     void drawHit(Pair<Integer, Integer> pair);
 

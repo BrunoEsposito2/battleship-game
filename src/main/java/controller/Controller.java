@@ -3,6 +3,9 @@ package controller;
 import java.util.Optional;
 
 import controller.users.AccountManager;
+import model.enums.GameMode;
+import model.enums.PlayerNumber;
+import model.match.players.PlayerInfo;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -33,5 +36,42 @@ public interface Controller {
      * @return the controller's account manager object.
      */
     AccountManager getAccountManager();
+
+    /**
+     * @return the current player
+     */
+    Optional<model.enums.PlayerNumber> getCurrentPlayer();
+
+    /**
+     * @param playerNumber - the new current player
+     */
+    void setCurrentPlayer(model.enums.PlayerNumber playerNumber);
+
+    /**
+     * this method checks whether the player has won the match according to selected win conditions.
+     * @param playerHits - how many times the player has hit the opponent's ships.
+     * @param opponentHits - how many times the opponent has hit the player's ships.
+     * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
+     * @return true - if the player has won the match.
+     */
+    Boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
+
+    /**
+     * @param gameMode - the new current gameMode
+     */
+    void setGameMode(GameMode gameMode);
+
+    /**
+     * 
+     * @param number - player's number
+     * @return the player's info, if any
+     */
+    Optional<PlayerInfo> getPlayerInfo(PlayerNumber number);
+
+    /**
+     * @param number - player's number
+     * @param info - player's info
+     */
+    void setPlayerInfo(PlayerNumber number, PlayerInfo info);
 
 }
