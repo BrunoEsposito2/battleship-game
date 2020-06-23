@@ -24,6 +24,11 @@ public class BattleViewImpl implements BattleView {
         this.controller = controller;
         // TODO Auto-generated constructor stub
     }
+    
+    @FXML
+    public void initialize() {
+        
+    }
 
     
     /**
