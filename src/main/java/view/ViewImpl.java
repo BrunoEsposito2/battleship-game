@@ -1,10 +1,11 @@
 package view;
 
 import java.util.Optional;
-
 import javafx.stage.Stage;
+import view.dialog.DialogLauncher;
 import view.dialog.DialogType;
 import view.scene.SceneLoader;
+import view.scene.SceneLoaderImpl;
 import view.scene.SceneName;
 
 /**
@@ -21,7 +22,7 @@ public final class ViewImpl implements View {
      */
     public ViewImpl(final Stage stage) {
         this.stage = stage;
-        sceneLoader = new SceneLoader();
+        sceneLoader = new SceneLoaderImpl();
         loadScene(SceneName.MAIN);
         stage.setTitle("Battleships");
         stage.show();
@@ -34,7 +35,7 @@ public final class ViewImpl implements View {
 
     @Override
     public Optional<String> launchDialog(final DialogType type, final String title, final String header, final String description) {
-        return type.getConcreteClass().launch(type, title, header, description);
+        return DialogLauncher.launchDialog(type, title, header, description);
     }
 
 }

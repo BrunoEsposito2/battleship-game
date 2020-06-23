@@ -40,12 +40,12 @@ public interface Controller {
     /**
      * @return the current player
      */
-    Optional<model.enums.PlayerNumber> getCurrentPlayer();
+    Optional<PlayerNumber> getCurrentPlayer();
 
     /**
      * @param playerNumber - the new current player
      */
-    void setCurrentPlayer(model.enums.PlayerNumber playerNumber);
+    void setCurrentPlayer(PlayerNumber playerNumber);
 
     /**
      * this method checks whether the player has won the match according to selected win conditions.
