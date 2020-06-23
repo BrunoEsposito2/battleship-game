@@ -5,8 +5,10 @@ import java.util.Optional;
 import model.intelligence.BasicArtificialIntelligence;
 import model.intelligence.BasicIntelligenceComputation;
 import model.players.ArtificialPlayer;
-import model.enums.GameMode;
 import model.enums.PlayerNumber;
+import model.gamemode.GameMode;
+import model.gamemode.WinCondition;
+import model.gamemode.WinConditionImpl;
 import model.match.players.CurrentPlayer;
 import model.match.players.PlayerInfo;
 import model.players.Player;
@@ -22,6 +24,10 @@ public final class ModelImpl implements Model {
     private static final String BASIC_AI_PASS = "basic";
 
     private final ArtificialPlayer playerAI;
+    private final WinCondition winCondition = new WinConditionImpl();
+    private final CurrentPlayer currentPlayer = new CurrentPlayer();
+    private Optional<PlayerInfo> player1 = Optional.empty(); 
+    private Optional<PlayerInfo> player2 = Optional.empty(); 
 
     /**
      * concrete implementation of Model interface. 
@@ -29,10 +35,6 @@ public final class ModelImpl implements Model {
     public ModelImpl() {
         this.playerAI = new ArtificialPlayer(BASIC_AI_NAME, BASIC_AI_PASS);
     }
-    private final CurrentPlayer currentPlayer = new CurrentPlayer();
-    private Optional<PlayerInfo> player1 = Optional.empty(); 
-    private Optional<PlayerInfo> player2 = Optional.empty(); 
-    private Optional<GameMode> gameMode = Optional.empty();
 
     @Override
     public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
@@ -62,7 +64,7 @@ public final class ModelImpl implements Model {
 
     @Override
     public void setGameMode(final GameMode gameMode) {
-        this.gameMode = Optional.ofNullable(gameMode);
+        winCondition.setGameMode(gameMode);
     }
 
     @Override
@@ -80,8 +82,8 @@ public final class ModelImpl implements Model {
     }
 
     @Override
-    public Boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
-        return gameMode.isPresent() ? gameMode.get().isMatchOver(playerHits, opponentHits, opponentRemainingShips) : false;
+    public Boolean isMatchOver(final int hits, final int opponentRemainingShips) {
+        return winCondition.isMatchOver(hits, opponentRemainingShips);
     }
 
 }

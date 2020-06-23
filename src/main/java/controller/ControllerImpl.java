@@ -7,8 +7,8 @@ import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
-import model.enums.GameMode;
 import model.enums.PlayerNumber;
+import model.gamemode.GameMode;
 import model.match.players.PlayerInfo;
 import view.View;
 import view.ViewImpl;
@@ -60,8 +60,8 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public Boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
-        return model.isMatchOver(playerHits, opponentHits, opponentRemainingShips);
+    public Boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
+        return model.isMatchOver(playerHits, opponentRemainingShips);
     }
 
     @Override

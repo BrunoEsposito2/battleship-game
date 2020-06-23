@@ -3,8 +3,8 @@ package model;
 import java.util.List;
 import java.util.Optional;
 
-import model.enums.GameMode;
 import model.enums.PlayerNumber;
+import model.gamemode.GameMode;
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -35,12 +35,11 @@ public interface Model {
 
     /**
      * this method checks whether the player has won the match according to selected win conditions.
-     * @param playerHits - how many times the player has hit the opponent's ships.
-     * @param opponentHits - how many times the opponent has hit the player's ships.
+     * @param hits - how many times the player has hit the opponent's ships.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    Boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
+    Boolean isMatchOver(int hits, int opponentRemainingShips);
 
     /**
      * @param gameMode - the new current gameMode

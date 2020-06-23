@@ -3,9 +3,9 @@ package controller.match;
 import java.util.Optional;
 import application.Battleships;
 import controller.Controller;
-import model.enums.GameMode;
 import model.enums.PlayerNumber;
 import model.enums.PlayerType;
+import model.gamemode.GameMode;
 import model.match.players.PlayerInfo;
 import view.scene.SceneName;
 
