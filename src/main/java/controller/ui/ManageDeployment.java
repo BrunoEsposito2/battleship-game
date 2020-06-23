@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import model.util.Pair;
+import model.match.PlaygroundBattle;
 import model.match.Ship;
 import model.enums.ShipType;
 import javafx.scene.image.ImageView;
@@ -25,9 +26,11 @@ final class ManageDeployment {
     private static final int DESTROYER_VERT_OFFSET = 10;
     
     private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
+    private PlaygroundBattle playgroundBattle;
     
-    public ManageDeployment() {
+    protected ManageDeployment(PlaygroundBattle playgroundBattle) {
         this.ships = new HashMap<>();
+        this.playgroundBattle = playgroundBattle;
     }
     
     /**
