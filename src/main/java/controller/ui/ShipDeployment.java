@@ -181,11 +181,11 @@ public final class ShipDeployment {
                     }
                     
                     try {
-                    playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
-                                                  new Pair<>(this.coordY, this.coordX));
-                    ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                    board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
-                    draggingShip.setTranslateX(this.horizOffset.get());
+                        playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
+                                                      new Pair<>(this.coordY, this.coordX));
+                        ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
+                        board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                        draggingShip.setTranslateX(this.horizOffset.get());
                     } catch(CellsFilledException exception) {
                         System.out.println("NON VA BENE");
                     }
