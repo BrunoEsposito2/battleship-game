@@ -12,11 +12,11 @@ public class BasicArtificialIntelligence extends ArtificialIntelligence {
 
     public BasicArtificialIntelligence(final IntelligenceComputation intelligence) {
         super(intelligence);
-        this.attackGrid = new LinkedList<Pair<Integer, Integer>>();
     }
 
     @Override
     public final PlaygroundBattle initShipsOnGrid() {
+        this.attackGrid = new LinkedList<Pair<Integer, Integer>>();
         return this.getIntelligenceComputation().initShips();
     }
 

@@ -28,7 +28,7 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
 
     private boolean checkCollision(final PlaygroundBattle shipsGrid, final ShipType type) {
         try {
-            shipsGrid.positionShip(new Ship(ShipType.BATTLESHIP), this.getRandomPosition());
+            shipsGrid.positionShip(new Ship(type), this.getRandomPosition());
             return true;
         } catch (CellsFilledException e) {
             e.printStackTrace();
