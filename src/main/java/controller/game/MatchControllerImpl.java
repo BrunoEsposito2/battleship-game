@@ -19,8 +19,8 @@ public class MatchControllerImpl implements MatchController {
     /*
      * For now i put grid size here
      */
-    private static final int LINE = 8;
-    private static final int COLUMN = 8;
+    private static final int LINE = 10;
+    private static final int COLUMN = 10;
 
     private BattleView battleView;
     private PlayerNumber currentPlayer;
@@ -52,7 +52,7 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void removeShip(final Pair<Integer, Integer> cell) {
-        this.currentPlaygroundBattle.removeShip(cell);
+        this.currentPlaygroundBattle.removeShipWithCell(cell);
     }
 
     /**

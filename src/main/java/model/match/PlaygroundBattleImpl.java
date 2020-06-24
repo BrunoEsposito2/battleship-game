@@ -61,7 +61,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public boolean removeShip(final Pair<Integer, Integer> cell) {
+    public boolean removeShipWithCell(final Pair<Integer, Integer> cell) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
         final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
 
@@ -76,6 +76,23 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         }
         return true;
     }
+    
+    @Override
+    public void removeShipWithShip(final Ship shipPassata) {
+        final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
+        final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
+ 
+        while (iterator.hasNext()) {
+            final Entry<List<Pair<Integer, Integer>>, Ship> entry = iterator.next();
+            Ship ship = entry.getValue();
+            final List<Pair<Integer, Integer>> shipCells = entry.getKey();
+ 
+            if (ship.equals(shipPassata)) {
+                shipCells.forEach(i -> this.playground.get(i.getX()).set(i.getY(), false));
+                iterator.remove();
+            }
+        }
+    }
 
     @Override
     public void resetPlayground() {
@@ -85,7 +102,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     @Override
     public void removeAllShips() {
         for (Entry<List<Pair<Integer, Integer>>, Ship> list : this.shipList.entrySet()) {
-            this.removeShip(list.getKey().get(0));
+            this.removeShipWithCell(list.getKey().get(0));
         }
     }
 
@@ -160,9 +177,25 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return new HashMap<List<Pair<Integer, Integer>>, Ship>(this.shipList);
     }
 
+//    @Override
+//    public boolean isCellUsed(final Pair<Integer, Integer> cell) {
+//        return this.playground.get(cell.getX()).get(cell.getY());
+//    }
+
     @Override
     public boolean isCellUsed(final Pair<Integer, Integer> cell) {
-        return this.playground.get(cell.getX()).get(cell.getY());
+        final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
+        final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
+ 
+        while (iterator.hasNext()) {
+            final Entry<List<Pair<Integer, Integer>>, Ship> ship = iterator.next();
+            final List<Pair<Integer, Integer>> shipCells = ship.getKey();
+ 
+            if (shipCells.contains(cell)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void createPlayGround() {
