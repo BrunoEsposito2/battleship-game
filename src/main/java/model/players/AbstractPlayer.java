@@ -9,6 +9,11 @@ public abstract class AbstractPlayer implements Player, Serializable {
      */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 
+     */
+    protected static final double DEF_INIT_STATS_VAL = 0.00;
+
     private String userName;
     private String password;
     private transient boolean online;
