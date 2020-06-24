@@ -1,4 +1,4 @@
-package model.enums;
+package model.gamemode;
 
 /**
  * This enum models the win conditions for a match, selectable by the player in the matchSettings menu.
@@ -10,7 +10,7 @@ public enum GameMode {
      */
     CLASSIC("Classic", "Sink all enemy ships to win.") {
         @Override
-        public boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
+        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
             return opponentRemainingShips < 1;
         }
     },
@@ -18,10 +18,10 @@ public enum GameMode {
     /**
      * Have the highest score at the end of the match.
      */
-    HIGH_SCORE("High-score", "Have the highest score at the end of the match.") {
+    FIVE_HITS("5 Hits", "Be the first player to score 5 hits.") {
         @Override
-        public boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
-            return playerHits > opponentHits;
+        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
+            return playerHits > 4;
         }
     };
 
@@ -34,13 +34,12 @@ public enum GameMode {
     }
 
     /**
-     * this method checks whether the player has won the match according to selected win conditions.
-     * @param playerHits - how many times the player has hit the opponent's ships.
-     * @param opponentHits - how many times the opponent has hit the player's ships.
+     * this method checks whether the player has won the match.
+     * @param hits - how many times the player has hit the opponent's ships.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    public abstract boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
+    protected abstract boolean isMatchOver(int hits, int opponentRemainingShips);
 
     /**
      * @return the GameMode's name.

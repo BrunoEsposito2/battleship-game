@@ -2,10 +2,15 @@ package model;
 
 import java.util.List;
 import java.util.Optional;
-
-import model.enums.GameMode;
+import model.intelligence.BasicArtificialIntelligence;
+import model.intelligence.BasicIntelligenceComputation;
+import model.players.ArtificialPlayer;
 import model.enums.PlayerNumber;
+import model.gamemode.GameMode;
+import model.gamemode.WinCondition;
+import model.gamemode.WinConditionImpl;
 import model.match.players.CurrentPlayer;
+import model.match.players.CurrentPlayerImpl;
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -16,21 +21,37 @@ import model.players.PlayerOperation;
  */
 public final class ModelImpl implements Model {
 
-    private final CurrentPlayer currentPlayer = new CurrentPlayer();
+    private static final String BASIC_AI_NAME = "BasicAI";
+    private static final String BASIC_AI_PASS = "basic";
+
+    private final ArtificialPlayer playerAI;
+    private final WinCondition winCondition = new WinConditionImpl();
+    private final CurrentPlayer currentPlayer = new CurrentPlayerImpl();
     private Optional<PlayerInfo> player1 = Optional.empty(); 
     private Optional<PlayerInfo> player2 = Optional.empty(); 
-    private Optional<GameMode> gameMode = Optional.empty();
+
+    /**
+     * concrete implementation of Model interface. 
+     */
+    public ModelImpl() {
+        this.playerAI = new ArtificialPlayer(BASIC_AI_NAME, BASIC_AI_PASS);
+    }
 
     @Override
     public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
         return new PlayerOperation(players);
     }
 
+    @Override
+    public void startBasicAI() {
+        this.playerAI.setArtificialIntelligence(new BasicArtificialIntelligence(new BasicIntelligenceComputation()));
+    }
+
     /**
      * @return the current player
      */
     @Override
-    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
+    public Optional<PlayerNumber> getCurrentPlayer() {
         return currentPlayer.getCurrentPlayer();
     }
 
@@ -38,13 +59,13 @@ public final class ModelImpl implements Model {
      * @param playerNumber - the new current player
      */
     @Override
-    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+    public void setCurrentPlayer(final PlayerNumber playerNumber) {
         currentPlayer.setCurrentPlayer(playerNumber);
     }
 
     @Override
     public void setGameMode(final GameMode gameMode) {
-        this.gameMode = Optional.ofNullable(gameMode);
+        winCondition.setGameMode(gameMode);
     }
 
     @Override
@@ -62,8 +83,8 @@ public final class ModelImpl implements Model {
     }
 
     @Override
-    public Boolean isMatchOver(final int playerHits, final int opponentHits, final int opponentRemainingShips) {
-        return gameMode.isPresent() ? gameMode.get().isMatchOver(playerHits, opponentHits, opponentRemainingShips) : false;
+    public Boolean isMatchOver(final int hits, final int opponentRemainingShips) {
+        return winCondition.isMatchOver(hits, opponentRemainingShips);
     }
 
 }

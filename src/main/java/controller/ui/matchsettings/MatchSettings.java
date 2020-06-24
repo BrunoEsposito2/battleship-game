@@ -4,13 +4,14 @@ import javafx.scene.control.TextArea;
 import java.util.Optional;
 import application.Battleships;
 import controller.match.MatchInitializer;
+import controller.match.MatchInitializerImpl;
 import controller.users.AccountManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
-import model.enums.GameMode;
 import model.enums.PlayerType;
+import model.gamemode.GameMode;
 import view.scene.SceneName;
 
 /**
@@ -20,6 +21,7 @@ public final class MatchSettings {
 
     private final AccountManager accountManager = Battleships.getController().getAccountManager(); //new AccountOperation();
     private final Login login = new Login(accountManager);
+    private final MatchInitializer matchInitializer = new MatchInitializerImpl();
 
     @FXML
     private Button buttonBack, buttonStart;
@@ -50,8 +52,8 @@ public final class MatchSettings {
         final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
         final Optional<String> username2 = checkboxAI.isSelected() ? Optional.empty() : Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
         if (login.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
-            new MatchInitializer(username1.get(), username2, checkboxAI.isSelected()
-                    ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode)).startNewMatch();
+            matchInitializer.startNewMatch(username1.get(), username2, checkboxAI.isSelected()
+                    ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
         }
     }
 

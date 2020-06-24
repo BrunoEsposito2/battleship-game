@@ -6,7 +6,7 @@ import java.util.Collections;
 import controller.users.AccountManager;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ChoiceBox;
-import model.enums.GameMode;
+import model.gamemode.GameMode;
 
 //package private
 final class Initializer {
