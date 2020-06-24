@@ -21,4 +21,6 @@ public interface BattleView {
     void drawMissed(Pair<Integer, Integer> pair);
 
     void drawShip(List<Pair<Integer, Integer>> cells);
+
+    void changePlayer();
 }
