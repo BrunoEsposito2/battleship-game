@@ -31,7 +31,7 @@ public interface PlaygroundBattle {
 
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
-    boolean areThereAliveShip();
+    int getNumberOfAliveShip();
 
     boolean isCellUsed(Pair<Integer, Integer> cell);
 
