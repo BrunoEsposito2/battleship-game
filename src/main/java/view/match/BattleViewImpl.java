@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -19,15 +20,21 @@ import model.enums.ShipType;
 import model.util.Pair;
 import view.dialog.DialogType;
 
-import static java.util.stream.Collectors.joining;;
+import static java.util.stream.Collectors.joining;
+
+
 
 public class BattleViewImpl implements BattleView {
 
     @FXML
     private GridPane playerOneGrid, playerTwoGrid;
+    
+    @FXML
+    private  TextField pointsPLOne, pointsPLTwo, shotAvailablePLOne, shotAvailablePLTwo;
 
     private GridPane currentPlayerGridPane;
     private GridPane currentVillainGridPane;
+    private TextField currentPointsPL, currentShotAvailable;
 
     private PlayerNumber playerNumber;
 
@@ -63,10 +70,25 @@ public class BattleViewImpl implements BattleView {
         gridPane.setStyle("-fx-background-color: #000000");
     }
 
+    private void initTextField() {
+        this.pointsPLOne.setText("" + 0);
+        this.pointsPLOne.setEditable(false);
+
+        this.pointsPLTwo.setText("" + 0);
+        this.pointsPLTwo.setEditable(false);
+
+        this.shotAvailablePLOne.setText("" + MatchControllerImpl.getShipNumberOfGame());
+        this.shotAvailablePLOne.setEditable(false);
+
+        this.shotAvailablePLTwo.setText("" + MatchControllerImpl.getShipNumberOfGame());
+        this.shotAvailablePLTwo.setEditable(false);
+    }
+
     @FXML
     public void initialize() {
         this.initGridPane(this.playerOneGrid);
         this.initGridPane(this.playerTwoGrid);
+        this.initTextField();
         this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
         this.playerNumber = PlayerNumber.PLAYER_ONE;
@@ -145,16 +167,32 @@ public class BattleViewImpl implements BattleView {
 
     @Override
     public void changePlayer() {
-        if (this.playerNumber == PlayerNumber.PLAYER_ONE) {
+        if (this.playerNumber == PlayerNumber.PLAYER_TWO) {
             this.currentPlayerGridPane = playerOneGrid;
+            this.currentPointsPL = this.pointsPLOne;
+            this.currentShotAvailable = this.shotAvailablePLOne;
             this.currentVillainGridPane = playerTwoGrid;
+            this.playerNumber = PlayerNumber.PLAYER_ONE;
         } else {
             this.currentPlayerGridPane = playerTwoGrid;
+            this.currentPointsPL = this.pointsPLTwo;
+            this.currentShotAvailable = this.shotAvailablePLTwo;
             this.currentVillainGridPane = playerOneGrid;
+            this.playerNumber = PlayerNumber.PLAYER_TWO;
         }
     }
 
-    private Node getNodeByRowColumnIndex(final int row, final int column, GridPane gridPane) {
+    @Override
+    public void setPoints(final int point) {
+        this.currentPointsPL.setText("" + point);
+    }
+
+    @Override
+    public void setShotAvailable(final int shotAvailable) {
+        this.currentShotAvailable.setText("" + shotAvailable);
+    }
+
+    private Node getNodeByRowColumnIndex(final int row, final int column, final GridPane gridPane) {
         Node result = null;
         final ObservableList<Node> childrens = gridPane.getChildren();
 
