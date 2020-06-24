@@ -10,11 +10,10 @@ import view.dialog.DialogType;
 //package private
 final class Login {
 
-    private final AccountManager accountManager;
+    private final AccountManager accountManager = Battleships.getController().getAccountManager();
     private final Controller controller = Battleships.getController();
 
-    protected Login(final AccountManager accountManager) {
-        this.accountManager = accountManager;
+    protected Login() {
     }
 
   //package private
