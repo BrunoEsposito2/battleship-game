@@ -23,4 +23,8 @@ public interface BattleView {
     void drawShip(List<Pair<Integer, Integer>> cells);
 
     void changePlayer();
+
+    void setPoints(int point);
+
+    void setShotAvailable(int shotAvailable);
 }
