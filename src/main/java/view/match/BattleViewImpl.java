@@ -32,10 +32,7 @@ public class BattleViewImpl implements BattleView {
     
     private MatchController controller;
     
-    public BattleViewImpl() {
-        this.controller = new MatchControllerImpl();
-        // TODO Auto-generated constructor stub
-    }
+
     
     private void initGridPane(final GridPane gridPane) {
         for (int col = 0; col < gridPane.getColumnCount(); col++) {
@@ -64,7 +61,7 @@ public class BattleViewImpl implements BattleView {
         }
         gridPane.setStyle("-fx-background-color: #000000");
     }
-    
+
     @FXML
     public void initialize() {
         this.initGridPane(this.playerOneGrid);
@@ -72,6 +69,7 @@ public class BattleViewImpl implements BattleView {
         this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
         this.playerNumber = PlayerNumber.PLAYER_ONE;
+        this.controller = Battleships.getController().getMatchController();
         this.controller.setView(this);
     }
 
@@ -101,7 +99,7 @@ public class BattleViewImpl implements BattleView {
 
     @Override
     public void drawHit(final Pair<Integer, Integer> pair) {
-        
+        this.getNodeByRowColumnIndex(pair.getX(), pair.getY(), this.currentVillainGridPane).setStyle("-fx-background-color: #ff6600");
     }
     
 //    @Override
@@ -110,14 +108,17 @@ public class BattleViewImpl implements BattleView {
 //    }
     
     @Override
-    public void drawShip(List<Pair<Integer, Integer>> cells) {
-        // TODO Auto-generated method stub
-        
+    public void drawShip(final List<Pair<Integer, Integer>> cells) {
+        for (Pair<Integer, Integer> cell : cells) {
+            this.getNodeByRowColumnIndex(cell.getX(), cell.getY(), this.currentVillainGridPane).setStyle("-fx-background-color: #00995c");
+        }
     }
 
     @Override
     public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells) {
-        // TODO Auto-generated method stub
+        for (Pair<Integer, Integer> cell : cells) {
+            this.getNodeByRowColumnIndex(cell.getX(), cell.getY(), this.currentVillainGridPane).setStyle("-fx-background-color: #660033");
+        }
     }
 
     @Override
