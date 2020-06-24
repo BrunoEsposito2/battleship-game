@@ -3,9 +3,12 @@ package model;
 import java.util.List;
 import java.util.Optional;
 
-import model.enums.GameMode;
 import model.enums.PlayerNumber;
+<<<<<<< HEAD
 import model.match.PlaygroundBattle;
+=======
+import model.gamemode.GameMode;
+>>>>>>> 95320364063f8a0752f48aae1265902e42b70738
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -24,6 +27,7 @@ public interface Model {
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
+<<<<<<< HEAD
     /**
      * 
      * @return the new PlaygroungBattle containing all the ships 
@@ -38,24 +42,26 @@ public interface Model {
      */
     Pair<Integer, Integer> getNextHitPointAI();
 
+=======
+    void startBasicAI();
+>>>>>>> 95320364063f8a0752f48aae1265902e42b70738
     /**
      * @return the current player
      */
-    Optional<model.enums.PlayerNumber> getCurrentPlayer();
+    Optional<PlayerNumber> getCurrentPlayer();
 
     /**
      * @param playerNumber - the new current player
      */
-    void setCurrentPlayer(model.enums.PlayerNumber playerNumber);
+    void setCurrentPlayer(PlayerNumber playerNumber);
 
     /**
      * this method checks whether the player has won the match according to selected win conditions.
-     * @param playerHits - how many times the player has hit the opponent's ships.
-     * @param opponentHits - how many times the opponent has hit the player's ships.
+     * @param hits - how many times the player has hit the opponent's ships.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    Boolean isMatchOver(int playerHits, int opponentHits, int opponentRemainingShips);
+    Boolean isMatchOver(int hits, int opponentRemainingShips);
 
     /**
      * @param gameMode - the new current gameMode

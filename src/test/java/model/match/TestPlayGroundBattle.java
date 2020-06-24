@@ -162,7 +162,7 @@ public class TestPlayGroundBattle {
         System.out.println(playgroundBattle.getShips().toString());
         System.out.println("");
 //
-        playgroundBattle.removeShip(new Pair<>(1,2));
+        playgroundBattle.removeShipWithCell(new Pair<>(1,2));
         
 //        playgroundBattle.removeAllShips();
         playgroundBattle.getPlaygroundBattle().forEach(i -> System.out.println(i));

@@ -2,25 +2,26 @@ package model.match.players;
 
 import java.util.Optional;
 
-/**
- *  This class keeps track of the current player.
- */
-public class CurrentPlayer {
+import model.enums.PlayerNumber;
 
-    private Optional<model.enums.PlayerNumber> current = Optional.empty();
+/**
+ *  This interface models an object that keeps track of the current player.
+ */
+public interface CurrentPlayer {
 
     /**
      * @return the current player
      */
-    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
-        return current;
-    }
+    Optional<PlayerNumber> getCurrentPlayer();
 
     /**
      * @param playerNumber - the new current player
      */
-    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
-        current = Optional.ofNullable(playerNumber);
-    }
+    void setCurrentPlayer(PlayerNumber playerNumber);
+
+    /**
+     * sets the next player as current.
+     */
+    void nextPlayer();
 
 }
