@@ -1,6 +1,7 @@
 package model.players;
 
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,15 +47,16 @@ public final class PlayerOperation implements PlayerManager {
 
     @Override
     public boolean removePlayer(final String userName, final String password) {
+        boolean canRemove = false;
         if (infoAreValid(userName, password)) {
-            this.players.get().forEach(x -> {
-                if (x instanceof HumanPlayer && x.getUsername().equals(userName)) {
-                    this.players.get().remove(x);
+            for (Player player : this.players.get()) {
+                if (player instanceof HumanPlayer && player.getUsername().equals(userName)) {
+                    this.players.get().remove(player);
+                    canRemove = true;
                 }
-            });
-            return true;
+            }
         }
-        return false;
+        return canRemove;
     }
 
     @Override
@@ -85,7 +87,13 @@ public final class PlayerOperation implements PlayerManager {
 
     @Override
     public Optional<List<Player>> getPlayers() {
-        return Optional.of(Collections.unmodifiableList(this.players.get()));
+        Optional<List<Player>> humanList = Optional.ofNullable(new LinkedList<>());
+        for (Player player : this.players.get()) {
+            if (player instanceof HumanPlayer) {
+                humanList.get().add(player);
+            }
+        }
+        return Optional.of(Collections.unmodifiableList(humanList.get()));
     }
 
     @Override
@@ -118,6 +126,17 @@ public final class PlayerOperation implements PlayerManager {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean artificialExists() {
+        return this.players.get().stream().filter(x -> x instanceof ArtificialPlayer)
+                .count() == 1 ? true : false;
+    }
+
+    @Override
+    public void addArtificialPlayer(final ArtificialPlayer playerAI) {
+        this.players.get().add(playerAI);
     }
 
 }

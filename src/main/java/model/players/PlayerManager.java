@@ -7,6 +7,8 @@ public interface PlayerManager {
 
     Optional<Player> addPlayer(String userName, String password);
 
+    void addArtificialPlayer(ArtificialPlayer playerAI);
+
     boolean removePlayer(String userName, String password);
 
     boolean setLogIn(String userName, String password);
@@ -18,4 +20,6 @@ public interface PlayerManager {
     boolean updateLosStats(String userName, Double score);
 
     Optional<List<Player>> getPlayers();
+
+    boolean artificialExists();
 }
