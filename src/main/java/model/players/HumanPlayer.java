@@ -24,7 +24,7 @@ public class HumanPlayer extends AbstractPlayer {
     private void initStats() {
         this.stats = new HashMap<>();
         Arrays.asList(StatsInfo.values()).forEach(x -> {
-            this.stats.put(x.getName(), 0.00);
+            this.stats.put(x.getName(), AbstractPlayer.DEF_INIT_STATS_VAL);
         });
     }
 

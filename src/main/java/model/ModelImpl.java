@@ -34,8 +34,15 @@ public final class ModelImpl implements Model {
      */
     public static final int MAX_COLS = 10;
 
-    private static final String BASIC_AI_NAME = "BasicAI";
-    private static final String BASIC_AI_PASS = "basic";
+    /**
+     * 
+     */
+    public static final String BASIC_AI_NAME = "BasicAI";
+
+    /**
+     * 
+     */
+    public static final String BASIC_AI_PASS = "basic";
 
     private final ArtificialPlayer playerAI;
     private final WinCondition winCondition = new WinConditionImpl();
@@ -54,6 +61,11 @@ public final class ModelImpl implements Model {
     @Override
     public PlayerManager setPlayerManager(final Optional<List<Player>> players) {
         return new PlayerOperation(players);
+    }
+
+    @Override
+    public ArtificialPlayer getArtificialPlayer() {
+        return this.playerAI;
     }
 
     @Override

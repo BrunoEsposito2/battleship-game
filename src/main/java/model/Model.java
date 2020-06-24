@@ -7,6 +7,7 @@ import model.enums.PlayerNumber;
 import model.match.PlaygroundBattle;
 import model.gamemode.GameMode;
 import model.match.players.PlayerInfo;
+import model.players.ArtificialPlayer;
 import model.players.Player;
 import model.players.PlayerManager;
 import model.util.Pair;
@@ -23,6 +24,8 @@ public interface Model {
      * @return the model's player manager object.
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
+
+    ArtificialPlayer getArtificialPlayer();
 
     /**
      * 

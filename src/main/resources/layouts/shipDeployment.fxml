@@ -18,7 +18,7 @@
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="492.0" prefWidth="620.0">
                <children>
-                  <GridPane fx:id="board" gridLinesVisible="true" hgap="2.0" layoutX="63.0" layoutY="39.0" onMouseClicked="#onMouseClicked" prefHeight="472.0" prefWidth="471.0" vgap="2.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="164.0" AnchorPane.topAnchor="39.0">
+                  <GridPane fx:id="board" gridLinesVisible="true" hgap="2.0" layoutX="63.0" layoutY="39.0" onMouseClicked="#onMouseClicked" prefHeight="472.0" prefWidth="471.0" vgap="2.0">
                     <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="45.0" minWidth="45.0" prefWidth="45.0" />

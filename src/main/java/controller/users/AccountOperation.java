@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import model.players.PlayerManager;
 import model.players.Player;
 import model.Model;
+import model.ModelImpl;
 import model.players.HumanPlayer;
 
 public class AccountOperation implements AccountManager {
@@ -19,6 +20,7 @@ public class AccountOperation implements AccountManager {
     public AccountOperation(final Model model) {
         this.system = new FileSystemManager();
         this.modelMng = model.setPlayerManager(initAllUsers());
+        this.createArtificial(model);
     }
 
     private Optional<List<Player>> initAllUsers() {
@@ -26,6 +28,17 @@ public class AccountOperation implements AccountManager {
             return this.system.loadUsers();
         } else {
             return Optional.of(new LinkedList<>());
+        }
+    }
+
+    private void createArtificial(final Model model) {
+        if (!this.modelMng.artificialExists()) {
+            try {
+                this.system.saveUser(model.getArtificialPlayer());
+                this.modelMng.addArtificialPlayer(model.getArtificialPlayer());
+            } catch (IllegalAccountArgumentException e) {
+                throw new IllegalAccountArgumentException("Error: Artificial Player not saved.");
+            }
         }
     }
 
