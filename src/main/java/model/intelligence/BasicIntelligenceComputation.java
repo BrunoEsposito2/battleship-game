@@ -14,6 +14,8 @@ import model.util.Pair;
 
 public class BasicIntelligenceComputation implements IntelligenceComputation {
 
+    private static final int POSSIBLE_ORIENTATIONS = 2;
+
     private final int maxRows;
     private final int maxCols;
 
@@ -29,8 +31,7 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
 
     private Orientation setRandomOrientation() {
         Optional<Random> rand = Optional.empty();
-        final int num = rand.get().nextInt(2);
-
+        final int num = rand.get().nextInt(BasicIntelligenceComputation.POSSIBLE_ORIENTATIONS);
         return num == 0 ? Orientation.VERTICAL : Orientation.HORIZONTAL;
     }
 
