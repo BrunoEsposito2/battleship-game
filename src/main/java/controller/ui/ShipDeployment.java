@@ -34,8 +34,6 @@ public final class ShipDeployment {
 
     private int coordX;
     private int coordY;
-    private int mouseCoordX;
-    private int mouseCoordY;
     private int size;
     private Optional<Integer> horizOffset;
     private Optional<Integer> vertOffset;
@@ -103,12 +101,12 @@ public final class ShipDeployment {
      */
     @FXML
     private void onMouseClicked(final MouseEvent e) {
-        Node clickedNode = e.getPickResult().getIntersectedNode();
-        Integer colIndex = GridPane.getColumnIndex(clickedNode);
-        Integer rowIndex = GridPane.getRowIndex(clickedNode);
-        this.mouseCoordY = colIndex == null ? 0 : colIndex;
-        this.mouseCoordX = rowIndex == null ? 0 : rowIndex;
-        System.out.printf("Mouse clicked cell [%d, %d]%n", this.mouseCoordX, this.mouseCoordY);
+        final Node clickedNode = e.getPickResult().getIntersectedNode();
+        final Integer colIndex = GridPane.getColumnIndex(clickedNode);
+        final Integer rowIndex = GridPane.getRowIndex(clickedNode);
+        final int mouseCoordY = colIndex == null ? 0 : colIndex;
+        final int mouseCoordX = rowIndex == null ? 0 : rowIndex;
+        System.out.printf("Mouse clicked cell [Row %d, Col %d]%n", mouseCoordX, mouseCoordY);
     }
 
     /**
@@ -116,11 +114,10 @@ public final class ShipDeployment {
      * 
      * @param ship, the ship currently dragged
      */
-    private void dragImage(ImageView ship) {
+    private void dragImage(final ImageView ship) {
         ship.setOnDragDetected(e -> {
-            Dragboard db = ship.startDragAndDrop(TransferMode.MOVE);
-
-            ClipboardContent cc = new ClipboardContent();
+            final Dragboard db = ship.startDragAndDrop(TransferMode.MOVE);
+            final ClipboardContent cc = new ClipboardContent();
             cc.putImage(ship.getImage());
 
             db.setContent(cc);
@@ -143,7 +140,7 @@ public final class ShipDeployment {
      * 
      * @param gridPane, where the ship is dropped
      */
-    private void dropImage(GridPane gridPane) {
+    private void dropImage(final GridPane gridPane) {
         gridPane.setOnDragOver(e -> {
             
             Dragboard db = e.getDragboard();
@@ -154,7 +151,7 @@ public final class ShipDeployment {
             }
             
             this.extractCoordinates(e);
-            System.out.printf("Dragging on cell [%d, %d]%n", this.coordX, this.coordY); 
+            System.out.printf("Dragging on cell [Row %d, Col %d]%n", this.coordX, this.coordY); 
             
             e.consume();
         });
@@ -174,7 +171,7 @@ public final class ShipDeployment {
                 
                 //*** Horizontal dropping ***
                 if (this.orientation.get().equals(Orientation.HORIZONTAL)
-                    && (this.coordX < GRIDSIZE - this.size + 1)
+                    && this.coordX < GRIDSIZE - this.size + 1
                     && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
                     //check whether this ship is already present
@@ -197,7 +194,7 @@ public final class ShipDeployment {
                     
                 //*** Vertical dropping ***    
                 } else if (this.orientation.get().equals(Orientation.VERTICAL)
-                           && (this.coordY < GRIDSIZE - this.size + 1)
+                           && this.coordY < GRIDSIZE - this.size + 1
                            && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
                   //check whether this ship is already present
@@ -272,11 +269,11 @@ public final class ShipDeployment {
     private void applyRotation() {
         this.orientation = manageDeployment.extractOrientation(draggingShip);
         
-        double rot = draggingShip.getRotate();
+        final double rot = draggingShip.getRotate();
         
         //*** Vertical rotation ***
         if (this.orientation.get().equals(Orientation.HORIZONTAL)
-            && (this.coordY < GRIDSIZE - this.size + 1)
+            && this.coordY < GRIDSIZE - this.size + 1
             && this.checkVertRotation()) {
             
             board.getChildren().remove(draggingShip);
@@ -295,7 +292,7 @@ public final class ShipDeployment {
             
         //*** Horizontal rotation ***    
         } else if (this.orientation.get().equals(Orientation.VERTICAL)
-                   && (this.coordX < GRIDSIZE - this.size + 1)
+                   && this.coordX < GRIDSIZE - this.size + 1
                    && this.checkHorizRotation()) {
             
             board.getChildren().remove(draggingShip);
