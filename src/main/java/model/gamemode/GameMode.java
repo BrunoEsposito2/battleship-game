@@ -11,7 +11,7 @@ public enum GameMode {
     CLASSIC("Classic", "Sink all enemy ships to win.") {
         @Override
         protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return opponentRemainingShips < 1;
+            return opponentRemainingShips == 0;
         }
     },
 
