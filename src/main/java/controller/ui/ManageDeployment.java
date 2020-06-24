@@ -148,5 +148,31 @@ final class ManageDeployment {
         }
         return Optional.empty();
     }
+    
+    /**
+     * 
+     * @return true if vertical rotation is possible (with no collisions)
+     */
+    boolean checkVertRotation(final int size, final int coordX, final int coordY) {
+        for (int i = 1; i < size; i++) {
+            if (playgroundBattle.isCellUsed(new Pair<>(coordX + i, coordY))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 
+     * @return true if horizontal rotation is possible (with no collisions)
+     */
+    boolean checkHorizRotation(final int size, final int coordX, final int coordY) {
+        for (int i = 1; i < size; i++) {
+            if (playgroundBattle.isCellUsed(new Pair<>(coordX, coordY + i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
 }
