@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
+import model.enums.Orientation;
 import model.util.Pair;
 import model.match.PlaygroundBattle;
 import model.match.Ship;
@@ -128,6 +129,21 @@ final class ManageDeployment {
         for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 return Optional.of(entry.getValue().getY().getY());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    /**
+     * Method to extract the orientation of the selected ship
+     * 
+     * @param draggingShip - the ImageView of the selected ship
+     * @return orientation
+     */
+    Optional<Orientation> extractOrientation(final ImageView draggingShip) {
+        for (final Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                return Optional.of(entry.getValue().getX().getOrientation());
             }
         }
         return Optional.empty();
