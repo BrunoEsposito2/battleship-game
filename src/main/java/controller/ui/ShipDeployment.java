@@ -65,13 +65,13 @@ public final class ShipDeployment {
         //initialize the grid's cells
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                Pane pane = new Pane();
+                final Pane pane = new Pane();
                 pane.setStyle("-fx-background-color: white;");
                 board.add(pane, i, j);
             }
         }
         
-        for (Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
+        for (final Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
             dragImage(entry.getKey());
         }
         
