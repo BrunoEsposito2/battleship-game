@@ -2,6 +2,7 @@ package controller;
 
 import java.util.Optional;
 
+import controller.game.MatchController;
 import controller.users.AccountManager;
 import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
@@ -72,5 +73,12 @@ public interface Controller {
      * @param info - player's info
      */
     void setPlayerInfo(PlayerNumber number, PlayerInfo info);
+
+    /**
+     * Method to get the controller of match.
+     * 
+     * @return the controller of the match
+     */
+    MatchController getMatchController();
 
 }
