@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Random;
 
+import model.enums.Orientation;
 import model.enums.ShipType;
 import model.match.CellsFilledException;
 import model.match.PlaygroundBattle;
@@ -12,6 +13,8 @@ import model.match.Ship;
 import model.util.Pair;
 
 public class BasicIntelligenceComputation implements IntelligenceComputation {
+
+    private static final int POSSIBLE_ORIENTATIONS = 2;
 
     private final int maxRows;
     private final int maxCols;
@@ -26,9 +29,17 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
         return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows), rand.get().nextInt(this.maxCols));
     }
 
+    private Orientation setRandomOrientation() {
+        Optional<Random> rand = Optional.empty();
+        final int num = rand.get().nextInt(BasicIntelligenceComputation.POSSIBLE_ORIENTATIONS);
+        return num == 0 ? Orientation.VERTICAL : Orientation.HORIZONTAL;
+    }
+
     private boolean checkCollision(final PlaygroundBattle shipsGrid, final ShipType type) {
         try {
-            shipsGrid.positionShip(new Ship(type), this.getRandomPosition());
+            final Ship shipToPos = new Ship(type);
+            shipToPos.setOrientation(this.setRandomOrientation());
+            shipsGrid.positionShip(shipToPos, this.getRandomPosition());
             return true;
         } catch (CellsFilledException e) {
             e.printStackTrace();
@@ -38,9 +49,9 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
 
     @Override
     public final PlaygroundBattle initShips() {
-        final PlaygroundBattle shipsGrid = new PlaygroundBattleImpl(this.maxRows, this.maxCols);
+        PlaygroundBattle shipsGrid = new PlaygroundBattleImpl(this.maxRows, this.maxCols);
 
-        for (ShipType ship : ShipType.values()) {
+        for (final ShipType ship : ShipType.values()) {
             boolean setShip = this.checkCollision(shipsGrid, ship);
             if (!setShip) {
                 boolean flag = true;
