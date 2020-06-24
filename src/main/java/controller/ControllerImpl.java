@@ -2,6 +2,8 @@ package controller;
 
 import java.util.Optional;
 
+import controller.game.MatchController;
+import controller.game.MatchControllerImpl;
 import controller.users.AccountManager;
 import controller.users.AccountOperation;
 import javafx.stage.Stage;
@@ -16,12 +18,13 @@ import view.dialog.DialogType;
 import view.scene.SceneName;
 
 /**
- * Concrete implementation of the app's mvc controller.
+ * Concrete implementation of the app's mvc controller.s
  */
 public final class ControllerImpl implements Controller {
 
     private final Model model;
     private final View view;
+    private final MatchController matchController;
 
     private final AccountManager manager;
 
@@ -33,6 +36,7 @@ public final class ControllerImpl implements Controller {
         view = new ViewImpl(stage);
         model = new ModelImpl();
         manager = new AccountOperation(model);
+        this.matchController = new MatchControllerImpl();
     }
 
     public AccountManager getAccountManager() {
@@ -77,6 +81,11 @@ public final class ControllerImpl implements Controller {
     @Override
     public void setPlayerInfo(final PlayerNumber number, final PlayerInfo info) {
         model.setPlayerInfo(number, info);
+    }
+
+    @Override
+    public MatchController getMatchController() {
+        return this.matchController;
     }
 
 }
