@@ -1,9 +1,14 @@
 package model.intelligence;
 
+import java.util.List;
+
+import model.match.PlaygroundBattle;
+import model.util.Pair;
+
 public interface IntelligenceComputation {
 
-    void initShips();
+    PlaygroundBattle initShips();
 
-    void setNextToHit();
+    Pair<Integer, Integer> setNextToHit(List<Pair<Integer, Integer>> attackGrid);
 
 }

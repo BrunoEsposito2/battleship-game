@@ -1,5 +1,8 @@
 package model.intelligence;
 
+import model.match.PlaygroundBattle;
+import model.util.Pair;
+
 public abstract class ArtificialIntelligence {
 
     private IntelligenceComputation intelligence;
@@ -12,8 +15,8 @@ public abstract class ArtificialIntelligence {
         return this.intelligence;
     }
 
-    public abstract void initShipsOnGrid();
+    public abstract PlaygroundBattle initShipsOnGrid();
 
-    public abstract void setNextHitPoint();
+    public abstract Pair<Integer, Integer> setNextHitPoint();
 
 }

@@ -5,9 +5,11 @@ import java.util.Optional;
 
 import model.enums.GameMode;
 import model.enums.PlayerNumber;
+import model.match.PlaygroundBattle;
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
+import model.util.Pair;
 
 /**
  * Main model interface containing all the main interactions available.
@@ -22,10 +24,20 @@ public interface Model {
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
-<<<<<<< HEAD
+    /**
+     * 
+     * @return the new PlaygroungBattle containing all the ships 
+     *          positionated by AI basic implementation 
+     */
+    PlaygroundBattle startBasicAI();
 
-    void startBasicAI();
-=======
+    /**
+     * 
+     * @return the point in which set the new attack, 
+     *          calculated by AI basic implementation
+     */
+    Pair<Integer, Integer> getNextHitPointAI();
+
     /**
      * @return the current player
      */
@@ -62,6 +74,5 @@ public interface Model {
      * @param info - player's info
      */
     void setPlayerInfo(PlayerNumber number, PlayerInfo info);
->>>>>>> 5d3ade73d23c2b4d07dabbab4b781952af1fa203
 
 }
