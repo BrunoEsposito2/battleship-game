@@ -17,7 +17,9 @@ public interface PlaygroundBattle {
 
     List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
-    boolean removeShip(Pair<Integer, Integer> box);
+    boolean removeShipWithCell(Pair<Integer, Integer> box);
+
+    void removeShipWithShip(Ship shipPassata);
 
     void removeAllShips();
 
