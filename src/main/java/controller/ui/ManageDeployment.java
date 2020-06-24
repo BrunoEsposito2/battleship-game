@@ -3,6 +3,8 @@ package controller.ui;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import model.util.Pair;
@@ -99,6 +101,36 @@ final class ManageDeployment {
     boolean checkShip(Ship ship) {
         Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
         return map.containsValue(ship);
+    }
+    
+    /**
+     * Method to extract the horizontal offset from the selected ship
+     * 
+     * @param draggingShip - the ImageView of the selected ship
+     * @return horizontal offset
+     */
+    Optional<Integer> extractHorizontalOffset(ImageView draggingShip) {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                return Optional.of(entry.getValue().getY().getX());
+            }
+        }
+        return Optional.empty();
+    }
+    
+    /**
+     * Method to extract the vertical offset from the selected ship
+     * 
+     * @param draggingShip - the ImageView of the selected ship
+     * @return vertical offset
+     */
+    Optional<Integer> extractVerticalOffset(ImageView draggingShip) {
+        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+            if (entry.getKey().equals(draggingShip)) {
+                return Optional.of(entry.getValue().getY().getY());
+            }
+        }
+        return Optional.empty();
     }
 
 }
