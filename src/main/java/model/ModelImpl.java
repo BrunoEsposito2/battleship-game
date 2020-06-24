@@ -62,7 +62,7 @@ public final class ModelImpl implements Model {
     }
 
     @Override
-    public Pair<Integer, Integer> getNextHitPointAI() {
+    public Pair<Integer, Integer> getNextHitPointBasicAI() {
         return this.playerAI.getArtificialIntelligence().setNextHitPoint();
     }
 

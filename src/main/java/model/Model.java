@@ -36,7 +36,7 @@ public interface Model {
      * @return the point in which set the new attack, 
      *          calculated by AI basic implementation
      */
-    Pair<Integer, Integer> getNextHitPointAI();
+    Pair<Integer, Integer> getNextHitPointBasicAI();
 
     /**
      * @return the current player
