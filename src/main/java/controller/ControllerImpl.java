@@ -18,14 +18,14 @@ import view.dialog.DialogType;
 import view.scene.SceneName;
 
 /**
- * Concrete implementation of the app's mvc controller.s
+ * Concrete implementation of the app's mvc controller.
  */
 public final class ControllerImpl implements Controller {
 
     private final Model model;
     private final View view;
-    private final MatchController matchController;
 
+    private final MatchController matchController;
     private final AccountManager manager;
 
     /**
