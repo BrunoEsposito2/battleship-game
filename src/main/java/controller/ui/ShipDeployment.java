@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import application.Battleships;
@@ -36,8 +37,8 @@ public final class ShipDeployment {
     private int mouseCoordX;
     private int mouseCoordY;
     private int size;
-    private int horizOffset;
-    private int vertOffset;
+    private Optional<Integer> horizOffset;
+    private Optional<Integer> vertOffset;
     private Orientation orientation;
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
@@ -164,8 +165,8 @@ public final class ShipDeployment {
             System.out.println("onDragDropped");
             
             this.size = manageDeployment.extractSize(draggingShip);
-            this.extractHorizontalOffset();
-            this.extractVerticalOffset();
+            this.horizOffset = manageDeployment.extractHorizontalOffset(draggingShip);
+            this.vertOffset = manageDeployment.extractVerticalOffset(draggingShip);
             
             if (db.hasImage()) {
                 
@@ -187,7 +188,7 @@ public final class ShipDeployment {
                                                   new Pair<>(this.coordY, this.coordX));
                     ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                     board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
-                    draggingShip.setTranslateX(this.horizOffset);
+                    draggingShip.setTranslateX(this.horizOffset.get());
                     } catch(CellsFilledException exception) {
                         System.out.println("NON VA BENE");
                     }
@@ -210,7 +211,7 @@ public final class ShipDeployment {
                                                       new Pair<>(this.coordY, this.coordX));
                         ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
                         board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
-                        draggingShip.setTranslateX(this.vertOffset);
+                        draggingShip.setTranslateX(this.vertOffset.get());
                     } catch (CellsFilledException exception) {
                         System.out.println("NON VA BENE");
                     }
@@ -224,28 +225,6 @@ public final class ShipDeployment {
             e.consume();
         });
 
-    }
-
-    /**
-     * Method to extract the horizontal offset from the selected ship
-     */
-    private void extractHorizontalOffset() {
-        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
-            if (entry.getKey().equals(draggingShip)) {
-                this.horizOffset = entry.getValue().getY().getX();
-            }
-        }
-    }
-
-    /**
-     * Method to extract the vertical offset from the selected ship
-     */
-    private void extractVerticalOffset() {
-        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
-            if (entry.getKey().equals(draggingShip)) {
-                this.vertOffset = entry.getValue().getY().getY();
-            }
-        }
     }
 
     /**
@@ -320,7 +299,7 @@ public final class ShipDeployment {
                 playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                               new Pair<>(this.coordY, this.coordX));
                 board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
-                draggingShip.setTranslateX(this.vertOffset);
+                draggingShip.setTranslateX(this.vertOffset.get());
             } catch (CellsFilledException exception) {
                 System.out.println("NON VA BENE");
             }
@@ -339,7 +318,7 @@ public final class ShipDeployment {
                 playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
                                               new Pair<>(this.coordY, this.coordX));
                 board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
-                draggingShip.setTranslateX(this.horizOffset);
+                draggingShip.setTranslateX(this.horizOffset.get());
             } catch (CellsFilledException exception) {
                 System.out.println("NON VA BENE");
             }
