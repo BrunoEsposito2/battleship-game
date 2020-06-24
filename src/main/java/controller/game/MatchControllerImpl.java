@@ -21,6 +21,7 @@ public class MatchControllerImpl implements MatchController {
      */
     private static final int LINE = 10;
     private static final int COLUMN = 10;
+    private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
     private PlayerNumber currentPlayer;
@@ -102,11 +103,15 @@ public class MatchControllerImpl implements MatchController {
         this.battleView = battleView;
     }
 
+    public static int getShipNumberOfGame() {
+        return MatchControllerImpl.SHIPS_NUMBER;
+    }
+
     private void checkWin() {
         /*
          * The current playground is of the opponent. 
          */
-        if (this.currentPlaygroundBattle.areThereAliveShip()) {
+        if (this.currentPlaygroundBattle.getNumberOfAliveShip() == 0) {
             this.battleView.showWinDialog(this.currentPlayer);
         }
     }
