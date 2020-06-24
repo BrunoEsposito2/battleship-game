@@ -39,7 +39,7 @@ public final class ShipDeployment {
     private int size;
     private Optional<Integer> horizOffset;
     private Optional<Integer> vertOffset;
-    private Orientation orientation;
+    private Optional<Orientation> orientation;
     private ImageView draggingShip;
     private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
     
@@ -170,10 +170,10 @@ public final class ShipDeployment {
             
             if (db.hasImage()) {
                 
-                this.extractOrientation();
+                this.orientation = manageDeployment.extractOrientation(draggingShip);
                 
                 //*** Horizontal dropping ***
-                if (this.orientation.equals(Orientation.HORIZONTAL)
+                if (this.orientation.get().equals(Orientation.HORIZONTAL)
                     && (this.coordX < GRIDSIZE - this.size + 1)
                     && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
@@ -196,7 +196,7 @@ public final class ShipDeployment {
                     e.setDropCompleted(true);
                     
                 //*** Vertical dropping ***    
-                } else if (this.orientation.equals(Orientation.VERTICAL)
+                } else if (this.orientation.get().equals(Orientation.VERTICAL)
                            && (this.coordY < GRIDSIZE - this.size + 1)
                            && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
 
@@ -241,17 +241,6 @@ public final class ShipDeployment {
     }
 
     /**
-     * Method to extract the orientation of the selected ship
-     */
-    private void extractOrientation() {
-        for (Entry<ImageView, Pair<Ship, Pair<Integer,Integer>>> entry : this.ships.entrySet()) {
-            if (entry.getKey().equals(draggingShip)) {
-                this.orientation = entry.getValue().getX().getOrientation();
-            }
-        }
-    }
-
-    /**
      * 
      * @return true if vertical rotation is possible (with no collisions)
      */
@@ -281,12 +270,12 @@ public final class ShipDeployment {
      * This method applies a rotation of 90° at the selected ship
      */
     private void applyRotation() {
-        this.extractOrientation();
+        this.orientation = manageDeployment.extractOrientation(draggingShip);
         
         double rot = draggingShip.getRotate();
         
         //*** Vertical rotation ***
-        if (this.orientation.equals(Orientation.HORIZONTAL)
+        if (this.orientation.get().equals(Orientation.HORIZONTAL)
             && (this.coordY < GRIDSIZE - this.size + 1)
             && this.checkVertRotation()) {
             
@@ -305,7 +294,7 @@ public final class ShipDeployment {
             }
             
         //*** Horizontal rotation ***    
-        } else if (this.orientation.equals(Orientation.VERTICAL)
+        } else if (this.orientation.get().equals(Orientation.VERTICAL)
                    && (this.coordX < GRIDSIZE - this.size + 1)
                    && this.checkHorizRotation()) {
             
