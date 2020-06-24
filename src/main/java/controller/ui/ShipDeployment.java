@@ -176,7 +176,7 @@ public final class ShipDeployment {
 
                     //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
-                        playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
+                        playgroundBattle.removeShipWithShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
                     
@@ -199,7 +199,7 @@ public final class ShipDeployment {
 
                   //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
-                        playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
+                        playgroundBattle.removeShipWithShip(manageDeployment.extractShip(draggingShip));
                         System.out.println("REMOVE FATTA");
                     }
                     
@@ -251,7 +251,7 @@ public final class ShipDeployment {
             && manageDeployment.checkVertRotation(this.size, this.coordX, this.coordY)) {
             
             board.getChildren().remove(draggingShip);
-            playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
+            playgroundBattle.removeShipWithShip(manageDeployment.extractShip(draggingShip));
             draggingShip.setRotate(rot - 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.VERTICAL);
             
@@ -270,7 +270,7 @@ public final class ShipDeployment {
                    && manageDeployment.checkHorizRotation(this.size, this.coordX, this.coordY)) {
             
             board.getChildren().remove(draggingShip);
-            playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
+            playgroundBattle.removeShipWithShip(manageDeployment.extractShip(draggingShip));
             draggingShip.setRotate(rot + 90);
             this.ships.get(draggingShip).getX().setOrientation(Orientation.HORIZONTAL);
             
