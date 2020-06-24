@@ -158,7 +158,7 @@ public final class ShipDeployment {
         
         gridPane.setOnDragDropped(e -> {
             
-            Dragboard db = e.getDragboard();
+            final Dragboard db = e.getDragboard();
             System.out.println("onDragDropped");
             
             this.size = manageDeployment.extractSize(draggingShip);
@@ -171,8 +171,8 @@ public final class ShipDeployment {
                 
                 //*** Horizontal dropping ***
                 if (this.orientation.get().equals(Orientation.HORIZONTAL)
-                    && this.coordX < GRIDSIZE - this.size + 1
-                    && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
+                    && this.coordY < GRIDSIZE - this.size + 1
+                    && !playgroundBattle.isCellUsed(new Pair<>(this.coordX, this.coordY))) {
 
                     //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
@@ -182,9 +182,9 @@ public final class ShipDeployment {
                     
                     try {
                         playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
-                                                      new Pair<>(this.coordY, this.coordX));
+                                                      new Pair<>(this.coordX, this.coordY));
                         ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                        board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                        board.add(draggingShip, this.coordY + 1, this.coordX, this.size, 1);
                         draggingShip.setTranslateX(this.horizOffset.get());
                     } catch(CellsFilledException exception) {
                         System.out.println("NON VA BENE");
@@ -194,8 +194,8 @@ public final class ShipDeployment {
                     
                 //*** Vertical dropping ***    
                 } else if (this.orientation.get().equals(Orientation.VERTICAL)
-                           && this.coordY < GRIDSIZE - this.size + 1
-                           && !playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX))) {
+                           && this.coordX < GRIDSIZE - this.size + 1
+                           && !playgroundBattle.isCellUsed(new Pair<>(this.coordX, this.coordY))) {
 
                   //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
@@ -205,9 +205,9 @@ public final class ShipDeployment {
                     
                     try {
                         playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
-                                                      new Pair<>(this.coordY, this.coordX));
+                                                      new Pair<>(this.coordX, this.coordY));
                         ((Pane) draggingShip.getParent()).getChildren().remove(draggingShip);
-                        board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                        board.add(draggingShip, this.coordY, this.coordX, 1, this.size);
                         draggingShip.setTranslateX(this.vertOffset.get());
                     } catch (CellsFilledException exception) {
                         System.out.println("NON VA BENE");
@@ -233,34 +233,8 @@ public final class ShipDeployment {
         Node clickedNode = e.getPickResult().getIntersectedNode();
         Integer colIndex = GridPane.getColumnIndex(clickedNode);
         Integer rowIndex = GridPane.getRowIndex(clickedNode);
-        this.coordX = colIndex == null ? 0 : colIndex;
-        this.coordY = rowIndex == null ? 0 : rowIndex;
-    }
-
-    /**
-     * 
-     * @return true if vertical rotation is possible (with no collisions)
-     */
-    private boolean checkVertRotation() {
-        for (int i = 1; i < this.size; i++) {
-            if (playgroundBattle.isCellUsed(new Pair<>(this.coordY + i, this.coordX))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * 
-     * @return true if horizontal rotation is possible (with no collisions)
-     */
-    private boolean checkHorizRotation() {
-        for (int i = 1; i < this.size; i++) {
-            if (playgroundBattle.isCellUsed(new Pair<>(this.coordY, this.coordX + i))) {
-                return false;
-            }
-        }
-        return true;
+        this.coordY = colIndex == null ? 0 : colIndex;
+        this.coordX = rowIndex == null ? 0 : rowIndex;
     }
 
     /**
@@ -273,8 +247,8 @@ public final class ShipDeployment {
         
         //*** Vertical rotation ***
         if (this.orientation.get().equals(Orientation.HORIZONTAL)
-            && this.coordY < GRIDSIZE - this.size + 1
-            && this.checkVertRotation()) {
+            && this.coordX < GRIDSIZE - this.size + 1
+            && manageDeployment.checkVertRotation(this.size, this.coordX, this.coordY)) {
             
             board.getChildren().remove(draggingShip);
             playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
@@ -283,8 +257,8 @@ public final class ShipDeployment {
             
             try {
                 playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
-                                              new Pair<>(this.coordY, this.coordX));
-                board.add(draggingShip, this.coordX, this.coordY, 1, this.size);
+                                              new Pair<>(this.coordX, this.coordY));
+                board.add(draggingShip, this.coordY, this.coordX, 1, this.size);
                 draggingShip.setTranslateX(this.vertOffset.get());
             } catch (CellsFilledException exception) {
                 System.out.println("NON VA BENE");
@@ -292,8 +266,8 @@ public final class ShipDeployment {
             
         //*** Horizontal rotation ***    
         } else if (this.orientation.get().equals(Orientation.VERTICAL)
-                   && this.coordX < GRIDSIZE - this.size + 1
-                   && this.checkHorizRotation()) {
+                   && this.coordY < GRIDSIZE - this.size + 1
+                   && manageDeployment.checkHorizRotation(this.size, this.coordX, this.coordY)) {
             
             board.getChildren().remove(draggingShip);
             playgroundBattle.removeShip(manageDeployment.extractShip(draggingShip));
@@ -302,8 +276,8 @@ public final class ShipDeployment {
             
             try {
                 playgroundBattle.positionShip(manageDeployment.extractShip(draggingShip), 
-                                              new Pair<>(this.coordY, this.coordX));
-                board.add(draggingShip, this.coordX + 1, this.coordY, this.size, 1);
+                                              new Pair<>(this.coordX, this.coordY));
+                board.add(draggingShip, this.coordY + 1, this.coordX, this.size, 1);
                 draggingShip.setTranslateX(this.horizOffset.get());
             } catch (CellsFilledException exception) {
                 System.out.println("NON VA BENE");
