@@ -4,11 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import model.enums.PlayerNumber;
-<<<<<<< HEAD
 import model.match.PlaygroundBattle;
-=======
 import model.gamemode.GameMode;
->>>>>>> 95320364063f8a0752f48aae1265902e42b70738
 import model.match.players.PlayerInfo;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -27,7 +24,6 @@ public interface Model {
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
-<<<<<<< HEAD
     /**
      * 
      * @return the new PlaygroungBattle containing all the ships 
@@ -42,9 +38,6 @@ public interface Model {
      */
     Pair<Integer, Integer> getNextHitPointAI();
 
-=======
-    void startBasicAI();
->>>>>>> 95320364063f8a0752f48aae1265902e42b70738
     /**
      * @return the current player
      */
