@@ -30,10 +30,10 @@ final class ManageDeployment {
     private static final int SUBMARINE_VERT_OFFSET = 6;
     private static final int DESTROYER_VERT_OFFSET = 10;
     
-    private Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
-    private PlaygroundBattle playgroundBattle;
+    private final Map<ImageView, Pair<Ship, Pair<Integer, Integer>>> ships;
+    private final PlaygroundBattle playgroundBattle;
     
-    protected ManageDeployment(PlaygroundBattle playgroundBattle) {
+    protected ManageDeployment(final PlaygroundBattle playgroundBattle) {
         this.ships = new HashMap<>();
         this.playgroundBattle = playgroundBattle;
     }
@@ -62,7 +62,7 @@ final class ManageDeployment {
      * @param draggingShip - the ImageView of the ship currently selected
      * @return ship's size
      */
-    int extractSize(ImageView draggingShip) {
+    int extractSize(final ImageView draggingShip) {
         List<Ship> resultUserList = this.ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
                 .map(x -> x.getValue().getX())
@@ -80,7 +80,7 @@ final class ManageDeployment {
      * @param draggingShip - the ImageView of the selected ship
      * @return Ship object of the selected ship
      */
-    Ship extractShip(ImageView draggingShip) {
+    Ship extractShip(final ImageView draggingShip) {
         List<Ship> resultUserList = this.ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
                 .map(x -> x.getValue().getX())
@@ -99,7 +99,7 @@ final class ManageDeployment {
      * @param ship - the current ship
      * @return true if the ship is present
      */
-    boolean checkShip(Ship ship) {
+    boolean checkShip(final Ship ship) {
         Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
         return map.containsValue(ship);
     }
@@ -110,7 +110,7 @@ final class ManageDeployment {
      * @param draggingShip - the ImageView of the selected ship
      * @return horizontal offset
      */
-    Optional<Integer> extractHorizontalOffset(ImageView draggingShip) {
+    Optional<Integer> extractHorizontalOffset(final ImageView draggingShip) {
         for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 return Optional.of(entry.getValue().getY().getX());
@@ -125,7 +125,7 @@ final class ManageDeployment {
      * @param draggingShip - the ImageView of the selected ship
      * @return vertical offset
      */
-    Optional<Integer> extractVerticalOffset(ImageView draggingShip) {
+    Optional<Integer> extractVerticalOffset(final ImageView draggingShip) {
         for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 return Optional.of(entry.getValue().getY().getY());
