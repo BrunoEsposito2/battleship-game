@@ -158,13 +158,14 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public boolean areThereAliveShip() {
+    public int getNumberOfAliveShip() {
+        int aliveShips = 0;
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (!v.getValue().isDestroyed()) {
-                return true; 
+                aliveShips++; 
             }
         }
-        return false;
+        return aliveShips;
     }
 
     @Override
