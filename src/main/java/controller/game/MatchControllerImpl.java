@@ -124,7 +124,7 @@ public class MatchControllerImpl implements MatchController {
     private void checkWin() {
         if (Battleships.getController().isMatchOver(this.currentPlaygroundBattle.getDamage(),
                 this.currentPlaygroundBattle.getNumberOfAliveShip())) {
-            this.battleView.showWinDialog(this.currentPlayer);
+            this.battleView.showWinDialog();
         }
     }
 
@@ -134,6 +134,7 @@ public class MatchControllerImpl implements MatchController {
     @Override
     public void changePlayer() {
         this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
+        Battleships.getController().nextPlayer();
         this.currentPlaygroundBattle = getNext();
         this.battleView.changePlayer();
     }
@@ -144,7 +145,7 @@ public class MatchControllerImpl implements MatchController {
      * @return playgroundBattle - the playground for next turn.
      */
     private PlaygroundBattle getNext() {
-        if (this.currentPlayer == PlayerNumber.PLAYER_ONE) {
+        if (Battleships.getController().getCurrentPlayer().get() == PlayerNumber.PLAYER_ONE) {
             return this.playgroundPlayerOne;
         } else {
             return this.playgroundPlayerTwo;
