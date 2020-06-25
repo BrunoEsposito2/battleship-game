@@ -38,4 +38,6 @@ public interface PlaygroundBattle {
     List<List<Boolean>> getPlaygroundBattle();
 
     Map<List<Pair<Integer, Integer>>, Ship> getShips();
+
+    int getDamage();
 }
