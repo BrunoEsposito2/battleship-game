@@ -10,6 +10,7 @@ import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -22,15 +23,16 @@ import view.dialog.DialogType;
 
 import static java.util.stream.Collectors.joining;
 
-
-
 public class BattleViewImpl implements BattleView {
 
     @FXML
     private GridPane playerOneGrid, playerTwoGrid;
-    
+
     @FXML
-    private  TextField pointsPLOne, pointsPLTwo, shotAvailablePLOne, shotAvailablePLTwo;
+    private TextField pointsPLOne, pointsPLTwo, shotAvailablePLOne, shotAvailablePLTwo;
+
+    @FXML
+    private Label nameOne, nameTwo;
 
     private GridPane currentPlayerGridPane;
     private GridPane currentVillainGridPane;
@@ -89,9 +91,11 @@ public class BattleViewImpl implements BattleView {
         this.initGridPane(this.playerOneGrid);
         this.initGridPane(this.playerTwoGrid);
         this.initTextField();
+        this.nameOne.setText(Battleships.getController().getPlayerInfo(PlayerNumber.PLAYER_ONE).get().getUsername());
+        this.nameOne.setText(Battleships.getController().getPlayerInfo(PlayerNumber.PLAYER_TWO).get().getUsername());
         this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
-        this.playerNumber = PlayerNumber.PLAYER_ONE;
+        //this.playerNumber = PlayerNumber.PLAYER_ONE;
         this.controller = Battleships.getController().getMatchController();
         this.controller.setView(this);
     }
@@ -117,8 +121,11 @@ public class BattleViewImpl implements BattleView {
     }
 
     @Override
-    public void showWinDialog(final PlayerNumber winnerPlayer) {
-        final String description = "Il giocatore " + (winnerPlayer == PlayerNumber.PLAYER_ONE ? "uno" : "due") + " vince la partita!";
+    public void showWinDialog() {
+        final String winner = Battleships.getController()
+                .getPlayerInfo(Battleships.getController().getCurrentPlayer().get())
+                .get().getUsername();
+        final String description = "Il giocatore " + winner + " vince la partita!";
         final Optional<String> returnDialog = Battleships.getController().launchDialog(DialogType.INFORMATION, "Fine partita",
                 "Vittoria!", description);
         System.out.println(returnDialog.orElse("Non Presente"));
@@ -167,18 +174,20 @@ public class BattleViewImpl implements BattleView {
 
     @Override
     public void changePlayer() {
-        if (this.playerNumber == PlayerNumber.PLAYER_TWO) {
+        if (Battleships.getController().getCurrentPlayer().get() == PlayerNumber.PLAYER_TWO) {
             this.currentPlayerGridPane = playerOneGrid;
             this.currentPointsPL = this.pointsPLOne;
             this.currentShotAvailable = this.shotAvailablePLTwo;
             this.currentVillainGridPane = playerTwoGrid;
-            this.playerNumber = PlayerNumber.PLAYER_ONE;
+            //this.playerNumber = PlayerNumber.PLAYER_ONE;
+            //aggiungere nextPlayer
         } else {
             this.currentPlayerGridPane = playerTwoGrid;
             this.currentPointsPL = this.pointsPLTwo;
             this.currentShotAvailable = this.shotAvailablePLOne;
             this.currentVillainGridPane = playerOneGrid;
-            this.playerNumber = PlayerNumber.PLAYER_TWO;
+            //aggiungere nextPlayer
+            //this.playerNumber = PlayerNumber.PLAYER_TWO;
         }
     }
 
