@@ -168,7 +168,11 @@
                      <font>
                         <Font name="Verdana" size="21.0" />
                      </font></Label>
-                  <Label id="nameOne" fx:id="nameOne" layoutX="553.0" layoutY="69.0" />
+                  <Label id="nameOne" fx:id="nameOne" layoutX="553.0" layoutY="69.0">
+                     <font>
+                        <Font name="Verdana" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="569.0" prefWidth="628.0">
@@ -318,7 +322,11 @@
                      <font>
                         <Font name="Verdana" size="21.0" />
                      </font></Label>
-                  <Label id="nameTwo" fx:id="nameTwo" layoutX="553.0" layoutY="69.0" />
+                  <Label id="nameTwo" fx:id="nameTwo" layoutX="553.0" layoutY="69.0">
+                     <font>
+                        <Font name="Verdana" size="20.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
         </items>
