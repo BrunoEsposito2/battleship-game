@@ -25,6 +25,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     private final int lines;
     private final int columns;
+    private int aliveShips;
+    private int damage;
 
     /**
      * Constructor of battle's playground with size passed.
@@ -50,7 +52,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
         this.shipList.put(cellsNecessary, ship);
         cellsNecessary.forEach(i -> this.playground.get(i.getX()).set(i.getY(), true));
-
+        this.aliveShips++;
     }
 
     @Override
@@ -132,6 +134,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
             if (v.getKey().contains(cell)) {
                 v.getValue().hit();
+                this.aliveShips = v.getValue().isDestroyed() ? --this.aliveShips : this.aliveShips;
+                this.damage++;
                 return Optional.of(v);
             }
         }
@@ -159,13 +163,12 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 
     @Override
     public int getNumberOfAliveShip() {
-        int aliveShips = 0;
-        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
-            if (!v.getValue().isDestroyed()) {
-                aliveShips++; 
-            }
-        }
-        return aliveShips;
+        return this.aliveShips;
+    }
+    
+    @Override
+    public int getDamage() {
+        return this.damage;
     }
 
     @Override
