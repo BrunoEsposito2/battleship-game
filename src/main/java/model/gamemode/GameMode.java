@@ -16,12 +16,32 @@ public enum GameMode {
     },
 
     /**
-     * Have the highest score at the end of the match.
+     * Be the first player to score a hit.
+     */
+    ONE_HIT("1 Hit", "Be the first player to score a hit.") {
+        @Override
+        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
+            return playerHits > 0;
+        }
+    },
+
+    /**
+     * Be the first player to score 5 hits.
      */
     FIVE_HITS("5 Hits", "Be the first player to score 5 hits.") {
         @Override
         protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
             return playerHits > 4;
+        }
+    },
+
+    /**
+     * Be the first player to score 10 hits.
+     */
+    TEN_HITS("10 Hits", "Be the first player to score 10 hits.") {
+        @Override
+        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
+            return playerHits >= 10;
         }
     };
 
