@@ -64,8 +64,10 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void shot(final int line, final int col) {
+        PlayerNumber villainPlayer = Battleships.getController()
+                .getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE) 
+                ? PlayerNumber.PLAYER_TWO : PlayerNumber.PLAYER_ONE;
         try {
-
             final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle
                     .shipHitted(new Pair<>(line, col));
 
@@ -73,15 +75,16 @@ public class MatchControllerImpl implements MatchController {
             if (v.isPresent()) {
                 // If ship is sunk, player could be winner.
                 if (this.currentPlaygroundBattle.shipSunk(v.get().getKey()).get()) {
-                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
+                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey(), villainPlayer);
                     this.checkWin();
                 } else {
-                    this.battleView.drawHit(new Pair<>(line, col));
+                    this.battleView.drawHit(new Pair<>(line, col), villainPlayer);
                 }
             } else {
-                this.battleView.drawMissed(new Pair<>(line, col));
+                this.battleView.drawMissed(new Pair<>(line, col), villainPlayer);
             }
 
+            System.out.println(this.currentPlaygroundBattle.getNumberOfAliveShip());
             this.battleView.setShotAvailable(this.currentPlaygroundBattle.getNumberOfAliveShip());
             this.battleView.setPoints(this.currentPlaygroundBattle.getDamage());
 
@@ -132,9 +135,9 @@ public class MatchControllerImpl implements MatchController {
     @Override
     public void changePlayer() {
         this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
-        Battleships.getController().nextPlayer();
-        this.currentPlaygroundBattle = getNext();
         this.battleView.changePlayer();
+        this.currentPlaygroundBattle = getNext();
+        Battleships.getController().nextPlayer();
     }
 
     /**
@@ -143,7 +146,7 @@ public class MatchControllerImpl implements MatchController {
      * @return playgroundBattle - the playground for next turn.
      */
     private PlaygroundBattle getNext() {
-        if (Battleships.getController().getCurrentPlayer().get() == PlayerNumber.PLAYER_ONE) {
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
             return this.playgroundPlayerOne;
         } else {
             return this.playgroundPlayerTwo;
