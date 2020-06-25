@@ -2,6 +2,9 @@ package controller.game;
 
 import java.util.List;
 import java.util.Optional;
+
+import application.Battleships;
+
 import java.util.Map.Entry;
 
 import model.enums.PlayerNumber;
@@ -64,11 +67,12 @@ public class MatchControllerImpl implements MatchController {
     public void shot(final int line, final int col) {
         try {
 
-            final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
+            final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle
+                    .shipHitted(new Pair<>(line, col));
 
             // If optional is present a ship is hitted.
             if (v.isPresent()) {
-                //If ship is sunk, player could be winner.
+                // If ship is sunk, player could be winner.
                 if (this.currentPlaygroundBattle.shipSunk(v.get().getKey()).get()) {
                     this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
                     this.checkWin();
@@ -88,7 +92,7 @@ public class MatchControllerImpl implements MatchController {
 
         } catch (CellAlreadyShottedException e) {
             /*
-             * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
+             * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err)
              * dell'eccezione?
              */
             this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
@@ -118,13 +122,10 @@ public class MatchControllerImpl implements MatchController {
     }
 
     private void checkWin() {
-        
-        /*
-         * The current playground is of the opponent. 
-         */
-        if (this.currentPlaygroundBattle.getNumberOfAliveShip() == 0) {
+        if (Battleships.getController().isMatchOver(this.currentPlaygroundBattle.getDamage(),
+                this.currentPlaygroundBattle.getNumberOfAliveShip())) {
             this.battleView.showWinDialog(this.currentPlayer);
-        } 
+        }
     }
 
     /**
@@ -140,7 +141,7 @@ public class MatchControllerImpl implements MatchController {
     /**
      * Method to get playground to use in next turn.
      * 
-     * @return playgroundBattle - the playground for next turn. 
+     * @return playgroundBattle - the playground for next turn.
      */
     private PlaygroundBattle getNext() {
         if (this.currentPlayer == PlayerNumber.PLAYER_ONE) {
