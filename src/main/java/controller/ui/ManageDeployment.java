@@ -12,6 +12,7 @@ import model.util.Pair;
 import model.match.PlaygroundBattle;
 import model.match.Ship;
 import model.enums.ShipType;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 final class ManageDeployment {
@@ -53,6 +54,12 @@ final class ManageDeployment {
         this.ships.put(destroyer, new Pair<>(new Ship(ShipType.DESTROYER),
                        new Pair<>(DESTROYER_HORIZ_OFFSET, DESTROYER_VERT_OFFSET)));
         
+        carrier.setImage(new Image(getClass().getResource("/images/ships/Carrier.png").toExternalForm()));
+        battleship.setImage(new Image(getClass().getResource("/images/ships/Battleship.png").toExternalForm()));
+        cruiser.setImage(new Image(getClass().getResource("/images/ships/Cruiser.png").toExternalForm()));
+        submarine.setImage(new Image(getClass().getResource("/images/ships/Submarine.png").toExternalForm()));
+        destroyer.setImage(new Image(getClass().getResource("/images/ships/Destroyer.png").toExternalForm()));
+        
         return this.ships;
     }
     
@@ -63,7 +70,7 @@ final class ManageDeployment {
      * @return ship's size
      */
     int extractSize(final ImageView draggingShip) {
-        List<Ship> resultUserList = this.ships.entrySet().stream()
+        final List<Ship> resultUserList = this.ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
                 .map(x -> x.getValue().getX())
                 .collect(Collectors.toList());
@@ -81,7 +88,7 @@ final class ManageDeployment {
      * @return Ship object of the selected ship
      */
     Ship extractShip(final ImageView draggingShip) {
-        List<Ship> resultUserList = this.ships.entrySet().stream()
+        final List<Ship> resultUserList = this.ships.entrySet().stream()
                 .filter(x -> x.getKey().equals(draggingShip))
                 .map(x -> x.getValue().getX())
                 .collect(Collectors.toList());
@@ -89,8 +96,7 @@ final class ManageDeployment {
             throw new IllegalStateException();
         }
         
-        Ship ship = resultUserList.get(0);
-        return ship;
+        return resultUserList.get(0);
     }
     
     /**
@@ -100,7 +106,7 @@ final class ManageDeployment {
      * @return true if the ship is present
      */
     boolean checkShip(final Ship ship) {
-        Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
+        final Map<List<Pair<Integer, Integer>>, Ship> map = playgroundBattle.getShips();
         return map.containsValue(ship);
     }
     
@@ -111,7 +117,7 @@ final class ManageDeployment {
      * @return horizontal offset
      */
     Optional<Integer> extractHorizontalOffset(final ImageView draggingShip) {
-        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+        for (final Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 return Optional.of(entry.getValue().getY().getX());
             }
@@ -126,7 +132,7 @@ final class ManageDeployment {
      * @return vertical offset
      */
     Optional<Integer> extractVerticalOffset(final ImageView draggingShip) {
-        for (Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
+        for (final Entry<ImageView, Pair<Ship, Pair<Integer, Integer>>> entry : this.ships.entrySet()) {
             if (entry.getKey().equals(draggingShip)) {
                 return Optional.of(entry.getValue().getY().getY());
             }
