@@ -1,6 +1,7 @@
 package view.match;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import application.Battleships;
@@ -23,6 +24,8 @@ import view.dialog.DialogType;
 
 import static java.util.stream.Collectors.joining;
 
+import java.util.HashMap;
+
 public class BattleViewImpl implements BattleView {
 
     @FXML
@@ -37,6 +40,7 @@ public class BattleViewImpl implements BattleView {
     private GridPane currentPlayerGridPane;
     private GridPane currentVillainGridPane;
     private TextField currentPointsPL, currentShotAvailable;
+    private Map<PlayerNumber, Map<Pair<Integer, Integer>, Pane>> panes; 
 
     private MatchController controller;
 
@@ -65,6 +69,12 @@ public class BattleViewImpl implements BattleView {
                     }
                 });
                 gridPane.add(pane, col, row);
+
+                if (gridPane == this.playerOneGrid) {
+                    this.panes.get(PlayerNumber.PLAYER_ONE).put(new Pair<Integer, Integer>(row, col), pane);
+                } else {
+                    this.panes.get(PlayerNumber.PLAYER_TWO).put(new Pair<Integer, Integer>(row, col), pane);
+                }
             }
         }
         gridPane.setStyle("-fx-background-color: #000000");
@@ -84,8 +94,15 @@ public class BattleViewImpl implements BattleView {
         this.shotAvailablePLTwo.setEditable(false);
     }
 
+    private void initMapPanes() {
+        this.panes = new HashMap<>();
+        this.panes.put(PlayerNumber.PLAYER_ONE, new HashMap<>());
+        this.panes.put(PlayerNumber.PLAYER_TWO, new HashMap<>());
+    }
+
     @FXML
     public void initialize() {
+        this.initMapPanes();
         this.initGridPane(this.playerOneGrid);
         this.initGridPane(this.playerTwoGrid);
         this.initTextField();
@@ -93,12 +110,14 @@ public class BattleViewImpl implements BattleView {
                 .get()
                 .getPlayerInfo(PlayerNumber.PLAYER_ONE)
                 .getUsername());
-        this.nameOne.setText(Battleships.getController().getMatchInfo()
+        this.nameTwo.setText(Battleships.getController().getMatchInfo()
                 .get()
                 .getPlayerInfo(PlayerNumber.PLAYER_TWO)
                 .getUsername());
         this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
+        this.currentShotAvailable = this.shotAvailablePLTwo;
+        this.currentPointsPL = this.pointsPLOne;
         this.controller = Battleships.getController().getMatchController();
         this.controller.setView(this);
     }
@@ -137,49 +156,45 @@ public class BattleViewImpl implements BattleView {
     }
 
     @Override
-    public void drawHit(final Pair<Integer, Integer> pair) {
+    public void drawHit(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
         Platform.runLater(() -> {
-            this.getNodeByRowColumnIndex(pair.getX(), pair.getY(), this.currentVillainGridPane)
+            this.getNodeByRowColumnIndex(cell, playerNumber)
                     .setStyle("-fx-background-color: #ff6600");
         });
     }
 
-    // @Override
-    // public void drawShip(nave da disegnare e posizioni) {
-    //
-    // }
 
     @Override
-    public void drawShip(final List<Pair<Integer, Integer>> cells) {
+    public void drawShip(final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
         for (final Pair<Integer, Integer> cell : cells) {
             Platform.runLater(() -> {
-                this.getNodeByRowColumnIndex(cell.getX(), cell.getY(), this.currentVillainGridPane)
+                this.getNodeByRowColumnIndex(cell, playerNumber)
                         .setStyle("-fx-background-color: #00995c");
             });
         }
     }
 
     @Override
-    public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells) {
+    public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
         for (final Pair<Integer, Integer> cell : cells) {
             Platform.runLater(() -> {
-                this.getNodeByRowColumnIndex(cell.getX(), cell.getY(), this.currentVillainGridPane)
+                this.getNodeByRowColumnIndex(cell, playerNumber)
                         .setStyle("-fx-background-color: #660033");
             });
         }
     }
 
     @Override
-    public void drawMissed(final Pair<Integer, Integer> pair) {
+    public void drawMissed(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
         Platform.runLater(() -> {
-            this.getNodeByRowColumnIndex(pair.getX(), pair.getY(), this.currentVillainGridPane)
+            this.getNodeByRowColumnIndex(cell, playerNumber)
                     .setStyle("-fx-background-color: #329ef9");
         });
     }
 
     @Override
     public void changePlayer() {
-        if (Battleships.getController().getCurrentPlayer().get() == PlayerNumber.PLAYER_TWO) {
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_TWO)) {
             this.currentPlayerGridPane = playerOneGrid;
             this.currentPointsPL = this.pointsPLOne;
             this.currentShotAvailable = this.shotAvailablePLTwo;
@@ -206,16 +221,7 @@ public class BattleViewImpl implements BattleView {
         this.currentShotAvailable.setText("" + shotAvailable);
     }
 
-    private Node getNodeByRowColumnIndex(final int row, final int column, final GridPane gridPane) {
-        Node result = null;
-        final ObservableList<Node> childrens = gridPane.getChildren();
-
-        for (final Node node : childrens) {
-            if (GridPane.getRowIndex(node) == row && GridPane.getColumnIndex(node) == column) {
-                result = node;
-                return result;
-            }
-        }
-        return result;
+    private Pane getNodeByRowColumnIndex(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
+        return this.panes.get(playerNumber).get(cell);
     }
 }
