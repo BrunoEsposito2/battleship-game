@@ -27,6 +27,7 @@ public class MatchControllerImpl implements MatchController {
     private PlayerNumber currentPlayer;
     private final PlaygroundBattle playgroundPlayerOne;
     private final PlaygroundBattle playgroundPlayerTwo;
+    private int shotAvailable;
 
     private PlaygroundBattle currentPlaygroundBattle;
 
@@ -77,6 +78,14 @@ public class MatchControllerImpl implements MatchController {
             } else {
                 this.battleView.drawMissed(new Pair<>(line, col));
             }
+
+            this.battleView.setShotAvailable(this.currentPlaygroundBattle.getNumberOfAliveShip());
+            this.battleView.setPoints(this.currentPlaygroundBattle.getDamage());
+
+            if (this.shotAvailable <= 0) {
+                this.changePlayer();
+            }
+
         } catch (CellAlreadyShottedException e) {
             /*
              * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
@@ -93,6 +102,7 @@ public class MatchControllerImpl implements MatchController {
     public void startGame() {
         this.currentPlayer = PlayerNumber.PLAYER_ONE;
         this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+        this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
     }
 
     /**
@@ -108,12 +118,13 @@ public class MatchControllerImpl implements MatchController {
     }
 
     private void checkWin() {
+        
         /*
          * The current playground is of the opponent. 
          */
         if (this.currentPlaygroundBattle.getNumberOfAliveShip() == 0) {
             this.battleView.showWinDialog(this.currentPlayer);
-        }
+        } 
     }
 
     /**
@@ -121,7 +132,9 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void changePlayer() {
+        this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
         this.currentPlaygroundBattle = getNext();
+        this.battleView.changePlayer();
     }
 
     /**
