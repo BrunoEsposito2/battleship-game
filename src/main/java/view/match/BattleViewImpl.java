@@ -38,8 +38,6 @@ public class BattleViewImpl implements BattleView {
     private GridPane currentVillainGridPane;
     private TextField currentPointsPL, currentShotAvailable;
 
-    private PlayerNumber playerNumber;
-
     private MatchController controller;
 
     private void initGridPane(final GridPane gridPane) {
@@ -73,16 +71,16 @@ public class BattleViewImpl implements BattleView {
     }
 
     private void initTextField() {
-        this.pointsPLOne.setText("" + 0);
+        this.pointsPLOne.setText("0");
         this.pointsPLOne.setEditable(false);
 
-        this.pointsPLTwo.setText("" + 0);
+        this.pointsPLTwo.setText("0");
         this.pointsPLTwo.setEditable(false);
 
-        this.shotAvailablePLOne.setText("" + MatchControllerImpl.getShipNumberOfGame());
+        this.shotAvailablePLOne.setText(Integer.toString(MatchControllerImpl.getShipNumberOfGame()));
         this.shotAvailablePLOne.setEditable(false);
 
-        this.shotAvailablePLTwo.setText("" + MatchControllerImpl.getShipNumberOfGame());
+        this.shotAvailablePLTwo.setText(Integer.toString(MatchControllerImpl.getShipNumberOfGame()));
         this.shotAvailablePLTwo.setEditable(false);
     }
 
@@ -91,11 +89,16 @@ public class BattleViewImpl implements BattleView {
         this.initGridPane(this.playerOneGrid);
         this.initGridPane(this.playerTwoGrid);
         this.initTextField();
-        this.nameOne.setText(Battleships.getController().getPlayerInfo(PlayerNumber.PLAYER_ONE).get().getUsername());
-        this.nameOne.setText(Battleships.getController().getPlayerInfo(PlayerNumber.PLAYER_TWO).get().getUsername());
+        this.nameOne.setText(Battleships.getController().getMatchInfo()
+                .get()
+                .getPlayerInfo(PlayerNumber.PLAYER_ONE)
+                .getUsername());
+        this.nameOne.setText(Battleships.getController().getMatchInfo()
+                .get()
+                .getPlayerInfo(PlayerNumber.PLAYER_TWO)
+                .getUsername());
         this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
-        //this.playerNumber = PlayerNumber.PLAYER_ONE;
         this.controller = Battleships.getController().getMatchController();
         this.controller.setView(this);
     }
@@ -122,9 +125,11 @@ public class BattleViewImpl implements BattleView {
 
     @Override
     public void showWinDialog() {
-        final String winner = Battleships.getController()
+        final String winner = Battleships.getController().getMatchInfo()
+                .get()
                 .getPlayerInfo(Battleships.getController().getCurrentPlayer().get())
-                .get().getUsername();
+                .getUsername();
+
         final String description = "Il giocatore " + winner + " vince la partita!";
         final Optional<String> returnDialog = Battleships.getController().launchDialog(DialogType.INFORMATION, "Fine partita",
                 "Vittoria!", description);
@@ -179,15 +184,15 @@ public class BattleViewImpl implements BattleView {
             this.currentPointsPL = this.pointsPLOne;
             this.currentShotAvailable = this.shotAvailablePLTwo;
             this.currentVillainGridPane = playerTwoGrid;
-            //this.playerNumber = PlayerNumber.PLAYER_ONE;
-            //aggiungere nextPlayer
+            // this.playerNumber = PlayerNumber.PLAYER_ONE;
+            // aggiungere nextPlayer
         } else {
             this.currentPlayerGridPane = playerTwoGrid;
             this.currentPointsPL = this.pointsPLTwo;
             this.currentShotAvailable = this.shotAvailablePLOne;
             this.currentVillainGridPane = playerOneGrid;
-            //aggiungere nextPlayer
-            //this.playerNumber = PlayerNumber.PLAYER_TWO;
+            // aggiungere nextPlayer
+            // this.playerNumber = PlayerNumber.PLAYER_TWO;
         }
     }
 
