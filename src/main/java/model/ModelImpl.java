@@ -118,4 +118,9 @@ public final class ModelImpl implements Model {
         return winCondition.isMatchOver(hits, opponentRemainingShips);
     }
 
+    @Override
+    public void nextPlayer() {
+        currentPlayer.nextPlayer();
+    }
+
 }

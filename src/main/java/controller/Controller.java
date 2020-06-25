@@ -81,4 +81,9 @@ public interface Controller {
      */
     MatchController getMatchController();
 
+    /**
+     * sets the next player as current.
+     */
+    void nextPlayer();
+
 }

@@ -88,4 +88,9 @@ public final class ControllerImpl implements Controller {
         return this.matchController;
     }
 
+    @Override
+    public void nextPlayer() {
+        model.nextPlayer();
+    }
+
 }

@@ -77,4 +77,9 @@ public interface Model {
      */
     void setPlayerInfo(PlayerNumber number, PlayerInfo info);
 
+    /**
+     * sets the next player as current.
+     */
+    void nextPlayer();
+
 }
