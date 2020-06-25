@@ -19,8 +19,7 @@ import view.scene.SceneName;
  */
 public final class MatchSettings {
 
-    private final AccountManager accountManager = Battleships.getController().getAccountManager(); //new AccountOperation();
-    private final Login login = new Login(accountManager);
+    private final Login login = new Login();
     private final MatchInitializer matchInitializer = new MatchInitializerImpl();
 
     @FXML
@@ -38,7 +37,7 @@ public final class MatchSettings {
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI.
      */
     public void initialize() {
-        new Initializer(this, login, accountManager).initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
+        new Initializer(this, login).initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
         if (choiceboxPlayer1.getItems().isEmpty()) {
             login.noProfilesAvailable();
         }
