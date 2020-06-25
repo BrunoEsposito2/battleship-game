@@ -27,7 +27,6 @@ public class MatchControllerImpl implements MatchController {
     private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
-    private PlayerNumber currentPlayer;
     private final PlaygroundBattle playgroundPlayerOne;
     private final PlaygroundBattle playgroundPlayerTwo;
     private int shotAvailable;
@@ -104,7 +103,6 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void startGame() {
-        this.currentPlayer = PlayerNumber.PLAYER_ONE;
         this.currentPlaygroundBattle = this.playgroundPlayerTwo;
         this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
     }
