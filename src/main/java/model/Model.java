@@ -6,7 +6,8 @@ import java.util.Optional;
 import model.enums.PlayerNumber;
 import model.match.PlaygroundBattle;
 import model.gamemode.GameMode;
-import model.match.players.PlayerInfo;
+import model.match.players.MatchInfo;
+import model.match.players.PlayerInfoImpl;
 import model.players.ArtificialPlayer;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -65,17 +66,14 @@ public interface Model {
     void setGameMode(GameMode gameMode);
 
     /**
-     * 
-     * @param number - player's number
-     * @return the player's info, if any
+     * @return the match's info, if set
      */
-    Optional<PlayerInfo> getPlayerInfo(PlayerNumber number);
+    Optional<MatchInfo> getMatchInfo();
 
     /**
-     * @param number - player's number
-     * @param info - player's info
+     * @param info - match's info
      */
-    void setPlayerInfo(PlayerNumber number, PlayerInfo info);
+    void setMatchInfo(MatchInfo info);
 
     /**
      * sets the next player as current.

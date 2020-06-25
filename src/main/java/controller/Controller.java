@@ -6,7 +6,7 @@ import controller.game.MatchController;
 import controller.users.AccountManager;
 import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
-import model.match.players.PlayerInfo;
+import model.match.players.MatchInfo;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
@@ -62,17 +62,14 @@ public interface Controller {
     void setGameMode(GameMode gameMode);
 
     /**
-     * 
-     * @param number - player's number
-     * @return the player's info, if any
+     * @return the match's info, if set
      */
-    Optional<PlayerInfo> getPlayerInfo(PlayerNumber number);
+    Optional<MatchInfo> getMatchInfo();
 
     /**
-     * @param number - player's number
-     * @param info - player's info
+     * @param info - match's info
      */
-    void setPlayerInfo(PlayerNumber number, PlayerInfo info);
+    void setMatchInfo(MatchInfo info);
 
     /**
      * Method to get the controller of match.

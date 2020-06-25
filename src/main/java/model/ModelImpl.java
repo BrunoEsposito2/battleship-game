@@ -2,7 +2,6 @@ package model;
 
 import java.util.List;
 import java.util.Optional;
-
 import model.intelligence.BasicArtificialIntelligence;
 import model.intelligence.BasicIntelligenceComputation;
 import model.players.ArtificialPlayer;
@@ -13,7 +12,7 @@ import model.gamemode.WinCondition;
 import model.gamemode.WinConditionImpl;
 import model.match.players.CurrentPlayer;
 import model.match.players.CurrentPlayerImpl;
-import model.match.players.PlayerInfo;
+import model.match.players.MatchInfo;
 import model.players.Player;
 import model.players.PlayerManager;
 import model.players.PlayerOperation;
@@ -47,8 +46,7 @@ public final class ModelImpl implements Model {
     private final ArtificialPlayer playerAI;
     private final WinCondition winCondition = new WinConditionImpl();
     private final CurrentPlayer currentPlayer = new CurrentPlayerImpl();
-    private Optional<PlayerInfo> player1 = Optional.empty(); 
-    private Optional<PlayerInfo> player2 = Optional.empty(); 
+    private Optional<MatchInfo> matchInfo = Optional.empty(); 
 
     /**
      * concrete implementation of Model interface. 
@@ -100,20 +98,6 @@ public final class ModelImpl implements Model {
     }
 
     @Override
-    public Optional<PlayerInfo> getPlayerInfo(final PlayerNumber number) {
-        return number.equals(PlayerNumber.PLAYER_ONE) ? player1 : player2;
-    }
-
-    @Override
-    public void setPlayerInfo(final PlayerNumber number, final PlayerInfo info) {
-        if (number.equals(PlayerNumber.PLAYER_ONE)) {
-            player1 = Optional.ofNullable(info);
-        } else {
-            player2 = Optional.ofNullable(info);
-        }
-    }
-
-    @Override
     public Boolean isMatchOver(final int hits, final int opponentRemainingShips) {
         return winCondition.isMatchOver(hits, opponentRemainingShips);
     }
@@ -121,6 +105,16 @@ public final class ModelImpl implements Model {
     @Override
     public void nextPlayer() {
         currentPlayer.nextPlayer();
+    }
+
+    @Override
+    public Optional<MatchInfo> getMatchInfo() {
+        return matchInfo;
+    }
+
+    @Override
+    public void setMatchInfo(final MatchInfo info) {
+       matchInfo = Optional.ofNullable(info); 
     }
 
 }
