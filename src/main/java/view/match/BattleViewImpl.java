@@ -170,13 +170,13 @@ public class BattleViewImpl implements BattleView {
         if (this.playerNumber == PlayerNumber.PLAYER_TWO) {
             this.currentPlayerGridPane = playerOneGrid;
             this.currentPointsPL = this.pointsPLOne;
-            this.currentShotAvailable = this.shotAvailablePLOne;
+            this.currentShotAvailable = this.shotAvailablePLTwo;
             this.currentVillainGridPane = playerTwoGrid;
             this.playerNumber = PlayerNumber.PLAYER_ONE;
         } else {
             this.currentPlayerGridPane = playerTwoGrid;
             this.currentPointsPL = this.pointsPLTwo;
-            this.currentShotAvailable = this.shotAvailablePLTwo;
+            this.currentShotAvailable = this.shotAvailablePLOne;
             this.currentVillainGridPane = playerOneGrid;
             this.playerNumber = PlayerNumber.PLAYER_TWO;
         }
