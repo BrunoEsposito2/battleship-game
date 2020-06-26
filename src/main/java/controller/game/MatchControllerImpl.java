@@ -16,6 +16,7 @@ import model.match.PlaygroundBattleImpl;
 import model.match.Ship;
 import model.util.Pair;
 import view.match.BattleView;
+import view.scene.SceneName;
 
 public class MatchControllerImpl implements MatchController {
 
@@ -116,6 +117,22 @@ public class MatchControllerImpl implements MatchController {
     @Override
     public void setView(final BattleView battleView) {
         this.battleView = battleView;
+    }
+
+    public void nextToPosition() {
+        
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
+            this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+            Battleships.getController().changeScene(SceneName.SHIP_DEPLOYMENT);
+        } else {
+            this.startGame();
+        }
+        
+        Battleships.getController().nextPlayer();
+    }
+
+    public void setPlayground(final PlaygroundBattle playgroundBattle) {
+        this.currentPlaygroundBattle = playgroundBattle;
     }
 
     public static int getShipNumberOfGame() {
