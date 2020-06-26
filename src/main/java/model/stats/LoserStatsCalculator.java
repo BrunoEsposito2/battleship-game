@@ -19,12 +19,14 @@ public class LoserStatsCalculator implements Statistics {
     public final void basicStats() {
         final double tot = getInfoValue(StatsInfo.TOTALS.getName()) + 1;
         final double loss = getInfoValue(StatsInfo.LOSS.getName()) + 1;
+        final double wins = getInfoValue(StatsInfo.WINS.getName());
 
         bestScoreCheck();
 
         this.loser.updateStats(StatsInfo.TOTALS.getName(), tot);
         this.loser.updateStats(StatsInfo.LOSS.getName(), loss);
         this.loser.updateStats(StatsInfo.LOSS_RATE.getName(), (loss / tot) * 100);
+        this.loser.updateStats(StatsInfo.WINS_RATE.getName(), (wins / tot) * 100);
     }
 
     private void bestScoreCheck() {
