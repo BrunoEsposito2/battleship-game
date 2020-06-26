@@ -9,13 +9,13 @@ import model.enums.ShipType;
  */
 public class Ship implements GameObject {
 
-    private int size;
-    private int damage;    // how many damages has received
+    private final int size;
+    private int damage;
     private boolean destroyed;
-    private ShipType shipType;
+    private final ShipType shipType;
     private Orientation orientation;
 
-    public Ship(ShipType shipType) {
+    public Ship(final ShipType shipType) {
         this.shipType = shipType;
         this.size = shipType.getSize();
         this.damage = 0;
@@ -29,11 +29,21 @@ public class Ship implements GameObject {
     }
 
     @Override
+    public boolean hit() {
+        this.damage++;
+
+        if (this.damage >= this.size) {
+            this.destroyed = true;
+            return this.destroyed;
+        }
+
+        return this.destroyed;
+    }
+
     public int getDamage() {
         return this.damage;
     }
 
-    @Override
     public boolean isDestroyed() {
         return this.destroyed;
     }
@@ -41,25 +51,13 @@ public class Ship implements GameObject {
     public ShipType getShipType() {
         return this.shipType;
     }
-    
+
     public Orientation getOrientation() {
         return this.orientation;
     }
-    
-    public void setOrientation(Orientation orientation) {
-        this.orientation = orientation;
-    }
 
-    @Override
-    public boolean hit() {
-        this.damage++;
-        
-        if (this.damage >= this.size) {
-            this.destroyed = true;
-            return this.destroyed;
-        }
-        
-        return this.destroyed;
+    public void setOrientation(final Orientation orientation) {
+        this.orientation = orientation;
     }
 
 }
