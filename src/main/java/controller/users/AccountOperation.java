@@ -3,20 +3,32 @@ package controller.users;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import model.players.PlayerManager;
 import model.players.Player;
 import model.Model;
-import model.ModelImpl;
 import model.players.HumanPlayer;
 
+/**
+ * Represents an implementation of {@link AccountManager}.
+ * This class manages all controller operations related to players.
+ *
+ */
 public class AccountOperation implements AccountManager {
 
     private final FileManager system;
     private final PlayerManager modelMng;
 
+    /**
+     * Initialize the {@link FileManager} to manage player operations on disc and
+     * also the {@link PlayerManager} to manage the logical operations of the players. 
+     * 
+     * @param model
+     *          the variable associated to the Model.
+     */
     public AccountOperation(final Model model) {
         this.system = new FileSystemManager();
         this.modelMng = model.setPlayerManager(initAllUsers());
@@ -123,6 +135,11 @@ public class AccountOperation implements AccountManager {
         } catch (IllegalAccountArgumentException e) {
             throw new IllegalAccountArgumentException("Invalid info: Account already not exists");
         }
+    }
+
+    @Override
+    public final Optional<Map<String, Double>> getAccountStats(final String userName) {
+        return Optional.of(Collections.unmodifiableMap(this.modelMng.getPlayerStats(userName).get()));
     }
 
 }

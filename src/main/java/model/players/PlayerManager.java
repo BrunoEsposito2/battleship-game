@@ -1,6 +1,7 @@
 package model.players;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface PlayerManager {
@@ -22,4 +23,6 @@ public interface PlayerManager {
     Optional<List<Player>> getPlayers();
 
     boolean artificialExists();
+
+    Optional<Map<String, Double>> getPlayerStats(String userName);
 }

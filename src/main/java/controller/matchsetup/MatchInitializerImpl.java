@@ -1,4 +1,4 @@
-package controller.match;
+package controller.matchsetup;
 
 import java.util.Optional;
 import application.Battleships;

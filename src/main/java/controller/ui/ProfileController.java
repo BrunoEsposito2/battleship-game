@@ -9,6 +9,10 @@ import javafx.scene.control.TextField;
 import view.dialog.DialogType;
 import view.scene.SceneName;
 
+/**
+ * Represents the controller of account creation and removal.
+ *
+ */
 public class ProfileController {
 
     @FXML
@@ -19,6 +23,7 @@ public class ProfileController {
 
     private final AccountManager accountMng;
     private final Controller controller;
+
 
     public ProfileController() {
         this.accountMng = Battleships.getController().getAccountManager();

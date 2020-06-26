@@ -3,7 +3,8 @@ package controller.users;
 import java.io.File;
 
 /**
- * 
+ * Contains constants used to find files saved on the user home directory.
+ * It is responsible of checking if the install directory exist and when necessary creates it.
  * 
  */
 public final class InstallManager {

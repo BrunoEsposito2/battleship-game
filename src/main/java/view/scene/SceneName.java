@@ -21,14 +21,19 @@ public enum SceneName {
      * Create or delete player profiles.
      */
     PROFILE("profile"),
+    
+    /**
+     * View player statistics.
+     */
+    STATISTICS("statistics"),
 
     /**
-     * Create or delete player profiles.
+     * Position your ships.
      */
     SHIP_DEPLOYMENT("shipDeployment"),
 
     /**
-     * Create or delete player profiles.
+     * Main view of the battlefield in a match.
      */
     MATCH_BATTLE("MatchBattlee");
 
