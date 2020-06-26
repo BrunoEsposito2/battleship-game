@@ -218,4 +218,14 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         }
     }
 
+    @Override
+    public String toString() {
+        String playground = "";
+        for (List<Boolean> list : this.playground) {
+            playground += list.toString() + "\n";
+        }
+        return "PlaygroundBattle:\n" + playground + "Damage inflicted: " + this.damage + "\n"
+                + "Alive ships: " + this.aliveShips;
+    }
+
 }
