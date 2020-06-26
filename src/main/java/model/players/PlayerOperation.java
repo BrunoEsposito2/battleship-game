@@ -1,8 +1,10 @@
 package model.players;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import model.stats.LoserStatsCalculator;
@@ -137,6 +139,18 @@ public final class PlayerOperation implements PlayerManager {
     @Override
     public void addArtificialPlayer(final ArtificialPlayer playerAI) {
         this.players.get().add(playerAI);
+    }
+
+    @Override
+    public Optional<Map<String, Double>> getPlayerStats(final String userName) {
+        if (this.usernameExists(userName)) {
+            for (final Player pl : this.players.get()) {
+                if (pl.getUsername().equals(userName)) {
+                    return Optional.of(pl.getStatistics());
+                }
+            }
+        }
+        return Optional.empty();
     }
 
 }

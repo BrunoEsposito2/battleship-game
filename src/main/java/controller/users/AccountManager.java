@@ -1,6 +1,7 @@
 package controller.users;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface AccountManager {
@@ -18,5 +19,7 @@ public interface AccountManager {
     void setLoser(String userName, Double scoreValue);
 
     void removeAccount(String userName, String password);
+
+    Optional<Map<String, Double>> getAccountStats(String userName);
 
 }

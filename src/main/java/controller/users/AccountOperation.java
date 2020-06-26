@@ -3,13 +3,13 @@ package controller.users;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import model.players.PlayerManager;
 import model.players.Player;
 import model.Model;
-import model.ModelImpl;
 import model.players.HumanPlayer;
 
 public class AccountOperation implements AccountManager {
@@ -123,6 +123,11 @@ public class AccountOperation implements AccountManager {
         } catch (IllegalAccountArgumentException e) {
             throw new IllegalAccountArgumentException("Invalid info: Account already not exists");
         }
+    }
+
+    @Override
+    public final Optional<Map<String, Double>> getAccountStats(final String userName) {
+        return Optional.of(Collections.unmodifiableMap(this.modelMng.getPlayerStats(userName).get()));
     }
 
 }
