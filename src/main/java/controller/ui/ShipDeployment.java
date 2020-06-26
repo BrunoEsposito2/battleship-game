@@ -1,37 +1,32 @@
 package controller.ui;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import application.Battleships;
 import model.match.CellsFilledException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
 import model.enums.Orientation;
-import model.enums.ShipType;
 import model.util.Pair;
 import view.scene.SceneName;
 import model.match.Ship;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
 public final class ShipDeployment {
 
-    private static final int GRIDSIZE = 10;
+    private static final int GRIDSIZE = Battleships.getController().getMatchInfo().get().getFieldSize().getKey();
+    private static final int NUMSHIPS = Battleships.getController().getMatchInfo().get().getShipsNumber();
 
     private int coordX;
     private int coordY;
@@ -64,8 +59,8 @@ public final class ShipDeployment {
         board.setStyle("-fx-background-color: black;");
 
         //initialize the grid's cells
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < GRIDSIZE; i++) {
+            for (int j = 0; j < GRIDSIZE; j++) {
                 final Pane pane = new Pane();
                 pane.setStyle("-fx-background-color: white;");
                 board.add(pane, i, j);
@@ -92,7 +87,10 @@ public final class ShipDeployment {
      */
     @FXML
     public void buttonStart() {
-        Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
+        if (playgroundBattle.getNumberOfAliveShip() == NUMSHIPS) {
+            Battleships.getController().getMatchController().setPlayground(playgroundBattle);
+            Battleships.getController().getMatchController().nextToPosition();
+        }
     }
 
     /**
