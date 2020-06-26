@@ -1,11 +1,7 @@
 package model.gamemode;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-<<<<<<< HEAD
-=======
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
->>>>>>> 4034867715dbc423ce2bd507ad3af22ebf49feab
 import org.junit.jupiter.api.Test;
 
 class WinConditionTest {
