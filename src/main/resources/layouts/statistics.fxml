@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.Statistics">
+   <children>
+      <ChoiceBox id="cbPlayer" fx:id="cbPlayer" layoutX="225.0" layoutY="100.0" prefWidth="150.0" />
+      <Label layoutX="107.0" layoutY="164.0" text="Label" />
+      <Label layoutX="468.0" layoutY="164.0" text="Label" />
+      <Label layoutX="107.0" layoutY="253.0" text="Label" />
+      <Label layoutX="468.0" layoutY="253.0" text="Label" />
+      <TextField layoutX="407.0" layoutY="188.0" />
+      <TextField layoutX="46.0" layoutY="188.0" />
+      <TextField layoutX="46.0" layoutY="274.0" />
+      <TextField layoutX="407.0" layoutY="274.0" />
+      <Label layoutX="251.0" layoutY="39.0" text="Statistics">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font>
+      </Label>
+      <Button id="btBack" fx:id="btBack" onMouseClicked="#btBack" layoutX="233.0" layoutY="346.0" mnemonicParsing="false" text="&lt;- Back to Main Menu" />
+      <Label layoutX="287.0" layoutY="164.0" text="Label" />
+      <Label layoutX="287.0" layoutY="253.0" text="Label" />
+      <TextField layoutX="226.0" layoutY="188.0" />
+      <TextField layoutX="226.0" layoutY="274.0" />
+   </children>
+</AnchorPane>
