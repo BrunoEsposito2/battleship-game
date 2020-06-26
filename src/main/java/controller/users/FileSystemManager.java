@@ -16,6 +16,11 @@ import java.util.Optional;
 
 import model.players.Player;
 
+/**
+ * Represents the implementation class for the {@link FileManager} that loads, 
+ * save and remove users in the FileSystem.
+ * 
+ */
 public class FileSystemManager implements FileManager {
 
     public FileSystemManager() {

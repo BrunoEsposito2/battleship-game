@@ -12,11 +12,23 @@ import model.players.Player;
 import model.Model;
 import model.players.HumanPlayer;
 
+/**
+ * Represents an implementation of {@link AccountManager}.
+ * This class manages all controller operations related to players.
+ *
+ */
 public class AccountOperation implements AccountManager {
 
     private final FileManager system;
     private final PlayerManager modelMng;
 
+    /**
+     * Initialize the {@link FileManager} to manage player operations on disc and
+     * also the {@link PlayerManager} to manage the logical operations of the players. 
+     * 
+     * @param model
+     *          the variable associated to the Model.
+     */
     public AccountOperation(final Model model) {
         this.system = new FileSystemManager();
         this.modelMng = model.setPlayerManager(initAllUsers());
