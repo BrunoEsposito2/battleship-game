@@ -130,8 +130,10 @@ public class BattleViewImpl implements BattleView {
     public void showCellAlreadyShottedAlert(final Pair<Integer, Integer> cell) {
         final String description = "Cell [line, column]: [" + cell.getX() + "," + cell.getY() + "] is already shotted.\n"
                 + "Select another cell, please.";
+        Platform.runLater(() -> {
         Battleships.getController().launchDialog(DialogType.WARNING, "Choiche not valid", "Cell choiced is already shotted!",
                 description);
+        });
     }
 
     @Override
