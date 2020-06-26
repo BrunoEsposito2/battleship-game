@@ -87,10 +87,11 @@ public class BattleViewImpl implements BattleView {
         this.pointsPLTwo.setText("0");
         this.pointsPLTwo.setEditable(false);
 
-        this.shotAvailablePLOne.setText(Integer.toString(MatchControllerImpl.getShipNumberOfGame()));
+        
+        this.shotAvailablePLOne.setText(Integer.toString(Battleships.getController().getMatchInfo().get().getShipsNumber()));
         this.shotAvailablePLOne.setEditable(false);
 
-        this.shotAvailablePLTwo.setText(Integer.toString(MatchControllerImpl.getShipNumberOfGame()));
+        this.shotAvailablePLTwo.setText(Integer.toString(Battleships.getController().getMatchInfo().get().getShipsNumber()));
         this.shotAvailablePLTwo.setEditable(false);
     }
 
