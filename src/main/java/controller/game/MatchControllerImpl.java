@@ -127,6 +127,7 @@ public class MatchControllerImpl implements MatchController {
             Battleships.getController().changeScene(SceneName.SHIP_DEPLOYMENT);
         } else {
             this.startGame();
+            Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
         }
         
         Battleships.getController().nextPlayer();
