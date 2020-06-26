@@ -1,8 +1,14 @@
 package model.match.players;
 
+<<<<<<< HEAD
+=======
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Optional;
+>>>>>>> 4034867715dbc423ce2bd507ad3af22ebf49feab
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.util.Optional;
 import model.enums.PlayerNumber;
 
 class CurrentPlayerTest {

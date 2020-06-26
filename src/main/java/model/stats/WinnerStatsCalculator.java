@@ -19,12 +19,14 @@ public class WinnerStatsCalculator implements Statistics {
     public final void basicStats() {
         final double tot = getInfoValue(StatsInfo.TOTALS.getName()) + 1;
         final double wins = getInfoValue(StatsInfo.WINS.getName()) + 1;
+        final double loss = getInfoValue(StatsInfo.LOSS.getName());
 
-        bestScoreCheck();                                                           //update of score "Record".
+        bestScoreCheck();                                                                            //update of score "Record".
 
-        this.winner.updateStats(StatsInfo.TOTALS.getName(), tot);                   //update of the "Totals" match played.
-        this.winner.updateStats(StatsInfo.WINS.getName(), wins);                    //update of the number of all "Wons". 
-        this.winner.updateStats(StatsInfo.WINS_RATE.getName(), (wins / tot) * 100); //calculation of new "Won_Rate".
+        this.winner.updateStats(StatsInfo.TOTALS.getName(), tot);                                    //update of the "Totals" match played.
+        this.winner.updateStats(StatsInfo.WINS.getName(), wins);                                     //update of the number of all "Wons". 
+        this.winner.updateStats(StatsInfo.WINS_RATE.getName(), (wins / tot) * 100);                  //calculation of new "Won_Rate".
+        this.winner.updateStats(StatsInfo.LOSS_RATE.getName(), (loss / tot) * 100);
     }
 
     private void bestScoreCheck() {
