@@ -33,7 +33,7 @@ public interface MatchController {
     /**
      * Method for start the game after ship placement.
      */
-    void startGame();
+    void startBattle();
 
     /**
      * Set the game view linked to this controller.
@@ -50,5 +50,7 @@ public interface MatchController {
     void setPlayground(PlaygroundBattle playgroundBattle);
 
     void nextToPosition();
+
+    void showShip();
 
 }
