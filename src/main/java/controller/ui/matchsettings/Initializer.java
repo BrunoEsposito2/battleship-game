@@ -3,7 +3,7 @@ package controller.ui.matchsettings;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
-import controller.users.AccountManager;
+import application.Battleships;
 import javafx.beans.value.ChangeListener;
 import javafx.scene.control.ChoiceBox;
 import model.gamemode.GameMode;
@@ -13,16 +13,15 @@ final class Initializer {
 
     private final MatchSettings ms;
     private final Login login;
-    private final Collection<String> usernames;
+    private final Collection<String> usernames = Battleships.getController().getAccountManager().getAllUsername().orElse(Collections.emptyList());
 
     private enum ChoiceBoxType {
         PLAYER, GAMEMODE;
     }
 
-    protected Initializer(final MatchSettings ms, final Login login, final AccountManager accountManager) {
+    protected Initializer(final MatchSettings ms, final Login login) {
         this.ms = ms;
         this.login = login;
-        usernames = accountManager.getAllUsername().orElse(Collections.emptyList());
     }
 
   //package private

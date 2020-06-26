@@ -31,11 +31,13 @@ public interface PlaygroundBattle {
 
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
-    boolean areThereAliveShip();
+    int getNumberOfAliveShip();
 
     boolean isCellUsed(Pair<Integer, Integer> cell);
 
     List<List<Boolean>> getPlaygroundBattle();
 
     Map<List<Pair<Integer, Integer>>, Ship> getShips();
+
+    int getDamage();
 }

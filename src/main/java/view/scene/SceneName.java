@@ -30,7 +30,7 @@ public enum SceneName {
     /**
      * Create or delete player profiles.
      */
-    MATCH_BATTLE("matchBattle");
+    MATCH_BATTLE("MatchBattlee");
 
     private final String layoutName;
 

@@ -9,9 +9,8 @@ import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
-import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
-import model.match.players.PlayerInfo;
+import model.match.players.MatchInfo;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;
@@ -74,18 +73,23 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public Optional<PlayerInfo> getPlayerInfo(final PlayerNumber number) {
-        return model.getPlayerInfo(number);
-    }
-
-    @Override
-    public void setPlayerInfo(final PlayerNumber number, final PlayerInfo info) {
-        model.setPlayerInfo(number, info);
-    }
-
-    @Override
     public MatchController getMatchController() {
         return this.matchController;
+    }
+
+    @Override
+    public void nextPlayer() {
+        model.nextPlayer();
+    }
+
+    @Override
+    public Optional<MatchInfo> getMatchInfo() {
+        return model.getMatchInfo();
+    }
+
+    @Override
+    public void setMatchInfo(final MatchInfo info) {
+        model.setMatchInfo(info);
     }
 
 }

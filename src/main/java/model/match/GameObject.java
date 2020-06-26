@@ -7,25 +7,15 @@ package model.match;
 public interface GameObject {
 
     /**
-     * @return the size of the ship
+     * @return the size of the game object
      */
-    public int getSize();
-
-    /**
-     * @return the number of damages received
-     */
-    public int getDamage();
-
-    /**
-     * @return true if (damage == size)
-     */
-    public boolean isDestroyed();
+    int getSize();
 
     /**
      * Hits a ship
      * 
-     * @return true if ship was destroyed
+     * @return true if game object was destroyed
      */
-    public boolean hit();
+    boolean hit();
 
 }

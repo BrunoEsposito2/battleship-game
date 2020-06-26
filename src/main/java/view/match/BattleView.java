@@ -12,15 +12,20 @@ public interface BattleView {
 
     void showCellAlreadyShottedAlert(Pair<Integer, Integer> cell);
 
-    void showWinDialog(PlayerNumber winnerPlayer);
+    void drawHit(Pair<Integer, Integer> pair, PlayerNumber playerNumber);
 
-    void drawHit(Pair<Integer, Integer> pair);
+    void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
 
-    void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells);
+    void drawShip(List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
 
-    void drawMissed(Pair<Integer, Integer> pair);
-
-    void drawShip(List<Pair<Integer, Integer>> cells);
+    void drawMissed(Pair<Integer, Integer> cell, PlayerNumber playerNumber);
 
     void changePlayer();
+
+    void setPoints(int point);
+
+    void setShotAvailable(int shotAvailable);
+
+    void showWinDialog();
+
 }

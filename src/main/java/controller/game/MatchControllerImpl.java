@@ -2,6 +2,9 @@ package controller.game;
 
 import java.util.List;
 import java.util.Optional;
+
+import application.Battleships;
+
 import java.util.Map.Entry;
 
 import model.enums.PlayerNumber;
@@ -13,6 +16,7 @@ import model.match.PlaygroundBattleImpl;
 import model.match.Ship;
 import model.util.Pair;
 import view.match.BattleView;
+import view.scene.SceneName;
 
 public class MatchControllerImpl implements MatchController {
 
@@ -21,11 +25,12 @@ public class MatchControllerImpl implements MatchController {
      */
     private static final int LINE = 10;
     private static final int COLUMN = 10;
+    private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
-    private PlayerNumber currentPlayer;
     private final PlaygroundBattle playgroundPlayerOne;
     private final PlaygroundBattle playgroundPlayerTwo;
+    private int shotAvailable;
 
     private PlaygroundBattle currentPlaygroundBattle;
 
@@ -60,25 +65,37 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void shot(final int line, final int col) {
+        PlayerNumber villainPlayer = Battleships.getController()
+                .getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE) 
+                ? PlayerNumber.PLAYER_TWO : PlayerNumber.PLAYER_ONE;
         try {
-
-            final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle.shipHitted(new Pair<>(line, col)); 
+            final Optional<Entry<List<Pair<Integer, Integer>>, Ship>> v = this.currentPlaygroundBattle
+                    .shipHitted(new Pair<>(line, col));
 
             // If optional is present a ship is hitted.
             if (v.isPresent()) {
-                //If ship is sunk, player could be winner.
+                // If ship is sunk, player could be winner.
                 if (this.currentPlaygroundBattle.shipSunk(v.get().getKey()).get()) {
-                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey());
+                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey(), villainPlayer);
                     this.checkWin();
                 } else {
-                    this.battleView.drawHit(new Pair<>(line, col));
+                    this.battleView.drawHit(new Pair<>(line, col), villainPlayer);
                 }
             } else {
-                this.battleView.drawMissed(new Pair<>(line, col));
+                this.battleView.drawMissed(new Pair<>(line, col), villainPlayer);
             }
+
+            System.out.println(this.currentPlaygroundBattle.getNumberOfAliveShip());
+            this.battleView.setShotAvailable(this.currentPlaygroundBattle.getNumberOfAliveShip());
+            this.battleView.setPoints(this.currentPlaygroundBattle.getDamage());
+
+            if (this.shotAvailable <= 0) {
+                this.changePlayer();
+            }
+
         } catch (CellAlreadyShottedException e) {
             /*
-             * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err) 
+             * MEMO -> Scrivo qualcosa da qualche parte (log, std.out, std.err)
              * dell'eccezione?
              */
             this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
@@ -90,8 +107,8 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void startGame() {
-        this.currentPlayer = PlayerNumber.PLAYER_ONE;
         this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+        this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
     }
 
     /**
@@ -102,12 +119,33 @@ public class MatchControllerImpl implements MatchController {
         this.battleView = battleView;
     }
 
+    @Override
+    public void nextToPosition() {
+        
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
+            this.currentPlaygroundBattle = this.playgroundPlayerTwo;
+            Battleships.getController().changeScene(SceneName.SHIP_DEPLOYMENT);
+        } else {
+            this.startGame();
+            Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
+        }
+        
+        Battleships.getController().nextPlayer();
+    }
+
+    @Override
+    public void setPlayground(final PlaygroundBattle playgroundBattle) {
+        this.currentPlaygroundBattle = playgroundBattle;
+    }
+
+    public static int getShipNumberOfGame() {
+        return MatchControllerImpl.SHIPS_NUMBER;
+    }
+
     private void checkWin() {
-        /*
-         * The current playground is of the opponent. 
-         */
-        if (this.currentPlaygroundBattle.areThereAliveShip()) {
-            this.battleView.showWinDialog(this.currentPlayer);
+        if (Battleships.getController().isMatchOver(this.currentPlaygroundBattle.getDamage(),
+                this.currentPlaygroundBattle.getNumberOfAliveShip())) {
+            this.battleView.showWinDialog();
         }
     }
 
@@ -116,16 +154,19 @@ public class MatchControllerImpl implements MatchController {
      */
     @Override
     public void changePlayer() {
+        this.shotAvailable = this.currentPlaygroundBattle.getNumberOfAliveShip();
+        this.battleView.changePlayer();
         this.currentPlaygroundBattle = getNext();
+        Battleships.getController().nextPlayer();
     }
 
     /**
      * Method to get playground to use in next turn.
      * 
-     * @return playgroundBattle - the playground for next turn. 
+     * @return playgroundBattle - the playground for next turn.
      */
     private PlaygroundBattle getNext() {
-        if (this.currentPlayer == PlayerNumber.PLAYER_ONE) {
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
             return this.playgroundPlayerOne;
         } else {
             return this.playgroundPlayerTwo;
