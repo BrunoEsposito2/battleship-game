@@ -3,9 +3,10 @@ package controller.ui.matchsettings;
 import javafx.scene.control.TextArea;
 import java.util.Optional;
 import application.Battleships;
-import controller.match.MatchInitializer;
-import controller.match.MatchInitializerImpl;
-import controller.users.AccountManager;
+import controller.matchsetup.PlayerCheckerImpl;
+import controller.matchsetup.MatchInitializer;
+import controller.matchsetup.MatchInitializerImpl;
+import controller.matchsetup.PlayerChecker;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -19,7 +20,7 @@ import view.scene.SceneName;
  */
 public final class MatchSettings {
 
-    private final Login login = new Login();
+    private final PlayerChecker playerChecker = new PlayerCheckerImpl();
     private final MatchInitializer matchInitializer = new MatchInitializerImpl();
 
     @FXML
@@ -37,9 +38,9 @@ public final class MatchSettings {
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI.
      */
     public void initialize() {
-        new Initializer(this, login).initChoiceBoxes(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
+        new MatchSettingsInitializer(this, playerChecker).initialize(choiceboxPlayer1, choiceboxPlayer2, choiceboxGameMode);
         if (choiceboxPlayer1.getItems().isEmpty()) {
-            login.noProfilesAvailable();
+            playerChecker.noProfilesAvailable();
         }
     }
 
@@ -50,7 +51,7 @@ public final class MatchSettings {
     public void buttonStart() {
         final Optional<String> username1 = Optional.ofNullable(getSelectedItem(choiceboxPlayer1));
         final Optional<String> username2 = checkboxAI.isSelected() ? Optional.empty() : Optional.ofNullable(getSelectedItem(choiceboxPlayer2));
-        if (login.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
+        if (playerChecker.isPlayerSelectionValid(username1, username2, checkboxAI.isSelected())) {
             matchInitializer.startNewMatch(username1.get(), username2, checkboxAI.isSelected()
                     ? PlayerType.ARTIFICIAL : PlayerType.HUMAN, getSelectedItem(choiceboxGameMode));
         }
@@ -72,13 +73,21 @@ public final class MatchSettings {
         Battleships.getController().changeScene(SceneName.MAIN);
     }
 
-    // package-private
-    void setGameModeDescription(final String text) {
+    /**
+     * sets the displayed gamemode info.
+     * @param text - the info to display
+     */
+    public void setGameModeDescription(final String text) {
         textareaDescription.setText(text);
     }
 
-    // package-private
-    <T> T getSelectedItem(final ChoiceBox<T> cb) {
+    /**
+     * gets selected item of a choicebox.
+     * @param <T> - type of contained item
+     * @param cb - choicebox
+     * @return the selected item
+     */
+    public <T> T getSelectedItem(final ChoiceBox<T> cb) {
         return cb.getSelectionModel().getSelectedItem();
     }
 
