@@ -132,9 +132,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     @Override
     public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
 
-//        if (this.isCellUsed(cell)) {
-//            throw new CellAlreadyShottedException(cell);
-//        }
+        if (this.isCellUsed(cell)) {
+            throw new CellAlreadyShottedException(cell);
+        }
 
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
@@ -187,10 +187,10 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return new HashMap<List<Pair<Integer, Integer>>, Ship>(this.shipList);
     }
 
-//    @Override
-//    public boolean isCellUsed(final Pair<Integer, Integer> cell) {
-//        return this.playground.get(cell.getX()).get(cell.getY());
-//    }
+    @Override
+    public boolean isCellUsed(final Pair<Integer, Integer> cell) {
+        return this.playground.get(cell.getX()).get(cell.getY());
+    }
 
     @Override
     public boolean isCellUsedByShip(final Pair<Integer, Integer> cell) {
