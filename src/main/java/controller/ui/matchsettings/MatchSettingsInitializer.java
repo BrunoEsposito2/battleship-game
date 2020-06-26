@@ -32,6 +32,7 @@ final class MatchSettingsInitializer {
         cbInit.initChoiceBox(choiceboxPlayer1, usernames, getChoiceBoxListener(choiceboxPlayer1, ChoiceBoxType.PLAYER));
         cbInit.initChoiceBox(choiceboxPlayer2, usernames, getChoiceBoxListener(choiceboxPlayer2, ChoiceBoxType.PLAYER));
         cbInit.initChoiceBox(choiceboxGameMode, Arrays.asList(GameMode.values()), getChoiceBoxListener(choiceboxGameMode, ChoiceBoxType.GAMEMODE));
+        choiceboxGameMode.getSelectionModel().selectFirst();
     }
  
     private <T> ChangeListener<T> getChoiceBoxListener(final ChoiceBox<T> cb, final ChoiceBoxType type) {
