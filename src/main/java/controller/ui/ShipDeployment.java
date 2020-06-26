@@ -23,7 +23,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 
-public final class ShipDeployment {
+public class ShipDeployment {
 
     private static final int GRIDSIZE = Battleships.getController().getMatchInfo().get().getFieldSize().getKey();
     private static final int NUMSHIPS = Battleships.getController().getMatchInfo().get().getShipsNumber();
