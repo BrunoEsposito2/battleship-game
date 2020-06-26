@@ -119,6 +119,7 @@ public class MatchControllerImpl implements MatchController {
         this.battleView = battleView;
     }
 
+    @Override
     public void nextToPosition() {
         
         if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
@@ -131,6 +132,7 @@ public class MatchControllerImpl implements MatchController {
         Battleships.getController().nextPlayer();
     }
 
+    @Override
     public void setPlayground(final PlaygroundBattle playgroundBattle) {
         this.currentPlaygroundBattle = playgroundBattle;
     }
