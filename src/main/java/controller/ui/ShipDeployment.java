@@ -155,7 +155,7 @@ public final class ShipDeployment {
                 //*** Horizontal dropping ***
                 if (this.orientation.get().equals(Orientation.HORIZONTAL)
                     && this.coordY < GRIDSIZE - this.size + 1
-                    && !playgroundBattle.isCellUsed(new Pair<>(this.coordX, this.coordY))) {
+                    && !playgroundBattle.isCellUsedByShip(new Pair<>(this.coordX, this.coordY))) {
 
                     //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
@@ -176,7 +176,7 @@ public final class ShipDeployment {
                 //*** Vertical dropping ***    
                 } else if (this.orientation.get().equals(Orientation.VERTICAL)
                            && this.coordX < GRIDSIZE - this.size + 1
-                           && !playgroundBattle.isCellUsed(new Pair<>(this.coordX, this.coordY))) {
+                           && !playgroundBattle.isCellUsedByShip(new Pair<>(this.coordX, this.coordY))) {
 
                   //check whether this ship is already present
                     if (manageDeployment.checkShip(manageDeployment.extractShip(draggingShip))) {
