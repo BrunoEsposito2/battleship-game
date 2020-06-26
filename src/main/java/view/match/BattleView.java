@@ -8,10 +8,24 @@ import model.util.Pair;
 
 public interface BattleView {
 
-    void showCellAlreadyUsedAlert(List<Pair<Integer, Integer>> cell);
-
+    /**
+     * Show a dialog where is explained which cells have been overlapped. 
+     * 
+     * @param cells - list of cells already used
+     */
+    void showCellAlreadyUsedAlert(List<Pair<Integer, Integer>> cells);
+    
+    /**
+     * Show a dialog where is explained which cell has already been shot. 
+     * @param cell - cell already shot
+     */
     void showCellAlreadyShottedAlert(Pair<Integer, Integer> cell);
 
+    /**
+     * 
+     * @param pair - 
+     * @param playerNumber
+     */
     void drawHit(Pair<Integer, Integer> pair, PlayerNumber playerNumber);
 
     void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
@@ -27,5 +41,9 @@ public interface BattleView {
     void setShotAvailable(int shotAvailable);
 
     void showWinDialog();
+
+    void hideShip(List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
+
+    void showChangePlayerDialog();
 
 }
