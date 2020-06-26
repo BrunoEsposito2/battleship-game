@@ -2,11 +2,12 @@ package controller.ui;
 
 import java.util.Collection;
 import java.util.Collections;
-
+import java.util.Map;
 import application.Battleships;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
 import view.scene.SceneName;
 import view.util.ChoiceBoxInitializer;
 import view.util.ChoiceBoxInitializerImpl;
@@ -20,6 +21,8 @@ public final class Statistics {
     private Button btBack;
     @FXML
     private ChoiceBox<String> cbPlayer;
+    @FXML
+    private TextField defeatRate, total, defeats, record, victories, victoryRate;
 
     /**
      * this method is called automatically when loading the fxml layout. It sets the initial state of the UI.
@@ -39,7 +42,13 @@ public final class Statistics {
     }
 
     private void displayPlayerInfo(final String username) {
- 
+        Map<String, Double> statMap = Battleships.getController().getAccountManager().getAccountStats(username).orElse(Collections.emptyMap());
+        defeats.setText(statMap.get("Loss").toString());
+        defeatRate.setText(statMap.get("Loss_rate").toString());
+        victories.setText(statMap.get("Wins").toString());
+        victoryRate.setText(statMap.get("Wins_rate").toString());
+        total.setText(statMap.get("Totals").toString());
+        record.setText(statMap.get("Record").toString());
     }
 
 }
