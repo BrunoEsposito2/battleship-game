@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.7" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.MainMenu">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="800.0" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ui.MainMenu">
 
   <children>
       <Button id="buttonNewGame" fx:id="buttonNewGame" mnemonicParsing="false" onMouseClicked="#buttonNewGame" text="New Game">
@@ -16,6 +16,11 @@
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Button>
+      <Button id="buttonStatistics" fx:id="buttonStatistics" mnemonicParsing="false" onMouseClicked="#buttonStatistics" text="Statistics">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Button>
       <Button id="buttonExit" fx:id="buttonExit" mnemonicParsing="false" onMouseClicked="#buttonExit" text="Exit">
          <font>
             <Font name="System Bold" size="18.0" />
