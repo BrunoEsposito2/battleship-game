@@ -28,8 +28,8 @@ public class MatchControllerImpl implements MatchController {
     private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
-    private final PlaygroundBattle playgroundPlayerOne;
-    private final PlaygroundBattle playgroundPlayerTwo;
+    private PlaygroundBattle playgroundPlayerOne;
+    private PlaygroundBattle playgroundPlayerTwo;
     private int shotAvailable;
 
     private PlaygroundBattle currentPlaygroundBattle;
@@ -89,8 +89,10 @@ public class MatchControllerImpl implements MatchController {
             this.battleView.setShotAvailable(this.currentPlaygroundBattle.getNumberOfAliveShip());
             this.battleView.setPoints(this.currentPlaygroundBattle.getDamage());
 
-            if (this.shotAvailable <= 0) {
+            if (this.shotAvailable <= 1) {
                 this.changePlayer();
+            } else {
+                this.shotAvailable--;
             }
 
         } catch (CellAlreadyShottedException e) {
@@ -123,19 +125,21 @@ public class MatchControllerImpl implements MatchController {
     public void nextToPosition() {
         
         if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
-            this.currentPlaygroundBattle = this.playgroundPlayerTwo;
             Battleships.getController().changeScene(SceneName.SHIP_DEPLOYMENT);
         } else {
             this.startGame();
             Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
         }
-        
         Battleships.getController().nextPlayer();
     }
 
     @Override
     public void setPlayground(final PlaygroundBattle playgroundBattle) {
-        this.currentPlaygroundBattle = playgroundBattle;
+        if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
+            this.playgroundPlayerOne = playgroundBattle;
+        } else {
+            this.playgroundPlayerTwo = playgroundBattle;
+        }
     }
 
     public static int getShipNumberOfGame() {
