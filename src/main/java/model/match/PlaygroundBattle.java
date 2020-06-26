@@ -40,4 +40,6 @@ public interface PlaygroundBattle {
     Map<List<Pair<Integer, Integer>>, Ship> getShips();
 
     int getDamage();
+
+    boolean isCellUsed(Pair<Integer, Integer> cell);
 }
