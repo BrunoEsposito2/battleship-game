@@ -76,6 +76,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                 iterator.remove();
             }
         }
+        
+        this.aliveShips--;
+        
         return true;
     }
     
@@ -94,6 +97,8 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                 iterator.remove();
             }
         }
+        
+        this.aliveShips--;
     }
 
     @Override
@@ -106,6 +111,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         for (Entry<List<Pair<Integer, Integer>>, Ship> list : this.shipList.entrySet()) {
             this.removeShipWithCell(list.getKey().get(0));
         }
+        this.aliveShips = 0;
     }
 
 
