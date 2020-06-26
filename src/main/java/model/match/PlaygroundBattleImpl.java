@@ -58,7 +58,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     @Override
     public List<Pair<Integer, Integer>> getCellsOverlappedList(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
         return orientation.cellsUsedList(firstCell, ship.getSize()).stream()
-                                                                   .filter(i -> isCellUsed(i))
+                                                                   .filter(i -> isCellUsedByShip(i))
                                                                    .collect(toList());
     }
 
@@ -132,9 +132,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     @Override
     public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
 
-        if (this.isCellUsed(cell)) {
-            throw new CellAlreadyShottedException(cell);
-        }
+//        if (this.isCellUsed(cell)) {
+//            throw new CellAlreadyShottedException(cell);
+//        }
 
         this.playground.get(cell.getX()).set(cell.getY(), true);
         for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
@@ -193,7 +193,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 //    }
 
     @Override
-    public boolean isCellUsed(final Pair<Integer, Integer> cell) {
+    public boolean isCellUsedByShip(final Pair<Integer, Integer> cell) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
         final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
  
