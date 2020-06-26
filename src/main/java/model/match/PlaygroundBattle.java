@@ -33,7 +33,7 @@ public interface PlaygroundBattle {
 
     int getNumberOfAliveShip();
 
-    boolean isCellUsed(Pair<Integer, Integer> cell);
+    boolean isCellUsedByShip(Pair<Integer, Integer> cell);
 
     List<List<Boolean>> getPlaygroundBattle();
 
