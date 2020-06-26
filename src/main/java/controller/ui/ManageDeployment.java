@@ -168,7 +168,7 @@ final class ManageDeployment {
      */
     boolean checkVertRotation(final int size, final int coordX, final int coordY) {
         for (int i = 1; i < size; i++) {
-            if (playgroundBattle.isCellUsed(new Pair<>(coordX + i, coordY))) {
+            if (playgroundBattle.isCellUsedByShip(new Pair<>(coordX + i, coordY))) {
                 return false;
             }
         }
@@ -181,7 +181,7 @@ final class ManageDeployment {
      */
     boolean checkHorizRotation(final int size, final int coordX, final int coordY) {
         for (int i = 1; i < size; i++) {
-            if (playgroundBattle.isCellUsed(new Pair<>(coordX, coordY + i))) {
+            if (playgroundBattle.isCellUsedByShip(new Pair<>(coordX, coordY + i))) {
                 return false;
             }
         }
