@@ -1,6 +1,7 @@
 package controller.game;
 
 import model.enums.ShipType;
+import model.match.PlaygroundBattle;
 import model.util.Pair;
 import view.match.BattleView;
 
@@ -45,5 +46,9 @@ public interface MatchController {
      * Pass to nextTurn player.
      */
     void changePlayer();
+
+    void setPlayground(PlaygroundBattle playgroundBattle);
+
+    void nextToPosition();
 
 }
