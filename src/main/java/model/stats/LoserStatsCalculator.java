@@ -3,6 +3,10 @@ package model.stats;
 import model.enums.StatsInfo;
 import model.players.Player;
 
+/**
+ * The class calculates all the values related to the loser player statistics.
+ * 
+ */
 public class LoserStatsCalculator implements Statistics {
 
     private static final double DEFAULT_VAL = 0.00;
