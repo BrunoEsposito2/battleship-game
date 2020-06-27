@@ -13,12 +13,12 @@ public interface PlayerInfo {
     String getUsername();
 
     /**
-     * @return player's username
+     * @return player's type
      */
     PlayerType getType();
 
     /**
-     * @return player's username
+     * @return player's number.
      */
     PlayerNumber getNumber();
 }
