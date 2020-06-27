@@ -33,7 +33,8 @@ public enum Orientation {
 
     /**
      * Get a list of cells used in the direction of object "Orientation",
-     * given the initial cell and the number of cells these will be used. 
+     * given the initial cell and the number of cells these will be used.
+     * 
      * @param initialCell - The cell where to start.
      * @param cellsNumber - Number of cell used along direction.
      * @return a list of cells used
