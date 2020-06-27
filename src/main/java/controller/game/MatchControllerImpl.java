@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import application.Battleships;
 
@@ -169,7 +170,7 @@ public class MatchControllerImpl implements MatchController {
     private List<Pair<Integer, Integer>> shipCells(final PlayerNumber playerNumber) {
         List<Pair<Integer, Integer>> listOfCells = new ArrayList<>();
 
-        var keySet = this.playgrounds.get(playerNumber).getShips().keySet();
+        Set<List<Pair<Integer, Integer>>> keySet = this.playgrounds.get(playerNumber).getShips().keySet();
 
         for (List<Pair<Integer, Integer>> list : keySet) {
             listOfCells.addAll(list);
