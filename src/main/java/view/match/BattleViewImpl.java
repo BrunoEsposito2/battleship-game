@@ -18,13 +18,16 @@ import model.enums.ShipType;
 import model.util.Pair;
 import view.dialog.DialogType;
 import view.scene.SceneName;
-
-import static java.util.stream.Collectors.joining;
-
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static java.util.stream.Collectors.joining;
+
+/**
+ * 
+ * Implementation of battle's view dynamics.
+ *
+ */
 public class BattleViewImpl implements BattleView {
 
 //    private static final String SEPARATOR = System.getProperty("file.separator");
