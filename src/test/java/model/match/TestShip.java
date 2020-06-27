@@ -11,9 +11,9 @@ public class TestShip {
     @Test
     public void testCreationShip() {
         
-        final GameObject carrier = new Ship(ShipType.CARRIER);
-        final GameObject battleship = new Ship(ShipType.BATTLESHIP);
-        final GameObject cruiser = new Ship(ShipType.CRUISER);
+        final Ship carrier = new Ship(ShipType.CARRIER);
+        final Ship battleship = new Ship(ShipType.BATTLESHIP);
+        final Ship cruiser = new Ship(ShipType.CRUISER);
         
         assertEquals(carrier.getSize(), 5);
         assertEquals(battleship.getSize(), 4);
@@ -23,9 +23,9 @@ public class TestShip {
     @Test
     public void testDestruction() {
         
-        final GameObject carrier = new Ship(ShipType.CARRIER);
-        final GameObject battleship = new Ship(ShipType.BATTLESHIP);
-        final GameObject cruiser = new Ship(ShipType.CRUISER);
+        final Ship carrier = new Ship(ShipType.CARRIER);
+        final Ship battleship = new Ship(ShipType.BATTLESHIP);
+        final Ship cruiser = new Ship(ShipType.CRUISER);
         
         for (int i = 0; i < 5; i++) {
             carrier.hit();

@@ -28,9 +28,15 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
         this.maxCols = maxCols;
     }
 
+<<<<<<< HEAD
     private Pair<Integer, Integer> getRandomInitPosition() {
         Optional<Random> rand = Optional.of(new Random());
         return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows - (this.maxRows / 2) + 1), rand.get().nextInt(this.maxCols - (this.maxCols / 2) + 1));
+=======
+    private Pair<Integer, Integer> getRandomPosition() {
+        Optional<Random> rand = Optional.of(new Random());
+        return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows), rand.get().nextInt(this.maxCols));
+>>>>>>> 3eb301c47aa36cca0f3dc337412376934cf6e9e3
     }
 
     private Orientation setRandomOrientation() {

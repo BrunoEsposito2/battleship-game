@@ -2,7 +2,6 @@ package model.match;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,8 @@ import static java.util.stream.Collectors.toList;
 
 /**
  *
+ * Implementation of playground of battleship. 
+ * 
  */
 public class PlaygroundBattleImpl implements PlaygroundBattle {
 
@@ -55,15 +56,14 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.aliveShips++;
     }
 
-    @Override
-    public List<Pair<Integer, Integer>> getCellsOverlappedList(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
+    private List<Pair<Integer, Integer>> getCellsOverlappedList(final Ship ship, final Pair<Integer, Integer> firstCell, final Orientation orientation) {
         return orientation.cellsUsedList(firstCell, ship.getSize()).stream()
                                                                    .filter(i -> isCellUsedByShip(i))
                                                                    .collect(toList());
     }
 
     @Override
-    public boolean removeShipWithCell(final Pair<Integer, Integer> cell) {
+    public void removeShipWithCell(final Pair<Integer, Integer> cell) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
         final Iterator<Entry<List<Pair<Integer, Integer>>, Ship>> iterator = setOfShipEntries.iterator();
 
@@ -76,10 +76,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                 iterator.remove();
             }
         }
-        
+
         this.aliveShips--;
-        
-        return true;
+
     }
     
     @Override
@@ -102,7 +101,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public void resetPlayground() {
+    public void resetLogicGrid() {
         this.createPlayGround();
     }
 

@@ -83,4 +83,9 @@ public interface Controller {
      */
     void nextPlayer();
 
+    /**
+     * Set AI playground. 
+     */
+    void setAI();
+
 }

@@ -92,4 +92,9 @@ public final class ControllerImpl implements Controller {
         model.setMatchInfo(info);
     }
 
+    @Override
+    public void setAI() {
+        this.matchController.setPlayground(this.model.startBasicAI());
+    }
+
 }
