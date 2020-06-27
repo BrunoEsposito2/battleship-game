@@ -2,7 +2,6 @@ package model.match;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +16,8 @@ import static java.util.stream.Collectors.toList;
 
 /**
  *
+ * Implementation of playground of battleship. 
+ * 
  */
 public class PlaygroundBattleImpl implements PlaygroundBattle {
 
