@@ -13,7 +13,6 @@ import view.scene.SceneName;
  */
 public final class ViewImpl implements View {
 
-    private final Stage stage;
     private final SceneLoader sceneLoader;
 
     /**
@@ -21,8 +20,7 @@ public final class ViewImpl implements View {
      * @param stage - the application's stage.
      */
     public ViewImpl(final Stage stage) {
-        this.stage = stage;
-        sceneLoader = new SceneLoaderImpl();
+        sceneLoader = new SceneLoaderImpl(stage);
         loadScene(SceneName.MAIN);
         stage.setTitle("Battleships");
         stage.show();
@@ -30,7 +28,7 @@ public final class ViewImpl implements View {
 
     @Override
     public void loadScene(final SceneName name) {
-        sceneLoader.switchScene(stage, name);
+        sceneLoader.switchScene(name);
     }
 
     @Override

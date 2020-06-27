@@ -10,13 +10,20 @@ import javafx.stage.Stage;
 public final class SceneLoaderImpl implements SceneLoader {
 
     private final LayoutLoader layoutLoader = new LayoutLoaderFXML();
+    private final Stage stage;
+ 
+    /**
+     * @param stage - the active stage of the application.
+     */
+    public SceneLoaderImpl(final Stage stage) {
+        this.stage = stage;
+    }
 
     /**
      * This method switches the active Scene to the one passed as parameter.
      * @param nextScene - the name of the Scene you want to load.
-     * @param stage - the Stage of the application.
      */
-    public void switchScene(final Stage stage, final SceneName nextScene) {
+    public void switchScene(final SceneName nextScene) {
         final String directory = "layouts";
         final String separator = File.separator;
         final String fileName = nextScene.getLayoutName();
