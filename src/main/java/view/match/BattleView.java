@@ -6,6 +6,11 @@ import model.enums.PlayerNumber;
 import model.enums.ShipType;
 import model.util.Pair;
 
+/**
+ * 
+ * View of match battle started.
+ * 
+ */
 public interface BattleView {
 
     /**
