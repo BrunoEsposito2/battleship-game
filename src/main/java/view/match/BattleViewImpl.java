@@ -128,6 +128,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showCellAlreadyUsedAlert(final List<Pair<Integer, Integer>> cell) {
         final String description = "Cell [line, column]: "
@@ -139,6 +142,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showWinDialog() {
         final String winner = Battleships.getController().getMatchInfo().get()
@@ -151,6 +157,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawHit(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
         this.hittedCells.get(playerNumber).add(cell);
@@ -165,6 +174,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawShip(final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
 
@@ -175,6 +187,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
         for (final Pair<Integer, Integer> cell : cells) {
@@ -189,6 +204,9 @@ public class BattleViewImpl implements BattleView {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void drawMissed(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
         Platform.runLater(() -> {
@@ -201,6 +219,9 @@ public class BattleViewImpl implements BattleView {
         });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void changePlayer() {
 
@@ -219,16 +240,25 @@ public class BattleViewImpl implements BattleView {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPoints(final int point) {
         this.currentPointsPL.setText("" + point);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setShotAvailable(final int shotAvailable) {
         this.currentShotAvailable.setText("" + shotAvailable);
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showChangePlayerDialog() {
         Platform.runLater(() -> {
@@ -242,6 +272,9 @@ public class BattleViewImpl implements BattleView {
         return this.panes.get(playerNumber).get(cell);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void hideShip(final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
         for (Pair<Integer, Integer> cell : cells) {
