@@ -13,7 +13,7 @@ import java.util.Map.Entry;
 
 import model.enums.PlayerNumber;
 import model.enums.ShipType;
-import model.match.CellAlreadyShottedException;
+import model.match.CellAlreadyShotException;
 import model.match.CellsFilledException;
 import model.match.PlaygroundBattle;
 import model.match.PlaygroundBattleImpl;
@@ -97,7 +97,7 @@ public class MatchControllerImpl implements MatchController {
                 this.shotAvailable--;
             }
 
-        } catch (CellAlreadyShottedException e) {
+        } catch (CellAlreadyShotException e) {
             this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
         }
     }
