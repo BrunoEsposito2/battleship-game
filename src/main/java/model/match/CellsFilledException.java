@@ -5,26 +5,28 @@ import java.util.stream.Collectors;
 
 import model.util.Pair;
 
+/**
+ * 
+ * Exception representing situation where cells these it want to use are filled.
+ * 
+ */
 public class CellsFilledException extends CellsAlreadyUsedException {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6205542022676663926L;
 
     public CellsFilledException(final List<Pair<Integer, Integer>> cellsUsed) {
         super(cellsUsed);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        String s = this.getCellsUsed().stream()
+        final String s = this.getCellsUsed().stream()
                 .map(cell -> "[" + cell.getX() + ", " + cell.getY() + "]")
                 .collect(Collectors.joining("; ", "{ ", "}"));
 
-//        this.getCellsUsed().forEach(cell -> {
-//            s = s + "[" + cell.getX() + ", " + cell.getY() + "]";
-//        });
         return "Cells already filled: " + s + "\n" + super.toString();
     }
 
