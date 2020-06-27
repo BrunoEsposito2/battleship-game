@@ -14,6 +14,9 @@ import model.players.Player;
 import model.players.PlayerManager;
 import model.players.PlayerOperation;
 
+/**
+ * JUnit test for {@link PlayerManager} statistics.
+ */
 public class PlayerManagerStatisticsTest {
 
     private static final Double WIN_SCORE = 20.0;
@@ -25,6 +28,9 @@ public class PlayerManagerStatisticsTest {
 
     private Statistics stats;
 
+    /**
+     * Test if the statistics of the winning player are updated correctly.
+     */
     @Test
     void basicPlayerManagerWinStatsTest() {
         Player player1 = new HumanPlayer("Test1", "PassTest1");
@@ -45,6 +51,9 @@ public class PlayerManagerStatisticsTest {
         assertEquals(expected, res);
     }
 
+    /**
+     * Test if the statistics of the losing player are updated correctly.
+     */
     @Test
     void basicPlayerManagerLossStatsTest() {
         Player player1 = new HumanPlayer("Test1", "PassTest1");

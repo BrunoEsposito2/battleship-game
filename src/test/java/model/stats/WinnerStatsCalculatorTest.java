@@ -11,6 +11,9 @@ import model.enums.StatsInfo;
 import model.players.HumanPlayer;
 import model.players.Player;
 
+/**
+ * JUnit test for {@link Statistics}.
+ */
 public class WinnerStatsCalculatorTest {
 
     private static final Double WIN_LOSS_SCORE = 20.0;
@@ -22,6 +25,9 @@ public class WinnerStatsCalculatorTest {
 
     private Statistics stats;
 
+    /**
+     * Test if the calculator of the winner statistics works correctly.
+     */
     @Test 
     void basicWinStatsTest() {
         Player player1 = new HumanPlayer("Test1", "PassTest1");
@@ -40,6 +46,9 @@ public class WinnerStatsCalculatorTest {
         assertEquals(expected, res);
     }
 
+    /**
+     * Test if the calculator of the loser statistics works correctly.
+     */
     @Test 
     void basicLossStatsTest() {
         Player player1 = new HumanPlayer("Test1", "PassTest1");
