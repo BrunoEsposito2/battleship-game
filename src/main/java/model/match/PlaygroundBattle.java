@@ -27,7 +27,7 @@ public interface PlaygroundBattle {
 
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
-    Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShottedException;
+    Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShotException;
 
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
