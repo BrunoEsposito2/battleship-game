@@ -12,6 +12,10 @@ import model.match.PlaygroundBattleImpl;
 import model.match.Ship;
 import model.util.Pair;
 
+/**
+ * Represents a specific implementation of {@link IntelligenceComputation}.
+ * 
+ */
 public class BasicIntelligenceComputation implements IntelligenceComputation {
 
     private static final int POSSIBLE_ORIENTATIONS = 2;

@@ -7,7 +7,6 @@ import model.enums.PlayerNumber;
 import model.match.PlaygroundBattle;
 import model.gamemode.GameMode;
 import model.match.players.MatchInfo;
-import model.match.players.PlayerInfoImpl;
 import model.players.ArtificialPlayer;
 import model.players.Player;
 import model.players.PlayerManager;
@@ -21,24 +20,32 @@ public interface Model {
 
     /**
      * 
-     * @param players - players saved on the system
-     * @return the model's player manager object.
+     * @param players 
+                the list of players saved on system.
+     * @return 
+     *      Returns the model's player manager object.
      */
     PlayerManager setPlayerManager(Optional<List<Player>> players);
 
+    /**
+     * @return
+     *      Returns the artificial player initialized.
+     */
     ArtificialPlayer getArtificialPlayer();
 
     /**
      * 
-     * @return the new PlaygroungBattle containing all the ships 
-     *          positionated by AI basic implementation 
+     * @return 
+     *      Returns a new PlaygroungBattle containing all the ships 
+     *      positionated by AI basic implementation. 
      */
     PlaygroundBattle startBasicAI();
 
     /**
      * 
-     * @return the point in which set the new attack, 
-     *          calculated by AI basic implementation
+     * @return 
+     *      Returns the point in which set the new attack, 
+     *      calculated by AI basic implementation.
      */
     Pair<Integer, Integer> getNextHitPointBasicAI();
 

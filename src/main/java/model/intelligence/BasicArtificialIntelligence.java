@@ -6,6 +6,11 @@ import java.util.List;
 import model.match.PlaygroundBattle;
 import model.util.Pair;
 
+/**
+ * This class represents a specific kind of {@link ArtificialIntelligence} and
+ * its implementation is related to the {@link IntelligenceComputation}.
+ * 
+ */
 public class BasicArtificialIntelligence extends ArtificialIntelligence {
 
     private List<Pair<Integer, Integer>> attackGrid;

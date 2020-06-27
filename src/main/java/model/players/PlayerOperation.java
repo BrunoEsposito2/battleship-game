@@ -1,7 +1,6 @@
 package model.players;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +10,11 @@ import model.stats.LoserStatsCalculator;
 import model.stats.Statistics;
 import model.stats.WinnerStatsCalculator;
 
+/**
+ * This class is an implementation of {@link PlayerManager} that manages 
+ * all operations on players.
+ *
+ */
 public final class PlayerOperation implements PlayerManager {
 
     private final Optional<List<Player>> players;

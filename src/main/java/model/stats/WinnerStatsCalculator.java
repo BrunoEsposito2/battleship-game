@@ -3,6 +3,10 @@ package model.stats;
 import model.enums.StatsInfo;
 import model.players.Player;
 
+/**
+ * The class calculates all the values related to the winner player statistics.
+ *
+ */
 public class WinnerStatsCalculator implements Statistics {
 
     private static final double DEFAULT_VAL = 0.00;
@@ -21,11 +25,11 @@ public class WinnerStatsCalculator implements Statistics {
         final double wins = getInfoValue(StatsInfo.WINS.getName()) + 1;
         final double loss = getInfoValue(StatsInfo.LOSS.getName());
 
-        bestScoreCheck();                                                                            //update of score "Record".
+        bestScoreCheck();
 
-        this.winner.updateStats(StatsInfo.TOTALS.getName(), tot);                                    //update of the "Totals" match played.
-        this.winner.updateStats(StatsInfo.WINS.getName(), wins);                                     //update of the number of all "Wons". 
-        this.winner.updateStats(StatsInfo.WINS_RATE.getName(), (wins / tot) * 100);                  //calculation of new "Won_Rate".
+        this.winner.updateStats(StatsInfo.TOTALS.getName(), tot);
+        this.winner.updateStats(StatsInfo.WINS.getName(), wins); 
+        this.winner.updateStats(StatsInfo.WINS_RATE.getName(), (wins / tot) * 100);
         this.winner.updateStats(StatsInfo.LOSS_RATE.getName(), (loss / tot) * 100);
     }
 
