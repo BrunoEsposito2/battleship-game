@@ -148,7 +148,7 @@ public class MatchControllerImpl implements MatchController {
     @Override
     public void setPlayground(final PlaygroundBattle playgroundBattle) {
         this.playgrounds.put(Battleships.getController().getCurrentPlayer().get(), playgroundBattle);
-        playgroundBattle.resetPlayground();
+        playgroundBattle.resetLogicGrid();
     }
 
     public static int getShipNumberOfGame() {

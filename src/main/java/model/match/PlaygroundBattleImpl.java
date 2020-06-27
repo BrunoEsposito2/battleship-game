@@ -101,7 +101,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public void resetPlayground() {
+    public void resetLogicGrid() {
         this.createPlayGround();
     }
 

@@ -33,15 +33,18 @@ public interface PlaygroundBattle {
     void removeShipWithCell(Pair<Integer, Integer> cell);
 
     /**
-     * Remove ship passed.
+     * Remove ship passed from playground.
      * 
      * @param ship - Ship to remove.
      */
     void removeShipWithShip(Ship ship);
 
+    /**
+     * Remove all ships from playground.
+     */
     void removeAllShips();
 
-    void resetPlayground();
+    void resetLogicGrid();
 
     boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
 
