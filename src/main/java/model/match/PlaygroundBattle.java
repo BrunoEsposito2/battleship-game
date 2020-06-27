@@ -13,8 +13,26 @@ import model.util.Pair;
  */
 public interface PlaygroundBattle {
 
+    /**
+     * Position the ship in this playground starting from passed cell.
+     * If a ship will position over another one, it will be throw exception.
+     * In this situation, position not be successful.
+     * 
+     * @param ship - Ship to position in playground
+     * @param firstCell - The first cell (higher and more left used by ship)
+     * 
+     * @throws CellsFilledException - When ship to position is over existing ships.
+     */
     void positionShip(Ship ship, Pair<Integer, Integer> firstCell) throws CellsFilledException;
 
+    /**
+     * 
+     * 
+     * @param ship
+     * @param firstCell
+     * @param orientation
+     * @return list
+     */
     List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
 
     boolean removeShipWithCell(Pair<Integer, Integer> box);
