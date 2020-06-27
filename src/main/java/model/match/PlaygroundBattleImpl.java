@@ -130,10 +130,10 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
 //    }
 
     @Override
-    public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
+    public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShotException {
 
         if (this.isCellUsed(cell)) {
-            throw new CellAlreadyShottedException(cell);
+            throw new CellAlreadyShotException(cell);
         }
 
         this.playground.get(cell.getX()).set(cell.getY(), true);
