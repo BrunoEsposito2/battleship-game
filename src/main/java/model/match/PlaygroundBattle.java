@@ -26,18 +26,18 @@ public interface PlaygroundBattle {
     void positionShip(Ship ship, Pair<Integer, Integer> firstCell) throws CellsFilledException;
 
     /**
+     * Remove ship that cross this cell.
      * 
-     * 
-     * @param ship
-     * @param firstCell
-     * @param orientation
-     * @return list
+     * @param cell - Cell crossed by ship to remove 
      */
-    List<Pair<Integer, Integer>> getCellsOverlappedList(Ship ship, Pair<Integer, Integer> firstCell, Orientation orientation);
+    void removeShipWithCell(Pair<Integer, Integer> cell);
 
-    boolean removeShipWithCell(Pair<Integer, Integer> box);
-
-    void removeShipWithShip(Ship shipPassata);
+    /**
+     * Remove ship passed.
+     * 
+     * @param ship - Ship to remove.
+     */
+    void removeShipWithShip(Ship ship);
 
     void removeAllShips();
 
