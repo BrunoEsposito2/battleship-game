@@ -1,0 +1,13 @@
+.gradle/
+build/
+bin/
+out/
+.idea/
+# Ignored, as Gradle Buildship generates it on import / refresh
+.classpath
+doc/ 
+src/main/resources/layouts/matchSettingsOld.fxml 
+src/main/resources/layouts/matchSettingsTest.fxml
+src/main/java/view/prova/
+MainTest.java
+uml/

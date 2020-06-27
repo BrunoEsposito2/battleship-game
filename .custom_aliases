@@ -1,0 +1,51 @@
+# File to make it easier the use of git inside bash.
+#
+# To use it use command "source" (or rather to "charge" these commands inside list of usable commands) 
+# Ex. "source .custom_aliases". After that you can use these commands like normal bash commands.
+#
+
+
+alias l="ls -alh"
+
+alias gs="git status"
+
+alias ga="git add"
+
+alias gc="git commit -m"
+
+alias gd="git diff"
+
+alias gck="git checkout"
+
+alias gph="git push"
+
+alias gpl="git pull"
+
+alias glg="git log --graph --all"
+
+alias glo="git log --oneline --all"
+
+
+# "Funcion" to do a "git add" and a "git commit -m" simultaneously.
+# Use: gac "name of file" "commit message"
+# Ex. gac src/HelloWorld.java "- File modified."
+# Commit resultant : "src/HelloWorld.java - File modified."
+
+gac(){
+	ga "${1}"
+	gc ""${1}" ${2}"
+}
+
+# "Funcion" to do a "git add" and a "git commit -m" "git push" simultaneously. Make attention because this 
+# "function" does a generic push so from https://git-scm.com/docs/git-push:
+#
+# When neither the command-line nor the configuration specify what to push, the default behavior is used, 
+# which corresponds to the simple value for push.default: the current branch is pushed to the corresponding
+# upstream branch, but as a safety measure, the push is aborted if the upstream branch does not have the 
+# same name as the local one.
+
+gacp(){
+	ga "${1}"
+	gc ""${1}" ${2}"
+	gph
+}
