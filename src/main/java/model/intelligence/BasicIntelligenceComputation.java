@@ -25,12 +25,12 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
     }
 
     private Pair<Integer, Integer> getRandomPosition() {
-        Optional<Random> rand = Optional.empty();
+        Optional<Random> rand = Optional.of(new Random());
         return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows), rand.get().nextInt(this.maxCols));
     }
 
     private Orientation setRandomOrientation() {
-        Optional<Random> rand = Optional.empty();
+        Optional<Random> rand = Optional.of(new Random());
         final int num = rand.get().nextInt(BasicIntelligenceComputation.POSSIBLE_ORIENTATIONS);
         return num == 0 ? Orientation.VERTICAL : Orientation.HORIZONTAL;
     }
