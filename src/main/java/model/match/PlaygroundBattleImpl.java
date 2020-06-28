@@ -42,10 +42,13 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void positionShip(final Ship ship, final Pair<Integer, Integer> firstCell) throws CellsFilledException {
-        final List<Pair<Integer, Integer>> cellsNecessary = ship.getOrientation().cellsUsedList(firstCell, ship.getSize());
         final List<Pair<Integer, Integer>> cellsOverlapped = this.getCellsOverlappedList(ship, firstCell, ship.getOrientation());
+        final List<Pair<Integer, Integer>> cellsNecessary = ship.getOrientation().cellsUsedList(firstCell, ship.getSize());
 
         if (!cellsOverlapped.isEmpty()) {
             throw new CellsFilledException(cellsOverlapped);
@@ -62,6 +65,9 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                                                                    .collect(toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeShipWithCell(final Pair<Integer, Integer> cell) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
@@ -80,7 +86,10 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         this.aliveShips--;
 
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeShipWithShip(final Ship shipPassata) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
@@ -88,7 +97,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
  
         while (iterator.hasNext()) {
             final Entry<List<Pair<Integer, Integer>>, Ship> entry = iterator.next();
-            Ship ship = entry.getValue();
+            final Ship ship = entry.getValue();
             final List<Pair<Integer, Integer>> shipCells = entry.getKey();
  
             if (ship.equals(shipPassata)) {
@@ -96,38 +105,32 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                 iterator.remove();
             }
         }
-        
+
         this.aliveShips--;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void resetLogicGrid() {
         this.createPlayGround();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void removeAllShips() {
-        for (Entry<List<Pair<Integer, Integer>>, Ship> list : this.shipList.entrySet()) {
+        for (final Entry<List<Pair<Integer, Integer>>, Ship> list : this.shipList.entrySet()) {
             this.removeShipWithCell(list.getKey().get(0));
         }
         this.aliveShips = 0;
     }
 
-
-//    @Override
-//    public boolean isShipPresent(final Pair<Integer, Integer> cell) throws CellAlreadyShottedException {
-//        if (this.isCellUsed(cell)) {
-//            throw new CellAlreadyShottedException(cell);
-//        }
-//        this.playground.get(cell.getX()).set(cell.getY(), true);
-//        for (final Entry<List<Pair<Integer, Integer>>, Ship> v : this.shipList.entrySet()) {
-//            if (v.getKey().contains(cell)) {
-//                return true; 
-//            }
-//        }
-//        return false;
-//    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(final Pair<Integer, Integer> cell) throws CellAlreadyShotException {
 
@@ -147,37 +150,57 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return Optional.empty();
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Boolean> shipSunk(final List<Pair<Integer, Integer>> cells) {
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getNumberOfAliveShip() {
         return this.aliveShips;
     }
-    
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getDamage() {
         return this.damage;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public ArrayList<List<Boolean>> getLogicGrid() {
         return new ArrayList<List<Boolean>>(this.playground);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public Map<List<Pair<Integer, Integer>>, Ship> getShips(){
+    public Map<List<Pair<Integer, Integer>>, Ship> getShips() {
         return new HashMap<List<Pair<Integer, Integer>>, Ship>(this.shipList);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCellUsed(final Pair<Integer, Integer> cell) {
         return this.playground.get(cell.getX()).get(cell.getY());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isCellUsedByShip(final Pair<Integer, Integer> cell) {
         final Set<Entry<List<Pair<Integer, Integer>>, Ship>> setOfShipEntries = this.shipList.entrySet();
@@ -204,13 +227,17 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
-        String playground = "";
-        for (List<Boolean> list : this.playground) {
-            playground += list.toString() + "\n";
+        final StringBuilder builder = new StringBuilder();
+        for (final List<Boolean> list : this.playground) {
+            final String s = list.toString() + "\n";
+            builder.append(s);
         }
-        return "PlaygroundBattle:\n" + playground + "Damage inflicted: " + this.damage + "\n"
+        return "PlaygroundBattle:\n" + builder + "Damage inflicted: " + this.damage + "\n"
                 + "Alive ships: " + this.aliveShips;
     }
 
