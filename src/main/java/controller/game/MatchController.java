@@ -5,6 +5,11 @@ import model.match.PlaygroundBattle;
 import model.util.Pair;
 import view.match.BattleView;
 
+/**
+ * 
+ * Interface of match's controller.
+ * 
+ */
 public interface MatchController {
 
     /**
@@ -31,11 +36,6 @@ public interface MatchController {
     void shot(int line, int col);
 
     /**
-     * Method for start the game after ship placement.
-     */
-    void startBattle();
-
-    /**
      * Set the game view linked to this controller.
      * 
      * @param battleView - Game view
@@ -43,14 +43,21 @@ public interface MatchController {
     void setView(BattleView battleView);
 
     /**
-     * Pass to nextTurn player.
+     * Set the passed playground for current player who has to position ship.
+     * 
+     * @param playgroundBattle - Playground to set
      */
-    void changePlayer();
-
     void setPlayground(PlaygroundBattle playgroundBattle);
 
+    /**
+     * Call new scene based on who is the next player who has to position ship. Start battle if 
+     * both player positioned ships.
+     */
     void nextToPosition();
 
+    /**
+     * Call view to show ship of current player.
+     */
     void showShip();
 
 }
