@@ -12,21 +12,22 @@ import model.util.Pair;
 public interface PlaygroundBattle {
 
     /**
-     * Position the ship in this playground starting from passed cell.
-     * If a ship will position over another one, it will be throw exception.
-     * In this situation, position not be successful.
+     * Position the ship in this playground starting from passed cell. If a ship
+     * will position over another one, it will be throw exception. In this
+     * situation, position not be successful.
      * 
-     * @param ship - Ship to position in playground
+     * @param ship      - Ship to position in playground
      * @param firstCell - The first cell (higher and more left used by ship)
      * 
-     * @throws CellsFilledException - When ship to position is over existing ships.
+     * @throws CellsFilledException - When ship to position is over existing
+     *                                ships.
      */
     void positionShip(Ship ship, Pair<Integer, Integer> firstCell) throws CellsFilledException;
 
     /**
      * Remove ship that cross this cell.
      * 
-     * @param cell - Cell crossed by ship to remove 
+     * @param cell - Cell crossed by ship to remove
      */
     void removeShipWithCell(Pair<Integer, Integer> cell);
 
@@ -48,19 +49,22 @@ public interface PlaygroundBattle {
     void resetLogicGrid();
 
     /**
+     * Method to hit a cell inside grid, it will be throw an exception if cell has been shot previously.
+     * An optional containing information of ship is returned if a ship in this cell is hit.
      * 
-     * @param cell
-     * @return
-     * @throws CellAlreadyShotException
+     * @param cell - Cell where shot
+     * @return An Optional containing an Entry of Map with a list of cells ad key and ship hit as valued
+     * @throws CellAlreadyShotException if cell passed has been already shot
      */
     Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShotException;
 
     /**
-     * Get an Optional containing true if ship crossing passed cells is true, false otherwise.
-     * Ship has to cross all cells passed and only them.
+     * Get an Optional containing true if ship crossing passed cells is true, false
+     * otherwise. Ship has to cross all cells passed and only them.
      * 
      * @param cells - Cells crossed by ship
-     * @return an optional containing a Boolean equal to true if ship  is sunk
+     * 
+     * @return an optional containing a Boolean equal to true if ship is sunk
      */
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
@@ -75,15 +79,15 @@ public interface PlaygroundBattle {
      * Get true if cell passed is crossed by a ship.
      * 
      * @param cell - Cell of which you want to know if occupied by a ship
+     * 
      * @return true if cell is used
      */
     boolean isCellUsedByShip(Pair<Integer, Integer> cell);
 
-
-    //Si potrebbe rimuovere man
+    // Si potrebbe rimuovere man
     /**
-     * Getter of logic grid of playground. It could be used to know which cells are crossed by ships during position and
-     * which are already hit during battle. 
+     * Getter of logic grid of playground. It could be used to know which cells are
+     * crossed by ships during position and which are already hit during battle.
      * 
      * @return the logic grid of playground
      */
@@ -97,11 +101,19 @@ public interface PlaygroundBattle {
     Map<List<Pair<Integer, Integer>>, Ship> getShips();
 
     /**
-     * Get damage inflicted to this playground. Cell used by ship hit inflict one damage point.
+     * Get damage inflicted to this playground. Cell used by ship hit inflict one
+     * damage point.
      * 
      * @return damage inflicted to playground
      */
     int getDamage();
 
+    /**
+     * Method to know if cell in grid logic is used.
+     * 
+     * @param cell - Cell inside grid logic
+     * 
+     * @return true if in grid logic cell is used, false otherwise
+     */
     boolean isCellUsed(Pair<Integer, Integer> cell);
 }
