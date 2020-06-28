@@ -152,19 +152,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     public Optional<Boolean> shipSunk(final List<Pair<Integer, Integer>> cells) {
         return this.shipList.containsKey(cells) ? Optional.of(this.shipList.get(cells).isDestroyed()) : Optional.empty();
     }
-//    public Ship getShip(Pair<Integer, Integer> cell) {
-//        for(var v : this.shipList.entrySet()) {
-//            if (v.getKey().contains(cell)) {
-//                return v.getValue();
-//            }
-//        }
-//        throw new IOException()
-//    }
-
-    @Override
-    public boolean cellAlreadyShotted(final Pair<Integer, Integer> cell) {
-        return this.playground.get(cell.getX()).get(cell.getY());
-    }
 
     @Override
     public int getNumberOfAliveShip() {
@@ -177,7 +164,7 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
     }
 
     @Override
-    public ArrayList<List<Boolean>> getPlaygroundBattle() {
+    public ArrayList<List<Boolean>> getLogicGrid() {
         return new ArrayList<List<Boolean>>(this.playground);
     }
 

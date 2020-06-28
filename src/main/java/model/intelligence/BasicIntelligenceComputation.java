@@ -28,9 +28,9 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
         this.maxCols = maxCols;
     }
 
-    private Pair<Integer, Integer> getRandomPosition() {
+    private Pair<Integer, Integer> getRandomInitPosition() {
         Optional<Random> rand = Optional.of(new Random());
-        return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows), rand.get().nextInt(this.maxCols));
+        return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows - (this.maxRows / 2) + 1), rand.get().nextInt(this.maxCols - (this.maxCols / 2) + 1));
     }
 
     private Orientation setRandomOrientation() {
@@ -43,7 +43,7 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
         try {
             final Ship shipToPos = new Ship(type);
             shipToPos.setOrientation(this.setRandomOrientation());
-            shipsGrid.positionShip(shipToPos, this.getRandomPosition());
+            shipsGrid.positionShip(shipToPos, this.getRandomInitPosition());
             return true;
         } catch (CellsFilledException e) {
             e.printStackTrace();
@@ -67,6 +67,11 @@ public class BasicIntelligenceComputation implements IntelligenceComputation {
             }
         }
         return shipsGrid;
+    }
+
+    private Pair<Integer, Integer> getRandomPosition() {
+        Optional<Random> rand = Optional.of(new Random());
+        return new Pair<Integer, Integer>(rand.get().nextInt(this.maxRows), rand.get().nextInt(this.maxCols));
     }
 
     @Override

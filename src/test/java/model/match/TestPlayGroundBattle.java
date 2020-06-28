@@ -30,7 +30,7 @@ public class TestPlayGroundBattle {
     @Test
     public void testCreationPlayground() {
         final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
-        final List<List<Boolean>> playground = playgroundBattle.getPlaygroundBattle();
+        final List<List<Boolean>> playground = playgroundBattle.getLogicGrid();
 
         playground.stream()
                   .forEach(
@@ -57,7 +57,7 @@ public class TestPlayGroundBattle {
             fail(e.toString());
         }
         
-        playgroundBattle.getPlaygroundBattle().forEach(e -> System.out.println(e.toString()));
+        playgroundBattle.getLogicGrid().forEach(e -> System.out.println(e.toString()));
         
         System.out.println("");
         //
@@ -157,7 +157,7 @@ public class TestPlayGroundBattle {
         } catch (CellsFilledException e) {
             fail(e.toString());
         }
-        playgroundBattle.getPlaygroundBattle().forEach(i -> System.out.println(i));
+        playgroundBattle.getLogicGrid().forEach(i -> System.out.println(i));
 //
         System.out.println(playgroundBattle.getShips().toString());
         System.out.println("");
@@ -165,7 +165,7 @@ public class TestPlayGroundBattle {
         playgroundBattle.removeShipWithCell(new Pair<>(1,2));
         
 //        playgroundBattle.removeAllShips();
-        playgroundBattle.getPlaygroundBattle().forEach(i -> System.out.println(i));
+        playgroundBattle.getLogicGrid().forEach(i -> System.out.println(i));
         System.out.println(playgroundBattle.getShips().toString());
 //
 //        Orientation.VERTICAL.cellsUsedList(firstShipPosition, SHIP_SIZE_THREE.getSize())

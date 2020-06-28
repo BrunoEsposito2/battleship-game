@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Optional;
-
-import model.enums.Orientation;
 import model.util.Pair;
 
 /**
@@ -44,22 +42,65 @@ public interface PlaygroundBattle {
      */
     void removeAllShips();
 
+    /**
+     * Reset the logic grid of playground. Use it to know if a cell is used.
+     */
     void resetLogicGrid();
 
-    boolean cellAlreadyShotted(Pair<Integer, Integer> cell);
-
+    /**
+     * 
+     * @param cell
+     * @return
+     * @throws CellAlreadyShotException
+     */
     Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShotException;
 
+    /**
+     * Get an Optional containing true if ship crossing passed cells is true, false otherwise.
+     * Ship has to cross all cells passed and only them.
+     * 
+     * @param cells - Cells crossed by ship
+     * @return an optional containing a Boolean equal to true if ship  is sunk
+     */
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
+    /**
+     * Getter ships' number still alive.
+     * 
+     * @return number of alive ship
+     */
     int getNumberOfAliveShip();
 
+    /**
+     * Get true if cell passed is crossed by a ship.
+     * 
+     * @param cell - Cell of which you want to know if occupied by a ship
+     * @return true if cell is used
+     */
     boolean isCellUsedByShip(Pair<Integer, Integer> cell);
 
-    List<List<Boolean>> getPlaygroundBattle();
 
+    //Si potrebbe rimuovere man
+    /**
+     * Getter of logic grid of playground. It could be used to know which cells are crossed by ships during position and
+     * which are already hit during battle. 
+     * 
+     * @return the logic grid of playground
+     */
+    List<List<Boolean>> getLogicGrid();
+
+    /**
+     * Get a map containing list of occupied cells as key and relative ship.
+     * 
+     * @return a map of cells occupied and relative ship
+     */
     Map<List<Pair<Integer, Integer>>, Ship> getShips();
 
+    /**
+     * Get damage inflicted to this playground. Cell used by ship hit inflict one damage point.
+     * 
+     * @return damage inflicted to playground
+     */
     int getDamage();
 
     boolean isCellUsed(Pair<Integer, Integer> cell);
