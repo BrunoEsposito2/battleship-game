@@ -10,38 +10,28 @@ public enum GameMode {
      */
     CLASSIC("Classic", "Sink all enemy ships to win.") {
         @Override
-        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
+        protected boolean isMatchOver(final int playerSunkShips, final int opponentRemainingShips) {
             return opponentRemainingShips == 0;
         }
     },
 
     /**
-     * Be the first player to score a hit.
+     * Be the first player to sink a ship.
      */
-    ONE_HIT("1 Hit", "Be the first player to score a hit.") {
+    FIRST_SHIP_SUNK("Sink a Ship", "Be the first player to sink a ship.") {
         @Override
-        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return playerHits > 0;
+        protected boolean isMatchOver(final int playerSunkShips, final int opponentRemainingShips) {
+            return playerSunkShips > 0;
         }
     },
 
     /**
-     * Be the first player to score 5 hits.
+     * Be the first player to sink 3 ships.
      */
-    FIVE_HITS("5 Hits", "Be the first player to score 5 hits.") {
+    THIRD_SHIP_SUNK("Sink Three Ships", "Be the first player to sink 3 ships.") {
         @Override
-        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return playerHits > 4;
-        }
-    },
-
-    /**
-     * Be the first player to score 10 hits.
-     */
-    TEN_HITS("10 Hits", "Be the first player to score 10 hits.") {
-        @Override
-        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return playerHits >= 10;
+        protected boolean isMatchOver(final int playerSunkShips, final int opponentRemainingShips) {
+            return playerSunkShips > 2;
         }
     };
 
@@ -55,11 +45,11 @@ public enum GameMode {
 
     /**
      * this method checks whether the player has won the match.
-     * @param hits - how many times the player has hit the opponent's ships.
+     * @param playerSunkShips - how many ships the player has sunk.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    protected abstract boolean isMatchOver(int hits, int opponentRemainingShips);
+    protected abstract boolean isMatchOver(int playerSunkShips, int opponentRemainingShips);
 
     /**
      * @return the GameMode's name.

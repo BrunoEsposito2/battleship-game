@@ -9,6 +9,7 @@ import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
+import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
 import model.match.players.MatchInfo;
 import view.View;
@@ -53,12 +54,12 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
+    public Optional<PlayerNumber> getCurrentPlayer() {
         return model.getCurrentPlayer();
     }
 
     @Override
-    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+    public void setCurrentPlayer(final PlayerNumber playerNumber) {
         model.setCurrentPlayer(playerNumber);
     }
 

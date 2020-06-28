@@ -11,9 +11,9 @@ public final class WinConditionImpl implements WinCondition {
     private Optional<GameMode> gameMode;
 
     @Override
-    public Boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-        if (isDataValid(playerHits, opponentRemainingShips)) {
-            return gameMode.isPresent() ? gameMode.get().isMatchOver(playerHits, opponentRemainingShips) : false;
+    public boolean isMatchOver(final int playerSunkShips, final int opponentRemainingShips) {
+        if (isDataValid(playerSunkShips, opponentRemainingShips)) {
+            return gameMode.isPresent() ? gameMode.get().isMatchOver(playerSunkShips, opponentRemainingShips) : false;
         }
         throw new IllegalArgumentException();
     }
