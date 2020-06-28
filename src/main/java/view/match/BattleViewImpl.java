@@ -14,7 +14,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import model.enums.PlayerNumber;
-import model.enums.ShipType;
 import model.util.Pair;
 import view.dialog.DialogType;
 import view.scene.SceneName;
@@ -43,7 +42,6 @@ public class BattleViewImpl implements BattleView {
     @FXML
     private Label nameOne, nameTwo;
 
-    private GridPane currentPlayerGridPane;
     private GridPane currentVillainGridPane;
     private TextField currentPointsPL, currentShotAvailable;
     private Map<PlayerNumber, Map<Pair<Integer, Integer>, Pane>> panes;
@@ -54,7 +52,7 @@ public class BattleViewImpl implements BattleView {
     private void initGridPane(final GridPane gridPane) {
         for (int col = 0; col < gridPane.getColumnCount(); col++) {
             for (int row = 0; row < gridPane.getRowCount(); row++) {
-                Pane pane = new Pane();
+                final Pane pane = new Pane();
                 final int finalRow = row, finalCol = col;
                 pane.setStyle("-fx-background-color: #FFFFFF");
                 pane.setOnMouseClicked(e -> {
@@ -100,6 +98,9 @@ public class BattleViewImpl implements BattleView {
         this.hittedCells.put(PlayerNumber.PLAYER_TWO, new ArrayList<>());
     }
 
+    /**
+     * Initialize components of view and fields.
+     */
     @FXML
     public void initialize() {
         this.initMaps();
@@ -110,7 +111,6 @@ public class BattleViewImpl implements BattleView {
                 .setText(Battleships.getController().getMatchInfo().get().getPlayerInfo(PlayerNumber.PLAYER_ONE).getUsername());
         this.nameTwo
                 .setText(Battleships.getController().getMatchInfo().get().getPlayerInfo(PlayerNumber.PLAYER_TWO).getUsername());
-        this.currentPlayerGridPane = this.playerOneGrid;
         this.currentVillainGridPane = this.playerTwoGrid;
         this.currentShotAvailable = this.shotAvailablePLTwo;
         this.currentPointsPL = this.pointsPLOne;
@@ -168,7 +168,7 @@ public class BattleViewImpl implements BattleView {
         this.hittedCells.get(playerNumber).add(cell);
 
         Platform.runLater(() -> {
-            ImageView imageView = new ImageView();
+            final ImageView imageView = new ImageView();
             imageView.setImage(new Image(getClass().getResource(HIT_IMAGE_URL).toExternalForm()));
             imageView.fitWidthProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).widthProperty());
             imageView.fitHeightProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).heightProperty());
@@ -194,10 +194,10 @@ public class BattleViewImpl implements BattleView {
      * {@inheritDoc}
      */
     @Override
-    public void drawSunkShip(final ShipType shipType, final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
+    public void drawSunkShip(final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
         for (final Pair<Integer, Integer> cell : cells) {
             Platform.runLater(() -> {
-                ImageView imageView = new ImageView();
+                final ImageView imageView = new ImageView();
                 imageView.setImage(new Image(getClass().getResource(RIP_IMAGE_URL).toExternalForm()));
                 imageView.fitWidthProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).widthProperty());
                 imageView.fitHeightProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).heightProperty());
@@ -213,7 +213,7 @@ public class BattleViewImpl implements BattleView {
     @Override
     public void drawMissed(final Pair<Integer, Integer> cell, final PlayerNumber playerNumber) {
         Platform.runLater(() -> {
-            ImageView imageView = new ImageView();
+            final ImageView imageView = new ImageView();
             imageView.setImage(new Image(getClass().getResource(MISS_IMAGE_URL).toExternalForm()));
             imageView.fitWidthProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).widthProperty());
             imageView.fitHeightProperty().bind(this.getNodeByRowColumnIndex(cell, playerNumber).heightProperty());
@@ -231,12 +231,10 @@ public class BattleViewImpl implements BattleView {
         this.showChangePlayerDialog();
 
         if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_TWO)) {
-            this.currentPlayerGridPane = playerOneGrid;
             this.currentPointsPL = this.pointsPLOne;
             this.currentShotAvailable = this.shotAvailablePLTwo;
             this.currentVillainGridPane = playerTwoGrid;
         } else {
-            this.currentPlayerGridPane = playerTwoGrid;
             this.currentPointsPL = this.pointsPLTwo;
             this.currentShotAvailable = this.shotAvailablePLOne;
             this.currentVillainGridPane = playerOneGrid;
@@ -248,7 +246,7 @@ public class BattleViewImpl implements BattleView {
      */
     @Override
     public void setPoints(final int point) {
-        this.currentPointsPL.setText("" + point);
+        this.currentPointsPL.setText(Integer.toString(point));
     }
 
     /**
@@ -256,7 +254,7 @@ public class BattleViewImpl implements BattleView {
      */
     @Override
     public void setShotAvailable(final int shotAvailable) {
-        this.currentShotAvailable.setText("" + shotAvailable);
+        this.currentShotAvailable.setText(Integer.toString(shotAvailable));
     }
 
     /**
@@ -280,7 +278,7 @@ public class BattleViewImpl implements BattleView {
      */
     @Override
     public void hideShip(final List<Pair<Integer, Integer>> cells, final PlayerNumber playerNumber) {
-        for (Pair<Integer, Integer> cell : cells) {
+        for (final Pair<Integer, Integer> cell : cells) {
             if (!this.hittedCells.get(playerNumber).contains(cell)) {
                 Platform.runLater(() -> {
                     this.getNodeByRowColumnIndex(cell, playerNumber).setStyle("-fx-background-color: #FFFFFF");
