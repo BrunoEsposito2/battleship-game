@@ -3,7 +3,6 @@ package view.match;
 import java.util.List;
 
 import model.enums.PlayerNumber;
-import model.enums.ShipType;
 import model.util.Pair;
 
 /**
@@ -36,19 +35,19 @@ public interface BattleView {
     void drawHit(Pair<Integer, Integer> cell, PlayerNumber playerNumber);
 
     /**
-     * Dra.
-     * 
-     * @param shipType
-     * @param cells
-     * @param playerNumber
+     * Draw in passed cells to show that there a ship is sunk. The drawing will be do in playground
+     * of player passed. 
+
+     * @param cells - Cells where draw
+     * @param playerNumber - Player owning the grid to draw on
      */
-    void drawSunkShip(ShipType shipType, List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
+    void drawSunkShip(List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
 
     /**
-     * Draw ship. 
+     * Draw ship in passed cells of playground represented by passed player number. 
      * 
-     * @param cells
-     * @param playerNumber
+     * @param cells - Cells where draw 
+     * @param playerNumber - Player owning the grid to draw on
      */
     void drawShip(List<Pair<Integer, Integer>> cells, PlayerNumber playerNumber);
 
