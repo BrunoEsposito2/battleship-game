@@ -24,22 +24,22 @@ import model.util.Pair;
 public final class ModelImpl implements Model {
 
     /**
-     * 
+     * Defines the max number of playground rows.
      */
     public static final int MAX_ROWS = 10;
 
     /**
-     * 
+     * Defines the max number of playground columns.
      */
     public static final int MAX_COLS = 10;
 
     /**
-     * 
+     * Defines the AI basic name.
      */
     public static final String BASIC_AI_NAME = "BasicAI";
 
     /**
-     * 
+     * Defines the AI basic password.
      */
     public static final String BASIC_AI_PASS = "basic";
 
