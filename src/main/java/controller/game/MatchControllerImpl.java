@@ -188,6 +188,18 @@ public class MatchControllerImpl implements MatchController {
         this.battleView.changePlayer();
         this.currentVillain = Battleships.getController().getCurrentPlayer().get();
         Battleships.getController().nextPlayer();
+
+        if (this.isAITurn()) {
+            this.turnAI();
+        }
+    }
+
+    private boolean isAITurn() {
+        return Battleships.getController().getMatchInfo().get().getPlayerInfo(Battleships.getController().getCurrentPlayer().get()).getType().equals(PlayerType.ARTIFICIAL);
+    }
+
+    private void turnAI() {
+        Battleships.getController();
     }
 
     /**
