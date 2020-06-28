@@ -30,14 +30,19 @@ public class Ship implements GameObject {
 
     @Override
     public boolean hit() {
-        this.damage++;
 
-        if (this.damage >= this.size) {
+        if (this.damage == this.size) {
             this.destroyed = true;
+            return this.destroyed;
+        } else {
+            this.damage++;
+            if (this.damage == this.size) {
+                this.destroyed = true;
+                return this.destroyed;
+            }
             return this.destroyed;
         }
 
-        return this.destroyed;
     }
 
     public int getDamage() {
