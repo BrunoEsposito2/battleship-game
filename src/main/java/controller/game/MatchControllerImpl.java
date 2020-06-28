@@ -23,6 +23,11 @@ import model.util.Pair;
 import view.match.BattleView;
 import view.scene.SceneName;
 
+/**
+ * 
+ * Possible implementation of match's controller.
+ * 
+ */
 public class MatchControllerImpl implements MatchController {
 
     /*
@@ -33,7 +38,7 @@ public class MatchControllerImpl implements MatchController {
     private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
-    private Map<PlayerNumber, PlaygroundBattle> playgrounds;
+    private final Map<PlayerNumber, PlaygroundBattle> playgrounds;
     private PlayerNumber currentVillain;
     private int shotAvailable;
 
@@ -80,7 +85,7 @@ public class MatchControllerImpl implements MatchController {
             if (v.isPresent()) {
                 // If ship is sunk, player could be winner.
                 if (this.playgrounds.get(this.currentVillain).shipSunk(v.get().getKey()).get()) {
-                    this.battleView.drawSunkShip(v.get().getValue().getShipType(), v.get().getKey(), this.currentVillain);
+                    this.battleView.drawSunkShip(v.get().getKey(), this.currentVillain);
                     this.checkWin();
                 } else {
                     this.battleView.drawHit(new Pair<>(line, col), this.currentVillain);
@@ -104,11 +109,7 @@ public class MatchControllerImpl implements MatchController {
         }
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void startBattle() {
+    private void startBattle() {
         this.currentVillain = PlayerNumber.PLAYER_TWO;
         this.shotAvailable = this.playgrounds.get(PlayerNumber.PLAYER_ONE).getNumberOfAliveShip();
         this.battleView.drawShip(this.shipCells(PlayerNumber.PLAYER_ONE), PlayerNumber.PLAYER_ONE);
@@ -122,6 +123,9 @@ public class MatchControllerImpl implements MatchController {
         this.battleView = battleView;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void nextToPosition() {
 
@@ -145,6 +149,9 @@ public class MatchControllerImpl implements MatchController {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setPlayground(final PlaygroundBattle playgroundBattle) {
         this.playgrounds.put(Battleships.getController().getCurrentPlayer().get(), playgroundBattle);
@@ -174,12 +181,7 @@ public class MatchControllerImpl implements MatchController {
                 Double.valueOf(this.playgrounds.get(Battleships.getController().getCurrentPlayer().get()).getDamage()));
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void changePlayer() {
-        // this.battleView.changinPlayer();
+    private void changePlayer() {
         this.shotAvailable = this.playgrounds.get(this.currentVillain).getNumberOfAliveShip();
         this.battleView.hideShip(this.shipCells(Battleships.getController().getCurrentPlayer().get()),
                 Battleships.getController().getCurrentPlayer().get());
@@ -188,6 +190,9 @@ public class MatchControllerImpl implements MatchController {
         Battleships.getController().nextPlayer();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void showShip() {
         this.battleView.drawShip(this.shipCells(Battleships.getController().getCurrentPlayer().get()),
@@ -195,11 +200,10 @@ public class MatchControllerImpl implements MatchController {
     }
 
     private List<Pair<Integer, Integer>> shipCells(final PlayerNumber playerNumber) {
-        List<Pair<Integer, Integer>> listOfCells = new ArrayList<>();
+        final List<Pair<Integer, Integer>> listOfCells = new ArrayList<>();
+        final Set<List<Pair<Integer, Integer>>> keySet = this.playgrounds.get(playerNumber).getShips().keySet();
 
-        Set<List<Pair<Integer, Integer>>> keySet = this.playgrounds.get(playerNumber).getShips().keySet();
-
-        for (List<Pair<Integer, Integer>> list : keySet) {
+        for (final List<Pair<Integer, Integer>> list : keySet) {
             listOfCells.addAll(list);
         }
 
