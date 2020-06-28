@@ -7,11 +7,11 @@ public interface WinCondition {
 
     /**
      * this method checks whether the player has won the match.
-     * @param playerSunkShips - how many ships the player has sunk.
+     * @param playerHits - how many hits the player has scored.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    boolean isMatchOver(int playerSunkShips, int opponentRemainingShips);
+    boolean isMatchOver(int playerHits, int opponentRemainingShips);
 
     /**
      * @param gameMode - the new gameMode

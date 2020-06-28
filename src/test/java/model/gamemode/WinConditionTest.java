@@ -32,7 +32,7 @@ class WinConditionTest {
     @Test
     void testFiveHits() {
 
-        winCondition.setGameMode(GameMode.THIRD_SHIP_SUNK);
+        winCondition.setGameMode(GameMode.THREE_HITS);
 
         hits = -5000;
         assertThrows(IllegalArgumentException.class, () -> winCondition.isMatchOver(hits, opponentRemainingShips));
