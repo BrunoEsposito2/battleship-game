@@ -30,7 +30,7 @@ class WinConditionTest {
     }
 
     @Test
-    void testFiveHits() {
+    void testThreeHits() {
 
         winCondition.setGameMode(GameMode.THREE_HITS);
 
@@ -40,7 +40,7 @@ class WinConditionTest {
         hits = 0;
         assertEquals(winCondition.isMatchOver(hits, opponentRemainingShips), false);
 
-        hits = 5;
+        hits = 3;
         assertEquals(winCondition.isMatchOver(hits, opponentRemainingShips), true);
 
         hits = 5000;
