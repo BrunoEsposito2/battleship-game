@@ -1,6 +1,6 @@
 package model.match.players;
 
-import javafx.util.Pair;
+import model.util.Pair;
 import model.enums.PlayerNumber;
 
 /**
