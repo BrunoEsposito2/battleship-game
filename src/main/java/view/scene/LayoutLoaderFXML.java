@@ -2,8 +2,6 @@ package view.scene;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Optional;
-
 import application.Battleships;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,14 +12,15 @@ final class LayoutLoaderFXML implements LayoutLoader {
 
     @Override
     public Parent load(final String resourcePath) {
-        Optional<Parent> res = Optional.empty();
+        Parent res = null;
         try {
-            res = Optional.ofNullable(FXMLLoader.load(ClassLoader.getSystemResource(resourcePath)));
+            res = FXMLLoader.load(ClassLoader.getSystemResource(resourcePath));
         } catch (Exception e) {
             Battleships.getController().launchDialog(DialogType.ERROR, "An Exception has occurred",
                     "Application encountered a critical error while reading files from disk", getStringFromStackTrace(e));
+            throw new IllegalStateException();
         }
-        return res.orElseThrow(() -> new IllegalStateException("could not load resource"));
+        return res;
     }
 
     private String getStringFromStackTrace(final Exception e) {

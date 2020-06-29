@@ -21,7 +21,7 @@ public enum SceneName {
      * Create or delete player profiles.
      */
     PROFILE("profile"),
-    
+
     /**
      * View player statistics.
      */
