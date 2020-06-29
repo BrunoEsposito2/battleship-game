@@ -50,7 +50,7 @@ public interface PlaygroundBattle {
 
     /**
      * Method to hit a cell inside grid, it will be throw an exception if cell has been shot previously.
-     * An optional containing information of ship is returned if a ship in this cell is hit.
+     * An optional containing information of ship is returned if a ship in this cell is hit, it is empty otherwise.
      * 
      * @param cell - Cell where shot
      * @return An Optional containing an Entry of Map with a list of cells ad key and ship hit as valued
@@ -59,12 +59,13 @@ public interface PlaygroundBattle {
     Optional<Entry<List<Pair<Integer, Integer>>, Ship>> shipHitted(Pair<Integer, Integer> cell) throws CellAlreadyShotException;
 
     /**
-     * Get an Optional containing true if ship crossing passed cells is true, false
+     * Get an Optional containing true if ship crossing passed cells is sunk, false
      * otherwise. Ship has to cross all cells passed and only them.
      * 
      * @param cells - Cells crossed by ship
      * 
-     * @return an optional containing a Boolean equal to true if ship is sunk
+     * @return an optional containing a Boolean equal to true if ship is sunk, 
+     *         if cells are not used by a ship optional will be empty. 
      */
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
