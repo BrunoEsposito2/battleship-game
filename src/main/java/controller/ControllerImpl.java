@@ -9,8 +9,10 @@ import controller.users.AccountOperation;
 import javafx.stage.Stage;
 import model.Model;
 import model.ModelImpl;
+import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
 import model.match.players.MatchInfo;
+import model.util.Pair;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;
@@ -53,12 +55,12 @@ public final class ControllerImpl implements Controller {
     }
 
     @Override
-    public Optional<model.enums.PlayerNumber> getCurrentPlayer() {
+    public Optional<PlayerNumber> getCurrentPlayer() {
         return model.getCurrentPlayer();
     }
 
     @Override
-    public void setCurrentPlayer(final model.enums.PlayerNumber playerNumber) {
+    public void setCurrentPlayer(final PlayerNumber playerNumber) {
         model.setCurrentPlayer(playerNumber);
     }
 
@@ -95,6 +97,12 @@ public final class ControllerImpl implements Controller {
     @Override
     public void setAI() {
         this.matchController.setPlayground(this.model.startBasicAI());
+    }
+
+    @Override
+    public void shotAI() {
+        Pair<Integer, Integer> cellHittedByAI = this.model.getNextHitPointBasicAI();
+        this.matchController.shot(cellHittedByAI.getX(), cellHittedByAI.getY());
     }
 
 }

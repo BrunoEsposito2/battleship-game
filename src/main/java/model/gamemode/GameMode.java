@@ -16,9 +16,9 @@ public enum GameMode {
     },
 
     /**
-     * Be the first player to score a hit.
+     * Be the first player to hit a ship.
      */
-    ONE_HIT("1 Hit", "Be the first player to score a hit.") {
+    FIRST_HIT("Score a hit", "Be the first player to score a hit.") {
         @Override
         protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
             return playerHits > 0;
@@ -26,22 +26,12 @@ public enum GameMode {
     },
 
     /**
-     * Be the first player to score 5 hits.
+     * Be the first player to sink 3 ships.
      */
-    FIVE_HITS("5 Hits", "Be the first player to score 5 hits.") {
+    THREE_HITS("Score three Hits", "Be the first player to score 3 hits.") {
         @Override
         protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return playerHits > 4;
-        }
-    },
-
-    /**
-     * Be the first player to score 10 hits.
-     */
-    TEN_HITS("10 Hits", "Be the first player to score 10 hits.") {
-        @Override
-        protected boolean isMatchOver(final int playerHits, final int opponentRemainingShips) {
-            return playerHits >= 10;
+            return playerHits > 2;
         }
     };
 
@@ -55,11 +45,11 @@ public enum GameMode {
 
     /**
      * this method checks whether the player has won the match.
-     * @param hits - how many times the player has hit the opponent's ships.
+     * @param playerHits - how many hits the player has scored.
      * @param opponentRemainingShips - how many (not sunk) ships the opponent still has.
      * @return true - if the player has won the match.
      */
-    protected abstract boolean isMatchOver(int hits, int opponentRemainingShips);
+    protected abstract boolean isMatchOver(int playerHits, int opponentRemainingShips);
 
     /**
      * @return the GameMode's name.
