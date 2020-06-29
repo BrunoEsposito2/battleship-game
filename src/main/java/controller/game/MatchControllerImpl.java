@@ -33,8 +33,8 @@ public class MatchControllerImpl implements MatchController {
     /*
      * For now i put grid size here
      */
-    private static final int LINE = Battleships.getController().getMatchInfo().get().getFieldSize().getX();
-    private static final int COLUMN = Battleships.getController().getMatchInfo().get().getFieldSize().getY();
+    private static final int LINE = Battleships.getController().getMatchInfo().get().getFieldSize().getKey();
+    private static final int COLUMN = Battleships.getController().getMatchInfo().get().getFieldSize().getValue();
     private static final int SHIPS_NUMBER = Battleships.getController().getMatchInfo().get().getShipsNumber();
 
     private BattleView battleView;
