@@ -35,7 +35,7 @@ public class MatchControllerImpl implements MatchController {
      */
     private static final int LINE = 10;
     private static final int COLUMN = 10;
-    private static final int SHIPS_NUMBER = Battleships.getController().getMatchInfo().get().getShipsNumber();
+    private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
     private final Map<PlayerNumber, PlaygroundBattle> playgrounds;
