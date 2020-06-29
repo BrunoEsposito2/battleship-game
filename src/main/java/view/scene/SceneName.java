@@ -35,7 +35,7 @@ public enum SceneName {
     /**
      * Main view of the battlefield in a match.
      */
-    MATCH_BATTLE("MatchBattlee");
+    MATCH_BATTLE("matchBattle");
 
     private final String layoutName;
 
