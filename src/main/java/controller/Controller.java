@@ -88,4 +88,9 @@ public interface Controller {
      */
     void setAI();
 
+    /**
+     * Shot AI's opponent playground.
+     */
+    void shotAI();
+
 }
