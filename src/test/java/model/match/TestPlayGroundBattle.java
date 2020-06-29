@@ -13,30 +13,28 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Optional;
 
 public class TestPlayGroundBattle {
 
     private static final int COLUMNS = 10;
-    private static final int LINES = 8;
+    private static final int LINES = 10;
     private static final int FIRST = 0;
     private static final int CELLS_USED = 2;
 
-    //private static final Ship SHIP_SIZE_ONE = new Ship(ShipType.BATTLESHIP);
-    private static final Ship SHIP_SIZE_THREE = new Ship(ShipType.CRUISER);
+    // private static final Ship SHIP_SIZE_ONE = new Ship(ShipType.BATTLESHIP);
     private static final Ship SHIP_SIZE_TWO = new Ship(ShipType.DESTROYER);
-//    private static final Ship SHIP_SIZE_FOUR = new Ship(ShipType.SUBMARINE);
-
+    private static final Ship SHIP_SIZE_THREE = new Ship(ShipType.CRUISER);
+    private static final Ship SHIP_SIZE_FOUR = new Ship(ShipType.BATTLESHIP);
+    private static final Ship SHIP_SIZE_FIVE = new Ship(ShipType.CARRIER);
 
     @Test
     public void testCreationPlayground() {
         final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
         final List<List<Boolean>> playground = playgroundBattle.getLogicGrid();
 
-        playground.stream()
-                  .forEach(
-                          x -> x.stream()
-                                .forEach(
-                                        y -> assertFalse(y)));
+        playground.stream().forEach(x -> x.stream().forEach(y -> assertFalse(y)));
         System.out.println(playground);
         assertEquals(LINES, playground.size());
         assertEquals(COLUMNS, playground.get(FIRST).size());
@@ -45,138 +43,164 @@ public class TestPlayGroundBattle {
     @Test
     public void testInsertShip() {
         final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
-        
+
         final Pair<Integer, Integer> firstShipPosition = new Pair<>(0, 0);
 
-        final List<Pair<Integer, Integer>> cells = 
-                Orientation.HORIZONTAL.cellsUsedList(new Pair<Integer, Integer>(0, 0), CELLS_USED);
+        final List<Pair<Integer, Integer>> cells = Orientation.HORIZONTAL.cellsUsedList(new Pair<Integer, Integer>(0, 0),
+                CELLS_USED);
 
         try {
             playgroundBattle.positionShip(SHIP_SIZE_THREE, firstShipPosition);
         } catch (CellsFilledException e) {
             fail(e.toString());
         }
-        
+
         playgroundBattle.getLogicGrid().forEach(e -> System.out.println(e.toString()));
-        
+
         System.out.println("");
-        //
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                firstShipPosition));
-//
-//        /*
-//         * To verify that list of overlapped cells is not empty.
-//         */
-//        assertFalse(playgroundBattle.getCellsOverlappedList(SHIP_SIZE_THREE, firstShipPosition, Orientation.HORIZONTAL).isEmpty());
-//
-//        /*
-//         * To verify that list of overlapped cells is equal to cells already used.
-//         */
-//        assertEquals(cells, playgroundBattle.getCellsOverlappedList(SHIP_SIZE_THREE, firstShipPosition, Orientation.HORIZONTAL));
-//
-//        /*
-//         * Try to position ship to overlap the previous.
-//         */
-//        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                firstShipPosition, Orientation.HORIZONTAL));
+
+        cells.forEach(cell -> assertTrue(playgroundBattle.isCellUsed(cell)));
+        cells.forEach(cell -> assertTrue(playgroundBattle.isCellUsedByShip(cell)));
     }
 
     @Test
     public void testInsertMultipleShip() {
-//        final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
-//        final Pair<Integer, Integer> firstShipPosition = new Pair<>(1, 1);
-//
-//        final Pair<Integer, Integer> secondShipPositionNotCorrect = new Pair<>(2, 0);
-//        final Pair<Integer, Integer> secondShipPositionCorrect = new Pair<>(0, 0);
-//
-//        final Pair<Integer, Integer> thirdShipPosition = new Pair<>(1, 5);
-//
-//        final Pair<Integer, Integer> fourthShipPosition = new Pair<>(5, 4);
-//
-//        final Pair<Integer, Integer> fifthShipPositionIncorrect1 = new Pair<>(5, 6);
-//        final Pair<Integer, Integer> fifthShipPositionIncorrect2 = new Pair<>(2, 5);
-//
-//
-//        /*
-//         * First ship correct.
-//         */
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                firstShipPosition, Orientation.VERTICAL));
-//
-//        /*
-//         *  Second ship incorrect
-//         */
-//        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                secondShipPositionNotCorrect, Orientation.HORIZONTAL));
-//
-//        /*
-//         * Second ship correct.
-//         */
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                secondShipPositionCorrect, Orientation.HORIZONTAL));
-//
-//        /*
-//         * Third ship correct.
-//         */
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_TWO,
-//                thirdShipPosition, Orientation.VERTICAL));
-//
-//        /*
-//         * Fourth ship correct.
-//         */
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_FOUR, fourthShipPosition, Orientation.HORIZONTAL));
+        final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
 
-        /*
-         * Fifth ship incorrect.
-         */
-//      assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
-//              fifthShipPositionIncorrect1, Orientation.VERTICAL));
+        final Pair<Integer, Integer> firstShipPosition = new Pair<>(0, 0);
 
-//      assertEquals(Arrays.asList(fifthShipPositionIncorrect1),
-//              playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect1, Orientation.VERTICAL));
+        final List<Pair<Integer, Integer>> cells = Orientation.HORIZONTAL.cellsUsedList(new Pair<Integer, Integer>(0, 0),
+                CELLS_USED);
 
-        /*
-         * Fifth ship incorrect
-         */
-//        assertFalse(playgroundBattle.positionShip(SHIP_SIZE_ONE,
-//              fifthShipPositionIncorrect2, Orientation.VERTICAL));
+        try {
+            playgroundBattle.positionShip(SHIP_SIZE_THREE, firstShipPosition);
+        } catch (CellsFilledException e) {
+            fail(e.toString());
+        }
 
-//        assertEquals(Arrays.asList(fifthShipPositionIncorrect2),
-//                playgroundBattle.getCellsOverlappedList(SHIP_SIZE_ONE, fifthShipPositionIncorrect2, Orientation.VERTICAL));
-
+        try {
+            playgroundBattle.positionShip(SHIP_SIZE_THREE, firstShipPosition);
+            fail();
+        } catch (CellsFilledException e) {
+            for (int i = 0; i < cells.size(); i++) {
+                assertEquals(cells.get(i), e.getCellsUsed().get(i));
+            }
+        }
 
     }
 
     @Test
     public void testRemoveShip() {
         final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
-        final Pair<Integer, Integer> firstShipPosition = new Pair<>(1, 1);
+        final Pair<Integer, Integer> firstShipPosition = new Pair<>(0, 0);
+        final List<Pair<Integer, Integer>> cells = Orientation.HORIZONTAL.cellsUsedList(firstShipPosition,
+                SHIP_SIZE_THREE.getSize());
+
+        for (int j = 0; j < cells.size(); j++) {
+
+            try {
+                playgroundBattle.positionShip(SHIP_SIZE_THREE, firstShipPosition);
+            } catch (CellsFilledException e) {
+                fail(e.toString());
+            }
+
+            playgroundBattle.removeShipWithCell(new Pair<>(0, j));
+            assertFalse(playgroundBattle.getShips().containsKey(cells));
+        }
+
+        // playgroundBattle.getLogicGrid().forEach(i -> System.out.println(i));
+
+        // System.out.println(playgroundBattle.getShips().toString());
+        // System.out.println("");
+    }
+
+    @Test
+    public void testShot() {
+        final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
+        final Pair<Integer, Integer> firstShipPosition = new Pair<>(0, 0);
+        final Pair<Integer, Integer> notOccupiedPosition = new Pair<>(1, 1);
+        final List<Pair<Integer, Integer>> cells = Orientation.HORIZONTAL.cellsUsedList(firstShipPosition,
+                SHIP_SIZE_THREE.getSize());
 
         try {
             playgroundBattle.positionShip(SHIP_SIZE_THREE, firstShipPosition);
         } catch (CellsFilledException e) {
             fail(e.toString());
         }
-        playgroundBattle.getLogicGrid().forEach(i -> System.out.println(i));
-//
-        System.out.println(playgroundBattle.getShips().toString());
-        System.out.println("");
-//
-        playgroundBattle.removeShipWithCell(new Pair<>(1,2));
-        
-//        playgroundBattle.removeAllShips();
-        playgroundBattle.getLogicGrid().forEach(i -> System.out.println(i));
-        System.out.println(playgroundBattle.getShips().toString());
-//
-//        Orientation.VERTICAL.cellsUsedList(firstShipPosition, SHIP_SIZE_THREE.getSize())
-//                            .forEach(i -> assertFalse(playgroundBattle.getPlaygroundBattle()
-//                                    .get(i.getX()).get(i.getY())));
-//
-//        /*
-//         * First ship correct.
-//         */
-//        assertTrue(playgroundBattle.positionShip(SHIP_SIZE_THREE,
-//                firstShipPosition, Orientation.VERTICAL));
+
+        playgroundBattle.resetLogicGrid();
+
+        for (int i = 0; i < cells.size(); i++) {
+            final Pair<Integer, Integer> cellToShot = new Pair<>(0, i);
+            try {
+                playgroundBattle.shipHitted(cellToShot);
+            } catch (CellAlreadyShotException e) {
+                fail(e.toString());
+            }
+
+            try {
+                playgroundBattle.shipHitted(cellToShot);
+                fail();
+            } catch (CellAlreadyShotException e) {
+                assertTrue(e.getCellsUsed().contains(cellToShot));
+            }
+        }
+
+        playgroundBattle.resetLogicGrid();
+
+        try {
+            Optional<Entry<List<Pair<Integer, Integer>>, Ship>> pairCellsShipHitted = playgroundBattle.shipHitted(firstShipPosition);
+            assertEquals(pairCellsShipHitted.get().getKey(), cells);
+            assertEquals(pairCellsShipHitted.get().getValue(), SHIP_SIZE_THREE);
+        } catch (CellAlreadyShotException e) {
+            fail(e.toString());
+        }
+
+        playgroundBattle.resetLogicGrid();
+
+        try {
+            Optional<Entry<List<Pair<Integer, Integer>>, Ship>> pairCellsShipHitted = playgroundBattle.shipHitted(notOccupiedPosition);
+            assertEquals(pairCellsShipHitted, Optional.empty());
+        } catch (CellAlreadyShotException e) {
+            fail(e.toString());
+        }
+
+    }
+
+    @Test
+    public void testSunkAndAlive() {
+        final PlaygroundBattle playgroundBattle = new PlaygroundBattleImpl(LINES, COLUMNS);
+        final Pair<Integer, Integer> firstShipPosition = new Pair<>(0, 0);
+        final Pair<Integer, Integer> notOccupiedPosition = new Pair<>(1, 1);
+
+        final List<Pair<Integer, Integer>> cells = Orientation.HORIZONTAL.cellsUsedList(firstShipPosition,
+                SHIP_SIZE_THREE.getSize());
+
+        final List<Pair<Integer, Integer>> cellsNotOccupied = Orientation.HORIZONTAL.cellsUsedList(notOccupiedPosition,
+                SHIP_SIZE_THREE.getSize());
+
+        try {
+            playgroundBattle.positionShip(new Ship(ShipType.CRUISER), firstShipPosition);
+        } catch (CellsFilledException e) {
+            fail(e.toString());
+        }
+
+        playgroundBattle.resetLogicGrid();
+
+        for (int i = 0; i < cells.size(); i++) {
+            final Pair<Integer, Integer> cellToShot = new Pair<>(0, i);
+            try {
+                assertTrue(playgroundBattle.getDamage() == i);
+                assertEquals(playgroundBattle.shipSunk(cells), Optional.of(false));
+                assertEquals(playgroundBattle.shipSunk(cellsNotOccupied), Optional.empty());
+                playgroundBattle.shipHitted(cellToShot);
+            } catch (CellAlreadyShotException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        assertTrue(playgroundBattle.getNumberOfAliveShip() == 0);
     }
 
 }
