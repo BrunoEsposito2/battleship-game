@@ -1,10 +1,10 @@
 Download Links
 
 link to report:
-[report link](https://bitbucket.org/oop19/battleships/raw/b52cfa213ed84b04451dc80961d88fab1e215a89/report_and_jar/OOP_battleship_report%20.pdf)
+[report link](https://bitbucket.org/oop19/oop19-angelo-tinti-bruno-esposito-marco-biagini-riccardo/raw/57a277b42829481ad1409571439a7619123c73b7/report_and_jar/OOP_battleship_report.pdf)
 
 link to jar:
-[jar link](https://bitbucket.org/oop19/battleships/raw/b52cfa213ed84b04451dc80961d88fab1e215a89/report_and_jar/battleships-all.jar)
+[jar link](https://bitbucket.org/oop19/oop19-angelo-tinti-bruno-esposito-marco-biagini-riccardo/raw/57a277b42829481ad1409571439a7619123c73b7/report_and_jar/battleships-all.jar)
 
 Instructions
 
