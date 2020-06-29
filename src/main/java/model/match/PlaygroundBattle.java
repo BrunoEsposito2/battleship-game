@@ -23,6 +23,7 @@ public interface PlaygroundBattle {
      *                                ships.
      */
     void positionShip(Ship ship, Pair<Integer, Integer> firstCell) throws CellsFilledException;
+    
 
     /**
      * Remove ship that cross this cell.
@@ -44,9 +45,29 @@ public interface PlaygroundBattle {
     void removeAllShips();
 
     /**
-     * Reset the logic grid of playground. Use it to know if a cell is used.
+     * Get true if cell passed is crossed by a ship.
+     * 
+     * @param cell - Cell of which you want to know if occupied by a ship
+     * 
+     * @return true if cell is used
      */
-    void resetLogicGrid();
+    boolean isCellUsedByShip(Pair<Integer, Integer> cell);
+
+    /**
+     * Method to know if cell in grid logic is used.
+     * 
+     * @param cell - Cell inside grid logic
+     * 
+     * @return true if in grid logic cell is used, false otherwise
+     */
+    boolean isCellUsed(Pair<Integer, Integer> cell);
+
+    /**
+     * Get a map containing list of occupied cells as key and relative ship.
+     * 
+     * @return a map of cells occupied and relative ship
+     */
+    Map<List<Pair<Integer, Integer>>, Ship> getShips();
 
     /**
      * Method to hit a cell inside grid, it will be throw an exception if cell has been shot previously.
@@ -70,22 +91,21 @@ public interface PlaygroundBattle {
     Optional<Boolean> shipSunk(List<Pair<Integer, Integer>> cells);
 
     /**
+     * Get damage inflicted to this playground. Cell used by ship hit inflict one
+     * damage point.
+     * 
+     * @return damage inflicted to playground
+     */
+    int getDamage();
+
+    /**
      * Getter ships' number still alive.
      * 
      * @return number of alive ship
      */
     int getNumberOfAliveShip();
 
-    /**
-     * Get true if cell passed is crossed by a ship.
-     * 
-     * @param cell - Cell of which you want to know if occupied by a ship
-     * 
-     * @return true if cell is used
-     */
-    boolean isCellUsedByShip(Pair<Integer, Integer> cell);
 
-    // Si potrebbe rimuovere man
     /**
      * Getter of logic grid of playground. It could be used to know which cells are
      * crossed by ships during position and which are already hit during battle.
@@ -95,26 +115,7 @@ public interface PlaygroundBattle {
     List<List<Boolean>> getLogicGrid();
 
     /**
-     * Get a map containing list of occupied cells as key and relative ship.
-     * 
-     * @return a map of cells occupied and relative ship
+     * Reset the logic grid of playground. Use it to know if a cell is used.
      */
-    Map<List<Pair<Integer, Integer>>, Ship> getShips();
-
-    /**
-     * Get damage inflicted to this playground. Cell used by ship hit inflict one
-     * damage point.
-     * 
-     * @return damage inflicted to playground
-     */
-    int getDamage();
-
-    /**
-     * Method to know if cell in grid logic is used.
-     * 
-     * @param cell - Cell inside grid logic
-     * 
-     * @return true if in grid logic cell is used, false otherwise
-     */
-    boolean isCellUsed(Pair<Integer, Integer> cell);
+    void resetLogicGrid();
 }

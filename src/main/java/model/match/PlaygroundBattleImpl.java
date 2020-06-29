@@ -217,15 +217,6 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
         return false;
     }
 
-    private void createPlayGround() {
-        this.playground = new ArrayList<>(this.lines);
-        for (int i = 0; i < this.lines; i++) {
-            this.playground.add(new ArrayList<>(this.columns));
-            for (int j = 0; j < this.columns; j++) {
-                this.playground.get(i).add(false);
-            }
-        }
-    }
 
     /**
      * {@inheritDoc}
@@ -241,4 +232,13 @@ public class PlaygroundBattleImpl implements PlaygroundBattle {
                 + "Alive ships: " + this.aliveShips;
     }
 
+    private void createPlayGround() {
+        this.playground = new ArrayList<>(this.lines);
+        for (int i = 0; i < this.lines; i++) {
+            this.playground.add(new ArrayList<>(this.columns));
+            for (int j = 0; j < this.columns; j++) {
+                this.playground.get(i).add(false);
+            }
+        }
+    }
 }
