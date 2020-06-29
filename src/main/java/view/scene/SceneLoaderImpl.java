@@ -1,6 +1,5 @@
 package view.scene;
 
-import java.io.File;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -24,11 +23,9 @@ public final class SceneLoaderImpl implements SceneLoader {
      * @param nextScene - the name of the Scene you want to load.
      */
     public void switchScene(final SceneName nextScene) {
-        final String directory = "layouts";
-        final String separator = File.separator;
         final String fileName = nextScene.getLayoutName();
         final String fileExtension = ".fxml";
-        stage.setScene(new Scene(layoutLoader.load(directory + separator + fileName + fileExtension)));
+        stage.setScene(new Scene(layoutLoader.load(fileName + fileExtension)));
     }
 
 }
