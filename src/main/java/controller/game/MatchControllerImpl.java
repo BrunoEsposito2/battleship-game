@@ -93,7 +93,6 @@ public class MatchControllerImpl implements MatchController {
                 this.battleView.drawMissed(new Pair<>(line, col), this.currentVillain);
             }
 
-            System.out.println(this.playgrounds.get(this.currentVillain).getNumberOfAliveShip());
             this.battleView.setShotAvailable(this.playgrounds.get(this.currentVillain).getNumberOfAliveShip());
             this.battleView.setPoints(this.playgrounds.get(this.currentVillain).getDamage());
 
@@ -177,7 +176,7 @@ public class MatchControllerImpl implements MatchController {
     }
 
     private void setStatistic() {
-        PlayerNumber currentPlayer = Battleships.getController().getCurrentPlayer().get();
+        final PlayerNumber currentPlayer = Battleships.getController().getCurrentPlayer().get();
 
         if (Battleships.getController().getMatchInfo().get().getPlayerInfo(currentPlayer).getType().equals(PlayerType.HUMAN)) {
             Battleships.getController().getAccountManager().setWinner(
