@@ -12,6 +12,7 @@ import model.ModelImpl;
 import model.enums.PlayerNumber;
 import model.gamemode.GameMode;
 import model.match.players.MatchInfo;
+import model.util.Pair;
 import view.View;
 import view.ViewImpl;
 import view.dialog.DialogType;
@@ -96,6 +97,12 @@ public final class ControllerImpl implements Controller {
     @Override
     public void setAI() {
         this.matchController.setPlayground(this.model.startBasicAI());
+    }
+
+    @Override
+    public void shotAI() {
+        Pair<Integer, Integer> cellHittedByAI = this.model.getNextHitPointBasicAI();
+        this.matchController.shot(cellHittedByAI.getX(), cellHittedByAI.getY());
     }
 
 }

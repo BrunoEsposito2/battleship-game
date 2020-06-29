@@ -83,13 +83,12 @@ public class MatchControllerImpl implements MatchController {
 
             // If optional is present a ship is hitted.
             if (v.isPresent()) {
-                // If ship is sunk, player could be winner.
                 if (this.playgrounds.get(this.currentVillain).shipSunk(v.get().getKey()).get()) {
                     this.battleView.drawSunkShip(v.get().getKey(), this.currentVillain);
-                    this.checkWin();
                 } else {
                     this.battleView.drawHit(new Pair<>(line, col), this.currentVillain);
                 }
+                this.checkWin();
             } else {
                 this.battleView.drawMissed(new Pair<>(line, col), this.currentVillain);
             }
@@ -102,10 +101,17 @@ public class MatchControllerImpl implements MatchController {
                 this.changePlayer();
             } else {
                 this.shotAvailable--;
+                if (this.isAITurn()) {
+                    this.turnAI();
+                }
             }
 
         } catch (CellAlreadyShotException e) {
-            this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
+            if (this.isAITurn()) {
+                this.turnAI();
+            } else {
+                this.battleView.showCellAlreadyShottedAlert(new Pair<>(line, col));
+            }
         }
     }
 
@@ -137,7 +143,6 @@ public class MatchControllerImpl implements MatchController {
             Battleships.getController().setAI();
             Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
             this.startBattle();
-
         } else {
             if (Battleships.getController().getCurrentPlayer().get().equals(PlayerNumber.PLAYER_ONE)) {
                 Battleships.getController().changeScene(SceneName.SHIP_DEPLOYMENT);
@@ -145,8 +150,9 @@ public class MatchControllerImpl implements MatchController {
                 Battleships.getController().changeScene(SceneName.MATCH_BATTLE);
                 this.startBattle();
             }
-            Battleships.getController().nextPlayer();
         }
+
+        Battleships.getController().nextPlayer();
     }
 
     /**
@@ -171,14 +177,19 @@ public class MatchControllerImpl implements MatchController {
     }
 
     private void setStatistic() {
-        Battleships.getController().getAccountManager().setWinner(
-                Battleships.getController().getMatchInfo().get()
-                        .getPlayerInfo(Battleships.getController().getCurrentPlayer().get()).getUsername(),
-                Double.valueOf(this.playgrounds.get(this.currentVillain).getDamage()));
+        PlayerNumber currentPlayer = Battleships.getController().getCurrentPlayer().get();
 
-        Battleships.getController().getAccountManager().setLoser(
-                Battleships.getController().getMatchInfo().get().getPlayerInfo(this.currentVillain).getUsername(),
-                Double.valueOf(this.playgrounds.get(Battleships.getController().getCurrentPlayer().get()).getDamage()));
+        if (Battleships.getController().getMatchInfo().get().getPlayerInfo(currentPlayer).getType().equals(PlayerType.HUMAN)) {
+            Battleships.getController().getAccountManager().setWinner(
+                    Battleships.getController().getMatchInfo().get().getPlayerInfo(currentPlayer).getUsername(),
+                    Double.valueOf(this.playgrounds.get(this.currentVillain).getDamage()));
+        }
+
+        if (Battleships.getController().getMatchInfo().get().getPlayerInfo(this.currentVillain).getType().equals(PlayerType.HUMAN)) {
+            Battleships.getController().getAccountManager().setLoser(
+                    Battleships.getController().getMatchInfo().get().getPlayerInfo(this.currentVillain).getUsername(),
+                    Double.valueOf(this.playgrounds.get(currentPlayer).getDamage()));
+        }
     }
 
     private void changePlayer() {
@@ -188,6 +199,23 @@ public class MatchControllerImpl implements MatchController {
         this.battleView.changePlayer();
         this.currentVillain = Battleships.getController().getCurrentPlayer().get();
         Battleships.getController().nextPlayer();
+
+        if (this.isAITurn()) {
+            this.turnAI();
+        }
+    }
+
+    private boolean isAITurn() {
+        final PlayerType secondPlayerType = Battleships.getController().getMatchInfo().get()
+                .getPlayerInfo(PlayerNumber.PLAYER_TWO).getType();
+
+        // return
+        // Battleships.getController().getMatchInfo().get().getPlayerInfo(Battleships.getController().getCurrentPlayer().get()).getType().equals(PlayerType.ARTIFICIAL);
+        return !this.currentVillain.equals(PlayerNumber.PLAYER_TWO) && secondPlayerType.equals(PlayerType.ARTIFICIAL);
+    }
+
+    private void turnAI() {
+        Battleships.getController().shotAI();
     }
 
     /**

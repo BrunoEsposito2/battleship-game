@@ -14,7 +14,7 @@ import model.players.Player;
 /**
  * JUnit test for {@link Statistics}.
  */
-public class WinnerStatsCalculatorTest {
+public class StatsCalculatorTest {
 
     private static final Double WIN_LOSS_SCORE = 20.0;
     private static final Double TOTALS_EXPECTED = 1.0;
