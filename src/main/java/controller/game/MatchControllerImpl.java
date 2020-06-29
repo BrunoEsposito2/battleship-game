@@ -33,9 +33,9 @@ public class MatchControllerImpl implements MatchController {
     /*
      * For now i put grid size here
      */
-    private static final int LINE = Battleships.getController().getMatchInfo().get().getFieldSize().getKey();
-    private static final int COLUMN = Battleships.getController().getMatchInfo().get().getFieldSize().getValue();
-    private static final int SHIPS_NUMBER = Battleships.getController().getMatchInfo().get().getShipsNumber();
+    private static final int LINE = 10;
+    private static final int COLUMN = 10;
+    private static final int SHIPS_NUMBER = 5;
 
     private BattleView battleView;
     private final Map<PlayerNumber, PlaygroundBattle> playgrounds;
